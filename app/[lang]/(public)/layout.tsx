@@ -1,4 +1,9 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { ConfigProvider } from "antd";
+import deDE from "antd/locale/de_DE";
+import enUS from "antd/locale/en_US";
+import esES from "antd/locale/es_ES";
+
 import type { Metadata } from "next";
 import "../../ui/styles/globals.css";
 import { poppins } from "../../ui/typography";
@@ -24,7 +29,11 @@ export default function RootLayout({
   return (
     <html lang={lang}>
       <body className={poppins.className}>
-        <AntdRegistry>{children}</AntdRegistry>
+        <ConfigProvider
+          locale={lang === "de" ? deDE : lang === "en" ? enUS : esES}
+        >
+          <AntdRegistry>{children}</AntdRegistry>
+        </ConfigProvider>
       </body>
     </html>
   );
