@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={lang}>
-      <body className={poppins.className}>
+      <body className={`${poppins.className} text-[1.5rem]`}>
         <ConfigProvider
           locale={lang === "de" ? deDE : lang === "en" ? enUS : esES}
           theme={{

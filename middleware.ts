@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { i18n } from "./i18n-config";
-
+import { updateSession } from "@/utils/supabase/middleware";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
@@ -18,7 +18,7 @@ function getLocale(request: NextRequest): string | undefined {
 }
 
 export async function middleware(request: NextRequest) {
-  // Locale negotiation and redirection logic
+  await updateSession(request);
   const pathname = request.nextUrl.pathname;
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|assets|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|assets|auth/confirm|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
     "/",
   ],
 };
