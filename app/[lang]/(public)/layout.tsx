@@ -31,6 +31,11 @@ export default function RootLayout({
       <body className={poppins.className}>
         <ConfigProvider
           locale={lang === "de" ? deDE : lang === "en" ? enUS : esES}
+          theme={{
+            token: {
+              colorPrimary: "#1a73b2",
+            },
+          }}
         >
           <AntdRegistry>{children}</AntdRegistry>
         </ConfigProvider>
