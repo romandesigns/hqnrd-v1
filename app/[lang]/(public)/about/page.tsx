@@ -6,7 +6,6 @@ import { signOutBtn } from "./SignOutBtn";
 export default async function Page() {
   const supabase = createClient();
   const { data, error } = await supabase.auth.getUser();
-
   if (error || !data?.user) {
     redirect("/");
   }
