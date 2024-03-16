@@ -28,11 +28,9 @@ export default function RootLayout({
   return (
     <html lang={lang} className={"min-h-dvh"}>
       <body className={`${poppins.className} min-h-dvh`}>
-        <AntConfigProvider lang={lang}>
-          <FontUnitProvider>
-            <AntdRegistry>{children}</AntdRegistry>
-          </FontUnitProvider>
-        </AntConfigProvider>
+        <AntdRegistry>
+          <AntConfigProvider lang={lang}>{children}</AntConfigProvider>
+        </AntdRegistry>
       </body>
     </html>
   );
