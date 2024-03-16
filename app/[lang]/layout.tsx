@@ -1,5 +1,4 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { ConfigProvider } from "antd";
 
 import type { Metadata } from "next";
 import { poppins } from "../ui/typography";
@@ -11,10 +10,9 @@ export const metadata: Metadata = {
 };
 
 import { Locale, i18n } from "@/i18n-config";
-import deDE from "antd/locale/de_DE";
-import enUS from "antd/locale/en_US";
-import esES from "antd/locale/es_ES";
+
 import { FontUnitProvider } from "../ui/typography/FontUnitProvider";
+import AntConfigProvider from "@/providers/ConfigProvider";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -30,19 +28,11 @@ export default function RootLayout({
   return (
     <html lang={lang} className={"min-h-dvh"}>
       <body className={`${poppins.className} min-h-dvh`}>
-        <ConfigProvider
-          locale={lang === "de" ? deDE : lang === "en" ? enUS : esES}
-          theme={{
-            cssVar: { key: "app" },
-            token: {
-              colorPrimary: "#1a73b2",
-            },
-          }}
-        >
+        <AntConfigProvider lang={lang}>
           <FontUnitProvider>
             <AntdRegistry>{children}</AntdRegistry>
           </FontUnitProvider>
-        </ConfigProvider>
+        </AntConfigProvider>
       </body>
     </html>
   );

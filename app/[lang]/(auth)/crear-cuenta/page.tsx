@@ -5,12 +5,13 @@
 import React from "react";
 import { Button, Input, Form } from "antd";
 import { signUp } from "../actions";
+import Link from "next/link";
 
 // Form Types
 type FieldType = {
   name: string;
   lastName: string;
-  sex?: string;
+  gender?: string;
 };
 
 /**
@@ -25,17 +26,16 @@ export default function Page() {
         <Form.Item>
           <Input />
         </Form.Item>
-        <Input
-          size="middle"
-          id="lastName"
-          name="lastName"
-          type="text"
-          required
-        />
-        <Input size="middle" id="email" name="email" type="email" required />
+        <Form.Item>
+          <Input />
+        </Form.Item>
+        <Form.Item>
+          <Input />
+        </Form.Item>
         <Button formAction={signUp} htmlType="submit">
           Crear Cuenta
         </Button>
+        <Link href={"/"}>Home</Link>
       </Form>
     </section>
   );
