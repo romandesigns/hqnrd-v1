@@ -27,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={lang} className={"min-h-dvh"}>
-      <body
-        className={`${poppins.className} min-h-dvh antialiased bg-[#fefefe] text-[#242424]`}
-      >
+      <body className={`${poppins.className} min-h-dvh`}>
         <AntConfigProvider lang={lang}>
           <AntdRegistry>
             <nav className="flex gap-2 text-sm p-2">

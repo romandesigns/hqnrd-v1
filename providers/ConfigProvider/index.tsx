@@ -26,6 +26,7 @@ export default function AntConfigProvider({
             borderRadius: 7,
           },
           Input: {
+            paddingBlock: 5,
             activeShadow: "0 0 0 3px rgba(5, 145, 255, 0.1)",
           },
         },

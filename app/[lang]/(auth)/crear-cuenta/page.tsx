@@ -21,7 +21,7 @@ export default function Page({
   const locale = locales?.split(",")[0].split("-")[1];
 
   return (
-    <main className="p-2">
+    <main className="p-4">
       <SignUpForm lang={lang} locale={locale as Country} />
       <div className="my-4">
         <p className="text-xs font-medium text-center">

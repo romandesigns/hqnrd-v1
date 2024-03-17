@@ -2,14 +2,32 @@ import { z } from "zod";
 
 export const signUpUserSchema = z
   .object({
-    name: z.string().min(3).max(50),
-    lastName: z.string().min(3).max(50),
-    gender: z.enum(["male", "female", "other"]),
-    email: z.string().email().min(3).max(70),
+    name: z
+      .string()
+      .min(3, { message: "name must be at least 3 characters long" })
+      .max(50, { message: "name must be less than 50 characters long" }),
+    lastName: z
+      .string()
+      .min(3, { message: "last name must be at least 3 characters long" })
+      .max(50, { message: "last name must be less than 50 characters long" }),
+    gender: z
+      .enum(["male", "female", "other"])
+      .refine((val) => val !== undefined, { message: "Gender is required" }),
+    email: z.string().email({ message: "Invalid email address" }),
     telCountry: z.string(),
     tel: z.string(),
-    password: z.string().min(4).max(30),
-    confirmPassword: z.string().min(4).max(30),
+    password: z
+      .string()
+      .min(4, { message: "password must be at least 4 characters long" })
+      .max(30, { message: "password must be less than 30 characters long" }),
+    confirmPassword: z
+      .string()
+      .min(4, {
+        message: "confirmation password must be at least 4 characters long",
+      })
+      .max(30, {
+        message: "confirmation password must be less than 30 characters long",
+      }),
     dateOfBirth: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
