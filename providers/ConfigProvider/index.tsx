@@ -14,7 +14,14 @@ export default function AntConfigProvider({
   lang: Locale;
 }) {
   return (
-    <ConfigProvider locale={lang === "de" ? deDE : lang === "en" ? enUS : esES}>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#ff0000",
+        },
+      }}
+      locale={lang === "de" ? deDE : lang === "en" ? enUS : esES}
+    >
       {children}
     </ConfigProvider>
   );

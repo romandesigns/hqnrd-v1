@@ -1,2 +1,2 @@
-export { InputField } from "./InputField";
+export { InputAnt } from "./InputAnt";
 export { InputPhone } from "./InputPhone";

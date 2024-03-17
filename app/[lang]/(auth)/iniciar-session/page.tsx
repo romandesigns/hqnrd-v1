@@ -15,7 +15,7 @@ export default function LoginPage() {
           type="password"
           required
         />
-        <Button formAction={signIn} htmlType="submit">
+        <Button formAction={signIn} htmlType="submit" type="primary">
           Sign In
         </Button>
       </form>

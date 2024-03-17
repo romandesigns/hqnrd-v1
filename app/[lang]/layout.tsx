@@ -27,11 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={lang} className={"min-h-dvh"}>
-      <body className={`${poppins.className} min-h-dvh`}>
+      <AntConfigProvider lang={lang}>
         <AntdRegistry>
-          <AntConfigProvider lang={lang}>{children}</AntConfigProvider>
+          <body className={`${poppins.className} min-h-dvh`}>{children}</body>
         </AntdRegistry>
-      </body>
+      </AntConfigProvider>
     </html>
   );
 }

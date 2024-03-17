@@ -1,42 +1,25 @@
-"use client";
 /**
  * Renders a form for creating a new account.
  */
 import React from "react";
-import { Button, Input, Form } from "antd";
-import { signUp } from "../actions";
-import Link from "next/link";
-
-// Form Types
-type FieldType = {
-  name: string;
-  lastName: string;
-  gender?: string;
-};
+import { SignUpForm } from "./SignUpForm";
+import { Locale } from "@/i18n-config";
+import { headers } from "next/headers";
+import { Country } from "react-phone-number-input";
 
 /**
  * Page component for creating a new account.
  * @returns JSX.Element representing the page.
  */
 
-export default function Page() {
+export default function Page({ lang }: { lang: Locale }) {
+  const headersList = headers();
+  const locales = headersList.get("Accept-Language");
+  const locale = locales?.split(",")[0].split("-")[1];
+
   return (
     <section className="p-2">
-      <Form>
-        <Form.Item>
-          <Input />
-        </Form.Item>
-        <Form.Item>
-          <Input />
-        </Form.Item>
-        <Form.Item>
-          <Input />
-        </Form.Item>
-        <Button formAction={signUp} htmlType="submit">
-          Crear Cuenta
-        </Button>
-        <Link href={"/"}>Home</Link>
-      </Form>
+      <SignUpForm lang={lang} locale={locale as Country} />
     </section>
   );
 }
