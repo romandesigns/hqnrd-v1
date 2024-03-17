@@ -2,16 +2,13 @@
 /**
  * Renders a form for creating a new account.
  */
-import React from "react";
-import { Button, Input, Form, Radio, Flex, DatePicker, Space } from "antd";
-import type { DatePickerProps } from "antd";
-import { signUp } from "../actions";
-import Link from "next/link";
 import { InputPhone } from "@/app/ui/common";
+import { InputAnt } from "@/app/ui/common/Form";
+import { Button, DatePicker, Flex, Radio } from "antd";
+import React from "react";
 import { useFormState } from "react-dom";
 import { Country } from "react-phone-number-input";
-import { InputAnt } from "@/app/ui/common/Form";
-import { Locale } from "@/i18n-config";
+import { signUp } from "../actions/signUp";
 
 // Form Types
 type FieldType = {
@@ -42,25 +39,29 @@ export function SignUpForm({
   locale: Country;
 }) {
   const [phone, setPhone] = React.useState<string>("");
-  const [guestUserDate, setUserBirthDate] = React.useState<Date | null>(null);
-
   const phoneNumber = (phone: string) => {
-    console.log(phone);
     setPhone(phone);
   };
 
   return (
-    <section className="p-4 flex items-center justify-center">
-      <form autoComplete="off" className="w-full">
-        {/* 
-        ========================================
-        Profile Details 
-        ========================================
-        */}
+    <form autoComplete="off" className="w-full">
+      <fieldset className="mb-4 space-y-4">
         <InputAnt name="name" placeholder="Name" type="text" />
         <InputAnt name="lastName" placeholder="Last Name" type="text" />
-        <DatePicker size="large" format="MM/DD/YYYY" />
+        <DatePicker
+          variant="outlined"
+          className="w-full !py-[.38rem]"
+          size="middle"
+          format="MM/DD/YYYY"
+          allowClear={true}
+          needConfirm={true}
+          name="dateOfBirth"
+          style={{ width: "100%" }}
+          placeholder="Date of Birth"
+          required
+        />
         <Flex vertical gap="middle" align="center">
+          <span className="text-xs font-semibold">Select Gender</span>
           <Radio.Group buttonStyle="solid" name="gender">
             <Radio.Button name="gender" value="male">
               Man
@@ -73,11 +74,9 @@ export function SignUpForm({
             </Radio.Button>
           </Radio.Group>
         </Flex>
-        {/* 
-        ========================================
-        Account Details 
-        ========================================
-        */}
+      </fieldset>
+
+      <fieldset className="mb-4 space-y-4">
         <InputAnt name="email" placeholder="E-Mail" type="email" />
         <InputPhone
           phone={phone}
@@ -88,20 +87,22 @@ export function SignUpForm({
         />
         <InputAnt name="password" placeholder="Password" type="password" />
         <InputAnt
-          name="confirm_password"
+          name="confirmPassword"
           placeholder="Confirm Password"
           type="password"
         />
-        <Button
-          formAction={signUp}
-          htmlType="submit"
-          type="primary"
-          block
-          size="large"
-        >
-          Crear Cuenta
-        </Button>
-      </form>
-    </section>
+        <div className="py-10">
+          <Button
+            htmlType="submit"
+            type="primary"
+            block
+            size="large"
+            formAction={signUp}
+          >
+            Crear Cuenta
+          </Button>
+        </div>
+      </fieldset>
+    </form>
   );
 }

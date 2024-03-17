@@ -2,10 +2,11 @@
  * Renders a form for creating a new account.
  */
 import React from "react";
-import { SignUpForm } from "./SignUpForm";
+import { SignUpForm } from "./components/SignUpForm";
 import { Locale } from "@/i18n-config";
 import { headers } from "next/headers";
 import { Country } from "react-phone-number-input";
+import Link from "next/link";
 
 /**
  * Page component for creating a new account.
@@ -20,8 +21,19 @@ export default function Page({
   const locale = locales?.split(",")[0].split("-")[1];
 
   return (
-    <section className="p-2">
+    <main className="p-2">
       <SignUpForm lang={lang} locale={locale as Country} />
-    </section>
+      <div className="my-4">
+        <p className="text-xs font-medium text-center">
+          Already have an account?{" "}
+          <Link
+            href={`/${lang}/iniciar-session`}
+            className="ml-2 underline text-primary-500"
+          >
+            Sign in
+          </Link>
+        </p>
+      </div>
+    </main>
   );
 }

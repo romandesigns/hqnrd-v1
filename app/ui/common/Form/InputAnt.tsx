@@ -1,5 +1,4 @@
-import React from "react";
-import { Input, Form } from "antd";
+import { Input } from "antd";
 
 export function InputAnt({
   name,
@@ -11,6 +10,14 @@ export function InputAnt({
   type: string;
 }) {
   return (
-    <Input placeholder={placeholder} name={name} type={type} size="large" />
+    <Input
+      placeholder={placeholder}
+      type={type}
+      size="large"
+      autoComplete="off"
+      className="placeholder:text-xs"
+      name={name}
+      required
+    />
   );
 }

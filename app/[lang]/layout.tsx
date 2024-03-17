@@ -27,9 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={lang} className={"min-h-dvh"}>
-      <AntConfigProvider lang={lang}>
-        <AntdRegistry>
-          <body className={`${poppins.className} min-h-dvh antialiased`}>
+      <body
+        className={`${poppins.className} min-h-dvh antialiased bg-[#fefefe] text-[#242424]`}
+      >
+        <AntConfigProvider lang={lang}>
+          <AntdRegistry>
             <nav className="flex gap-2 text-sm p-2">
               <Link href="/" locale={lang}>
                 Home
@@ -42,9 +44,9 @@ export default function RootLayout({
               </Link>
             </nav>
             {children}
-          </body>
-        </AntdRegistry>
-      </AntConfigProvider>
+          </AntdRegistry>
+        </AntConfigProvider>
+      </body>
     </html>
   );
 }

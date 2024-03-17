@@ -18,9 +18,19 @@ export default function AntConfigProvider({
       theme={{
         algorithm: [theme.defaultAlgorithm, theme.compactAlgorithm],
         token: {
-          colorPrimary: "#1a73b2",
+          colorPrimary: "#3c8cc2",
           fontFamily: "Poppins",
         },
+        components: {
+          DatePicker: {
+            borderRadius: 7,
+          },
+          Input: {
+            activeShadow: "0 0 0 3px rgba(5, 145, 255, 0.1)",
+          },
+        },
+        cssVar: true,
+        hashed: false,
       }}
       locale={lang === "de" ? deDE : lang === "en" ? enUS : esES}
     >
