@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 };
 
 import { Locale, i18n } from "@/i18n-config";
-
 import { FontUnitProvider } from "../ui/typography/FontUnitProvider";
 import AntConfigProvider from "@/providers/ConfigProvider";
+import Link from "next/link";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -29,7 +29,20 @@ export default function RootLayout({
     <html lang={lang} className={"min-h-dvh"}>
       <AntConfigProvider lang={lang}>
         <AntdRegistry>
-          <body className={`${poppins.className} min-h-dvh`}>{children}</body>
+          <body className={`${poppins.className} min-h-dvh antialiased`}>
+            <nav className="flex gap-2 text-sm p-2">
+              <Link href="/" locale={lang}>
+                Home
+              </Link>
+              <Link href="/about" locale={lang}>
+                About
+              </Link>
+              <Link href="/playground" locale={lang}>
+                Playground
+              </Link>
+            </nav>
+            {children}
+          </body>
         </AntdRegistry>
       </AntConfigProvider>
     </html>

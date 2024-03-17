@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, theme } from "antd";
 import deDE from "antd/locale/de_DE";
 import enUS from "antd/locale/en_US";
 import esES from "antd/locale/es_ES";
@@ -16,8 +16,10 @@ export default function AntConfigProvider({
   return (
     <ConfigProvider
       theme={{
+        algorithm: [theme.defaultAlgorithm, theme.compactAlgorithm],
         token: {
-          colorPrimary: "#ff0000",
+          colorPrimary: "#1a73b2",
+          fontFamily: "Poppins",
         },
       }}
       locale={lang === "de" ? deDE : lang === "en" ? enUS : esES}
