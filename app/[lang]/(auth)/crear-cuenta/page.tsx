@@ -12,7 +12,9 @@ import { Country } from "react-phone-number-input";
  * @returns JSX.Element representing the page.
  */
 
-export default function Page({ lang }: { lang: Locale }) {
+export default function Page({
+  params: { lang },
+}: Readonly<{ params: { lang: Locale } }>) {
   const headersList = headers();
   const locales = headersList.get("Accept-Language");
   const locale = locales?.split(",")[0].split("-")[1];
