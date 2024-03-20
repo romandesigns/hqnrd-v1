@@ -95,7 +95,7 @@ export function SignUpForm({
             placeholder="Confirm Password"
             type="password"
           />
-          <div className="py-10">
+          <div className="py-5">
             <Button
               htmlType="submit"
               type="primary"

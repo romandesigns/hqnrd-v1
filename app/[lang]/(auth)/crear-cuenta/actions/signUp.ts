@@ -30,18 +30,20 @@ export async function createUserAction(prevState: any, formData: FormData) {
       password: data.password as string,
       options: {
         data: {
+          email: data.email as string,
           name: data.name as string,
-          lastName: data.lastName as string,
+          last_name: data.lastName as string,
           dob: data.dateOfBirth as string,
           gender: data.gender as string,
-          email: data.email as string,
           tel: data.tel as string,
-          telCountry: data.telCountry as string,
-          guestType: "guest",
+          tel_country: data.telCountry as string,
+          user_role: "guest",
         },
       },
     });
+
     if (error?.message) {
+      console.log(error);
       return {
         errors: error.message,
       };
