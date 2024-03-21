@@ -1,6 +1,8 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
 import { signUpUserSchema } from "../components/schema";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createUserAction(prevState: any, formData: FormData) {
   const data = {
@@ -14,8 +16,10 @@ export async function createUserAction(prevState: any, formData: FormData) {
     password: formData.get("password"),
     confirmPassword: formData.get("confirmPassword"),
   };
+
   try {
     const validatedData = signUpUserSchema.safeParse(data);
+
     if (!validatedData.success) {
       const { path, message } = validatedData.error.errors[0];
       return {
@@ -48,6 +52,8 @@ export async function createUserAction(prevState: any, formData: FormData) {
         errors: error.message,
       };
     }
+    revalidatePath("/", "layout");
+    redirect("/[lang]/iniciar-session");
   } catch (e) {
     console.error("Validation error", e);
   }
