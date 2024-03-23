@@ -4,12 +4,11 @@
  */
 import { InputPhone } from "@/app/ui/common";
 import { InputAnt } from "@/app/ui/common/Form";
-import { Button, DatePicker, Flex, Radio } from "antd";
+import { Alert, Button, DatePicker, Flex, Radio } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
 import { createUserAction } from "../actions/signUp";
-import { Alert, Space } from "antd";
 
 type initialStateTypes = {
   path: string;
@@ -24,9 +23,11 @@ const initialState: initialStateTypes = {
 export function SignUpForm({
   lang,
   locale,
+  className,
 }: {
   lang: string;
   locale: Country;
+  className?: string;
 }) {
   const [phone, setPhone] = React.useState<string>("");
   const [state, formAction] = useFormState(createUserAction, initialState);
@@ -54,7 +55,7 @@ export function SignUpForm({
           <InputAnt name="lastName" placeholder="Last Name" type="text" />
           <DatePicker
             variant="outlined"
-            className="w-full !py-[.38rem]"
+            className="w-full !py-[.38rem] focus-within:!border-primary-400 focus-within:!shadow-[0_0_0_3px_rgba(5,_145,_255,_0.15)]"
             size="middle"
             format="MM/DD/YYYY"
             allowClear={true}
@@ -95,7 +96,7 @@ export function SignUpForm({
             placeholder="Confirm Password"
             type="password"
           />
-          <div className="py-5">
+          <div className="py-3 pb-2">
             <Button
               htmlType="submit"
               type="primary"

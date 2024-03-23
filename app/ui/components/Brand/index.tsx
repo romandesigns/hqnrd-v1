@@ -23,14 +23,16 @@ export function Brand({
     <Link href="/" className={cn(className ? className : "")}>
       <figure className="flex gap-2">
         <Image
-          src="/assets/brand/logo-original.svg"
+          src="/assets/images/brand/logo-original.svg"
           width={25}
           height={25}
           alt="Company logo -  Hotel Quinto Nivel RD"
         />
         <figcaption>
           {headingLevel === "h1" ? (
-            <h1 className="font-bold text-sm mt-1">Hotel Quinto Nivel RD</h1>
+            <h1 className="font-bold text-sm mt-1 uppercase font-black">
+              Hotel Quinto Nivel RD
+            </h1>
           ) : (
             <h2 className="font-bold text-sm mt-1">Hotel Quinto Nivel RD</h2>
           )}

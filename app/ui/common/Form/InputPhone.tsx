@@ -17,7 +17,7 @@ export function InputPhone({
   return (
     <div
       className={twMerge(
-        `border-neutral-300 focus-within:ring-[.18rem] focus-within:border-primary-500 focus-within:ring-primary-500/10 inline-block w-full border rounded-md py-[.3rem] px-[.4rem] ${
+        `border-neutral-300 focus-within:!border-primary-400 focus-within:!shadow-[0_0_0_3px_rgba(5,_145,_255,_0.15)] inline-block w-full border rounded-md py-[.3rem] px-[.4rem] transition-all ${
           className ? className : ""
         }`
       )}
