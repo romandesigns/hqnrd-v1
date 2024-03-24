@@ -80,7 +80,7 @@ export function SignUpForm({
             </Radio.Group>
           </Flex>
         </fieldset>
-
+        <input type="text" name="accountType" value="user" className="hidden" />
         <fieldset className="mb-4 space-y-4">
           <InputAnt name="email" placeholder="E-Mail" type="email" />
           <InputPhone

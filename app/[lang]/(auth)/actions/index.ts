@@ -1,2 +1,2 @@
 export { signUp } from "./signUp";
-export { signIn } from "./signIn";
+export { signIn } from "../iniciar-session/actions/signIn";

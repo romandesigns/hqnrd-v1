@@ -4,10 +4,12 @@ export function InputAnt({
   name,
   placeholder,
   type,
+  required = true,
 }: {
   name: string;
   placeholder: string;
   type: string;
+  required?: boolean;
 }) {
   return (
     <Input
@@ -17,7 +19,7 @@ export function InputAnt({
       autoComplete="off"
       className="placeholder:text-xs"
       name={name}
-      required
+      required={required}
     />
   );
 }

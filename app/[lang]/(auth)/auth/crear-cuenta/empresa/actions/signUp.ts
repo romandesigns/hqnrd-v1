@@ -15,11 +15,11 @@ export async function createUserAction(prevState: any, formData: FormData) {
     tel: formData.get("tel"),
     password: formData.get("password"),
     confirmPassword: formData.get("confirmPassword"),
+    accountType: formData.get("accountType"),
   };
 
   try {
     const validatedData = signUpUserSchema.safeParse(data);
-
     if (!validatedData.success) {
       const { path, message } = validatedData.error.errors[0];
       return {
@@ -27,7 +27,6 @@ export async function createUserAction(prevState: any, formData: FormData) {
         message,
       };
     }
-
     const supabase = createClient();
     const { error } = await supabase.auth.signUp({
       email: data.email as string,
@@ -42,6 +41,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
           tel: data.tel as string,
           tel_country: data.telCountry as string,
           user_role: "guest",
+          accountType: data.accountType as string,
         },
       },
     });

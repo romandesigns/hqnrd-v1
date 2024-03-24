@@ -2,6 +2,7 @@
 import React from "react";
 import { Carousel } from "antd";
 import Image from "next/image";
+import { CarouselTypes } from "@/types";
 
 const contentStyle: React.CSSProperties = {
   height: "32rem",
@@ -21,27 +22,26 @@ const carouselStyle: React.CSSProperties = {
   overflow: "hidden",
 };
 
-const images = [
-  {
-    src: "/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp",
-    alt: "Photograph behind plant on the table during sunset at the Hotel Quinto Nivel RD",
-  },
-  {
-    src: "/assets/images/auth/sitting-area-hallway-hqnrd.webp",
-    alt: "Photograph behind plant on the table during sunset at the Hotel Quinto Nivel RD",
-  },
-];
-
-export function AuthCarousel() {
+export function AuthCarousel({ images }: { images: CarouselTypes[] }) {
   return (
     <Carousel
       effect="fade"
       autoplay
+      speed={500}
+      autoplaySpeed={3000}
       style={carouselStyle}
       className="[&_.slick-list]:h-full [&_.slick-track]:h-full"
     >
       {images.map((image, index) => (
         <div key={index} style={contentStyle}>
+          <div className="absolute w-full flex items-center justify-center p-20 px-14 z-[2] bottom-0 bg-gradient-to-t from-black/60 flex-col">
+            <h3 className="text-white text-[1.3rem] font-black text-center">
+              {image.title}
+            </h3>
+            <p className="text-white text-[.94rem] text-center">
+              {image.description}
+            </p>
+          </div>
           <Image
             src={image.src}
             alt={image.alt}
