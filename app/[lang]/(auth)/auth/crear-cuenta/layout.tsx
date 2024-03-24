@@ -22,12 +22,12 @@ export default function RootLayout({
   params: { lang: Locale };
 }>) {
   return (
-    <main className="min-h-dvh flex items-center justify-center relative">
-      <section className="sm:max-w-5xl grid grid-cols-1 sm:grid-cols-[3fr_2fr] z-[2] xs:p-2 absolute top-0 left-0 right-0 bottom-0 bg-white lg:relative lg:rounded-md">
-        <SlideShow images={images} className="hidden sm:flex relative" />
-        <article className="bg-white sm:px-4 grid grid-cols-1 grid-rows-1 rounded-md p-2 flex-col sm:rounded-tl-none sm:rounded-bl-none">
+    <main className="min-h-dvh flex items-center justify-center relative lg:p-10 box-content">
+      <section className="sm:max-w-5xl grid grid-cols-1 lg:grid-cols-[3fr_2fr] z-[2] xs:p-2 absolute top-0 left-0 right-0 bottom-0 bg-white lg:relative lg:rounded-md">
+        <SlideShow images={images} className="hidden lg:flex relative" />
+        <article className="bg-white max-w-lg m-auto lg:px-4 grid grid-cols-1 grid-rows-1 rounded-md p-2 flex-col lg:rounded-tl-none lg:rounded-bl-none">
           <div className="grid grid-cols-1 grid-rows-[1fr_auto_auto]">
-            <div className="self-center border  sm:h-auto p-3 sm:p-2 sm:px-6 shadow-md rounded-md flex items-center justify-center flex-col bg-white rounded-m">
+            <div className="self-center border lg:h-auto p-4 lg:p-2 lg:px-6 shadow-md rounded-md flex items-center justify-center flex-col bg-white rounded-m">
               <div className="flex justify-between w-full py-2">
                 <GoBack />
                 <Link href="/">
@@ -35,7 +35,7 @@ export default function RootLayout({
                 </Link>
               </div>
               <div className="flex items-center justify-center flex-col mb-4">
-                <Brand className="my-8 sm:my-4" />
+                <Brand className="my-8 lg:my-4" />
               </div>
               {children}
             </div>

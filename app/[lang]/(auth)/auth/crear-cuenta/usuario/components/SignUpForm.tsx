@@ -55,7 +55,7 @@ export function SignUpForm({
           <InputAnt name="lastName" placeholder="Last Name" type="text" />
           <DatePicker
             variant="outlined"
-            className="w-full !py-[.38rem] focus-within:!border-primary-400 focus-within:!shadow-[0_0_0_3px_rgba(5,_145,_255,_0.15)]"
+            className="w-full !py-[.38rem] focus-within:!border-primary-400 focus-within:!shadow-[0_0_0_3px_rgba(5,_145,_255,_0.15)] [&_input]:sm:!py-[.2rem] [&_input]:lg:!py-[.02rem]"
             size="middle"
             format="MM/DD/YYYY"
             allowClear={true}

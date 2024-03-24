@@ -49,8 +49,8 @@ export default function Page({
                 <h3 className="uppercase font-bold text-sm my-2">Company</h3>
               </Link>
             </div>
-            <p className="text-sm text-center pb-8">
-              <span className="block">
+            <p className="text-xs font-bold text-center pb-8">
+              <span className="block pb-2">
                 Para preguntas porfavor llamarnos al number
               </span>
               <span className="block text-primary-500 underline font-bold">

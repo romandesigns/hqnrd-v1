@@ -17,7 +17,7 @@ export function InputAnt({
       type={type}
       size="large"
       autoComplete="off"
-      className="placeholder:text-xs"
+      className="placeholder:text-xs sm:!py-2 lg:!py-1"
       name={name}
       required={required}
     />

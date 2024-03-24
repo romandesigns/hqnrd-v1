@@ -30,7 +30,7 @@ export function InputPhone({
         defaultCountry={locale as Country}
         name="tel"
         required
-        className="focus:outline-none focus:ring-primary-100 flex [&_input]:focus:outline-none [&_input]:hover:outline-none [&_input]:outline-none [&_input]:placeholder:text-xs [&_input]:placeholder:font-normal [&_input]:placeholder:text-neutral-300"
+        className="focus:outline-none focus:ring-primary-100 flex [&_input]:focus:outline-none [&_input]:hover:outline-none [&_input]:outline-none [&_input]:placeholder:text-xs [&_input]:placeholder:font-normal [&_input]:placeholder:text-neutral-300 [&_input]:sm:!py-[.2rem] [&_input]:lg:!py-[.03rem]"
       />
     </div>
   );

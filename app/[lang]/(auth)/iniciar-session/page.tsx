@@ -25,7 +25,7 @@ export default function Page({
               </Button>
             </Link>
           </div>
-          <div className="flex gap-10 flex-col px-3 lg:px-16 items-center justify-center">
+          <div className="flex gap-10 flex-col px-3 lg:px-16 items-center justify-center max-w-lg m-auto">
             <Brand />
             <SignInForm lang={lang} />
             <div className="my-2 flex flex-col items-center justify-center gap-2">
