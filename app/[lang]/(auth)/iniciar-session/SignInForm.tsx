@@ -3,11 +3,9 @@
  * Renders a form for creating a new account.
  */
 import { InputAnt } from "@/app/ui/common/Form";
+import { Locale } from "@/i18n-config";
 import { Button } from "antd";
-import React from "react";
-import { useFormState, useFormStatus } from "react-dom";
-import { Country } from "react-phone-number-input";
-import { signInAction } from "./actions/signIn";
+import { useFormStatus } from "react-dom";
 
 type initialStateTypes = {
   path: string;
@@ -21,15 +19,12 @@ const initialState: initialStateTypes = {
 
 export function SignInForm({
   lang,
-  locale,
   className,
 }: {
-  lang: string;
-  locale: Country;
+  lang: Locale;
   className?: string;
 }) {
   const { pending } = useFormStatus();
-  const [state, formAction] = useFormState(signInAction, initialState);
   return (
     <>
       <form autoComplete="off" className="w-full">
