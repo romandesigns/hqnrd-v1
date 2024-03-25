@@ -1,10 +1,8 @@
 import { Brand } from "@/app/ui/components";
+import { FaRegBuilding, GoHomeFill, HiOutlineUser } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
 import Link from "next/link";
-import { FaRegBuilding } from "react-icons/fa";
-import { GoHomeFill } from "react-icons/go";
-import { HiOutlineUser } from "react-icons/hi";
 
 export default function Page({
   params: { lang },

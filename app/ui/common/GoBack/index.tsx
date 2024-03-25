@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { IoMdArrowRoundBack } from "react-icons/io";
 import React from "react";
+import { IoMdArrowRoundBack } from "../../icons";
 
 export function GoBack() {
   const router = useRouter();

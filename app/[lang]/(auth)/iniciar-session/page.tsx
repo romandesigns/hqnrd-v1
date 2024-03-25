@@ -3,8 +3,8 @@ import { Brand } from "@/app/ui/components";
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
 import Link from "next/link";
-import { GoHomeFill } from "react-icons/go";
 import { SignInForm } from "./SignInForm";
+import { GoHomeFill } from "@/app/ui/icons";
 
 export default function Page({
   params: { lang },

@@ -13,28 +13,30 @@ export function Brand({
   subheading,
   headingLevel = "h1",
   className,
+  logoSize = 25,
 }: {
   heading?: string;
   subheading?: string;
   headingLevel?: string;
   className?: string;
+  logoSize?: number;
 }) {
   return (
     <Link href="/" className={cn(className ? className : "")}>
       <figure className="flex gap-2">
         <Image
           src="/assets/images/brand/logo-original.svg"
-          width={25}
-          height={25}
+          width={logoSize}
+          height={logoSize}
           alt="Company logo -  Hotel Quinto Nivel RD"
         />
         <figcaption>
           {headingLevel === "h1" ? (
-            <h1 className="text-sm mt-1 uppercase font-black">
+            <h1 className="text-xs mt-1 uppercase font-black">
               Hotel Quinto Nivel RD
             </h1>
           ) : (
-            <h2 className="font-bold text-sm mt-1">Hotel Quinto Nivel RD</h2>
+            <h2 className="font-bold text-xs mt-1">Hotel Quinto Nivel RD</h2>
           )}
           <p className="font-semibold text-xs">Como estar en casa!</p>
         </figcaption>
