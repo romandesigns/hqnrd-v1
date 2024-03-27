@@ -24,27 +24,35 @@ export default function Page({
           </div>
           <div className="flex gap-8 flex-col items-center justify-center">
             <Brand />
-            <p className="text-xs font-semibold text-center w-4/5">
-              Select one of the two account types you wish to create
+            <p className="text-xs font-bold text-center w-4/5 underline">
+              CREATE ACCOUNT
             </p>
             <div className="gap-4 flex items-center justify-center">
               <Link
                 href={`/auth/crear-cuenta/usuario`}
                 className="justify-center flex items-center flex-col"
               >
-                <span className="w-36 h-36 border border-primary-100 bg-primary-50 rounded-md justify-center flex items-center lg:hover:bg-primary-100 lg:hover:cursor-pointer">
-                  <HiOutlineUser size={25} className="text-primary-500" />
-                </span>
-                <h3 className="uppercase font-bold text-sm my-2">Guest</h3>
+                <div className="w-36 h-36 border border-primary-100 bg-primary-50 rounded-md lg:hover:bg-primary-100 lg:hover:cursor-pointer p-1">
+                  <span className="gap-1 bg-primary-100/15 p-2 h-full w-full justify-center flex items-center flex-col rounded-md">
+                    <HiOutlineUser size={25} className="text-primary-500" />
+                    <h3 className="text-primary-800 uppercase font-bold text-[0.65rem]">
+                      Guest
+                    </h3>
+                  </span>
+                </div>
               </Link>
               <Link
                 href={`/auth/crear-cuenta/empresa`}
                 className="justify-center flex items-center flex-col"
               >
-                <span className="w-36 h-36 border border-secondary-100 bg-secondary-50 rounded-md justify-center flex items-center lg:hover:bg-secondary-100 lg:hover:cursor-pointer">
-                  <FaRegBuilding size={23} className="text-secondary-500" />
-                </span>
-                <h3 className="uppercase font-bold text-sm my-2">Company</h3>
+                <div className="gap-1 w-36 h-36 border border-secondary-100 bg-secondary-50 rounded-md lg:hover:bg-secondary-100 lg:hover:cursor-pointer p-1">
+                  <span className="gap-1 bg-secondary-100/15 p-2 h-full w-full justify-center flex items-center flex-col rounded-md">
+                    <FaRegBuilding size={25} className="text-secondary-500" />
+                    <h3 className="text-secondary-800 uppercase font-bold text-[0.65rem]">
+                      Company
+                    </h3>
+                  </span>
+                </div>
               </Link>
             </div>
             <p className="text-xs font-bold text-center pb-8">

@@ -13,7 +13,7 @@ export function Brand({
   subheading,
   headingLevel = "h1",
   className,
-  logoSize = 25,
+  logoSize = 22,
 }: {
   heading?: string;
   subheading?: string;

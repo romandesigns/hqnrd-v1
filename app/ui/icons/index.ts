@@ -1,7 +1,7 @@
-export { GoHomeFill } from "react-icons/go";
-export { IoMdArrowRoundBack, IoLogoWhatsapp } from "react-icons/io";
-export { FaRegBuilding, FaMapMarkerAlt } from "react-icons/fa";
-export { HiOutlineUser, HiMenuAlt1 } from "react-icons/hi";
 export { BsDoorOpenFill, BsTranslate } from "react-icons/bs";
-export { MdSpaceDashboard } from "react-icons/md";
-export { MdOutlineTranslate } from "react-icons/md";
+export { FaMapMarkerAlt, FaRegBuilding } from "react-icons/fa";
+export { GoHomeFill } from "react-icons/go";
+export { HiMenuAlt1, HiOutlineUser } from "react-icons/hi";
+export { IoLogoWhatsapp, IoMdArrowRoundBack } from "react-icons/io";
+export { MdOutlineTranslate, MdSpaceDashboard } from "react-icons/md";
+export { IoClose } from "react-icons/io5";

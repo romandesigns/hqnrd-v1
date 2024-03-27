@@ -28,7 +28,7 @@ export default function Page({
           <div className="flex gap-10 flex-col px-3 lg:px-16 items-center justify-center max-w-lg m-auto">
             <Brand />
             <SignInForm lang={lang} />
-            <div className="my-2 flex flex-col items-center justify-center gap-2">
+            <div className="my-2 flex flex-col items-center justify-center gap-6">
               <Link
                 href={`/${lang}/iniciar-session`}
                 className="ml-2 underline text-primary-500 text-xs font-medium text-center"
