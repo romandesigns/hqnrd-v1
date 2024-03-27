@@ -15,6 +15,7 @@ export default function AntConfigProvider({
 }) {
   return (
     <ConfigProvider
+      csp={{ nonce: "YourNonceCode" }}
       theme={{
         algorithm: [theme.defaultAlgorithm, theme.compactAlgorithm],
         token: {

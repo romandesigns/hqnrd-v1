@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import "./ant-ui-elements.css";
-@import "./theme.css";
+@import "./variables.css";
 @import "react-phone-number-input/style.css";
 
 @layer base {
