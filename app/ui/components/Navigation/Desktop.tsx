@@ -4,6 +4,8 @@ import { Wrapper } from "../../layout/Wrapper";
 import { Brand } from "../Brand";
 import { ToggleClose } from "./components/ToggleCloseBtn";
 
+import { DesktopMenu } from "./components/DesktopMenu";
+
 export function DesktopNav({
   className = "",
   lang,
@@ -22,32 +24,7 @@ export function DesktopNav({
           <div className="flex justify-between items-center w-full">
             <Brand />
             <div className="flex items-center">
-              <ul className="hidden sm:flex text-sm font-medium">
-                <li className="inline-block">
-                  <a
-                    href="/"
-                    className="text-blue-500 hover:text-blue-600 px-4 py-2"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li className="inline-block">
-                  <a
-                    href="/about"
-                    className="text-blue-500 hover:text-blue-600 px-4 py-2"
-                  >
-                    Rooms
-                  </a>
-                </li>
-                <li className="inline-block">
-                  <a
-                    href="/about"
-                    className="text-blue-500 hover:text-blue-600 px-4 py-2"
-                  >
-                    Sign In
-                  </a>
-                </li>
-              </ul>
+              <DesktopMenu lang={lang} />
               <ToggleClose className="sm:hidden" />
             </div>
           </div>

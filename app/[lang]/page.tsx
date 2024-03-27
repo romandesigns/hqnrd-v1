@@ -1,7 +1,7 @@
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
 import Link from "next/link";
-import { Navigation } from "../ui/components";
+import { PublicLayout } from "../ui/layout";
 
 export default async function Home({
   params: { lang },
@@ -10,13 +10,14 @@ export default async function Home({
 }) {
   return (
     <>
-      <Navigation lang={lang} />
-      <main className="flex flex-col items-center">
-        <h1>Hello World</h1>
-        <Link href={"/crear-cuenta"}>
-          <Button type="primary">Button</Button>
-        </Link>
-      </main>
+      <PublicLayout lang={lang}>
+        <main className="flex flex-col items-center">
+          <h1>Hello World</h1>
+          <Link href={"/crear-cuenta"}>
+            <Button type="primary">Button</Button>
+          </Link>
+        </main>
+      </PublicLayout>
     </>
   );
 }
