@@ -24,8 +24,10 @@ export default function RootLayout({
   params: { lang: Locale };
 }>) {
   return (
-    <html lang={lang} className={"min-h-dvh"}>
-      <body className={`${poppins.className} min-h-dvh`}>
+    <html lang={lang} className="min-h-dvh">
+      <body
+        className={`${poppins.className} min-h-dvh grid grid-cols-1 grid-rows-[auto_1fr]`}
+      >
         <AntConfigProvider lang={lang}>
           <AntdRegistry>{children}</AntdRegistry>
         </AntConfigProvider>

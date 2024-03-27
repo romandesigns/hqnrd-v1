@@ -11,7 +11,7 @@ export default async function Home({
   return (
     <>
       <Navigation lang={lang} />
-      <main className="flex min-h-dvh flex-col items-center justify-between">
+      <main className="flex flex-col items-center">
         <h1>Hello World</h1>
         <Link href={"/crear-cuenta"}>
           <Button type="primary">Button</Button>
