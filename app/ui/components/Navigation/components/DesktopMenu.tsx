@@ -4,7 +4,7 @@ import { Button } from "antd";
 import Link from "next/link";
 import { BsDoorOpenFill, GoHomeFill } from "@/app/ui/icons";
 
-export function DesktopMenu({ lang }) {
+export function DesktopMenu({ lang }: { lang: string }) {
   return (
     <ul className="hidden sm:flex text-sm font-medium">
       <li className="inline-block">
