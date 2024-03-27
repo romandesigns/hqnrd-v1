@@ -5,11 +5,13 @@ import {
   FaMapMarkerAlt,
   GoHomeFill,
   IoLogoWhatsapp,
+  MdEmail,
   MdSpaceDashboard,
 } from "@/app/ui/icons";
 import { useNavToggle } from "@/store/mobile-navigation";
 import { Button, Flex } from "antd";
 import Link from "next/link";
+import { Divider } from "antd";
 
 export function MobileMenu({ lang }: { lang: string }) {
   const { closeNavigation } = useNavToggle();
@@ -51,24 +53,31 @@ export function MobileMenu({ lang }: { lang: string }) {
           </Button>
         </Link>
       </li>
-      <li className="mt-10">
-        <Flex gap="large" wrap="wrap">
-          <Button
-            type="default"
-            icon={<BsTranslate />}
-            className="!flex items-center justify-center shadow-lg bg-white"
-          />
-          <Button
-            type="default"
-            icon={<FaMapMarkerAlt />}
-            className="!flex items-center justify-center shadow-lg bg-white"
-          />
-          <Button
-            type="default"
-            icon={<IoLogoWhatsapp />}
-            className="!flex items-center justify-center shadow-lg bg-white"
-          />
-        </Flex>
+      <li className="mt-10 w-full">
+        <Divider className="">
+          <Flex gap="large">
+            <Button
+              type="default"
+              icon={<BsTranslate />}
+              className="!flex items-center justify-center shadow-lg bg-white"
+            />
+            <Button
+              type="default"
+              icon={<FaMapMarkerAlt />}
+              className="!flex items-center justify-center shadow-lg bg-white"
+            />
+            <Button
+              type="default"
+              icon={<IoLogoWhatsapp />}
+              className="!flex items-center justify-center shadow-lg bg-white"
+            />
+            <Button
+              type="default"
+              icon={<MdEmail />}
+              className="!flex items-center justify-center shadow-lg bg-white"
+            />
+          </Flex>
+        </Divider>
       </li>
       {/* <li className="w-full flex gap-4 mt-auto">
         <Link href={`/${lang}/cerrar-session`} className="flex-1">
