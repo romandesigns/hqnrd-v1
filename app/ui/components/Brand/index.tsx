@@ -36,9 +36,11 @@ export function Brand({
               Hotel Quinto Nivel RD
             </h1>
           ) : (
-            <h2 className="font-bold text-xs mt-1">Hotel Quinto Nivel RD</h2>
+            <h2 className="font-black uppercase text-xs mt-1">
+              Hotel Quinto Nivel RD
+            </h2>
           )}
-          <p className="font-semibold text-xs">Como estar en casa!</p>
+          <p className="font-semibold text-xs text-left">Como estar en casa!</p>
         </figcaption>
       </figure>
     </Link>

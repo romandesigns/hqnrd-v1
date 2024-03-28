@@ -1,7 +1,7 @@
 import { Locale } from "@/i18n-config";
 import cn from "classnames";
-import { Wrapper } from "../../layout/Wrapper";
-import { Brand } from "../Brand";
+import { Wrapper } from "../Wrapper";
+import { Brand } from "../../components/Brand";
 import { ToggleClose } from "./components/ToggleCloseBtn";
 
 import { DesktopMenu } from "./components/DesktopMenu";
