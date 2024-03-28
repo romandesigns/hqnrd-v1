@@ -9,9 +9,8 @@ import {
   MdSpaceDashboard,
 } from "@/app/ui/icons";
 import { useNavToggle } from "@/store/mobile-navigation";
-import { Button, Flex } from "antd";
+import { Button, Divider, Flex } from "antd";
 import Link from "next/link";
-import { Divider } from "antd";
 
 export function MobileMenu({ lang }: { lang: string }) {
   const { closeNavigation } = useNavToggle();

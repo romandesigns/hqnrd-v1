@@ -1,18 +1,16 @@
 "use client";
-import React from "react";
+import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
 import { Button } from "antd";
 import Link from "next/link";
-import { BsDoorOpenFill, GoHomeFill } from "@/app/ui/icons";
 
 export function DesktopMenu({ lang }: { lang: string }) {
   return (
-    <ul className="hidden sm:flex text-sm font-medium">
+    <ul className="hidden sm:flex text-sm font-medium gap-2">
       <li className="inline-block">
-        <Link href="/">
+        <Link href={`/${lang}`}>
           <Button
             className="!flex items-center justify-center"
-            type="link"
-            size="large"
+            size="middle"
             icon={<GoHomeFill />}
           >
             Home
@@ -20,11 +18,10 @@ export function DesktopMenu({ lang }: { lang: string }) {
         </Link>
       </li>
       <li className="inline-block">
-        <Link href="/habitaciones">
+        <Link href={`/${lang}/habitaciones`}>
           <Button
             className="!flex items-center justify-center"
-            type="link"
-            size="large"
+            size="middle"
             icon={<BsDoorOpenFill />}
           >
             Rooms
@@ -32,11 +29,22 @@ export function DesktopMenu({ lang }: { lang: string }) {
         </Link>
       </li>
       <li className="inline-block">
+        <Link href={`/${lang}/portal`}>
+          <Button
+            className="!flex items-center justify-center"
+            size="middle"
+            icon={<MdSpaceDashboard />}
+          >
+            Dashboard
+          </Button>
+        </Link>
+      </li>
+      <li className="inline-block">
         <Link href={`/${lang}/auth`}>
           <Button
             className="!flex items-center justify-center"
-            type="link"
-            size="large"
+            size="middle"
+            type="primary"
             icon={<GoHomeFill />}
           >
             Sign In
