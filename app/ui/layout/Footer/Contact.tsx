@@ -5,7 +5,10 @@ import {
   BUSINESS_ADDRESS,
   BUSINESS_DEVELOPER_EMAIL,
   BUSINESS_EMAIL,
+  BUSINESS_EMAIL_FROM_VISITOR,
+  BUSINESS_MAP_LOCATION,
   BUSINESS_WEB_DOMAIN,
+  BUSINESS_WHATSAPP_DIRECT_CHAT,
 } from "../../constants";
 import {
   AiFillPhone,
@@ -24,7 +27,7 @@ export const Contact = ({ data }: ShareDataPropTypes) => {
       </li>
       <li>
         <ExternalLink
-          href="//wa.link/hotelquintonivelrd"
+          href={BUSINESS_WHATSAPP_DIRECT_CHAT}
           className="flex flex-col items-start justify-center"
         >
           <>
@@ -40,7 +43,7 @@ export const Contact = ({ data }: ShareDataPropTypes) => {
       </li>
       <li>
         <ExternalLink
-          href="mailto:hotelquintonivelrd@gmail.com?cc=roman@wavystyle.io, ayelin.delacruz@gmail.com&subject=HQNRD Website Visitor"
+          href={BUSINESS_EMAIL_FROM_VISITOR}
           className="flex flex-col items-start justify-center"
         >
           <>
@@ -58,7 +61,7 @@ export const Contact = ({ data }: ShareDataPropTypes) => {
       </li>
       <li className="flex items-center justify-between my-2 md:justify-start md:space-x-10">
         <ExternalLink
-          href="//hotelquintonivelrd.com"
+          href={BUSINESS_WEB_DOMAIN}
           className="flex flex-col items-start justify-center"
         >
           <span className="flex items-baseline justify-start">
@@ -77,7 +80,7 @@ export const Contact = ({ data }: ShareDataPropTypes) => {
       </li>
       <li>
         <ExternalLink
-          href="//www.google.com/maps/place/Hotel+Quinto+Nivel+RD/@19.3805972,-70.4256792,17z/data=!3m1!4b1!4m9!3m8!1s0x8eae296e50e06303:0x4141e3bda5d73fec!5m2!4m1!1i2!8m2!3d19.3805922!4d-70.4231043!16s%2Fg%2F11h18w_m9k?entry=ttu"
+          href={BUSINESS_MAP_LOCATION}
           className="flex flex-col items-start justify-center"
         >
           <>

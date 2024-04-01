@@ -1,6 +1,5 @@
+import { Drawer as DrawerComponent } from "antd";
 import React from "react";
-import { Button, Drawer as DrawerComponent, Radio, Space } from "antd";
-import type { DrawerProps, RadioChangeEvent } from "antd";
 
 export function Drawer({
   setOpen,

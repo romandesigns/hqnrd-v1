@@ -1,8 +1,8 @@
 import { ExternalLink } from "../../common/ExternalLink";
 import {
   BUSINESS_FACEBOOK,
-  BUSINESS_GOOGLE_MAPS,
   BUSINESS_INSTAGRAM,
+  BUSINESS_MAP_LOCATION,
 } from "../../constants";
 import { AiFillFacebook, ImInstagram } from "../../icons";
 
@@ -47,7 +47,7 @@ export function SocialMedia() {
       </li>
       <li className="h-52 w-full lg:w-3/4 rounded-md overflow-hidden mt-4 ">
         <iframe
-          src={BUSINESS_GOOGLE_MAPS}
+          src={BUSINESS_MAP_LOCATION}
           width="100%"
           height="100%"
           loading="lazy"
