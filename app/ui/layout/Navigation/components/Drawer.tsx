@@ -12,7 +12,7 @@ export function Drawer({
 }: {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
-  lang: Locale;
+  lang: string;
 }) {
   type FlagsTypes = {
     name: string;
