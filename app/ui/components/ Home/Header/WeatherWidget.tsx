@@ -2,8 +2,7 @@ import Image from "next/image";
 
 export function WeatherWidget() {
   return (
-    <div className="hidden text-white relative md:block">
-      <p className="text-xs mb-4">Weather in Salcedo City:</p>
+    <div className="hidden text-black relative md:block z-[3]">
       <div className="flex space-x-6">
         <span>
           <p className="text-xs font-regular">Today</p>
@@ -11,7 +10,7 @@ export function WeatherWidget() {
             <Image
               width={12}
               height={12}
-              src="/assets/weather-icons/drop-33486.svg"
+              src="/assets/icons/weather/drop-33486.svg"
               alt="drop icon"
             />
           </span>
@@ -22,7 +21,7 @@ export function WeatherWidget() {
             <Image
               width={20}
               height={20}
-              src="/assets/weather-icons/brightness-33474.svg"
+              src="/assets/icons/weather/brightness-33474.svg"
               alt="drop icon"
             />
           </span>
@@ -33,7 +32,7 @@ export function WeatherWidget() {
             <Image
               width={22}
               height={22}
-              src="/assets/weather-icons/cloud-33472.svg"
+              src="/assets/icons/weather/cloud-33472.svg"
               alt="drop icon"
             />
           </span>
