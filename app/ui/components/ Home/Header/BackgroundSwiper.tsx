@@ -2,9 +2,9 @@
 import Image from "next/image";
 import React from "react";
 import type { Swiper as SwiperType } from "swiper";
+import "swiper/css/effect-fade";
 import { Controller, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/effect-fade";
 
 export function BackgroundSwiper({
   homeBillboards,
