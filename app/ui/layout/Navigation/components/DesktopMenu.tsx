@@ -45,7 +45,6 @@ export function DesktopMenu({ lang }: { lang: string }) {
             className="!flex items-center justify-center"
             size="middle"
             type="primary"
-            icon={<GoHomeFill />}
           >
             Sign In
           </Button>

@@ -3,14 +3,17 @@ import React from "react";
 import { Controller } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
+import { twMerge } from "tailwind-merge";
 
 export function TextHeadingSwiper({
   setTextControlledSwipper,
   homeBillboards,
+  className,
 }: {
   setTextControlledSwipper: React.Dispatch<
     React.SetStateAction<SwiperType | null>
   >;
+  className?: string;
   homeBillboards: { src: string; title: string; description: string }[];
 }) {
   return (
@@ -21,20 +24,20 @@ export function TextHeadingSwiper({
       slidesPerView={1}
       speed={2000}
       onSwiper={setTextControlledSwipper}
-      className="h-auto w-auto"
+      className={`h-full w-full ${className}`}
     >
       {homeBillboards.map((slide, index) => {
         return (
           <SwiperSlide
-            key={index}
-            className="text-center text-white md:text-left"
+            key={slide.title}
+            className="bg-gradient-to-b from-black/50"
           >
-            <h3 className="font-semibold text-md md:font-bold sm:text-2xl md:text-xl md:mb-4 md:bg-neutral-500/60 md:p-4 rounded-tl-md rounded-tr-md">
+            <h3
+              className={`h-full flex items-center justify-center font-bold text-white text-md`}
+            >
               {slide.title}
             </h3>
-            <p className="hidden md:block md:text-sm text-left leading-7m md:pt-1 md:p-5">
-              {slide.description}
-            </p>
+            <p className="hidden md:block">{slide.description}</p>
           </SwiperSlide>
         );
       })}

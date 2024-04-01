@@ -3,22 +3,27 @@ import Image from "next/image";
 import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, Controller, EffectCards, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { twMerge } from "tailwind-merge";
 
 export function CardSwiper({
   controlledSwiper,
   textControlledSwipper,
   homeBillboards,
+  className = "",
 }: {
   controlledSwiper: SwiperType | null;
   textControlledSwipper: SwiperType | null;
   homeBillboards: { src: string; title: string; description: string }[];
+  className?: string;
 }) {
   return (
     <Swiper
       effect={"cards"}
       grabCursor={true}
       modules={[EffectCards, Autoplay, Pagination, Controller]}
-      className={`w-[70vw] h-[60vh] md:w-[22rem] aspect-[9/16] shadow-lg place-self-center relative !z-[3] md:place-content-start`}
+      className={twMerge(
+        `w-[70vw] h-[60vh] md:w-[22rem] aspect-[9/16] shadow-lg place-self-center relative !z-[3] md:place-content-start ${className}`
+      )}
       pagination={{
         clickable: true,
       }}

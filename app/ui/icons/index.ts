@@ -10,6 +10,7 @@ export {
   FaMapMarkerAlt,
   FaRegBuilding,
 } from "react-icons/fa";
+export { FcGoogle } from "react-icons/fc";
 export { GoHomeFill } from "react-icons/go";
 export { HiMenuAlt1, HiOutlineUser } from "react-icons/hi";
 export { ImInstagram } from "react-icons/im";
