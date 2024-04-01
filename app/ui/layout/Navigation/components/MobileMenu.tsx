@@ -1,18 +1,10 @@
 "use client";
 import { UtilsWidget } from "@/app/ui/components/UtilsWidget";
-import React, { useState } from "react";
+import { useState } from "react";
 
-import {
-  BsDoorOpenFill,
-  BsTranslate,
-  FaMapMarkerAlt,
-  GoHomeFill,
-  IoLogoWhatsapp,
-  MdEmail,
-  MdSpaceDashboard,
-} from "@/app/ui/icons";
+import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
 import { useNavToggle } from "@/store/mobile-navigation";
-import { Button, Divider, Flex } from "antd";
+import { Button } from "antd";
 import Link from "next/link";
 import { Drawer } from "./Drawer";
 
@@ -111,7 +103,7 @@ export function MobileMenu({ lang }: { lang: string }) {
           </Link>
         </li>
       </ul>
-      <Drawer setOpen={setOpen} open={open} />
+      <Drawer setOpen={setOpen} open={open} lang={lang} />
     </>
   );
 }
