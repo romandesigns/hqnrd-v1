@@ -3,19 +3,12 @@ import { ContactWidget } from "@/app/ui/components/ContactWidget";
 import { useState } from "react";
 
 import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
+import { Locale } from "@/i18n-config";
 import { useNavToggle } from "@/store/mobile-navigation";
 import { Button } from "antd";
 import Link from "next/link";
-import { Drawer } from "./Drawer";
-import { FlagsList } from "./FlagsList";
 
-export function MobileMenu({
-  lang,
-  component,
-}: {
-  lang: string;
-  component: React.ReactNode;
-}) {
+export function MobileMenu({ lang }: { lang: Locale }) {
   const { closeNavigation } = useNavToggle();
   const [open, setOpen] = useState(false);
 
