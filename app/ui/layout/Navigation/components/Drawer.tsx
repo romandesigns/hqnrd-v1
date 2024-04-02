@@ -42,15 +42,16 @@ export function Drawer({
       title="Select Language"
       placement={"bottom"}
       width={500}
+      height={170}
       onClose={() => setOpen(false)}
       open={open}
     >
-      <div className="grid grid-cols-1 grid-rows-3 h-full w-full gap-6">
+      <div className="grid grid-cols-[1fr_1fr_1fr] grid-rows-1 h-full w-full gap-6">
         {flags.map((flag) => (
           <div
             key={flag.locale}
             className={twMerge(
-              `flex items-center justify-between rounded-md ring-2 ring-offset-4 bg-neutral-100 ring-neutral-300`,
+              `h-full flex items-center justify-between rounded-md ring-2 ring-offset-4 bg-neutral-100 ring-neutral-300 relative`,
               classNames({
                 "ring-primary-500 bg-primary-500 text-white":
                   flag.locale === lang,
@@ -59,18 +60,18 @@ export function Drawer({
           >
             <span
               className={twMerge(
-                `w-full h-full flex-[2] flex items-center justify-center border-r-4 border-white uppercase  font-semibold text-neutral-800`,
+                `w-full h-full flex-[2] flex items-center justify-center  uppercase  font-semibold text-neutral-800`,
                 classNames({ "text-white": flag.locale === lang })
               )}
             >
-              English
+              {flag.name}
             </span>
-            <span className="w-full h-full flex-[1] relative rounded-tr-md rounded-br-md overflow-hidden">
+            <span className="flex-[1] rounded-sm p-[0.2rem] overflow-hidden absolute top-1 left-1 bg-white">
               <Image
                 src={flag.icon}
                 alt={`${flag.name} flag`}
-                fill
-                objectFit="cover"
+                width={30}
+                height={30}
               />
             </span>
           </div>
