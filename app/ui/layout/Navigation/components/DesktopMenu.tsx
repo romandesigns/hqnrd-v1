@@ -28,7 +28,7 @@ export function DesktopMenu({ lang }: { lang: string }) {
           </Button>
         </Link>
       </li>
-      <li className="inline-block">
+      {/* <li className="inline-block">
         <Link href={`/${lang}/portal`}>
           <Button
             className="!flex items-center justify-center"
@@ -38,7 +38,7 @@ export function DesktopMenu({ lang }: { lang: string }) {
             Dashboard
           </Button>
         </Link>
-      </li>
+      </li> */}
       <li className="inline-block">
         <Link href={`/${lang}/auth`}>
           <Button

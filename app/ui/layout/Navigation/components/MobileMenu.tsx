@@ -1,5 +1,5 @@
 "use client";
-import { UtilsWidget } from "@/app/ui/components/UtilsWidget";
+import { ContactWidget } from "@/app/ui/components/ContactWidget";
 import { useState } from "react";
 
 import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
@@ -7,20 +7,18 @@ import { useNavToggle } from "@/store/mobile-navigation";
 import { Button } from "antd";
 import Link from "next/link";
 import { Drawer } from "./Drawer";
+import { FlagsList } from "./FlagsList";
 
-export function MobileMenu({ lang }: { lang: string }) {
+export function MobileMenu({
+  lang,
+  component,
+}: {
+  lang: string;
+  component: React.ReactNode;
+}) {
   const { closeNavigation } = useNavToggle();
   const [open, setOpen] = useState(false);
 
-  const showDrawer = () => {
-    setOpen(true);
-    console.log("showDrawer");
-  };
-
-  const onClose = () => {
-    setOpen(false);
-    console.log("Close");
-  };
   return (
     <>
       <ul className="w-10/12 flex items-center justify-center flex-col gap-6 h-full pb-8">
@@ -61,7 +59,12 @@ export function MobileMenu({ lang }: { lang: string }) {
           </Link>
         </li>
         <li className="mt-10 w-full">
-          <UtilsWidget setOpen={setOpen} open={open} />
+          <ContactWidget
+            setOpen={setOpen}
+            open={open}
+            lang={lang}
+            component="drawer"
+          />
         </li>
         {/* <li className="w-full flex gap-4 mt-auto">
         <Link href={`/${lang}/cerrar-session`} className="flex-1">
@@ -103,7 +106,6 @@ export function MobileMenu({ lang }: { lang: string }) {
           </Link>
         </li>
       </ul>
-      <Drawer setOpen={setOpen} open={open} lang={lang} />
     </>
   );
 }
