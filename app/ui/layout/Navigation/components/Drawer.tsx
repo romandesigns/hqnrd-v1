@@ -1,4 +1,5 @@
 import { Locale } from "@/i18n-config";
+import { FlagsTypes } from "@/types";
 import { Drawer as DrawerComponent } from "antd";
 import classNames from "classnames";
 import Image from "next/image";
@@ -14,12 +15,6 @@ export function Drawer({
   open: boolean;
   lang: string;
 }) {
-  type FlagsTypes = {
-    name: string;
-    icon: string;
-    locale: Locale;
-  };
-
   const flags: FlagsTypes[] = [
     {
       name: "English",

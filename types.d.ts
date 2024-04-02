@@ -26,3 +26,9 @@ export type TestimonialPropTypes = {
   rating: string;
   review: { rooms: number; service: number; location: number }[];
 };
+
+export type FlagsTypes = {
+  name: string;
+  icon: string;
+  locale: Locale;
+};
