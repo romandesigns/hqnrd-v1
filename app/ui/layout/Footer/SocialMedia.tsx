@@ -1,9 +1,5 @@
 import { ExternalLink } from "../../common/ExternalLink";
-import {
-  BUSINESS_FACEBOOK,
-  BUSINESS_INSTAGRAM,
-  BUSINESS_MAP_LOCATION,
-} from "../../constants";
+import { BUSINESS_FACEBOOK, BUSINESS_INSTAGRAM } from "../../constants";
 import { AiFillFacebook, ImInstagram } from "../../icons";
 
 export function SocialMedia() {
@@ -47,7 +43,9 @@ export function SocialMedia() {
       </li>
       <li className="h-52 w-full lg:w-3/4 rounded-md overflow-hidden mt-4 ">
         <iframe
-          src={BUSINESS_MAP_LOCATION}
+          src={
+            "https://www.google.com/maps/place/Hotel+Quinto+Nivel+RD/@19.3805972,-70.4256792,17z/data=!3m1!4b1!4m9!3m8!1s0x8eae296e50e06303:0x4141e3bda5d73fec!5m2!4m1!1i2!8m2!3d19.3805922!4d-70.4231043!16s%2Fg%2F11h18w_m9k?entry=ttu"
+          }
           width="100%"
           height="100%"
           loading="lazy"

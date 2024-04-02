@@ -2,7 +2,7 @@ import { Locale } from "@/i18n-config";
 import { Button } from "antd";
 import Link from "next/link";
 import { HomeHeaderContent } from "../ui/components/ Home/Header/HeaderComponent";
-import { Header, PublicLayout } from "../ui/layout";
+import { Header, PublicLayout, Wrapper } from "../ui/layout";
 
 export default async function Home({
   params: { lang },
@@ -11,9 +11,11 @@ export default async function Home({
 }) {
   return (
     <PublicLayout lang={lang}>
-      <Header className="h-[calc(100vh-57px)] md:h-[calc(90vh)] md:pt-24 md:w-full md:max-w-[80.2rem] md:m-auto flex items-stretch justify-stretch p-2 mt-[42px]">
-        <HomeHeaderContent lang={lang} />
-      </Header>
+      <Wrapper className="p-0 pt-[57px] md:pt-[0]">
+        <Header className="h-[calc(100vh-57px)] md:h-[calc(90vh)] md:pt-[60px] flex items-stretch justify-stretch p-2">
+          <HomeHeaderContent lang={lang} />
+        </Header>
+      </Wrapper>
       <main className="flex flex-col items-center">
         <h1>Hello World</h1>
         <Link href={"/crear-cuenta"}>

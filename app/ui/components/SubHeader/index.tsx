@@ -6,7 +6,7 @@ export function SubHeader({ lang }: { lang: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="items-center justify-between w-full hidden md:flex">
+    <div className="items-center justify-between w-full hidden sm:flex py-4">
       <ContactWidget
         setOpen={setOpen}
         open={open}

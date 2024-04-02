@@ -31,7 +31,7 @@ export function ContactWidget({
   return (
     <>
       <div>
-        <Divider className="">
+        <Divider>
           <Flex gap="large">
             <Button
               type="default"

@@ -1,7 +1,6 @@
 "use client";
 import { ContactWidget } from "@/app/ui/components/ContactWidget";
 import { useState } from "react";
-
 import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { useNavToggle } from "@/store/mobile-navigation";

@@ -25,14 +25,13 @@ export const HomeHeaderContent = ({ lang }: { lang: Locale }) => {
     useState<SwiperType | null>(null);
 
   return (
-    <section className="md:flex md:flex-col md:items-start md:justify-center w-full space-y-4">
+    <section className="md:flex md:flex-col md:items-start md:justify-center w-full">
       <SubHeader lang={lang} />
       <div className="w-full h-full rounded-md flex items-center justify-center overflow-hidden relative md:p-4">
         <div className="h-full md:h-auto flex flex-col md:grid md:grid-cols-2 md:grid-rows-1 w-full max-w-6xl mx-auto overflow-hidden rounded-md z-[3]">
           {/* Description */}
           <div className="flex-[0.14] md:self-center">
             <GoogleRating className="hidden md:inline-block md:mb-4" />
-
             <TextHeadingSwiper
               className="relative !z-[3]"
               homeBillboards={homeBillboards.billboard}

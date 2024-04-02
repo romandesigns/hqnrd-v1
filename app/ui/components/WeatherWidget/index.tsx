@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function WeatherWidget() {
   return (
-    <div className="hidden text-black relative md:block z-[3]">
+    <div className="hidden text-black relative sm:block z-[3]">
       <div className="flex space-x-6">
         <span>
           <p className="text-xs font-regular">Today</p>
