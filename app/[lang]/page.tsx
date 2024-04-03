@@ -4,6 +4,7 @@ import Link from "next/link";
 import { HomeHeaderContent } from "../ui/components/ Home/Header/HeaderComponent";
 import { Header, PublicLayout, Wrapper } from "../ui/layout";
 import { CommonAreaAndEntertainment } from "../ui/components/ Home/CommonAreaAndEntertainment";
+import Testimonials from "../ui/components/ Home/Testimonials";
 
 export default async function Home({
   params: { lang },
@@ -18,6 +19,7 @@ export default async function Home({
         </Header>
       </Wrapper>
       <main className="flex flex-col items-center">
+        <Testimonials />
         <CommonAreaAndEntertainment />
       </main>
     </PublicLayout>
