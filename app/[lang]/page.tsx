@@ -3,6 +3,7 @@ import { Button } from "antd";
 import Link from "next/link";
 import { HomeHeaderContent } from "../ui/components/ Home/Header/HeaderComponent";
 import { Header, PublicLayout, Wrapper } from "../ui/layout";
+import { CommonAreaAndEntertainment } from "../ui/components/ Home/CommonAreaAndEntertainment";
 
 export default async function Home({
   params: { lang },
@@ -17,10 +18,7 @@ export default async function Home({
         </Header>
       </Wrapper>
       <main className="flex flex-col items-center">
-        <h1>Hello World</h1>
-        <Link href={"/crear-cuenta"}>
-          <Button type="primary">Button</Button>
-        </Link>
+        <CommonAreaAndEntertainment />
       </main>
     </PublicLayout>
   );
