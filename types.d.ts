@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export type CarouselTypes = {
   src: string;
   alt: string;
@@ -31,4 +33,12 @@ export type FlagsTypes = {
   name: string;
   icon: string;
   locale: Locale;
+};
+
+export type HomeImageGallery = {
+  liClassNames: string;
+  src: string;
+  alt: string;
+  style: CSSProperties;
+  sizes: string;
 };

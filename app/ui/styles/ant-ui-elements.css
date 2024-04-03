@@ -1,0 +1,16 @@
+.ant-image-preview-wrap {
+  background-color: rgba(0, 0, 0, 0.525);
+  backdrop-filter: blur(30px);
+}
+
+.ant-image-preview-switch-left,
+.ant-image-preview-switch-right,
+button.ant-image-preview-close,
+.ant-image-preview-operations {
+  background: rgba(0, 0, 0, 0.375) !important;
+}
+
+.ant-image-preview-switch-left-disabled,
+.ant-image-preview-switch-right-disabled {
+  background: rgba(0, 0, 0, 0.092) !important;
+}
