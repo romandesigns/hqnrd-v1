@@ -14,3 +14,18 @@ button.ant-image-preview-close,
 .ant-image-preview-switch-right-disabled {
   background: rgba(0, 0, 0, 0.092) !important;
 }
+
+.ant-collapse-header-text,
+.ant-collapse-content-box {
+  text-align: left;
+}
+
+.ant-collapse-header-text {
+  font-weight: 500;
+  color: #404040;
+}
+
+.ant-collapse-content-box {
+  font-size: 0.8rem;
+  padding-left: 1.7rem !important;
+}

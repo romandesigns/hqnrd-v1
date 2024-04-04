@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import "./ant-ui-elements.css";
+@import "./swiper.css";
 @import "./variables.css";
 @import "react-phone-number-input/style.css";
 

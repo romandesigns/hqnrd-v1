@@ -5,6 +5,8 @@ import { HomeHeaderContent } from "../ui/components/ Home/Header/HeaderComponent
 import { Header, PublicLayout, Wrapper } from "../ui/layout";
 import { CommonAreaAndEntertainment } from "../ui/components/ Home/CommonAreaAndEntertainment";
 import Testimonials from "../ui/components/ Home/Testimonials";
+import { Amenities } from "../ui/components/ Home/Amenities";
+import { FrequentlyAskedQuestions } from "../ui/components/Fqa";
 
 export default async function Home({
   params: { lang },
@@ -19,8 +21,10 @@ export default async function Home({
         </Header>
       </Wrapper>
       <main className="flex flex-col items-center">
+        <Amenities />
         <Testimonials />
         <CommonAreaAndEntertainment />
+        <FrequentlyAskedQuestions />
       </main>
     </PublicLayout>
   );
