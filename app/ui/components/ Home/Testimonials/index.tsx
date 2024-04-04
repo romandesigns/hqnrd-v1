@@ -6,7 +6,7 @@ import { HeadingSection } from "@/app/ui/common/SectionHeading";
 export default function Testimonials() {
   return (
     <Section className="w-full px-2 rounded-md sm:py-0 sm:px-10 relative">
-      <article className="w-full h-full max-w-6xl bg-white">
+      <article className="w-full h-full max-w-6xl">
         <div className="w-full h-full py-10 p-2 rounded-md sm:px-4 relative">
           <HeadingSection
             highlight="Google Testimonials"

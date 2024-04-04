@@ -24,9 +24,9 @@ export function SwiperComponent<T extends { reviewerName: string }>({
   return (
     <Swiper
       slidesPerView={width >= 1080 ? 3 : width >= 740 ? 2 : 1}
-      spaceBetween={25}
+      spaceBetween={10}
       autoplay={{
-        delay: 3500,
+        delay: 4500,
         disableOnInteraction: false,
       }}
       pagination={{
@@ -37,7 +37,7 @@ export function SwiperComponent<T extends { reviewerName: string }>({
       className={twMerge(`review_carousel flex items-stretch`, className)}
     >
       {items.map((item, index) => (
-        <SwiperSlide key={index} className="py-1 pb-7">
+        <SwiperSlide key={index} className="py-1 pb-7 px-3">
           <RenderComponent {...(item as T)} />
         </SwiperSlide>
       ))}
