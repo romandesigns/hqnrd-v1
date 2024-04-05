@@ -14,7 +14,7 @@ export function Amenities() {
       />
       <div className="flex py-20 gap-4 flex-col lg:flex-row w-full">
         {/* Images */}
-        <article className="lg:flex-[1]">
+        <article className="lg:flex-[1]  h-[27rem]">
           <div className="grid grid-cols-2 grid-rows-2 gap-2 h-full transform">
             <div className="bg-white p-2 rounded-md overflow-hidden relative">
               <Image

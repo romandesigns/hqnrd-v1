@@ -7,6 +7,8 @@ import { CommonAreaAndEntertainment } from "../ui/components/ Home/CommonAreaAnd
 import Testimonials from "../ui/components/ Home/Testimonials";
 import { Amenities } from "../ui/components/ Home/Amenities";
 import { FrequentlyAskedQuestions } from "../ui/components/Fqa";
+import { Discounts } from "../ui/components/ Home/Discounts";
+import Trending from "../ui/components/ Home/Trending";
 
 export default async function Home({
   params: { lang },
@@ -22,8 +24,10 @@ export default async function Home({
       </Wrapper>
       <main className="flex flex-col items-center">
         <Amenities />
+        <Discounts />
         <Testimonials />
         <CommonAreaAndEntertainment />
+        <Trending />
         <FrequentlyAskedQuestions />
       </main>
     </PublicLayout>
