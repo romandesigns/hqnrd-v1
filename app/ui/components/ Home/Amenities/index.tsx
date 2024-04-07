@@ -1,8 +1,7 @@
-import { HeadingSection } from "@/app/ui/common/SectionHeading";
+import { HeadingSection } from "@/app/ui/features/SectionHeading";
 import { Section } from "@/app/ui/layout";
-import React from "react";
-import { amenities } from "./amenities";
 import Image from "next/image";
+import { amenities } from "./amenities";
 
 export function Amenities() {
   return (
@@ -10,9 +9,9 @@ export function Amenities() {
       <HeadingSection
         highlight="Your comfort is our priority"
         title="Providing the best amenities for your stay!"
-        accent="neutral"
+        highlightClassName="border bg-neutral-500/20 border-neutral-500 text-neutral-800"
       />
-      <div className="flex py-20 gap-4 flex-col lg:flex-row w-full">
+      <div className="flex gap-4 flex-col lg:flex-row w-full">
         {/* Images */}
         <article className="lg:flex-[1]  h-[27rem]">
           <div className="grid grid-cols-2 grid-rows-2 gap-2 h-full transform">

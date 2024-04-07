@@ -3,8 +3,8 @@
  * Renders a form for creating a new account.
  */
 import { InputPhone } from "@/app/ui/common";
-import { InputAnt } from "@/app/ui/common/Form";
-import { Alert, Button, DatePicker, Flex, Radio } from "antd";
+import { InputAnt } from "@/app/ui/features/Form";
+import { Alert, Button } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
@@ -51,36 +51,30 @@ export function SignUpForm({
 
       <form autoComplete="off" className="w-full" action={formAction}>
         <fieldset className="mb-4 space-y-4">
-          <InputAnt name="name" placeholder="Name" type="text" />
-          <InputAnt name="lastName" placeholder="Last Name" type="text" />
-          <DatePicker
-            variant="outlined"
-            className="w-full !py-[.38rem] focus-within:!border-primary-400 focus-within:!shadow-[0_0_0_3px_rgba(5,_145,_255,_0.15)] [&_input]:sm:!py-[.2rem] [&_input]:lg:!py-[.02rem]"
-            size="middle"
-            format="MM/DD/YYYY"
-            allowClear={true}
-            needConfirm={true}
-            name="dateOfBirth"
-            style={{ width: "100%" }}
-            placeholder="Date of Birth"
-            required
+          <InputAnt name="name" placeholder="Nombre de Empresa" type="text" />
+          <InputAnt
+            name="lastName"
+            placeholder="Nombre Registrado de Empresa"
+            type="text"
           />
-          <Flex vertical gap="middle" align="center">
-            <span className="text-xs font-semibold">Select Gender</span>
-            <Radio.Group buttonStyle="solid" name="gender">
-              <Radio.Button name="gender" value="male">
-                Man
-              </Radio.Button>
-              <Radio.Button name="gender" value="female">
-                Woman
-              </Radio.Button>
-              <Radio.Button name="gender" value="other">
-                Other
-              </Radio.Button>
-            </Radio.Group>
-          </Flex>
+          <InputAnt
+            name="rcn"
+            placeholder="RCN (Optional)"
+            type="text"
+            required={false}
+          />
+          <InputAnt
+            name="address"
+            placeholder="Dirección de Empresa"
+            type="text"
+          />
         </fieldset>
-        <input type="text" name="accountType" value="user" className="hidden" />
+        <input
+          type="text"
+          name="accountType"
+          value="company"
+          className="hidden"
+        />
         <fieldset className="mb-4 space-y-4">
           <InputAnt name="email" placeholder="E-Mail" type="email" />
           <InputPhone
@@ -100,6 +94,7 @@ export function SignUpForm({
             <Button
               htmlType="submit"
               type="primary"
+              className="!bg-secondary-500"
               block
               size="large"
               aria-disabled={pending}

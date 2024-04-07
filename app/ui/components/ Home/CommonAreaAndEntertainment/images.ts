@@ -27,7 +27,7 @@ export const roofTopImages: HomeImageGallery[] = [
   },
   {
     liClassNames:
-      "bg-neutral-300 rounded-md overflow-hidden flex items-center justify-center md:row-span-2 [&>div]:h-full",
+      "bg-neutral-300 rounded-md overflow-hidden flex items-center justify-center md:row-span-2 [&>div]:h-full [&>div]:w-full",
     src: "/assets/home/highlights/rooftop/phtograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp",
     alt: "Front of building",
     style: { objectFit: "cover", height: "100%" },
@@ -69,7 +69,7 @@ export const commonAndEntertainment: HomeImageGallery[] = [
   },
   {
     liClassNames:
-      "rounded-md flex items-center justify-center overflow-hidden md:row-span-2 [&>div]:h-full",
+      "rounded-md flex items-center justify-center overflow-hidden md:row-span-2 [&>div]:h-full [&>div]:w-full",
     src: "/assets/home/highlights/around/front-building-art-hqnrd.webp",
     alt: "Art at Front of Building",
     style: { objectFit: "cover", height: "100%" },

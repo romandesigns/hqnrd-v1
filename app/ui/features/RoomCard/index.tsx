@@ -11,7 +11,7 @@ export const shareData = {
 
 export const RoomCard = () => {
   return (
-    <div className="bg-white shadow-lg rounded-md my-8 mt-0 grid grid-col-1 w-full grid-rows-[12rem,205px] min-500:grid-rows-[13rem,205px] group">
+    <div className="bg-white  border rounded-md my-8 mt-0 grid grid-col-1 w-full grid-rows-[12rem,205px] min-500:grid-rows-[13rem,205px] group">
       <div className="h-full w-full pb-2">
         <figure className="relative w-full h-full shadow-[0_0.7rem_0.5rem_-0.4rem_rgba(0,0,0,0.5)] rounded-md overflow-hidden">
           <Image
@@ -61,7 +61,11 @@ export const RoomCard = () => {
             ))}
           </ul>
         </div>
-        <Button type="default" size="large">
+        <Button
+          type="default"
+          size="large"
+          className="!bg-neutral-800 !text-white"
+        >
           See Details
         </Button>
       </div>

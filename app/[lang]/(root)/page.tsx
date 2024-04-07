@@ -1,14 +1,14 @@
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
 import Link from "next/link";
-import { HomeHeaderContent } from "../ui/components/ Home/Header/HeaderComponent";
-import { Header, PublicLayout, Wrapper } from "../ui/layout";
-import { CommonAreaAndEntertainment } from "../ui/components/ Home/CommonAreaAndEntertainment";
-import Testimonials from "../ui/components/ Home/Testimonials";
-import { Amenities } from "../ui/components/ Home/Amenities";
-import { FrequentlyAskedQuestions } from "../ui/components/Fqa";
-import { Discounts } from "../ui/components/ Home/Discounts";
-import Trending from "../ui/components/ Home/Trending";
+import { HomeHeaderContent } from "../../ui/components/ Home/Header/HeaderComponent";
+import { Header, PublicLayout, Wrapper } from "../../ui/layout";
+import { CommonAreaAndEntertainment } from "../../ui/components/ Home/CommonAreaAndEntertainment";
+import Testimonials from "../../ui/components/ Home/Testimonials";
+import { Amenities } from "../../ui/components/ Home/Amenities";
+import { FrequentlyAskedQuestions } from "../../ui/components/ Home/Fqa";
+import { Discounts } from "../../ui/components/ Home/Discounts";
+import Trending from "../../ui/components/ Home/Trending";
 
 export default async function Home({
   params: { lang },
@@ -23,9 +23,9 @@ export default async function Home({
         </Header>
       </Wrapper>
       <main className="flex flex-col items-center">
-        <Amenities />
         <Discounts />
         <Testimonials />
+        <Amenities />
         <CommonAreaAndEntertainment />
         <Trending />
         <FrequentlyAskedQuestions />

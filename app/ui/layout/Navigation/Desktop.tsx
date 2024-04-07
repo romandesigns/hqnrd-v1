@@ -1,6 +1,6 @@
 import { Locale } from "@/i18n-config";
 import cn from "classnames";
-import { Brand } from "../../components/Brand";
+import { Brand } from "../../features/Brand";
 import { Wrapper } from "../Wrapper";
 import { ToggleClose } from "./components/ToggleCloseBtn";
 

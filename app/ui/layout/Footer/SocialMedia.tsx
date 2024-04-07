@@ -1,4 +1,4 @@
-import { ExternalLink } from "../../common/ExternalLink";
+import { ExternalLink } from "../../features/ExternalLink";
 import { BUSINESS_FACEBOOK, BUSINESS_INSTAGRAM } from "../../constants";
 import { AiFillFacebook, ImInstagram } from "../../icons";
 

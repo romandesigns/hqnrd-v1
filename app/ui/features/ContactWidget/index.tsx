@@ -7,7 +7,6 @@ import {
 } from "@/app/ui/icons";
 import { Button, Divider, Flex } from "antd";
 import React from "react";
-import { ExternalLink } from "../../common";
 import {
   BUSINESS_EMAIL_FROM_VISITOR,
   BUSINESS_MAP_LOCATION,
@@ -15,7 +14,7 @@ import {
 } from "../../constants";
 import { Drawer } from "../../layout/Navigation/components/Drawer";
 import { FlagsList } from "../../layout/Navigation/components/FlagsList";
-import { Modal } from "../Modal";
+import { ExternalLink, Modal } from "..";
 
 export function ContactWidget({
   setOpen,

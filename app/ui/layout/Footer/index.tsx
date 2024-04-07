@@ -1,8 +1,8 @@
 import { shareData } from "@/public/assets/data";
-import { Brand } from "../../components";
 import { Section } from "../../layout";
 import { Contact } from "./Contact";
 import { SocialMedia } from "./SocialMedia";
+import { Brand } from "../../features";
 
 export function Footer() {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ContactWidget } from "../ContactWidget";
-import { WeatherWidget } from "../WeatherWidget";
+import { ContactWidget } from "../../../features/ContactWidget";
+import { WeatherWidget } from "../../../features/WeatherWidget";
 
 export function SubHeader({ lang }: { lang: string }) {
   const [open, setOpen] = useState(false);

@@ -2,7 +2,7 @@ import { Section } from "@/app/ui/layout";
 import React from "react";
 import { Tabs } from "antd";
 import { IoIosImages } from "@/app/ui/icons";
-import { HeadingSection } from "@/app/ui/common/SectionHeading";
+import { HeadingSection } from "@/app/ui/features/SectionHeading";
 import { CommonAreas } from "./CommonAreas";
 import { RoofTop } from "./RoofTop";
 
@@ -23,11 +23,11 @@ export function CommonAreaAndEntertainment() {
   ];
   return (
     <Section>
-      <div className="w-full sm:border sm:rounded-md sm:p-20 sm:py-10 sm:max-w-[p0rem]">
+      <div className="w-full">
         <HeadingSection
           highlight="Areas comunes y entretenimiento"
           title="Familiarizate con nuestras instalaciones"
-          accent="neutral"
+          highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
         />
         <Tabs
           defaultActiveKey="1"

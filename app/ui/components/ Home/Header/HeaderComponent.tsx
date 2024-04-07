@@ -9,7 +9,7 @@ import "swiper/css/autoplay";
 import "swiper/css/effect-cards";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { SubHeader } from "../../SubHeader";
+import { SubHeader } from "../SubHeader";
 import {
   BackgroundSwiper,
   CardSwiper,

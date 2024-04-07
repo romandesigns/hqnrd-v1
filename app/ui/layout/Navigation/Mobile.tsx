@@ -2,7 +2,7 @@ import { Locale } from "@/i18n-config";
 import cn from "classnames";
 import { Wrapper } from "../Wrapper";
 import { MotionMobileNav } from "../../motion/MotionMobileNav";
-import { Brand } from "../../components/Brand";
+import { Brand } from "../../features/Brand";
 import { MobileMenu } from "./components/MobileMenu";
 import { ToggleOpen } from "./components/ToggleOpenBtn";
 

@@ -1,15 +1,14 @@
+import { HeadingSection } from "@/app/ui/features/SectionHeading";
 import { Section } from "@/app/ui/layout";
-import React from "react";
 import { CardDiscount } from "./CardDiscount";
-import { HeadingSection } from "@/app/ui/common/SectionHeading";
 
 export function Discounts() {
   return (
-    <Section className="w-full bg-tertiary-100/20 px-2 rounded-md sm:py-10 relative">
+    <Section className="w-full bg-tertiary-100/20 px-2 rounded-md relative">
       <article className="w-full h-full rounded-md z-[2]">
         <div className="flex flex-col items-center justify-center">
           <HeadingSection
-            accent="text-tertiary-500 bg-tertiary-100/50"
+            highlightClassName="border bg-teal-500/20 border-teal-500 text-teal-800"
             highlight="Discounts Available!"
             title="Stay Longer by Spending Less"
           />
@@ -24,7 +23,7 @@ export function Discounts() {
               imgSrc="/assets/general/eight-percent.svg"
               eligibleDays="Applicable When Booking 8 days"
               borderColor="border-neutral-500"
-              bgColor="bg-neutral-500/90"
+              bgColor="bg-neutral-800/90"
             />
           </div>
         </div>

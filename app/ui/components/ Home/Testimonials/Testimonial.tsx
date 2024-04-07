@@ -3,7 +3,7 @@ import { TestimonialPropTypes } from "@/types";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 import { ReviewCard } from "./TestimonialCard";
-import { SwiperComponent } from "@/app/ui/common/Swiper";
+import { SwiperComponent } from "@/app/ui/features/Swiper";
 
 export default function Testimonial({
   testimonials,

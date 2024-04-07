@@ -1,6 +1,6 @@
 import { ShareDataPropTypes } from "@/types";
-import { ExternalLink } from "../../common/ExternalLink";
-import { ShareBtn } from "../../common/ShareBtn";
+import { ExternalLink } from "../../features/ExternalLink";
+import { ShareBtn } from "../../features/ShareBtn";
 import {
   BUSINESS_ADDRESS,
   BUSINESS_DEVELOPER_EMAIL,

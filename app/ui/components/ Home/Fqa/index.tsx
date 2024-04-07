@@ -1,12 +1,17 @@
 import data from "@/public/assets/data/fqa.json";
-import { Section } from "../../layout";
 import type { CollapseProps } from "antd";
 import { Collapse } from "antd";
+import { HeadingSection } from "../../../features/SectionHeading";
+import { Section } from "../../../layout";
 
 export const FrequentlyAskedQuestions = () => {
   return (
     <Section className="w-full max-w-[90rem]">
-      <h2 className="text-2xl my-8">Frequently Asked Questions</h2>
+      <HeadingSection
+        highlight="Your comfort is our priority"
+        title="Frequently Asked Questions"
+        accent="neutral"
+      />
       <Collapse
         accordion
         size="middle"

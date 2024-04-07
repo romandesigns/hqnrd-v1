@@ -1,9 +1,10 @@
 "use client";
 
-import { RoomCard } from "@/app/ui/common/RoomCard";
-import { HeadingSection } from "@/app/ui/common/SectionHeading";
-import { SwiperComponent } from "@/app/ui/common/Swiper";
+import { RoomCard } from "@/app/ui/features";
+import { HeadingSection } from "@/app/ui/features/SectionHeading";
+import { SwiperComponent } from "@/app/ui/features/Swiper";
 import { Section } from "@/app/ui/layout";
+import { BsStars } from "react-icons/bs";
 
 type TrendingListType = Array<
   { a: number } | { b: number } | { c: number } | { d: number } | { e: number }
@@ -18,12 +19,13 @@ export default function Trendings() {
   ];
   return (
     <Section className="w-full rounded-md my-2">
-      <article className="w-full h-full rounded-md sm:p-4 sm:border sm:border">
+      <article className="w-full h-full rounded-md sm:p-4 bg-white">
         <div className="p-2 sm:p-0 rounded-md sm:px-4 relative flex flex-col justify-center items-center">
           <HeadingSection
             highlight="Trending Now!"
             title="Discover Our Most Popular Rooms!"
-            accent="neutral"
+            highlightClassName="border bg-yellow-500/20 border-yellow-500 text-yellow-800"
+            Icon={BsStars}
           />
           <div className="w-full md:my-10 pl-0 md:pr-3">
             <SwiperComponent

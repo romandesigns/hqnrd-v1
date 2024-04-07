@@ -1,4 +1,4 @@
-import { GoBack } from "@/app/ui/common/GoBack";
+import { GoBack } from "@/app/ui/features/GoBack";
 import { Brand } from "@/app/ui/components";
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
