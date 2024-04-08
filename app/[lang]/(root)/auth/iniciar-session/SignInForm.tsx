@@ -1,8 +1,8 @@
 "use client";
+import { InputAnt } from "@/app/ui/components/Form";
 /**
  * Renders a form for creating a new account.
  */
-import { InputAnt } from "@/app/ui/features/Form";
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
 import { useFormStatus } from "react-dom";

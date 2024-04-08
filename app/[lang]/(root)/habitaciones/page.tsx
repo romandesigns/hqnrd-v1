@@ -2,7 +2,11 @@ import { PublicLayout } from "@/app/ui/layout";
 import React from "react";
 import { Locale } from "@/i18n-config";
 
-export default function Page({ lang }: { lang: Locale }) {
+export default function Page({
+  params: { lang },
+}: {
+  params: { lang: Locale };
+}) {
   return (
     <PublicLayout lang={lang}>
       <main className="flex flex-col items-center">
