@@ -11,7 +11,7 @@ export const shareData = {
 
 export const RoomCard = () => {
   return (
-    <div className="grid-col-1  min-500:grid-rows-[13rem,205px] group my-8 mt-0 grid w-full grid-rows-[15rem,205px] rounded-md border bg-white">
+    <div className="grid-col-1 min-500:grid-rows-[13rem,205px] group my-8 mt-0 grid w-full grid-rows-[15rem,205px] rounded-md bg-white">
       <div className="h-full w-full pb-2">
         <figure className="relative h-full w-full overflow-hidden rounded-md shadow-[0_0.7rem_0.5rem_-0.4rem_rgba(0,0,0,0.5)]">
           <Image

@@ -5,9 +5,12 @@ import TestimonialList from "./Testimonial";
 
 export function Testimonials() {
   return (
-    <Section className="w-full px-2 rounded-md relative">
-      <article className="w-full h-full max-w-6xl">
-        <div className="w-full h-full p-2 rounded-md sm:px-4 relative">
+    <Section className="relative w-full rounded-md px-2">
+      <div className="bg-trasparent absolute top-0 -z-10 h-full w-full">
+        <div className="absolute bottom-auto left-auto right-0 top-0 h-[500px] w-[500px] -translate-x-[80%] translate-y-[20%] rounded-full bg-primary-500 opacity-50 blur-[80px]" />
+      </div>
+      <article className="h-full w-full max-w-6xl">
+        <div className="relative h-full w-full rounded-md p-2 sm:px-4">
           <HeadingSection
             highlight="Google Testimonials"
             title="See what our guests have to say about us!"

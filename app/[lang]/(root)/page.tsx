@@ -23,7 +23,7 @@ export default async function Home({
           <HomeHeaderContent lang={lang} />
         </Header>
       </Wrapper>
-      <main className="flex flex-col items-center">
+      <main className="relative flex flex-col items-center">
         <Testimonials />
         <Discounts />
         <Amenities />

@@ -23,7 +23,7 @@ export function CommonAreaAndEntertainment() {
   ];
   return (
     <Section>
-      <div className="w-full">
+      <div className="relative w-full">
         <HeadingSection
           highlight="Areas comunes y entretenimiento"
           title="Familiarizate con nuestras instalaciones"
@@ -34,7 +34,7 @@ export function CommonAreaAndEntertainment() {
           size="middle"
           centered
           tabPosition="bottom"
-          className="w-full [&_.ant-tabs-tab-btn]:flex my-10"
+          className="my-10 w-full [&_.ant-tabs-tab-btn]:flex"
           style={{ color: "red" }}
           color="!text-red-500"
           items={tabItems.map((i) => {

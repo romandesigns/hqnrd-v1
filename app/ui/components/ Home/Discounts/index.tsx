@@ -4,15 +4,16 @@ import { CardDiscount } from "./CardDiscount";
 
 export function Discounts() {
   return (
-    <Section className="w-full bg-tertiary-100/20 px-2 rounded-md relative">
-      <article className="w-full h-full rounded-md z-[2]">
+    <Section className="bg-tertiary-100/20 relative w-full rounded-md px-2">
+      <div className="absolute top-0 z-[-2] h-screen w-screen bg-transparent bg-[radial-gradient(100%_50%_at_100%_70%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]" />
+      <article className="z-[2] h-full w-full rounded-md">
         <div className="flex flex-col items-center justify-center">
           <HeadingSection
             highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
             highlight="Discounts Available!"
             title="Stay Longer by Spending Less"
           />
-          <div className="flex items-center justify-center w-full flex-col md:flex-row gap-20">
+          <div className="flex w-full flex-col items-center justify-center gap-20 md:flex-row">
             <CardDiscount
               imgSrc="/assets/general/five-percent.svg"
               eligibleDays="Applicable When Booking 5 days"

@@ -6,7 +6,7 @@ import { Section } from "../../../layout";
 
 export const FrequentlyAskedQuestions = () => {
   return (
-    <Section className="w-full max-w-[90rem]">
+    <Section className="w-full max-w-[90rem] pb-32">
       <HeadingSection
         highlight="Your comfort is our priority"
         title="Frequently Asked Questions"

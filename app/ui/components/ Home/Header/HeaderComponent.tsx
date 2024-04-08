@@ -19,26 +19,26 @@ import {
 } from "./"; // Assuming index.js is properly set in your components folder
 export const HomeHeaderContent = ({ lang }: { lang: Locale }) => {
   const [controlledSwiper, setControlledSwiper] = useState<SwiperType | null>(
-    null
+    null,
   );
   const [textControlledSwipper, setTextControlledSwipper] =
     useState<SwiperType | null>(null);
 
   return (
-    <section className="md:flex md:flex-col md:items-start md:justify-center w-full">
+    <section className="w-full md:flex md:flex-col md:items-start md:justify-center">
       <SubHeader lang={lang} />
-      <div className="w-full h-full rounded-md flex items-center justify-center overflow-hidden relative md:p-4">
-        <div className="h-full md:h-auto flex flex-col md:grid md:grid-cols-2 md:grid-rows-1 w-full max-w-6xl mx-auto overflow-hidden rounded-md z-[3]">
+      <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-md md:p-4">
+        <div className="z-[3] mx-auto flex h-full w-full max-w-6xl flex-col overflow-hidden rounded-md md:grid md:h-auto md:grid-cols-2 md:grid-rows-1">
           {/* Description */}
           <div className="flex-[0.14] md:self-center">
-            <GoogleRating className="hidden md:inline-block md:mb-4" />
+            <GoogleRating className="hidden md:mb-4 md:inline-block" />
             <TextHeadingSwiper
               className="relative !z-[3]"
               homeBillboards={homeBillboards.billboard}
               setTextControlledSwipper={setTextControlledSwipper}
             />
             <HeaderButtonsGroup
-              className="hidden relative z-[3] md:flex pr-32 md:p-0 md:py-4"
+              className="relative z-[3] hidden pr-32 md:flex md:p-0 md:py-4"
               lang={lang}
             />
           </div>
@@ -53,11 +53,11 @@ export const HomeHeaderContent = ({ lang }: { lang: Locale }) => {
           <GoogleRating className="flex-[0.11] md:hidden" />
           {/* Buttons Group mobile */}
           <HeaderButtonsGroup
-            className="relative flex-[0.11] z-[3] md:hidden"
+            className="relative z-[3] flex-[0.11] md:hidden"
             lang={lang}
           />
         </div>
-        <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/15 backdrop-filter backdrop-blur-md w-full h-full z-[2]" />
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-[2] h-full w-full bg-black/15 backdrop-blur-md backdrop-filter" />
         <BackgroundSwiper
           homeBillboards={homeBillboards.billboard}
           setControlledSwiper={setControlledSwiper}
