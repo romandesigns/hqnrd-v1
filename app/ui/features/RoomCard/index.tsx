@@ -60,7 +60,7 @@ export const RoomCard = () => {
             ))}
           </ul>
         </div>
-        <Button type="primary" size="large" className=" !text-white">
+        <Button size="large" className="!bg-neutral-800 !text-white">
           See Details
         </Button>
       </div>

@@ -18,22 +18,22 @@ export function HeadingSection({
   className?: string;
 }) {
   return (
-    <div className={`my-15 lg:my-20 ${className}`}>
+    <div className={`mx-auto mb-10 w-10/12 lg:my-20 ${className}`}>
       <div
         className={twMerge(
-          `mt-4 inline-flex items-center text-xs justify-center font-bold p-1 rounded-full px-2 text-neutral-800 bg-neutral-500/20 relative ${highlightClassName}`
+          `relative mt-4 inline-flex items-center justify-center rounded-full bg-neutral-500/20 p-1 px-2 text-xs font-bold text-neutral-800 ${highlightClassName}`,
         )}
       >
         <p>{highlight}</p>
         {Icon && (
-          <span className="absolute -top-4 -right-4 animate-bounce">
+          <span className="absolute -right-4 -top-4 animate-bounce">
             <Icon size={20} />
           </span>
         )}
       </div>
       <h2
         className={twMerge(
-          `font-black my-2 text-neutral-800 underline text-xl ${descriptionClassName}`
+          `my-2 text-xl font-black text-neutral-800 underline ${descriptionClassName}`,
         )}
       >
         {title}

@@ -37,7 +37,7 @@ export function SwiperComponent<T extends { reviewerName: string }>({
       className={twMerge(`review_carousel flex items-stretch`, className)}
     >
       {items.map((item, index) => (
-        <SwiperSlide key={index} className="py-1 pb-7 px-3">
+        <SwiperSlide key={index} className="py-1 pb-7 md:px-2">
           <RenderComponent {...(item as T)} />
         </SwiperSlide>
       ))}
