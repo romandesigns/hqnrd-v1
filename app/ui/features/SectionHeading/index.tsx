@@ -8,15 +8,17 @@ export function HeadingSection({
   highlightClassName,
   descriptionClassName,
   Icon,
+  className,
 }: {
   highlight: string;
   title: string;
   highlightClassName?: string;
   descriptionClassName?: string;
   Icon?: IconType;
+  className?: string;
 }) {
   return (
-    <div className="my-15 lg:my-20">
+    <div className={`my-15 lg:my-20 ${className}`}>
       <div
         className={twMerge(
           `mt-4 inline-flex items-center text-xs justify-center font-bold p-1 rounded-full px-2 text-neutral-800 bg-neutral-500/20 relative ${highlightClassName}`

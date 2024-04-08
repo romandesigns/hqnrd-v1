@@ -3,7 +3,7 @@ import { Section } from "@/app/ui/layout/Section";
 import { testimonials } from "@/public/assets/data/testimonials";
 import TestimonialList from "./Testimonial";
 
-export default function Testimonials() {
+export function Testimonials() {
   return (
     <Section className="w-full px-2 rounded-md relative">
       <article className="w-full h-full max-w-6xl">
@@ -13,9 +13,7 @@ export default function Testimonials() {
             title="See what our guests have to say about us!"
             highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
           />
-          <div className="my-20 ">
-            <TestimonialList testimonials={testimonials} />
-          </div>
+          <TestimonialList testimonials={testimonials} />
         </div>
       </article>
     </Section>

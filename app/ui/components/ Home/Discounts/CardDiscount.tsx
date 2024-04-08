@@ -14,7 +14,7 @@ export function CardDiscount({
   bgColor: string;
 }): React.JSX.Element {
   return (
-    <div className="w-full h-full rounded-md relative md:py-10 md:p-7 mb-4 md:mb-0">
+    <div className="w-full h-full rounded-md relative">
       <div className="p-6 bg-white rounded-md shadow-sm">
         <div className="w-full h-full p-10 flex items-center flex-col justify-center rounded-md border-2 border-dashed">
           <h4 className="font-bold text-lg">{eligibleDays}</h4>

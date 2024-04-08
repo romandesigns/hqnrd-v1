@@ -10,7 +10,7 @@ export const FrequentlyAskedQuestions = () => {
       <HeadingSection
         highlight="Your comfort is our priority"
         title="Frequently Asked Questions"
-        accent="neutral"
+        highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
       />
       <Collapse
         accordion

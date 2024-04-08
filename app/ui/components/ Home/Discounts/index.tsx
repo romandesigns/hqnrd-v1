@@ -8,11 +8,11 @@ export function Discounts() {
       <article className="w-full h-full rounded-md z-[2]">
         <div className="flex flex-col items-center justify-center">
           <HeadingSection
-            highlightClassName="border bg-teal-500/20 border-teal-500 text-teal-800"
+            highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
             highlight="Discounts Available!"
             title="Stay Longer by Spending Less"
           />
-          <div className="flex items-center justify-center w-full flex-col md:flex-row">
+          <div className="flex items-center justify-center w-full flex-col md:flex-row gap-20">
             <CardDiscount
               imgSrc="/assets/general/five-percent.svg"
               eligibleDays="Applicable When Booking 5 days"

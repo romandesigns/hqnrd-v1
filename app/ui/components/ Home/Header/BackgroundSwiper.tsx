@@ -22,14 +22,14 @@ export function BackgroundSwiper({
       speed={1000}
       modules={[EffectFade, Controller]}
       onSwiper={setControlledSwiper}
-      className="!absolute h-full w-full top-0 right-0 left-0 bottom-0 -z-[15]"
+      className="!absolute bottom-0 left-0 right-0 top-0 -z-[15] h-full w-full"
     >
       {homeBillboards.map((slide, index) => {
         return (
           <SwiperSlide key={index}>
-            <figure className="w-full h-full after:content[*] top-0 left-0 right-0 after:absolute after:backdrop-filter after:backdrop-blur-lg after:w-full after:h-full after:block after:left-0 after:right-0 after:top-0 after:bottom-0 relative">
+            <figure className="after:content[*] relative left-0 right-0 top-0 h-full w-full after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:block after:h-full after:w-full after:backdrop-blur-lg after:backdrop-filter">
               <Image
-                className="w-full h-full object-cover"
+                className="h-full w-full object-cover"
                 src={slide.src}
                 placeholder="blur"
                 fill

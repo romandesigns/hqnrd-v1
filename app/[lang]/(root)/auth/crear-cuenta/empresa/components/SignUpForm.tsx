@@ -2,13 +2,13 @@
 /**
  * Renders a form for creating a new account.
  */
-import { InputPhone } from "@/app/ui/common";
-import { InputAnt } from "@/app/ui/features/Form";
+
 import { Alert, Button } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
 import { createUserAction } from "../actions/signUp";
+import { InputAnt, InputPhone } from "@/app/ui/components/Form";
 
 type initialStateTypes = {
   path: string;
@@ -45,7 +45,7 @@ export function SignUpForm({
           type="error"
           showIcon
           closable
-          className="w-full !my-2"
+          className="!my-2 w-full"
         />
       )}
 
@@ -94,7 +94,7 @@ export function SignUpForm({
             <Button
               htmlType="submit"
               type="primary"
-              className="!bg-secondary-500"
+              className="!bg-neutral-800"
               block
               size="large"
               aria-disabled={pending}

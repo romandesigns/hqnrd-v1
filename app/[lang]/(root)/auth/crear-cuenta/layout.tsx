@@ -6,12 +6,12 @@ export const metadata: Metadata = {
 };
 
 import { GoBack } from "@/app/ui/features/GoBack";
-import { Brand } from "@/app/ui/components";
 import { Locale } from "@/i18n-config";
 import Link from "next/link";
 import { images } from "./usuario/components/data";
 import { SlideShow } from "./usuario/components/SlideShow";
 import { GoHomeFill } from "@/app/ui/icons";
+import { Brand } from "@/app/ui/features";
 
 export default function RootLayout({
   children,
@@ -21,34 +21,34 @@ export default function RootLayout({
   params: { lang: Locale };
 }>) {
   return (
-    <main className="min-h-dvh flex items-center justify-center relative lg:p-10 box-content">
-      <section className="sm:max-w-5xl grid grid-cols-1 lg:grid-cols-[3fr_2fr] z-[2] xs:p-2 absolute top-0 left-0 right-0 bottom-0 bg-white lg:relative lg:rounded-md">
-        <SlideShow images={images} className="hidden lg:flex relative" />
-        <article className="bg-white max-w-lg m-auto lg:px-4 grid grid-cols-1 grid-rows-1 rounded-md p-2 flex-col lg:rounded-tl-none lg:rounded-bl-none">
+    <main className="relative box-content flex min-h-dvh items-center justify-center lg:p-10">
+      <section className="absolute bottom-0 left-0 right-0 top-0 z-[2] grid grid-cols-1 bg-white xs:p-2 sm:max-w-5xl lg:relative lg:grid-cols-[3fr_2fr] lg:rounded-md">
+        <SlideShow images={images} className="relative hidden lg:flex" />
+        <article className="m-auto grid max-w-lg grid-cols-1 grid-rows-1 flex-col rounded-md bg-white p-2 lg:rounded-bl-none lg:rounded-tl-none lg:px-4">
           <div className="grid grid-cols-1 grid-rows-[1fr_auto_auto]">
-            <div className="self-center border lg:h-auto p-4 lg:p-2 lg:px-6 shadow-md rounded-md flex items-center justify-center flex-col bg-white rounded-m">
-              <div className="flex justify-between w-full py-2">
+            <div className="rounded-m flex flex-col items-center justify-center self-center rounded-md border bg-white p-4 shadow-md lg:h-auto lg:p-2 lg:px-6">
+              <div className="flex w-full justify-between py-2">
                 <GoBack />
                 <Link href="/">
                   <GoHomeFill className="text-neutral-500" />
                 </Link>
               </div>
-              <div className="flex items-center justify-center flex-col mb-4">
+              <div className="mb-4 flex flex-col items-center justify-center">
                 <Brand className="my-8 lg:my-4" />
               </div>
               {children}
             </div>
-            <div className="flex justify-center -translate-y-[1px]">
+            <div className="flex -translate-y-[1px] justify-center">
               <div className="w-4/5">
-                <div className="h-[1px] bg-gradient-to-r from-transparent via-primary-400 to-transparent w-full"></div>
+                <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-primary-400 to-transparent"></div>
               </div>
             </div>
             <div className="my-2 flex items-center justify-center">
-              <p className="text-xs font-medium text-center">
+              <p className="text-center text-xs font-medium">
                 Already have an account?{" "}
                 <Link
                   href={`/${lang}/iniciar-session`}
-                  className="ml-2 underline text-primary-500"
+                  className="ml-2 text-primary-500 underline"
                 >
                   Sign in
                 </Link>
@@ -57,8 +57,8 @@ export default function RootLayout({
           </div>
         </article>
       </section>
-      <div className="bg-black/20 absolute top-0 left-0 right-0 bottom-0 rounded-md backdrop-filter backdrop-blur-xl z-[1]" />
-      <div className="bg-[url('/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp')] bg-no-repeat bg-center bg-cover absolute top-0 left-0 right-0 bottom-0" />
+      <div className="absolute bottom-0 left-0 right-0 top-0 z-[1] rounded-md bg-black/20 backdrop-blur-xl backdrop-filter" />
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[url('/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp')] bg-cover bg-center bg-no-repeat" />
     </main>
   );
 }

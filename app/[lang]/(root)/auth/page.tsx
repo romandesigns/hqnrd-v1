@@ -1,4 +1,4 @@
-import { Brand } from "@/app/ui/components";
+import { Brand } from "@/app/ui/features";
 import { FaRegBuilding, GoHomeFill, HiOutlineUser } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
@@ -8,9 +8,9 @@ export default function Page({
   params: { lang },
 }: Readonly<{ params: { lang: Locale } }>) {
   return (
-    <main className="min-h-dvh flex items-center justify-center relative">
-      <section className="w-full h-full absolute top-0 left-0 right-0 bottom-0 bg-white z-[2] p-4 sm:relative sm:h-auto sm:max-w-lg sm:rounded-md">
-        <article className="border p-2 rounded-md grid grid-cols-1 grid-rows-[auto_1fr] gap-10 h-full">
+    <main className="relative flex min-h-dvh items-center justify-center">
+      <section className="absolute bottom-0 left-0 right-0 top-0 z-[2] h-full w-full bg-white p-4 sm:relative sm:h-auto sm:max-w-lg sm:rounded-md">
+        <article className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-10 rounded-md border p-2">
           <div className="flex justify-end p-2">
             <Link href="/">
               <Button
@@ -22,20 +22,20 @@ export default function Page({
               </Button>
             </Link>
           </div>
-          <div className="flex gap-8 flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center gap-8">
             <Brand />
-            <p className="text-xs font-bold text-center w-4/5 underline">
+            <p className="w-4/5 text-center text-xs font-bold underline">
               CREATE ACCOUNT
             </p>
-            <div className="gap-4 flex items-center justify-center">
+            <div className="flex items-center justify-center gap-4">
               <Link
                 href={`/auth/crear-cuenta/usuario`}
-                className="justify-center flex items-center flex-col"
+                className="flex flex-col items-center justify-center"
               >
-                <div className="w-36 h-36 border border-primary-100 bg-primary-50 rounded-md sm:hover:bg-primary-100 sm:hover:cursor-pointer p-1">
-                  <span className="gap-1 bg-primary-100/15 p-2 h-full w-full justify-center flex items-center flex-col rounded-md">
+                <div className="h-36 w-36 rounded-md border border-primary-100 bg-primary-50 p-1 sm:hover:cursor-pointer sm:hover:bg-primary-100">
+                  <span className="flex h-full w-full flex-col items-center justify-center gap-1 rounded-md bg-primary-100/15 p-2">
                     <HiOutlineUser size={25} className="text-primary-500" />
-                    <h3 className="text-primary-800 uppercase font-bold text-[0.65rem]">
+                    <h3 className="text-[0.65rem] font-bold uppercase text-primary-800">
                       Guest
                     </h3>
                   </span>
@@ -43,31 +43,31 @@ export default function Page({
               </Link>
               <Link
                 href={`/auth/crear-cuenta/empresa`}
-                className="justify-center flex items-center flex-col"
+                className="flex flex-col items-center justify-center"
               >
-                <div className="gap-1 w-36 h-36 border border-secondary-100 bg-secondary-50 rounded-md sm:hover:bg-secondary-100 sm:hover:cursor-pointer p-1">
-                  <span className="gap-1 bg-secondary-100/15 p-2 h-full w-full justify-center flex items-center flex-col rounded-md">
-                    <FaRegBuilding size={25} className="text-secondary-500" />
-                    <h3 className="text-secondary-800 uppercase font-bold text-[0.65rem]">
+                <div className="h-36 w-36 gap-1 rounded-md border border-neutral-200 bg-neutral-50 p-1 sm:hover:cursor-pointer sm:hover:bg-neutral-100">
+                  <span className="flex h-full w-full flex-col items-center justify-center gap-1 rounded-md bg-neutral-100 p-2">
+                    <FaRegBuilding size={25} className="text-neutral-800" />
+                    <h3 className="text-[0.65rem] font-bold uppercase text-neutral-800">
                       Company
                     </h3>
                   </span>
                 </div>
               </Link>
             </div>
-            <p className="text-xs font-bold text-center pb-8">
+            <p className="pb-8 text-center text-xs font-bold">
               <span className="block pb-2">
                 Para preguntas porfavor llamarnos al number
               </span>
-              <span className="block text-primary-500 underline font-bold">
+              <span className="block font-bold text-primary-500 underline">
                 809-577-3145
               </span>
             </p>
           </div>
         </article>
       </section>
-      <div className="bg-black/20 absolute top-0 left-0 right-0 bottom-0 rounded-md backdrop-filter backdrop-blur-xl z-[1]" />
-      <div className="bg-[url('/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp')] bg-no-repeat bg-center bg-cover absolute top-0 left-0 right-0 bottom-0" />
+      <div className="absolute bottom-0 left-0 right-0 top-0 z-[1] rounded-md bg-black/20 backdrop-blur-xl backdrop-filter" />
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[url('/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp')] bg-cover bg-center bg-no-repeat" />
     </main>
   );
 }

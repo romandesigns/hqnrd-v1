@@ -53,3 +53,4 @@ export {
   TbToolsKitchen,
   TbWheelchair,
 } from "react-icons/tb";
+export { BiGroup } from "react-icons/bi";

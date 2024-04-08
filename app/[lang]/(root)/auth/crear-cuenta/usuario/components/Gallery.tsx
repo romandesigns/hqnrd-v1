@@ -34,11 +34,11 @@ export function AuthCarousel({ images }: { images: CarouselTypes[] }) {
     >
       {images.map((image, index) => (
         <div key={index} style={contentStyle}>
-          <div className="absolute w-full flex items-center justify-center p-20 px-14 z-[2] bottom-0 bg-gradient-to-t from-black/60 flex-col">
-            <h3 className="text-white text-[1.3rem] font-black text-center">
+          <div className="absolute bottom-0 z-[2] flex w-full flex-col items-center justify-center bg-gradient-to-t from-black/60 p-20 px-14">
+            <h3 className="text-center text-[1.3rem] font-black text-white">
               {image.title}
             </h3>
-            <p className="text-white text-[.94rem] text-center">
+            <p className="text-center text-[.94rem] text-white">
               {image.description}
             </p>
           </div>

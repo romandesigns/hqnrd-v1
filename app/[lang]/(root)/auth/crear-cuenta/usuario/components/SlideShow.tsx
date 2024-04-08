@@ -14,7 +14,7 @@ export function SlideShow({
   return (
     <article
       className={cn(
-        `bg-white h-full rounded-lr-md rounded-lr-md relative rounded-tl-md rounded-bl-md overflow-hidden ${className}`
+        `rounded-lr-md rounded-lr-md relative h-full overflow-hidden rounded-bl-md rounded-tl-md bg-white ${className}`,
       )}
     >
       <AuthCarousel images={images} />

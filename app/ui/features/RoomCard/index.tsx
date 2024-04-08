@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { Button } from "antd";
-import { amenityIcons } from "./Icons";
+import Image from "next/image";
 import { ShareBtn } from "../ShareBtn";
+import { amenityIcons } from "./Icons";
 
 export const shareData = {
   title: "MDN",
@@ -11,11 +11,11 @@ export const shareData = {
 
 export const RoomCard = () => {
   return (
-    <div className="bg-white  border rounded-md my-8 mt-0 grid grid-col-1 w-full grid-rows-[12rem,205px] min-500:grid-rows-[13rem,205px] group">
+    <div className="grid-col-1  min-500:grid-rows-[13rem,205px] group my-8 mt-0 grid w-full grid-rows-[15rem,205px] rounded-md border bg-white">
       <div className="h-full w-full pb-2">
-        <figure className="relative w-full h-full shadow-[0_0.7rem_0.5rem_-0.4rem_rgba(0,0,0,0.5)] rounded-md overflow-hidden">
+        <figure className="relative h-full w-full overflow-hidden rounded-md shadow-[0_0.7rem_0.5rem_-0.4rem_rgba(0,0,0,0.5)]">
           <Image
-            className="absolute w-full h-full object-cover lg:group-hover:scale-[1.05] transition-transform duration-300"
+            className="absolute h-full w-full object-cover transition-transform duration-300 lg:group-hover:scale-[1.05]"
             src={
               "/assets/home/trending/phtograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp"
             }
@@ -25,32 +25,31 @@ export const RoomCard = () => {
           />
         </figure>
       </div>
-
-      <div className="px-2 pb-4 grid grid-cols-1 grid-rows-[auto,auto,auto,auto]">
-        <div className="flex items-center justify-between border-b border-neutral-500 my-1">
-          <p className="uppercase font-bold text-xs text-neutral-500">
+      <div className="grid grid-cols-1 grid-rows-[auto,auto,auto,auto] px-2 pb-4">
+        <div className="my-1 flex items-end justify-between border-b border-neutral-500">
+          <p className="self-center text-xs font-semibold uppercase text-neutral-800">
             Unit # 201
           </p>
-          <p className="text-xs font-semibold bg-neutral-500 text-white px-2 py-1 rounded-tl-md rounded-tr-md">
+          <p className="rounded-tl-md rounded-tr-md bg-neutral-800 px-2 py-1 text-sm font-semibold text-white">
             2,350 / Night
           </p>
         </div>
         <div className="flex items-center justify-between py-1">
-          <h3 className="text-neutral-500 uppercase font-bold text-xs">
+          <h3 className="text-md font-extrabold uppercase text-neutral-800">
             Basica
           </h3>
           <ShareBtn
             data={shareData}
-            className="bg-neutral-500 border-none text-white shadow-md"
+            className="border border-neutral-400 text-neutral-800"
           />
         </div>
-        <p className="text-xs text-neutral-500 text-left leading-4 font-medium">
+        <p className="text-left text-xs font-medium leading-4 text-gray-600">
           Discover comfort in our Basic Room. An inviting space for relaxation
           and tranquility. Your ideal escape awaits!
         </p>
-        <div className="flex items-center justify-start my-1">
+        <div className="my-1 flex items-center justify-start">
           <p className="text-xs font-bold">Amenities</p>
-          <ul className="flex gap-2 ml-2 pl-2 border-l-2">
+          <ul className="ml-2 flex gap-2 border-l-2 pl-2">
             {amenityIcons.map((amenity) => (
               <li
                 className="flex items-center justify-start"
@@ -61,11 +60,7 @@ export const RoomCard = () => {
             ))}
           </ul>
         </div>
-        <Button
-          type="default"
-          size="large"
-          className="!bg-neutral-800 !text-white"
-        >
+        <Button type="primary" size="large" className=" !text-white">
           See Details
         </Button>
       </div>

@@ -10,10 +10,10 @@ export default function Page({
   params: { lang },
 }: Readonly<{ params: { lang: Locale } }>) {
   return (
-    <main className="min-h-dvh flex items-center justify-center relative">
-      <section className="w-full h-full absolute top-0 left-0 right-0 bottom-0 bg-white z-[2] p-4 lg:relative lg:max-w-lg lg:rounded-md">
-        <article className="border p-2 rounded-md grid grid-cols-1 grid-rows-[auto_1fr] gap-10 h-full">
-          <div className="flex justify-between w-full py-2">
+    <main className="relative flex min-h-dvh items-center justify-center">
+      <section className="absolute bottom-0 left-0 right-0 top-0 z-[2] h-full w-full bg-white p-4 lg:relative lg:max-w-lg lg:rounded-md">
+        <article className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-10 rounded-md border p-2">
+          <div className="flex w-full justify-between py-2">
             <GoBack />
             <Link href="/">
               <Button
@@ -25,24 +25,24 @@ export default function Page({
               </Button>
             </Link>
           </div>
-          <div className="flex gap-10 flex-col px-3 lg:px-16 items-center justify-center max-w-lg m-auto">
+          <div className="m-auto flex max-w-lg flex-col items-center justify-center gap-10 px-3 lg:px-16">
             <Brand />
-            <p className="text-xs font-bold text-center w-4/5 underline">
+            <p className="w-4/5 text-center text-xs font-bold underline">
               SIGN IN
             </p>
             <SignInForm lang={lang} />
             <div className="my-2 flex flex-col items-center justify-center gap-6">
               <Link
                 href={`/${lang}/iniciar-session`}
-                className="ml-2 underline text-primary-500 text-xs font-medium text-center"
+                className="ml-2 text-center text-xs font-medium text-primary-500 underline"
               >
                 Forgot Password
               </Link>
-              <p className="text-xs font-medium text-center">
+              <p className="text-center text-xs font-medium">
                 Don&#39;t have an account?
                 <Link
                   href={`/${lang}/auth`}
-                  className="ml-2 underline text-primary-500"
+                  className="ml-2 text-primary-500 underline"
                 >
                   Sign Up
                 </Link>
@@ -51,8 +51,8 @@ export default function Page({
           </div>
         </article>
       </section>
-      <div className="bg-black/20 absolute top-0 left-0 right-0 bottom-0 rounded-md backdrop-filter backdrop-blur-xl z-[1]" />
-      <div className="bg-[url('/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp')] bg-no-repeat bg-center bg-cover absolute top-0 left-0 right-0 bottom-0" />
+      <div className="absolute bottom-0 left-0 right-0 top-0 z-[1] rounded-md bg-black/20 backdrop-blur-xl backdrop-filter" />
+      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[url('/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp')] bg-cover bg-center bg-no-repeat" />
     </main>
   );
 }

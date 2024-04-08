@@ -1,7 +1,7 @@
 import { HeadingSection } from "@/app/ui/features/SectionHeading";
 import { Section } from "@/app/ui/layout";
-import Image from "next/image";
 import { amenities } from "./amenities";
+import { Gallery } from "./Gallery";
 
 export function Amenities() {
   return (
@@ -9,39 +9,14 @@ export function Amenities() {
       <HeadingSection
         highlight="Your comfort is our priority"
         title="Providing the best amenities for your stay!"
-        highlightClassName="border bg-neutral-500/20 border-neutral-500 text-neutral-800"
+        highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
       />
       <div className="flex gap-4 flex-col lg:flex-row w-full">
         {/* Images */}
-        <article className="lg:flex-[1]  h-[27rem]">
-          <div className="grid grid-cols-2 grid-rows-2 gap-2 h-full transform">
-            <div className="bg-white p-2 rounded-md overflow-hidden relative">
-              <Image
-                fill
-                src="/assets/home/amenities/doble-room.jpg"
-                alt="doble room image"
-              />
-            </div>
-            <div className="bg-white p-2 rounded-md overflow-hidden relative">
-              <Image
-                fill
-                src="/assets/home/amenities/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp"
-                alt="doble room image"
-              />
-            </div>
-            <div className="bg-white p-2 rounded-md overflow-hidden row-span-full  relative">
-              <Image
-                fill
-                objectFit="cover"
-                src="/assets/home/amenities/hqnrd-air-view-building.jpg"
-                alt="doble room image"
-              />
-            </div>
-          </div>
-        </article>
+        <Gallery />
         {/* Amenities Card */}
-        <article className="bg-white flex items-center justify-center lg:flex-[1.2] flex-col">
-          <ul className="py-20 px-2 grid grid-cols-2 w-full gap-4 sm:grid-cols-3 lg:px-14 rounded-md">
+        <article className="bg-white flex items-center justify-center lg:flex-[1.2] flex-col rounded-md">
+          <ul className="py-20 lg:py-10 px-2 grid grid-cols-2 w-full gap-4 lg:gap-6 sm:grid-cols-3 lg:px-14 rounded-md">
             {amenities.map((amenity, idx) => (
               <li key={idx} className="flex items-center justify-start">
                 <span className="order-2 text-[.8rem]">{amenity.label}</span>
@@ -51,10 +26,6 @@ export function Amenities() {
               </li>
             ))}
           </ul>
-          <div className="flex flex-row w-full">
-            <div className="h-[1px] bg-gradient-to-r from-transparent via-primary-500 to-secondary-300 w-full"></div>
-            <div className="h-[1px] bg-gradient-to-r from-secondary-300 to-transparent w-full"></div>
-          </div>
         </article>
       </div>
     </Section>
