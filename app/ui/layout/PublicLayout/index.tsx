@@ -2,6 +2,8 @@ import { Locale } from "@/i18n-config";
 import React from "react";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
+import { VerticalContactWidgetLayout } from "../VerticalContactWidget";
+
 export function PublicLayout({
   lang,
   children,
@@ -12,7 +14,9 @@ export function PublicLayout({
   return (
     <>
       <Navigation lang={lang} />
-      {children}
+      <VerticalContactWidgetLayout lang={lang}>
+        {children}
+      </VerticalContactWidgetLayout>
       <Footer />
     </>
   );

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { ContactWidget } from "../../../features/ContactWidget";
 import { WeatherWidget } from "../../../features/WeatherWidget";
+import { HorizontalContactWidget } from "@/app/ui/features";
 
 export function SubHeader({ lang }: { lang: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="items-center justify-between w-full hidden sm:flex py-4">
-      <ContactWidget
+    <div className="hidden w-full items-center justify-between py-4 sm:flex">
+      <HorizontalContactWidget
         setOpen={setOpen}
         open={open}
         lang={lang}

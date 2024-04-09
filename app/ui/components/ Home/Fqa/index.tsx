@@ -22,7 +22,7 @@ export const FrequentlyAskedQuestions = () => {
         items={data as CollapseProps["items"]}
         bordered={false}
         defaultActiveKey={["1"]}
-        className="z-20 w-full !bg-white"
+        className="z-[2] w-full !bg-white"
       />
     </Section>
   );

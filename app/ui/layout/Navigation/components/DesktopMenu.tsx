@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function DesktopMenu({ lang }: { lang: string }) {
   return (
-    <ul className="hidden sm:flex text-sm font-medium gap-2">
+    <ul className="hidden gap-2 text-sm font-medium sm:flex">
       <li className="inline-block">
         <Link href={`/`}>
           <Button
@@ -18,7 +18,7 @@ export function DesktopMenu({ lang }: { lang: string }) {
         </Link>
       </li>
       <li className="inline-block">
-        <Link href={`/habitaciones`}>
+        <Link href={`/${lang}/habitaciones`}>
           <Button
             className="!flex items-center justify-center"
             size="middle"
