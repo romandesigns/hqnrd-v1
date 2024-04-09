@@ -16,7 +16,7 @@ export function Testimonials() {
             title="See what our guests have to say about us!"
             highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
           />
-          <TestimonialList testimonials={testimonials} />
+          <TestimonialList testimonials={testimonials} className="!pl-[2rem]" />
         </div>
       </article>
     </Section>

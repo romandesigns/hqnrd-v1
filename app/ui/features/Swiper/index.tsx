@@ -24,7 +24,7 @@ export function SwiperComponent<T extends { reviewerName: string }>({
   return (
     <Swiper
       slidesPerView={width >= 1080 ? 3 : width >= 740 ? 2 : 1}
-      spaceBetween={10}
+      spaceBetween={15}
       autoplay={{
         delay: 4500,
         disableOnInteraction: false,
