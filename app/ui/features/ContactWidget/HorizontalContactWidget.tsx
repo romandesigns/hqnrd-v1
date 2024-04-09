@@ -1,4 +1,3 @@
-"use client";
 import {
   BsTranslate,
   FaMapMarkerAlt,

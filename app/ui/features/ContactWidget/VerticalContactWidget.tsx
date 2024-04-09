@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "antd";
 import { BsTranslate } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -13,6 +14,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import classNames from "classnames";
 import { WaveDot } from "..";
+import { MotionVerticalContactWidget } from "../../motion/MotionVerticalContactWidget";
 
 export function VerticalContactWidget({
   setOpen,
@@ -22,59 +24,58 @@ export function VerticalContactWidget({
   scrollY: number;
 }) {
   return (
-    <ul
-      className={twMerge(
-        `fixed left-2 top-[50vh] !z-[20] hidden flex-col gap-3 rounded-md bg-white p-2 shadow-md lg:left-48`,
-        classNames({
-          "sm:flex": Number(scrollY) > 80,
-        }),
-      )}
-    >
-      <li>
-        <Button
-          type="default"
-          icon={<BsTranslate />}
-          className="!flex items-center justify-center bg-white shadow-lg"
-          onClick={() => setOpen(true)}
-        />
-      </li>
-      <li>
-        <ExternalLink
-          href={BUSINESS_MAP_LOCATION}
-          className="flex flex-col items-start justify-center"
-        >
+    <MotionVerticalContactWidget showWidget={Number(scrollY) > 80}>
+      <ul
+        className={twMerge(
+          `fixed left-2 top-[50vh] !z-[20] flex-col gap-4 rounded-md bg-white p-2 shadow-md transition-transform duration-300 lg:left-48`,
+        )}
+      >
+        <li>
           <Button
             type="default"
-            icon={<FaMapMarkerAlt />}
+            icon={<BsTranslate />}
             className="!flex items-center justify-center bg-white shadow-lg"
+            onClick={() => setOpen(true)}
           />
-        </ExternalLink>
-      </li>
-      <li className="relative">
-        <WaveDot />
-        <ExternalLink
-          href={BUSINESS_WHATSAPP_DIRECT_CHAT}
-          className="flex flex-col items-start justify-center"
-        >
-          <Button
-            type="default"
-            icon={<IoLogoWhatsapp />}
-            className="!flex items-center justify-center bg-white shadow-lg"
-          />
-        </ExternalLink>
-      </li>
-      <li>
-        <ExternalLink
-          href={BUSINESS_EMAIL_FROM_VISITOR}
-          className="flex flex-col items-start justify-center"
-        >
-          <Button
-            type="default"
-            icon={<MdEmail />}
-            className="!flex items-center justify-center bg-white shadow-lg"
-          />
-        </ExternalLink>
-      </li>
-    </ul>
+        </li>
+        <li>
+          <ExternalLink
+            href={BUSINESS_MAP_LOCATION}
+            className="flex flex-col items-start justify-center"
+          >
+            <Button
+              type="default"
+              icon={<FaMapMarkerAlt />}
+              className="!flex items-center justify-center bg-white shadow-lg"
+            />
+          </ExternalLink>
+        </li>
+        <li className="relative">
+          <WaveDot />
+          <ExternalLink
+            href={BUSINESS_WHATSAPP_DIRECT_CHAT}
+            className="flex flex-col items-start justify-center"
+          >
+            <Button
+              type="default"
+              icon={<IoLogoWhatsapp />}
+              className="!flex items-center justify-center bg-white shadow-lg"
+            />
+          </ExternalLink>
+        </li>
+        <li>
+          <ExternalLink
+            href={BUSINESS_EMAIL_FROM_VISITOR}
+            className="flex flex-col items-start justify-center"
+          >
+            <Button
+              type="default"
+              icon={<MdEmail />}
+              className="!flex items-center justify-center bg-white shadow-lg"
+            />
+          </ExternalLink>
+        </li>
+      </ul>
+    </MotionVerticalContactWidget>
   );
 }
