@@ -7,7 +7,7 @@ export function DesktopMenu({ lang }: { lang: string }) {
   return (
     <ul className="hidden gap-2 text-sm font-medium sm:flex">
       <li className="inline-block">
-        <Link href={`/`}>
+        <Link href={`/${lang}`}>
           <Button
             className="!flex items-center justify-center"
             size="middle"
@@ -29,7 +29,7 @@ export function DesktopMenu({ lang }: { lang: string }) {
         </Link>
       </li>
       {/* <li className="inline-block">
-        <Link href={`/portal`}>
+        <Link href={`/${lang}/portal`}>
           <Button
             className="!flex items-center justify-center"
             size="middle"
@@ -40,7 +40,7 @@ export function DesktopMenu({ lang }: { lang: string }) {
         </Link>
       </li> */}
       <li className="inline-block">
-        <Link href={`/auth`}>
+        <Link href={`/${lang}/auth`}>
           <Button
             className="!flex items-center justify-center"
             size="middle"
