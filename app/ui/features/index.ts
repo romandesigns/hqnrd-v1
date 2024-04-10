@@ -10,3 +10,6 @@ export { HeadingSection } from "./SectionHeading";
 export { ShareBtn } from "./ShareBtn";
 export { SwiperComponent } from "./Swiper";
 export { WaveDot } from "./WaveDot";
+export {SubHeader} from "./SubHeader";
+export {Backdrop} from "./Backdrop";
+export {Blurdrop} from "./Blurdrop";

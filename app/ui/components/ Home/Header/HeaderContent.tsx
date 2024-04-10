@@ -9,15 +9,15 @@ import "swiper/css/autoplay";
 import "swiper/css/effect-cards";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { SubHeader } from "../SubHeader";
 import {
   BackgroundSwiper,
   CardSwiper,
   GoogleRating,
   HeaderButtonsGroup,
   TextHeadingSwiper,
-} from "./"; // Assuming index.js is properly set in your components folder
-export const HomeHeaderContent = ({ lang }: { lang: Locale }) => {
+} from "."; // Assuming index.js is properly set in your components folder
+import { SubHeader } from "@/app/ui/features";
+export const HeaderContent = ({ lang }: { lang: Locale }) => {
   const [controlledSwiper, setControlledSwiper] = useState<SwiperType | null>(
     null,
   );

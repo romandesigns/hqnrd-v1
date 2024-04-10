@@ -1,4 +1,4 @@
-import { Brand } from "@/app/ui/features";
+import { Backdrop, Blurdrop, Brand } from "@/app/ui/features";
 import { FaRegBuilding, GoHomeFill, HiOutlineUser } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
@@ -66,8 +66,8 @@ export default function Page({
           </div>
         </article>
       </section>
-      <div className="absolute bottom-0 left-0 right-0 top-0 z-[1] rounded-md bg-black/20 backdrop-blur-xl backdrop-filter" />
-      <div className="absolute bottom-0 left-0 right-0 top-0 bg-[url('/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp')] bg-cover bg-center bg-no-repeat" />
+      <Blurdrop blurLevel="xl" />
+      <Backdrop backgroundImg="bg-[url('/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp')]" />
     </main>
   );
 }
