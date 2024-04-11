@@ -27,7 +27,8 @@ export default function RoomsLayout({
           <HeaderContent lang={lang} />
         </Header>
       </Wrapper>
-      <main className="flex flex-col items-center py-36">{children}</main>
+
+      <main className="flex flex-col items-center pb-36">{children}</main>
     </PublicLayout>
   );
 }

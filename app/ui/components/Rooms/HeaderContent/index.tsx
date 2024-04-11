@@ -26,7 +26,7 @@ export function HeaderContent({ lang }: { lang: Locale }) {
             className="mx-auto !mb-0 !mt-0  flex flex-col items-center justify-center p-0 lg:my-0"
           />
           <span
-            className="inline-block rounded-lg bg-white/5 p-2"
+            className="inline-block rounded-lg bg-black/5 p-2"
             style={{ width: "100%", maxWidth: "25rem" }}
           >
             <CategoryMenu lang={lang} />
@@ -34,7 +34,7 @@ export function HeaderContent({ lang }: { lang: Locale }) {
         </div>
 
         <Blurdrop blurLevel="md" />
-        <Backdrop backgroundImg="bg-[url('/assets/images/auth/photograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp')]" />
+        <Backdrop backgroundImg="bg-[url('/assets/home/billboard/hqnrd-air-view-building.jpg')]" />
       </div>
     </article>
   );

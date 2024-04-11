@@ -33,6 +33,7 @@ export function Trending() {
           <div className="w-full pl-0 md:my-10 md:pr-3">
             <SwiperComponent
               items={trendingList}
+              // @ts-ignore
               RenderComponent={RoomCard}
               className="testimonails-swiper !pl-0 md:!pl-3"
             />

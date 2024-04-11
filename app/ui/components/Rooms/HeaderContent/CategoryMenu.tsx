@@ -8,6 +8,10 @@ export const CategoryMenu = ({ lang }: { lang: Locale }) => {
   const router = useRouter();
 
   const onChange = (value: string) => {
+    if (value === "all-rooms") {
+      router.push(`/${lang}/habitaciones`);
+      return;
+    }
     router.push(`/${lang}/habitaciones/${value}`);
   };
 
@@ -55,6 +59,10 @@ export const CategoryMenu = ({ lang }: { lang: Locale }) => {
         {
           value: "executive",
           label: "Executive Rooms",
+        },
+        {
+          value: "all-rooms",
+          label: "All Rooms",
         },
       ]}
     />
