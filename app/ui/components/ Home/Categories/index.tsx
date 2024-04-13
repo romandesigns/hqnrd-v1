@@ -12,7 +12,6 @@ export function Categories() {
       <HeadingSection
         highlight="Available Categories"
         title="Select your Room Type and reserve now!"
-        highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
         className="relative z-[4]"
       />
       <article className="relative h-full w-full overflow-hidden rounded-md p-5 md:p-40">

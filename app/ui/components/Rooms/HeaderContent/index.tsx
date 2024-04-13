@@ -21,7 +21,6 @@ export function HeaderContent({ lang }: { lang: Locale }) {
           <HeadingSection
             title="The quality and service you deserve!"
             descriptionClassName="text-sm font-bold md:text-xl text-white"
-            highlightClassName="text-xs bg-white/50 border border-white mt-0"
             highlight="Your peace of mind is our priority"
             className="mx-auto !mb-0 !mt-0  flex flex-col items-center justify-center p-0 lg:my-0"
           />

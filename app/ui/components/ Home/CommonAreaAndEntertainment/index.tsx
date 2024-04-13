@@ -27,7 +27,6 @@ export function CommonAreaAndEntertainment() {
         <HeadingSection
           highlight="Areas comunes y entretenimiento"
           title="Familiarizate con nuestras instalaciones"
-          highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
         />
         <Tabs
           defaultActiveKey="1"

@@ -21,7 +21,7 @@ export function HeadingSection({
     <div className={`mx-auto mb-10 w-10/12 lg:my-20 ${className}`}>
       <div
         className={twMerge(
-          `relative mt-4 inline-flex items-center justify-center rounded-full bg-neutral-500/20 p-1 px-2 text-xs font-bold text-neutral-800 ${highlightClassName}`,
+          `relative mt-4 inline-flex items-center justify-center rounded-full bg-neutral-500/20 bg-neutral-800 p-1 px-2 text-xs  font-bold text-white ${highlightClassName}`,
         )}
       >
         <p>{highlight}</p>

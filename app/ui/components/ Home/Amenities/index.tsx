@@ -10,7 +10,6 @@ export function Amenities() {
       <HeadingSection
         highlight="Your comfort is our priority"
         title="Providing the best amenities for your stay!"
-        highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
       />
       <div className="flex w-full flex-col gap-4 lg:flex-row">
         {/* Images */}

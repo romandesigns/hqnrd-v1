@@ -15,7 +15,6 @@ export function Discounts() {
       <article className="z-[2] h-full w-full rounded-md">
         <div className="flex flex-col items-center justify-center">
           <HeadingSection
-            highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
             highlight="Discounts Available!"
             title="Stay Longer by Spending Less"
           />

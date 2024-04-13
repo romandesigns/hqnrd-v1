@@ -21,6 +21,8 @@ export default function AntConfigProvider({
         token: {
           colorPrimary: "#3c8cc2",
           fontFamily: "Poppins",
+          borderRadius: 6,
+          colorBgContainer: "#ffffff",
         },
         components: {
           DatePicker: {

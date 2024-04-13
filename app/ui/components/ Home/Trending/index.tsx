@@ -27,7 +27,6 @@ export function Trending() {
           <HeadingSection
             highlight="Trending Now!"
             title="Discover Our Most Popular Rooms!"
-            highlightClassName="border bg-primary-500/20 border-primary-500 text-primary-800"
             Icon={BsStars}
           />
           <div className="w-full pl-0 md:my-10 md:pr-3">

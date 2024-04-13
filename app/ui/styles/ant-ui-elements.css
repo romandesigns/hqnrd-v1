@@ -30,3 +30,7 @@ button.ant-image-preview-close,
   font-size: 0.9rem;
   padding-left: 1.7rem !important;
 }
+
+.ant-image-preview-img-wrapper img {
+  border-radius: 0.7rem;
+}
