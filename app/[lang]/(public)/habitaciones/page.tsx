@@ -5,6 +5,7 @@ import { Locale } from "@/i18n-config";
 import { Pagination } from "antd";
 import { useState } from "react";
 import { rooms as roomList } from "./roomsList";
+import { IoInformationCircleOutline } from "@/app/ui/icons";
 
 export default function Page({
   params: { lang },
@@ -27,9 +28,18 @@ export default function Page({
   return (
     <>
       <section className="relative h-full w-full">
-        <Wrapper className="max-w-85rem relative z-[2]  p-2">
+        <Wrapper className="max-w-85rem relative z-[2] p-2">
           <div className="flex w-full items-center justify-between  pb-10 pt-24">
             <GoBack className="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-700 p-2 text-neutral-700" />
+            <div className="flex items-center justify-center space-x-2 pl-[9rem]">
+              <p className="">Stay longer by SPENDING LESS</p>
+              <span className="space-x-2">
+                <span>5%</span>
+                <span>8%</span>
+              </span>
+              <p className="">Available</p>
+              <IoInformationCircleOutline size={25} />
+            </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-bold">Showing</span>
               <span className="rounded-md border bg-neutral-700 px-4 text-white">
@@ -55,13 +65,12 @@ export default function Page({
             />
           </div>
         </Wrapper>
-
         <div className="absolute top-0 z-[-2] h-screen w-screen bg-transparent bg-[radial-gradient(100%_50%_at_100%_70%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]" />
         <div className="bg-trasparent absolute right-[50vw] top-0 -z-10 h-full w-full">
           <div className="absolute bottom-auto left-auto right-0 top-[10vh] h-[500px] w-[500px] -translate-x-[80%] translate-y-[20%] rounded-full bg-primary-500/70 opacity-50 blur-[80px]" />
         </div>
         <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full bg-transparent">
-          <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+          <div className="absolute h-full w-full bg-[radial-gradient(#b7bdc8,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_80%,transparent_100%)]"></div>
         </div>
       </section>
     </>

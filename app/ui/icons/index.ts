@@ -54,3 +54,4 @@ export {
   TbWheelchair,
 } from "react-icons/tb";
 export { BiGroup } from "react-icons/bi";
+export { IoInformationCircleOutline } from "react-icons/io5";
