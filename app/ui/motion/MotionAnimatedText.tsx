@@ -1,18 +1,24 @@
+import React from "react";
 import { motion } from "framer-motion";
 
 export const AnimatedText = ({ text }: { text: string }) => {
-  // Split the text into letters for individual animation
-  const letters = Array.from(text);
+  // Split text into an array of letters
+  const letters = text.split("");
 
   return (
-    <div className="flex justify-center">
+    <div style={{ display: "inline-block" }}>
       {letters.map((letter, index) => (
         <motion.span
           key={index}
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: index * 0.05, type: "spring", stiffness: 500 }}
-          className="inline-block" // Use inline-block to keep letters aligned
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: index * 0.05,
+            type: "spring",
+            stiffness: 500,
+            damping: 20,
+          }}
+          style={{ display: "inline-block" }} // Ensure each letter is inline
         >
           {letter}
         </motion.span>

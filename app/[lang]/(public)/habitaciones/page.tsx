@@ -5,7 +5,7 @@ import { Locale } from "@/i18n-config";
 import { Pagination } from "antd";
 import { useState } from "react";
 import { rooms as roomList } from "./roomsList";
-import { IoInformationCircleOutline } from "@/app/ui/icons";
+import { IoInformationCircle } from "@/app/ui/icons";
 
 export default function Page({
   params: { lang },
@@ -29,16 +29,16 @@ export default function Page({
     <>
       <section className="relative h-full w-full">
         <Wrapper className="max-w-85rem relative z-[2] p-2">
-          <div className="flex w-full items-center justify-between  pb-10 pt-24">
+          <div className="flex w-full items-center justify-between pb-10 pt-6 sm:pt-28">
             <GoBack className="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-700 p-2 text-neutral-700" />
-            <div className="flex items-center justify-center space-x-2 pl-[9rem]">
-              <p className="">Stay longer by SPENDING LESS</p>
+            <div className="hidden items-center justify-center space-x-2 pl-[9rem] font-semibold underline lg:flex">
+              <p className="font-semibold">Stay longer by SPENDING LESS</p>
               <span className="space-x-2">
-                <span>5%</span>
-                <span>8%</span>
+                <span className="font-black">5%</span>
+                <span className="font-black">8%</span>
               </span>
               <p className="">Available</p>
-              <IoInformationCircleOutline size={25} />
+              <IoInformationCircle size={25} color="#286a9c" />
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-bold">Showing</span>
