@@ -3,6 +3,8 @@ import Image from "next/image";
 import { ShareBtn } from "../ShareBtn";
 import { amenityIcons } from "./Icons";
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
+import { Locale } from "@/i18n-config";
 
 export const shareData = {
   title: "MDN",
@@ -10,7 +12,13 @@ export const shareData = {
   url: "https://developer.mozilla.org",
 };
 
-export const RoomCard = ({ className }: { className: string }) => {
+export const RoomCard = ({
+  className,
+  lang,
+}: {
+  className: string;
+  lang: Locale;
+}) => {
   return (
     <div
       className={twMerge(
@@ -66,7 +74,7 @@ export const RoomCard = ({ className }: { className: string }) => {
           </ul>
         </div>
         <Button size="large" className="!bg-neutral-800 !text-white">
-          See Details
+          <Link href={`/${lang}/habitacion/`}>See Details</Link>
         </Button>
       </div>
     </div>
