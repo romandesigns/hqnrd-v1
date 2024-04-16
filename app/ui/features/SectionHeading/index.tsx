@@ -18,7 +18,7 @@ export function HeadingSection({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto mb-10 w-10/12 lg:my-20 ${className}`}>
+    <div className={`mx-auto mb-10 w-full lg:my-20 ${className}`}>
       <div
         className={twMerge(
           `relative mt-4 inline-flex items-center justify-center rounded-full bg-neutral-500/20 bg-neutral-800 p-1 px-2 text-xs  font-bold text-white ${highlightClassName}`,
@@ -33,7 +33,7 @@ export function HeadingSection({
       </div>
       <h2
         className={twMerge(
-          `my-2 text-xl font-black text-neutral-800 underline ${descriptionClassName}`,
+          `my-2 w-full text-center text-xl font-black text-neutral-800 underline ${descriptionClassName}`,
         )}
       >
         {title}

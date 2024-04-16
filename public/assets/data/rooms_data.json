@@ -1,0 +1,36 @@
+{
+    "rooms": [
+        {
+            "unitNumber": "101",
+            "roomCategory": "Basic",
+            "slug": "basic",
+            "pricePerNight": 1250,
+            "maxOccupancy": 2,
+            "cardInfo":{
+                 "featuredImage": "https://via.placeholder.com/450x300",
+                 "title": "Basic Room",
+                 "description": "Discover comfort in our Basic Room. An inviting space for relaxation and tranquility. Your ideal escape awaits!"
+            },
+            "pageInfo": {
+                "title": "Basic Room",
+                "description": "Discover comfort in our Basic Room. An inviting space for relaxation and tranquility. Escape awaits! Discover comfort in our Basic Room. An inviting space for relaxation and tranquility. Your ideal escape awaits!",
+                "images": [
+                    "https://via.placeholder.com/450x300",
+                    "https://via.placeholder.com/450x300",
+                    "https://via.placeholder.com/450x300",
+                    "https://via.placeholder.com/450x300",
+                    "https://via.placeholder.com/450x300",
+                    "https://via.placeholder.com/450x300"
+                ]
+            },
+            "features": {
+                "beds": 1,
+                "baths": 1,
+                "size": 300,
+                "balcony": false,
+                "parking": true,
+                "roofTopAccess": true
+            }
+        }
+    ]
+}

@@ -32,6 +32,15 @@ export default function Page({
   return (
     <>
       <section className="relative h-full w-full">
+        <Wrapper className="max-w-85rem relative z-[2]  p-10">
+          {category}
+        </Wrapper>
+      </section>
+    </>
+  );
+  return (
+    <>
+      <section className="relative h-full w-full">
         <Wrapper className="max-w-85rem relative z-[2]  p-2">
           <div className="flex w-full items-center justify-between  pb-10 pt-24">
             <GoBack className="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-700 p-2 text-neutral-700" />

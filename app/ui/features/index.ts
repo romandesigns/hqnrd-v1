@@ -13,3 +13,4 @@ export { WaveDot } from "./WaveDot";
 export {SubHeader} from "./SubHeader";
 export {Backdrop} from "./Backdrop";
 export {Blurdrop} from "./Blurdrop";
+export {MaxGuestQntyBadge} from "./MaxGuestQntyBadge";
