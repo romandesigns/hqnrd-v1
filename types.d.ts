@@ -42,3 +42,10 @@ export type HomeImageGallery = {
   style: CSSProperties;
   sizes: string;
 };
+
+export type RoomTypes = {
+  id: number;
+  roomNumber: number;
+  slug: string;
+  category: string;
+};

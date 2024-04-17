@@ -1,4 +1,4 @@
-import { Backdrop, Blurdrop, Brand } from "@/app/ui/features";
+import { Backdrop, Blurdrop, Brand, GoBack } from "@/app/ui/features";
 import { FaRegBuilding, GoHomeFill, HiOutlineUser } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
@@ -11,15 +11,15 @@ export default function Page({
     <main className="relative flex min-h-dvh items-center justify-center">
       <section className="absolute bottom-0 left-0 right-0 top-0 z-[2] h-full w-full bg-white p-4 sm:relative sm:h-auto sm:max-w-lg sm:rounded-md">
         <article className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-10 rounded-md border p-2">
-          <div className="flex justify-end p-2">
+          <div className="flex w-full justify-between p-2">
+            <GoBack />
             <Link href="/">
               <Button
-                size="middle"
+                type="default"
+                icon={<GoHomeFill className="text-neutral-500" />}
+                size={"large"}
                 className="!flex items-center justify-center"
-                shape="circle"
-              >
-                <GoHomeFill className="text-neutral-500" />
-              </Button>
+              />
             </Link>
           </div>
           <div className="flex flex-col items-center justify-center gap-8">

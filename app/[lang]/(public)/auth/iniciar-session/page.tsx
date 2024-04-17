@@ -11,18 +11,17 @@ export default function Page({
 }: Readonly<{ params: { lang: Locale } }>) {
   return (
     <main className="relative flex min-h-dvh items-center justify-center">
-      <section className="absolute bottom-0 left-0 right-0 top-0 z-[2] h-full w-full bg-white p-4 lg:relative lg:max-w-lg lg:rounded-md">
+      <section className="absolute bottom-0 left-0 right-0 top-0 z-[2] h-full w-full bg-white p-4 lg:relative lg:h-auto lg:max-w-lg lg:rounded-md">
         <article className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-10 rounded-md border p-2">
-          <div className="flex w-full justify-between py-2">
+          <div className="flex w-full justify-between p-2">
             <GoBack />
             <Link href="/">
               <Button
-                size="middle"
+                type="default"
+                icon={<GoHomeFill className="text-neutral-500" />}
+                size={"large"}
                 className="!flex items-center justify-center"
-                shape="circle"
-              >
-                <GoHomeFill className="text-neutral-500" />
-              </Button>
+              />
             </Link>
           </div>
           <div className="m-auto flex max-w-lg flex-col items-center justify-center gap-10 px-3 lg:px-16">

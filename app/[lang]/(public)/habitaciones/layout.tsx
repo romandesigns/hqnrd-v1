@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 import { Locale, i18n } from "@/i18n-config";
 import { HeaderComponent } from "@/app/ui/components/Rooms/HeaderComponent";
-import { rooms } from "./roomsList";
+import { rooms } from "../../../../public/assets/data/roomsList";
 import { billboards } from "./billboards";
 
 export async function generateStaticParams() {

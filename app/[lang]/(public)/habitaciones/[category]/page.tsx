@@ -4,7 +4,7 @@ import { Wrapper } from "@/app/ui/layout";
 import { Locale } from "@/i18n-config";
 import { Pagination } from "antd";
 import React, { useState, useEffect } from "react";
-import { rooms as roomList } from "../roomsList";
+import { rooms as roomList } from "../../../../../public/assets/data/roomsList";
 
 export default function Page({
   params: { lang, category },

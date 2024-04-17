@@ -5,6 +5,7 @@ import { amenityIcons } from "./Icons";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
 import { Locale } from "@/i18n-config";
+import { RoomTypes } from "@/types";
 
 export const shareData = {
   title: "MDN",
@@ -15,9 +16,11 @@ export const shareData = {
 export const RoomCard = ({
   className,
   lang,
+  room,
 }: {
-  className: string;
-  lang: Locale;
+  className?: string;
+  lang?: Locale;
+  room?: RoomTypes;
 }) => {
   return (
     <div
@@ -48,8 +51,8 @@ export const RoomCard = ({
           </p>
         </div>
         <div className="flex items-center justify-between py-1">
-          <h3 className="text-md font-extrabold uppercase text-neutral-800">
-            Basica
+          <h3 className="text-sm font-extrabold text-neutral-800">
+            {room?.category}
           </h3>
           <ShareBtn
             data={shareData}
@@ -73,9 +76,14 @@ export const RoomCard = ({
             ))}
           </ul>
         </div>
-        <Button size="large" className="!bg-neutral-800 !text-white">
-          <Link href={`/${lang}/habitacion/`}>See Details</Link>
-        </Button>
+        <Link
+          href={`/${lang}/habitacion/${room?.roomNumber}`}
+          className="block w-full self-center"
+        >
+          <Button size="large" className="w-full !bg-neutral-800 !text-white">
+            See Details
+          </Button>
+        </Link>
       </div>
     </div>
   );

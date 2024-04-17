@@ -40,7 +40,7 @@ export function DesktopMenu({ lang }: { lang: string }) {
         </Link>
       </li> */}
       <li className="inline-block">
-        <Link href={`/${lang}/auth`}>
+        <Link href={`/${lang}/auth/iniciar-session`}>
           <Button
             className="!flex items-center justify-center"
             size="middle"

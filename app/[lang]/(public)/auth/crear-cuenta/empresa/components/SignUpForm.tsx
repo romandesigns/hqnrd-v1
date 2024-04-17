@@ -3,12 +3,12 @@
  * Renders a form for creating a new account.
  */
 
+import { InputAnt, InputPhone } from "@/app/ui/components/Form";
 import { Alert, Button } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
 import { createUserAction } from "../actions/signUp";
-import { InputAnt, InputPhone } from "@/app/ui/components/Form";
 
 type initialStateTypes = {
   path: string;

@@ -4,7 +4,7 @@ import { Wrapper } from "@/app/ui/layout";
 import { Locale } from "@/i18n-config";
 import { Pagination } from "antd";
 import { useState } from "react";
-import { rooms as roomList } from "./roomsList";
+import { rooms as roomList } from "../../../../public/assets/data/roomsList";
 import { IoInformationCircle } from "@/app/ui/icons";
 
 export default function Page({
@@ -53,7 +53,12 @@ export default function Page({
           </div>
           <div className="mb-10 grid grid-cols-1 gap-4 rounded-md bg-white sm:grid-cols-2 lg:grid-cols-3 lg:p-10">
             {currentRooms.map((room, index) => (
-              <RoomCard key={`${room.id}-${index}`} className="shadow-sm" />
+              <RoomCard
+                key={`${room.id}-${index}`}
+                className="shadow-sm"
+                room={room}
+                lang={lang}
+              />
             ))}
           </div>
           <div className="flex justify-center">
