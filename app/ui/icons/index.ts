@@ -12,12 +12,12 @@ export {
   FaMapMarkerAlt,
   FaRegBuilding,
 } from "react-icons/fa";
-export { FaPeopleRoof,FaCircleArrowDown } from "react-icons/fa6";
+export { FaPeopleRoof, FaCircleArrowDown } from "react-icons/fa6";
 export { FcGoogle } from "react-icons/fc";
 export { GiCctvCamera, GiWaterBottle } from "react-icons/gi";
 export { GoHomeFill } from "react-icons/go";
 export { GrToast } from "react-icons/gr";
-export { HiMenuAlt1, HiOutlineUser,HiUserGroup } from "react-icons/hi";
+export { HiMenuAlt1, HiOutlineUser, HiUserGroup } from "react-icons/hi";
 export { ImInstagram } from "react-icons/im";
 export {
   IoIosImages,
@@ -52,6 +52,10 @@ export {
   TbMicrowave,
   TbToolsKitchen,
   TbWheelchair,
+  TbRulerMeasure,
 } from "react-icons/tb";
 export { BiGroup } from "react-icons/bi";
 export { IoInformationCircle } from "react-icons/io5";
+export { TbTrafficCone } from "react-icons/tb";
+export { LiaBedSolid } from "react-icons/lia";
+export { BsCameraReels } from "react-icons/bs";
