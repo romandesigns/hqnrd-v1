@@ -42,6 +42,7 @@ export {
   MdWifi,
   MdBathtub,
   MdMicrowave,
+  MdChildCare,
 } from "react-icons/md";
 export {
   PiCouch,
@@ -59,6 +60,7 @@ export {
   TbToolsKitchen,
   TbWheelchair,
   TbRulerMeasure,
+  TbMapSearch,
 } from "react-icons/tb";
 export { BiGroup, BiSolidWasher } from "react-icons/bi";
 export { IoInformationCircle } from "react-icons/io5";
@@ -66,3 +68,5 @@ export { TbTrafficCone } from "react-icons/tb";
 export { LiaBedSolid } from "react-icons/lia";
 export { BsCameraReels } from "react-icons/bs";
 export { TiGroup } from "react-icons/ti";
+export { LuUser2 } from "react-icons/lu";
+export { PiIdentificationBadge } from "react-icons/pi";

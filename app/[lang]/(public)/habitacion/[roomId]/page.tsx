@@ -3,51 +3,64 @@ import { Header, PublicLayout, Wrapper } from "@/app/ui/layout";
 import { Locale } from "@/i18n-config";
 import { rooms } from "@/public/assets/data/roomsList";
 import React from "react";
-import { ImageGallery } from "./ImageGallery";
-
-import { Features } from "./Features";
-import { BackgroundEffect } from "./BackgroundEffect";
-import { Heading } from "../Heading";
-import { Description } from "./Description";
+import { notFound } from "next/navigation";
 import { shareData } from "@/public/assets/data";
-import { Amenities } from "./Amenities";
-import { Media } from "./Media";
+import { Divider } from "antd";
+import {
+  Amenities,
+  Media,
+  Description,
+  Heading,
+  BackgroundEffect,
+  Features,
+  ImageGallery,
+  PageHeading,
+  ServicesAndAttractions,
+} from "../../../../ui/components/Room";
+import { ReservationForm } from "@/app/ui/components/Room/ReservationForm";
+import { TbMapSearch } from "@/app/ui/icons";
 
-export default function Page({
+const fetchRoom = async (roomId: string) => {
+  const room = rooms.find((room) => room.roomNumber === Number(roomId));
+  return room;
+};
+
+export default async function Page({
   params: { lang, roomId },
 }: Readonly<{
   params: { lang: Locale; roomId: string };
 }>) {
-  const room = rooms.find((room) => room.roomNumber === Number(roomId));
+  const room = await fetchRoom(roomId);
+  if (!room?.roomNumber) {
+    return notFound();
+  }
+
   return (
     <PublicLayout lang={lang}>
       <Wrapper className="relative z-[1] p-0 pt-[57px] md:pt-[0]">
         <Header className="flex items-center justify-center p-2 md:pt-[60px]">
           <section className="h-full w-full">
             <SubHeader lang={lang} />
-            <div className="py-10 text-center sm:pt-0">
-              <div className="space-y-4">
-                <h1 className="text-center text-2xl font-extrabold md:text-3xl lg:text-4xl">
-                  {room?.category}
-                </h1>
-                <div className="relative !m-0 mt-4 inline-flex items-center justify-center rounded-full bg-neutral-800 p-1 px-8 text-xs font-bold text-white">
-                  <p className="font-semibold">Unit #{room?.roomNumber}</p>
-                </div>
-                <p className="text-xs lg:text-sm">
-                  Discover comfort in our Basic Room. An inviting space for
-                  relaxation and tranquility. Your ideal escape awaits!
-                </p>
-              </div>
-            </div>
+            <PageHeading
+              unit={String(room.roomNumber)}
+              title={room.category}
+              metaDescription="Discover comfort in our Basic Room. An inviting space for relaxation
+          and tranquility. Your ideal escape awaits!"
+            />
             <ImageGallery />
           </section>
         </Header>
       </Wrapper>
+
       <BackgroundEffect />
       <main className="relative z-[1] flex flex-col items-center">
-        <Wrapper className="my-10 w-full">
-          <section className="flex flex-col gap-3 md:flex-row">
-            <div className="flex-[2] rounded-md bg-white p-5">
+        <Wrapper className="mb-10 w-full">
+          <div className="my-5 mb-8">
+            <GoBack />
+          </div>
+
+          <section className="flex flex-col gap-3 lg:flex-row">
+            <div className="flex-[2] rounded-md bg-white p-3 lg:p-5">
               <article className="pb-5">
                 <Heading heading="Features" />
                 <Features />
@@ -63,15 +76,25 @@ export default function Page({
                 <Heading heading="Amenities Included" />
                 <Amenities />
               </article>
-              <article className="flex">
+              <article className="grid grid-cols-[1fr] grid-rows-1  gap-2 lg:grid-cols-[20rem_1fr]">
                 <Media />
               </article>
             </div>
-
-            {/* */}
-
             <article className="flex-[1] rounded-md bg-white p-4">
-              <Heading heading="Reservation Form" />
+              <div className="grid grid-cols-2 border-b border-neutral-200">
+                <Heading heading="Reservation Form" className="flex-1" />
+                <p className="flex-1 justify-self-end rounded-tl-md rounded-tr-md border-none bg-neutral-800 p-2 px-4 font-bold text-white">
+                  1,350$ / 1 Night
+                </p>
+              </div>
+              <ReservationForm roomNumber={roomId} />
+              {/* <Divider plain>
+                <div className="flex items-center justify-center gap-2">
+                  <span>Surrounding Services & Attractions</span>
+                  <TbMapSearch size={15} />
+                </div>
+              </Divider>
+              <ServicesAndAttractions /> */}
             </article>
           </section>
         </Wrapper>
