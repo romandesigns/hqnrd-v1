@@ -6,10 +6,10 @@ import dayjs from "dayjs";
 export function ReservationForm({ roomNumber }: { roomNumber: string }) {
   const { TextArea } = Input;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let uuid = self.crypto.randomUUID();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
     data.reservationId = uuid;
     console.log(data);
