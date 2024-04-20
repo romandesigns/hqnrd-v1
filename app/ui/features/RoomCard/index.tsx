@@ -1,11 +1,11 @@
-import { Button } from "antd";
-import Image from "next/image";
-import { ShareBtn } from "../ShareBtn";
-import { amenityIcons } from "./Icons";
-import { twMerge } from "tailwind-merge";
-import Link from "next/link";
 import { Locale } from "@/i18n-config";
 import { RoomTypes } from "@/types";
+import { Button } from "antd";
+import Image from "next/image";
+import Link from "next/link";
+import { twMerge } from "tailwind-merge";
+import { ShareBtn } from "../ShareBtn";
+import { amenityIcons } from "./Icons";
 
 export const shareData = {
   title: "MDN",

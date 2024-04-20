@@ -1,11 +1,11 @@
 "use client";
-import { useState } from "react";
+import { HorizontalContactWidget } from "@/app/ui/features";
 import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { useNavToggle } from "@/store/mobile-navigation";
 import { Button } from "antd";
 import Link from "next/link";
-import { HorizontalContactWidget } from "@/app/ui/features";
+import { useState } from "react";
 
 export function MobileMenu({ lang }: { lang: Locale }) {
   const { closeNavigation } = useNavToggle();

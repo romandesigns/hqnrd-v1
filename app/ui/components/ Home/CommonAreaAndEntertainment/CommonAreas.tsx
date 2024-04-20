@@ -6,7 +6,7 @@ export function CommonAreas() {
   const { PreviewGroup } = Image;
   return (
     <PreviewGroup>
-      <ul className="grid grid-cols-2 grid-rows-3 gap-3 h-[32rem] mb-8 md:grid-cols-3 my-10">
+      <ul className="my-10 mb-8 grid h-[32rem] grid-cols-2 grid-rows-3 gap-3 md:grid-cols-3">
         {commonAndEntertainment.map((image, index) => (
           <li className={image.liClassNames} key={index}>
             <Image

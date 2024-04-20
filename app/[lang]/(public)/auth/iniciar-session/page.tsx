@@ -1,10 +1,10 @@
+import { Brand } from "@/app/ui/features";
 import { GoBack } from "@/app/ui/features/GoBack";
+import { GoHomeFill } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
 import Link from "next/link";
 import { SignInForm } from "./SignInForm";
-import { GoHomeFill } from "@/app/ui/icons";
-import { Brand } from "@/app/ui/features";
 
 export default function Page({
   params: { lang },

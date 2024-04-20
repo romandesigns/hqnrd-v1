@@ -17,7 +17,7 @@ export default function AntConfigProvider({
     <ConfigProvider
       csp={{ nonce: "YourNonceCode" }}
       theme={{
-        algorithm: [theme.defaultAlgorithm, theme.compactAlgorithm],
+        algorithm: theme.compactAlgorithm,
         token: {
           fontFamily: "Poppins",
           borderRadius: 6,
@@ -30,6 +30,7 @@ export default function AntConfigProvider({
           colorLinkActive: "#1a73b2",
           colorLinkHover: "#6097c0",
           colorTextBase: "#181818",
+          wireframe: true,
         },
         components: {
           DatePicker: {

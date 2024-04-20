@@ -1,7 +1,7 @@
 import { Brand, NotFoundCode } from "@/app/ui/features";
-import Link from "next/link";
-import { Button } from "antd";
 import { GoHomeFill } from "@/app/ui/icons";
+import { Button } from "antd";
+import Link from "next/link";
 
 export default function NotFound() {
   return (

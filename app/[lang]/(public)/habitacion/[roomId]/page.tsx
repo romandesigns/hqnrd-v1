@@ -1,24 +1,20 @@
+import { ReservationForm } from "@/app/ui/components/Room/ReservationForm";
 import { GoBack, ShareBtn, SubHeader } from "@/app/ui/features";
 import { Header, PublicLayout, Wrapper } from "@/app/ui/layout";
 import { Locale } from "@/i18n-config";
-import { rooms } from "@/public/assets/data/roomsList";
-import React from "react";
-import { notFound } from "next/navigation";
 import { shareData } from "@/public/assets/data";
-import { Divider } from "antd";
+import { rooms } from "@/public/assets/data/roomsList";
+import { notFound } from "next/navigation";
 import {
   Amenities,
-  Media,
-  Description,
-  Heading,
   BackgroundEffect,
+  Description,
   Features,
+  Heading,
   ImageGallery,
+  Media,
   PageHeading,
-  ServicesAndAttractions,
 } from "../../../../ui/components/Room";
-import { ReservationForm } from "@/app/ui/components/Room/ReservationForm";
-import { TbMapSearch } from "@/app/ui/icons";
 
 const fetchRoom = async (roomId: string) => {
   const room = rooms.find((room) => room.roomNumber === Number(roomId));

@@ -7,7 +7,7 @@ export function ToggleOpen() {
 
   return (
     <div
-      className="flex items-center p-2 px-0 w-full justify-end hover:cursor-pointer"
+      className="flex w-full items-center justify-end p-2 px-0 hover:cursor-pointer"
       onClick={() => closeNavigation()}
     >
       {/* <span className="font-medium">CLOSE</span> */}

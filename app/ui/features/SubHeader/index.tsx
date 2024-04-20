@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
 import { HorizontalContactWidget, WeatherWidget } from "@/app/ui/features";
+import { useState } from "react";
 
 export function SubHeader({ lang }: { lang: string }) {
   const [open, setOpen] = useState(false);

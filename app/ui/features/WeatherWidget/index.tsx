@@ -2,10 +2,10 @@ import Image from "next/image";
 
 export function WeatherWidget() {
   return (
-    <div className="hidden text-black relative sm:block z-[3]">
+    <div className="relative z-[3] hidden text-black sm:block">
       <div className="flex space-x-6">
         <span>
-          <p className="text-xs font-regular">Today</p>
+          <p className="font-regular text-xs">Today</p>
           <span className="flex items-center justify-center">
             <Image
               width={12}
@@ -16,7 +16,7 @@ export function WeatherWidget() {
           </span>
         </span>
         <span>
-          <p className="text-xs font-regular">Tomorrow</p>
+          <p className="font-regular text-xs">Tomorrow</p>
           <span className="flex items-center justify-center">
             <Image
               width={20}
@@ -27,7 +27,7 @@ export function WeatherWidget() {
           </span>
         </span>
         <span>
-          <p className="text-xs font-regular">The Day After</p>
+          <p className="font-regular text-xs">The Day After</p>
           <span className="flex items-center justify-center">
             <Image
               width={22}

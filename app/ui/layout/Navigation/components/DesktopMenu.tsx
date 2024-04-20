@@ -1,5 +1,5 @@
 "use client";
-import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
+import { BsDoorOpenFill, GoHomeFill } from "@/app/ui/icons";
 import { Button } from "antd";
 import Link from "next/link";
 

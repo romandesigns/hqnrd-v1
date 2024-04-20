@@ -1,9 +1,9 @@
 "use client";
+import { Locale } from "@/i18n-config";
 import React from "react";
 import { VerticalContactWidget } from "../../features/ContactWidget";
 import { Drawer } from "../Navigation/components/Drawer";
 import { FlagsList } from "../Navigation/components/FlagsList";
-import { Locale } from "@/i18n-config";
 
 export function VerticalContactWidgetLayout({
   children,

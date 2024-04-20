@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 // Import only used Swiper styles to reduce bundle size
+import { SubHeader } from "@/app/ui/features";
 import { Locale } from "@/i18n-config";
 import homeBillboards from "@/public/assets/data/homeBillboard.json";
 import type { Swiper as SwiperType } from "swiper";
@@ -16,7 +17,6 @@ import {
   HeaderButtonsGroup,
   TextHeadingSwiper,
 } from "."; // Assuming index.js is properly set in your components folder
-import { SubHeader } from "@/app/ui/features";
 export const HeaderContent = ({ lang }: { lang: Locale }) => {
   const [controlledSwiper, setControlledSwiper] = useState<SwiperType | null>(
     null,

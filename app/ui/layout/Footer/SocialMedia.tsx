@@ -1,5 +1,5 @@
-import { ExternalLink } from "../../features/ExternalLink";
 import { BUSINESS_FACEBOOK, BUSINESS_INSTAGRAM } from "../../constants";
+import { ExternalLink } from "../../features/ExternalLink";
 import { AiFillFacebook, ImInstagram } from "../../icons";
 
 export function SocialMedia() {

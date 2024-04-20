@@ -1,8 +1,7 @@
-import React from "react";
 import { FlagsTypes } from "@/types";
 import classNames from "classnames";
-import { twMerge } from "tailwind-merge";
 import Image from "next/image";
+import { twMerge } from "tailwind-merge";
 
 export function FlagsList({ lang }: { lang: string }) {
   const flags: FlagsTypes[] = [
@@ -26,21 +25,21 @@ export function FlagsList({ lang }: { lang: string }) {
     <div
       key={flag.locale}
       className={twMerge(
-        `h-full flex items-center justify-between rounded-md ring-2 ring-offset-4 bg-neutral-100 ring-neutral-300 relative`,
+        `relative flex h-full items-center justify-between rounded-md bg-neutral-100 ring-2 ring-neutral-300 ring-offset-4`,
         classNames({
-          "ring-primary-500 bg-primary-100 text-white": flag.locale === lang,
-        })
+          "bg-primary-100 text-white ring-primary-500": flag.locale === lang,
+        }),
       )}
     >
       <span
         className={twMerge(
-          `w-full h-full flex-[2] flex items-center justify-center  uppercase  font-semibold text-neutral-800`,
-          classNames({ "text-primary-700": flag.locale === lang })
+          `flex h-full w-full flex-[2] items-center justify-center  font-semibold  uppercase text-neutral-800`,
+          classNames({ "text-primary-700": flag.locale === lang }),
         )}
       >
         {flag.name}
       </span>
-      <span className="flex-[1] rounded-sm p-[0.2rem] overflow-hidden absolute top-1 left-1 bg-white">
+      <span className="absolute left-1 top-1 flex-[1] overflow-hidden rounded-sm bg-white p-[0.2rem]">
         <Image
           src={flag.icon}
           alt={`${flag.name} flag`}

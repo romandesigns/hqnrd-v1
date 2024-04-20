@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
-import { AuthCarousel } from "./Gallery";
 import { CarouselTypes } from "@/types";
 import cn from "classnames";
+import { AuthCarousel } from "./Gallery";
 
 export function SlideShow({
   images,

@@ -1,7 +1,6 @@
 import { HeadingSection } from "@/app/ui/features";
 import { BiGroup } from "@/app/ui/icons";
 import { Section } from "@/app/ui/layout";
-import React from "react";
 
 export function Categories() {
   return (

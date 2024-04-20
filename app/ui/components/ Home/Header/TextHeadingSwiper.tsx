@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
+import ReactHtmlParser from "react-html-parser";
 import type { Swiper as SwiperType } from "swiper";
 import { Controller } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import ReactHtmlParser from "react-html-parser";
 
 export function TextHeadingSwiper({
   setTextControlledSwipper,
@@ -24,7 +24,7 @@ export function TextHeadingSwiper({
       slidesPerView={1}
       speed={2000}
       onSwiper={setTextControlledSwipper}
-      className={`h-full w-full md:h-auto md:my-4 ${className}`}
+      className={`h-full w-full md:my-4 md:h-auto ${className}`}
     >
       {homeBillboards.map((slide, index) => {
         return (
@@ -33,11 +33,11 @@ export function TextHeadingSwiper({
             className="bg-gradient-to-b from-black/50 md:bg-none"
           >
             <h3
-              className={`h-full flex items-center md:justify-start  justify-center font-bold text-white text-md md:text-3xl`}
+              className={`text-md flex h-full items-center  justify-center font-bold text-white md:justify-start md:text-3xl`}
             >
               {slide.title}
             </h3>
-            <p className="hidden md:block text-white md:text-sm">
+            <p className="hidden text-white md:block md:text-sm">
               {ReactHtmlParser(slide.description)}
             </p>
           </SwiperSlide>

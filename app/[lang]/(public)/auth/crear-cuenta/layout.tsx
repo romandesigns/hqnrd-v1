@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+import { Brand } from "@/app/ui/features";
 import { GoBack } from "@/app/ui/features/GoBack";
+import { GoHomeFill } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
+import { Button } from "antd";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { images } from "./usuario/components/data";
 import { SlideShow } from "./usuario/components/SlideShow";
-import { GoHomeFill } from "@/app/ui/icons";
-import { Brand } from "@/app/ui/features";
-import { Button } from "antd";
 
 export const metadata: Metadata = {
   title: "Create Next App",

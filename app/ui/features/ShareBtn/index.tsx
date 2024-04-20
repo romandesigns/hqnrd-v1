@@ -15,7 +15,7 @@ export function ShareBtn({ data, className, iconColor }: ShareDataPropTypes) {
 
   return (
     <button
-      className={twMerge(`p-1 border rounded-md ${className}`)}
+      className={twMerge(`rounded-md border p-1 ${className}`)}
       onClick={() => showShareScreen()}
     >
       <PiShareNetworkBold color={iconColor} />

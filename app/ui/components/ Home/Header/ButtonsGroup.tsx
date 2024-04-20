@@ -1,7 +1,7 @@
+import { Locale } from "@/i18n-config";
 import { Button } from "antd";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-import { Locale } from "@/i18n-config";
 
 export function HeaderButtonsGroup({
   className = "",
@@ -13,16 +13,16 @@ export function HeaderButtonsGroup({
   return (
     <div
       className={twMerge(
-        `p-2 px-2 flex items-center justify-center gap-2 w-full ${className}`
+        `flex w-full items-center justify-center gap-2 p-2 px-2 ${className}`,
       )}
     >
       <Link
         href={`/${lang}/iniciar-session`}
-        className="flex-1 w-full md:max-w-80"
+        className="w-full flex-1 md:max-w-80"
       >
         <Button
           type="primary"
-          className="font-semibold uppercase !border-none w-full md:max-w-80"
+          className="w-full !border-none font-semibold uppercase md:max-w-80"
           size="large"
         >
           Sign In
@@ -30,10 +30,10 @@ export function HeaderButtonsGroup({
       </Link>
       <Link
         href={`/${lang}/habitaciones`}
-        className="flex-1 w-full md:max-w-80"
+        className="w-full flex-1 md:max-w-80"
       >
         <Button
-          className="font-semibold uppercase !bg-neutral-800 !border-none !text-neutral-100 w-full"
+          className="w-full !border-none !bg-neutral-800 font-semibold uppercase !text-neutral-100"
           size="large"
         >
           Rooms

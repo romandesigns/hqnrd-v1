@@ -1,8 +1,7 @@
-import { Section } from "@/app/ui/layout";
-import React from "react";
-import { Tabs } from "antd";
-import { IoIosImages } from "@/app/ui/icons";
 import { HeadingSection } from "@/app/ui/features/SectionHeading";
+import { IoIosImages } from "@/app/ui/icons";
+import { Section } from "@/app/ui/layout";
+import { Tabs } from "antd";
 import { CommonAreas } from "./CommonAreas";
 import { RoofTop } from "./RoofTop";
 

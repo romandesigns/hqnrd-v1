@@ -8,7 +8,7 @@ export function ToggleClose({ className = "" }: { className?: string }) {
   return (
     <div
       className={cn(
-        `flex items-center p-4 px-2 gap-2 justify-end hover:cursor-pointer ${className}`
+        `flex items-center justify-end gap-2 p-4 px-2 hover:cursor-pointer ${className}`,
       )}
       onClick={() => openNavigation()}
     >

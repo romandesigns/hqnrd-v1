@@ -1,15 +1,15 @@
 import {
   Amenities,
+  Categories,
   CommonAreaAndEntertainment,
   Discounts,
   FrequentlyAskedQuestions,
   Testimonials,
   Trending,
-  Categories,
 } from "@/app/ui/components/ Home";
+import { HeaderContent } from "@/app/ui/components/ Home/Header/HeaderContent";
 import { Locale } from "@/i18n-config";
 import { Header, PublicLayout, Wrapper } from "../../ui/layout";
-import { HeaderContent } from "@/app/ui/components/ Home/Header/HeaderContent";
 
 export default async function Home({
   params: { lang },

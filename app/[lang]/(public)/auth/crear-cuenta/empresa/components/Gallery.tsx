@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import { CarouselTypes } from "@/types";
 import { Carousel } from "antd";
 import Image from "next/image";
-import { CarouselTypes } from "@/types";
+import React from "react";
 
 const contentStyle: React.CSSProperties = {
   height: "32rem",

@@ -1,7 +1,6 @@
-import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { HeaderContent } from "@/app/ui/components/Rooms/HeaderContent";
 import { Header, PublicLayout, Wrapper } from "@/app/ui/layout";
 import type { Metadata } from "next";
-import { HeaderContent } from "@/app/ui/components/Rooms/HeaderContent";
 
 export const metadata: Metadata = {
   title: "Hotel Quinto Nivel RD | Habitaciones",
@@ -9,8 +8,6 @@ export const metadata: Metadata = {
 };
 
 import { Locale, i18n } from "@/i18n-config";
-import { HeaderComponent } from "@/app/ui/components/Rooms/HeaderComponent";
-import { rooms } from "../../../../public/assets/data/roomsList";
 import { billboards } from "./billboards";
 
 export async function generateStaticParams() {

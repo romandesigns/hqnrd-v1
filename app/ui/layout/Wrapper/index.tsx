@@ -1,5 +1,4 @@
 import React from "react";
-import cn from "classnames";
 import { twMerge } from "tailwind-merge";
 
 export function Wrapper({
@@ -10,7 +9,7 @@ export function Wrapper({
   className?: string;
 }) {
   return (
-    <div className={twMerge(`w-full max-w-[90rem] m-auto px-2 ${className}`)}>
+    <div className={twMerge(`m-auto w-full max-w-[90rem] px-2 ${className}`)}>
       {children}
     </div>
   );

@@ -22,7 +22,7 @@ export function CardSwiper({
       grabCursor={true}
       modules={[EffectCards, Autoplay, Pagination, Controller]}
       className={twMerge(
-        `w-[70vw] h-[60vh] md:w-[22rem] aspect-[9/16] shadow-lg place-self-center relative !z-[3] md:place-content-start ${className}`
+        `relative !z-[3] aspect-[9/16] h-[60vh] w-[70vw] place-self-center shadow-lg md:w-[22rem] md:place-content-start ${className}`,
       )}
       pagination={{
         clickable: true,
@@ -37,7 +37,7 @@ export function CardSwiper({
       controller={{ control: [controlledSwiper, textControlledSwipper] }}
     >
       {homeBillboards.map((item, idx) => (
-        <SwiperSlide className="rounded-md overflow-hidden relative" key={idx}>
+        <SwiperSlide className="relative overflow-hidden rounded-md" key={idx}>
           <Image
             src={item.src}
             alt="front building airview image"

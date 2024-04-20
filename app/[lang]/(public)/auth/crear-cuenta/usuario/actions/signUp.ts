@@ -1,8 +1,8 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
-import { signUpUserSchema } from "../components/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { signUpUserSchema } from "../components/schema";
 
 export async function createUserAction(prevState: any, formData: FormData) {
   const data = {
