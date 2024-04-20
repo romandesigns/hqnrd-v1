@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
+import { Locale } from "@/i18n-config";
 import { ConfigProvider, theme } from "antd";
 import deDE from "antd/locale/de_DE";
 import enUS from "antd/locale/en_US";
 import esES from "antd/locale/es_ES";
-import { Locale } from "@/i18n-config";
+import React from "react";
 
 export default function AntConfigProvider({
   children,

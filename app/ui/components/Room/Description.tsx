@@ -1,5 +1,3 @@
-import React from "react";
-
 export function Description() {
   return (
     <article className="mx-auto w-full rounded-md bg-white py-4">

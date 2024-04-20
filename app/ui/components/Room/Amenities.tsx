@@ -1,4 +1,3 @@
-import React from "react";
 import { amenities } from "../../../../public/assets/data/amenities";
 
 export function Amenities() {

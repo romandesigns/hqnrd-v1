@@ -1,8 +1,8 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 import type { Metadata } from "next";
-import { poppins } from "../../ui/typography";
 import "../../ui/styles/globals.css";
+import { poppins } from "../../ui/typography";
 
 export const metadata: Metadata = {
   title: "Hotel Quinto Nivel RD - Home",
