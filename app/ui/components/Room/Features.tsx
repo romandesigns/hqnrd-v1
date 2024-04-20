@@ -15,49 +15,49 @@ export function Features() {
   const featuresList = [
     {
       id: 1,
-      color: "primary",
+      color: "bg-primary-100",
       icon: <MdOutlineBathtub />,
       text: "Private",
     },
     {
       id: 2,
-      color: "green",
+      color: "bg-green-100",
       icon: <MdBalcony />,
       text: "Balcony",
     },
     {
       id: 3,
-      color: "cyan",
+      color: "bg-cyan-100",
       icon: <TbRulerMeasure />,
       text: "258 Sqf",
     },
     {
       id: 4,
-      color: "sky",
+      color: "bg-sky-100",
       icon: <TbTrafficCone />,
       text: "Parking",
     },
     {
       id: 5,
-      color: "violet",
+      color: "bg-violet-100",
       icon: <FaPeopleRoof />,
       text: "Rooftop",
     },
     {
       id: 6,
-      color: "lime",
+      color: "bg-lime-100",
       icon: <LiaBedSolid />,
       text: "1.5 Beds",
     },
     {
       id: 7,
-      color: "emerald",
+      color: "bg-emerald-100",
       icon: <BsCameraReels />,
       text: "Surveillance",
     },
     {
       id: 8,
-      color: "amber",
+      color: "bg-amber-100",
       icon: <TbBrandIntercom />,
       text: "Intercom",
     },
@@ -74,7 +74,7 @@ export function Features() {
         >
           <span
             className={twMerge(
-              `flex bg-${feature.color}-100 h-8 w-8 items-center justify-center rounded-md`,
+              `flex ${feature.color} h-8 w-8 items-center justify-center rounded-md`,
             )}
           >
             {feature.icon}
