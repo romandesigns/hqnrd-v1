@@ -25,7 +25,12 @@ export function VerticalContactWidgetLayout({
     <div className="relative">
       <VerticalContactWidget setOpen={setOpen} scrollY={scrollY} />
       {children}
-      <Drawer open={open} setOpen={setOpen}>
+      <Drawer
+        open={open}
+        setOpen={setOpen}
+        placement="bottom"
+        title="Select Language"
+      >
         <div className="m-auto grid h-full w-full max-w-96 grid-cols-[1fr_1fr_1fr] grid-rows-1 gap-6">
           <FlagsList lang={lang} />
         </div>

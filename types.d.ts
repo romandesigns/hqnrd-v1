@@ -49,3 +49,13 @@ export type RoomTypes = {
   slug: string;
   category: string;
 };
+
+export type Reservation = {
+  adultsCount: number;
+  checkOutDate: string;
+  checkinDate: string;
+  checkinTime: string;
+  childrenCount?: number;
+  message?: string;
+  reservationId: string;
+};

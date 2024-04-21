@@ -7,3 +7,4 @@ export { ImageGallery } from "./ImageGallery";
 export { Media } from "./Media";
 export { PageHeading } from "./PageHeading";
 export { ServicesAndAttractions } from "./ServicesAndAttractions";
+export { Summary } from "./Summary";

@@ -34,3 +34,22 @@ button.ant-image-preview-close,
 .ant-image-preview-img-wrapper img {
   border-radius: 0.7rem;
 }
+
+.ant-drawer-content-wrapper:has(.custom) {
+  top: 0.8rem !important;
+  right: 0.8rem !important;
+  bottom: 0.8rem !important;
+}
+
+.ant-drawer-content-wrapper:has(.custom) .ant-drawer-content {
+  border-radius: 0.4rem !important;
+}
+
+@media (max-width: 768px) {
+  .ant-drawer-content-wrapper:has(.custom) {
+    top: 0rem !important;
+    right: 0rem !important;
+    bottom: 0rem !important;
+    left: 0rem !important;
+  }
+}

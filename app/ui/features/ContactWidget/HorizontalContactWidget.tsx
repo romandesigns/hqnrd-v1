@@ -73,7 +73,12 @@ export function HorizontalContactWidget({
         </Divider>
       </div>
       {component === "drawer" ? (
-        <Drawer open={open} setOpen={setOpen}>
+        <Drawer
+          open={open}
+          setOpen={setOpen}
+          title="Select Language"
+          placement="bottom"
+        >
           <div className="grid h-full w-full grid-cols-[1fr_1fr_1fr] grid-rows-1 gap-6">
             <FlagsList lang={lang} />
           </div>

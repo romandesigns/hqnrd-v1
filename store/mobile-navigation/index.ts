@@ -15,5 +15,5 @@ export const useNavToggle = create<NavigationState>()(
     isOpen: false,
     closeNavigation: () => set(() => ({ isOpen: false }), false, "Close Modal"),
     openNavigation: () => set({ isOpen: true }, false, "Open Modal"),
-  }))
+  })),
 );

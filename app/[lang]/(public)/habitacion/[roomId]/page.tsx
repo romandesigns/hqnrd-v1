@@ -14,6 +14,7 @@ import {
   ImageGallery,
   Media,
   PageHeading,
+  Summary,
 } from "../../../../ui/components/Room";
 
 const fetchRoom = async (roomId: string) => {
@@ -95,6 +96,7 @@ export default async function Page({
           </section>
         </Wrapper>
       </main>
+      <Summary />
     </PublicLayout>
   );
 }

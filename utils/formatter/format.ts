@@ -36,7 +36,7 @@ export const format = {
       .split("-")
       .map((word) => word[0].toUpperCase() + word.slice(1))
       .join(" ");
-    return category === "Habitaciones" ? "Showing All Categories" : category;
+    return category === "Habitaciones" ? "All Categories" : category;
   },
   transformCategory: (cat: string) => {
     switch (cat) {

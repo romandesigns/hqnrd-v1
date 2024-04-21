@@ -5,6 +5,9 @@ import { Locale } from "@/i18n-config";
 import { Pagination } from "antd";
 import { useEffect, useState } from "react";
 import { rooms as roomList } from "../../../../../public/assets/data/roomsList";
+import { Empty } from "antd";
+import { twMerge } from "tailwind-merge";
+import classNames from "classnames";
 
 export default function Page({
   params: { lang, category },
@@ -16,6 +19,7 @@ export default function Page({
     roomList.filter((room) => room.slug === category),
   );
   const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     const filteredRooms = roomList.filter((room) => room.slug === category);
     console.log("rooms", filteredRooms);
@@ -45,15 +49,26 @@ export default function Page({
               <span className="text-bold">Rooms</span>
             </div>
           </div>
-          <div className="mb-10 grid grid-cols-1 gap-4 rounded-md bg-white sm:grid-cols-2 lg:grid-cols-3 lg:p-10">
-            {currentRooms.map((room, index) => (
-              <RoomCard
-                key={`${room.id}-${index}`}
-                className="shadow-sm"
-                room={room}
-                lang={lang}
-              />
-            ))}
+          <div
+            className={twMerge(
+              "mb-10 grid grid-cols-1 gap-4 rounded-md bg-white sm:grid-cols-2 lg:grid-cols-3 lg:p-10",
+              classNames({
+                "lg:grid-cols-1": currentRooms.length === 0,
+              }),
+            )}
+          >
+            {currentRooms.length === 0 ? (
+              <Empty className="p-20 " />
+            ) : (
+              currentRooms.map((room, index) => (
+                <RoomCard
+                  key={`${room.id}-${index}`}
+                  className="shadow-sm"
+                  room={room}
+                  lang={lang}
+                />
+              ))
+            )}
           </div>
           <div className="flex justify-center">
             <Pagination
