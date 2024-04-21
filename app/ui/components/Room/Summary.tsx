@@ -1,8 +1,7 @@
 "use client";
 import { useReservation } from "@/store/reservation";
-import React from "react";
-import { Drawer } from "../../layout/Navigation/components/Drawer";
 import { SummaryItemCard } from ".";
+import { Drawer } from "../../layout/Navigation/components/Drawer";
 
 export function Summary() {
   const { isOpen, reservations, closeReservationDrawer, removeReservation } =
@@ -28,7 +27,7 @@ export function Summary() {
                 className="relative my-2 grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] gap-2 rounded-md bg-[#f9f9fb] p-1 pr-2 lg:p-2"
               >
                 <SummaryItemCard
-                  {...reservation}
+                  reservation={reservation}
                   removeReservation={removeReservation}
                 />
               </li>

@@ -1,23 +1,14 @@
-import React from "react";
+import { Reservation } from "@/types";
 import Image from "next/image";
 import { FaPen, FaRegTrashAlt } from "../../icons";
-import { Reservation } from "@/types";
 
 export function SummaryItemCard({
-  adultsCount,
-  checkOutDate,
-  checkInDate,
-  checkOutTime,
-  checkInTime,
-  roomNumber,
-  childrenCount,
-  message,
-  reservationId,
-  totalDays,
-  totalGuests,
-  discount,
+  reservation,
   removeReservation,
-}: Reservation) {
+}: {
+  reservation: Reservation;
+  removeReservation: (reservationId: string) => void;
+}) {
   return (
     <>
       {/* Image */}
@@ -34,7 +25,9 @@ export function SummaryItemCard({
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <p className="flex flex-col">
-            <small className="font-semibold">Unit# {roomNumber}</small>
+            <small className="font-semibold">
+              Unit# {reservation.roomNumber}
+            </small>
             <span className="text-sm font-semibold">Double Room</span>
           </p>
           <p className="mb-2 flex h-full items-end text-xs lg:text-sm">
@@ -45,15 +38,15 @@ export function SummaryItemCard({
         <div className="flex gap-3">
           <p className="flex items-center gap-1">
             <span className="font-semibold">Adults:</span>
-            <span>{adultsCount}</span>
+            <span>{reservation.adultsCount}</span>
           </p>
           <p className="flex items-center gap-1">
             <span className="font-semibold">Children:</span>
-            <span>{childrenCount}</span>
+            <span>{reservation.childrenCount}</span>
           </p>
           <p className="flex items-center gap-1">
             <span className="font-semibold">Total:</span>
-            <span>{totalGuests}</span>
+            <span>{reservation.totalGuests}</span>
           </p>
         </div>
       </div>
@@ -62,18 +55,18 @@ export function SummaryItemCard({
         <p className="flex flex-col text-xs">
           <span className="font-semibold">Check In:</span>
           <span>
-            {checkInDate} {checkInTime}
+            {reservation.checkInDate} {reservation.checkInTime}
           </span>
         </p>
         <p className="flex flex-col text-xs">
           <span className="font-semibold">Check Out:</span>
           <span>
-            {checkOutDate} {checkOutTime}
+            {reservation.checkOutDate} {reservation.checkOutTime}
           </span>
         </p>
         <p className="flex flex-col">
           <span className="font-semibold">Days:</span>
-          <span>{totalDays}</span>
+          <span>{reservation.totalDays}</span>
         </p>
       </div>
 
@@ -83,7 +76,7 @@ export function SummaryItemCard({
         </span>
         <span
           className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-md bg-red-300"
-          onClick={() => removeReservation(reservationId)}
+          onClick={() => removeReservation(reservation.reservationId)}
         >
           <FaRegTrashAlt />
         </span>
@@ -92,7 +85,7 @@ export function SummaryItemCard({
       <div className="absolute -bottom-6 left-3 h-6 w-fit rounded-bl-md border-b border-l">
         <div className="relative left-2 top-2 rounded-md bg-[#f9f9fb] p-1">
           <p className="flex gap-2">
-            <span>{totalDays} Days</span>
+            <span>{reservation.totalDays} Days</span>
             <span>x</span>
             <span>1,350</span>
             <span>=</span>

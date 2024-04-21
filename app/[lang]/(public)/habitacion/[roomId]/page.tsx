@@ -1,4 +1,3 @@
-import { ReservationForm } from "@/app/ui/components/Room/ReservationForm";
 import { GoBack, ShareBtn, SubHeader } from "@/app/ui/features";
 import { Header, PublicLayout, Wrapper } from "@/app/ui/layout";
 import { Locale } from "@/i18n-config";
@@ -7,6 +6,7 @@ import { rooms } from "@/public/assets/data/roomsList";
 import { notFound } from "next/navigation";
 import {
   Amenities,
+  Aside,
   BackgroundEffect,
   Description,
   Features,
@@ -77,22 +77,7 @@ export default async function Page({
                 <Media />
               </article>
             </div>
-            <article className="flex-[1] rounded-md bg-white p-4">
-              <div className="grid grid-cols-2 border-b border-neutral-200">
-                <Heading heading="Reservation Form" className="flex-1" />
-                <p className="flex-1 justify-self-end rounded-tl-md rounded-tr-md border-none bg-neutral-800 p-2 px-4 font-bold text-white">
-                  1,350$ / 1 Night
-                </p>
-              </div>
-              <ReservationForm roomNumber={roomId} />
-              {/* <Divider plain>
-                <div className="flex items-center justify-center gap-2">
-                  <span>Surrounding Services & Attractions</span>
-                  <TbMapSearch size={15} />
-                </div>
-              </Divider>
-              <ServicesAndAttractions /> */}
-            </article>
+            <Aside roomId={roomId} pricePerNight={room.pricePerNight} />
           </section>
         </Wrapper>
       </main>

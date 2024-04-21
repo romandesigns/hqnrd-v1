@@ -34,7 +34,8 @@ export {
   IoLogoWhatsapp,
   IoMdArrowRoundBack,
 } from "react-icons/io";
-export { IoClose, IoInformationCircle } from "react-icons/io5";
+export { IoClose, IoInformationCircle, IoCloseCircle } from "react-icons/io5";
+export { IoMdCloseCircleOutline } from "react-icons/io";
 export { LiaBedSolid } from "react-icons/lia";
 export { LuUser2 } from "react-icons/lu";
 export {
@@ -73,4 +74,4 @@ export {
   TbTrafficCone,
   TbWheelchair,
 } from "react-icons/tb";
-export { TiGroup } from "react-icons/ti";
+export { TiGroup, TiWarning } from "react-icons/ti";

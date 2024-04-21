@@ -18,3 +18,4 @@ export { Backdrop } from "./Backdrop";
 export { Blurdrop } from "./Blurdrop";
 export { MaxGuestQntyBadge } from "./MaxGuestQntyBadge";
 export { NotFoundCode } from "./NoFoundCode";
+export { NotificationTray } from "./NotificationsTray";

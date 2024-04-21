@@ -3,6 +3,7 @@ import React from "react";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
 import { VerticalContactWidgetLayout } from "../VerticalContactWidget";
+import { NotificationTray } from "../../features";
 
 export function PublicLayout({
   lang,
@@ -18,6 +19,7 @@ export function PublicLayout({
         {children}
       </VerticalContactWidgetLayout>
       <Footer />
+      <NotificationTray />
     </>
   );
 }
