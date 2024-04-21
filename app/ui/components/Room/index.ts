@@ -1,3 +1,4 @@
+export { SummaryItemCard } from "./SummaryItemCard";
 export { Amenities } from "./Amenities";
 export { BackgroundEffect } from "./BackgroundEffect";
 export { Description } from "./Description";

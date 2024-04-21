@@ -53,9 +53,14 @@ export type RoomTypes = {
 export type Reservation = {
   adultsCount: number;
   checkOutDate: string;
-  checkinDate: string;
-  checkinTime: string;
+  checkInDate: string;
+  checkOutTime: string;
+  checkInTime: string;
+  roomNumber: string;
   childrenCount?: number;
   message?: string;
   reservationId: string;
+  totalDays: number;
+  totalGuests: number;
+  discount: "5%" | "8%" | "0";
 };

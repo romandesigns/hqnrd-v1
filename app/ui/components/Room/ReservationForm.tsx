@@ -4,6 +4,8 @@ import dayjs from "dayjs";
 import { LuUser2, MdChildCare } from "../../icons";
 import { Summary } from "./Summary";
 import { useReservation } from "@/store/reservation";
+import moment from "moment";
+import { Reservation } from "@/types";
 
 export function ReservationForm({ roomNumber }: { roomNumber: string }) {
   const { TextArea } = Input;
@@ -14,9 +16,20 @@ export function ReservationForm({ roomNumber }: { roomNumber: string }) {
     e.preventDefault();
     let uuid = self.crypto.randomUUID();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    data.reservationId = uuid;
-    updateReservations([...reservations, data]);
+    const entries = Object.fromEntries(formData.entries()) as {
+      [key: string]: string;
+    };
+
+    const reservation: Reservation = {
+      ...entries,
+      reservationId: uuid,
+      totalGuests: Number(entries.adultsCount) + Number(entries.childrenCount),
+      totalDays: moment(entries.checkInDate).diff(entries.checkOutDate, "days"),
+      adultsCount: Number(entries.adultsCount),
+      childrenCount: Number(entries.childrenCount),
+    };
+
+    updateReservations([...reservations, reservation]);
   };
 
   return (
@@ -54,13 +67,14 @@ export function ReservationForm({ roomNumber }: { roomNumber: string }) {
                 size="large"
                 variant="filled"
                 required
-                name="checkinDate"
+                name="checkInDate"
+                format={"MM-DD-YYYY"}
               />
               <TimePicker
                 size="large"
                 variant="filled"
                 required
-                name="checkinTime"
+                name="checkInTime"
                 use12Hours
                 format="h:mm A"
                 minuteStep={10}
@@ -75,6 +89,7 @@ export function ReservationForm({ roomNumber }: { roomNumber: string }) {
                 variant="filled"
                 required
                 name="checkOutDate"
+                format={"MM-DD-YYYY"}
               />
               <TimePicker
                 size="large"
@@ -96,6 +111,18 @@ export function ReservationForm({ roomNumber }: { roomNumber: string }) {
                 type="text"
                 name="roomNumber"
                 value={roomNumber}
+                className="!hidden"
+              />
+              <Input
+                type="text"
+                name="checkOutTime"
+                value="11:30 AM"
+                className="!hidden"
+              />
+              <Input
+                type="text"
+                name="pricePerNight"
+                value="11:30 AM"
                 className="!hidden"
               />
             </div>

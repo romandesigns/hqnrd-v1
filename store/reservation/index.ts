@@ -9,19 +9,26 @@ export type NavigationState = {
   closeReservationDrawer: () => void;
   openReservationDrawer: () => void;
   updateReservations: (reservations: Reservation[]) => void;
+  removeReservation: (reservationId: string) => void;
 };
 
 // Custom middleware for opening the drawer when reservations increase
-const autoOpenDrawerOnNewReservation =
+const autoToggleDrawerOnReservationsChange =
   (config: any) => (set: any, get: any, api: any) =>
     config(
       (args: any) => {
+        // Open the drawer when a new reservation is added
         if (
           args.reservations &&
           args.reservations.length > get().reservations.length
         ) {
           set({ isOpen: true });
         }
+        // Close the drawer when there are no reservations
+        if (args.reservations && args.reservations.length === 0) {
+          set({ isOpen: false });
+        }
+        // Apply the rest of the state updates
         set(args);
       },
       get,
@@ -32,11 +39,18 @@ const autoOpenDrawerOnNewReservation =
 export const useReservation = create<NavigationState>()(
   devtools(
     persist(
-      autoOpenDrawerOnNewReservation((set, get) => ({
+      autoToggleDrawerOnReservationsChange((set, get) => ({
         isOpen: false,
         reservations: [],
         closeReservationDrawer: () => set(() => ({ isOpen: false })),
         openReservationDrawer: () => set({ isOpen: true }),
+        removeReservation: (reservationId: string) => {
+          const reservations = get().reservations.filter(
+            (reservation: Reservation) =>
+              reservation.reservationId !== reservationId,
+          );
+          set({ reservations });
+        },
         updateReservations: (reservations: Reservation[]) =>
           set({ reservations }),
       })),

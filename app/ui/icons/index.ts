@@ -19,6 +19,8 @@ export {
   FaMapMarkerAlt,
   FaParking,
   FaRegBuilding,
+  FaPen,
+  FaRegTrashAlt,
 } from "react-icons/fa";
 export { FaCircleArrowDown, FaKitchenSet, FaPeopleRoof } from "react-icons/fa6";
 export { FcGoogle } from "react-icons/fc";
