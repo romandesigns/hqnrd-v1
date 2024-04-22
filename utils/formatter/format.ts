@@ -3,7 +3,7 @@ import { Locale } from "@/i18n-config";
 
 export const format = {
   currency: (num: number) => {
-    return `$${num.toLocaleString()}`;
+    return `${num.toLocaleString()}`;
   },
   firstLetterToUpperCase: (str: string) => {
     return str

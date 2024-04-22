@@ -1,6 +1,7 @@
 import { Reservation } from "@/types";
 import Image from "next/image";
 import { FaPen, FaRegTrashAlt } from "../../icons";
+import { format } from "@/utils/formatter/format";
 
 export function SummaryItemCard({
   reservation,
@@ -9,6 +10,8 @@ export function SummaryItemCard({
   reservation: Reservation;
   removeReservation: (reservationId: string) => void;
 }) {
+  console.log();
+
   return (
     <>
       {/* Image */}
@@ -83,13 +86,17 @@ export function SummaryItemCard({
       </div>
 
       <div className="absolute -bottom-6 left-3 h-6 w-fit rounded-bl-md border-b border-l">
-        <div className="relative left-2 top-2 rounded-md bg-[#f9f9fb] p-1">
+        <div className="relative left-2 top-2 rounded-md border bg-white p-1 px-3">
           <p className="flex gap-2">
             <span>{reservation.totalDays} Days</span>
             <span>x</span>
-            <span>1,350</span>
+            <span>{format.currency(reservation.pricePerNight)}</span>
             <span>=</span>
-            <span>5,400</span>
+            <span>
+              {format.currency(
+                reservation.totalDays * reservation.pricePerNight,
+              )}
+            </span>
           </p>
         </div>
       </div>

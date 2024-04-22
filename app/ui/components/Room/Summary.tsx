@@ -24,7 +24,7 @@ export function Summary() {
             return (
               <li
                 key={reservation.reservationId}
-                className="relative my-2 grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] gap-2 rounded-md bg-[#f9f9fb] p-1 pr-2 lg:p-2"
+                className="relative my-2 grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] gap-2 rounded-md border p-1 pr-2 lg:p-2"
               >
                 <SummaryItemCard
                   reservation={reservation}
