@@ -58,8 +58,8 @@ export function SignUpForm({
             type="text"
           />
           <InputAnt
-            name="rcn"
-            placeholder="RCN (Optional)"
+            name="rnc"
+            placeholder="RNC (Optional)"
             type="text"
             required={false}
           />

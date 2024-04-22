@@ -1,17 +1,10 @@
+import { createClient } from "@/utils/supabase/server";
 import { Button, Input, Alert } from "antd";
 
-export default function Page() {
-  let foo = true;
-  if (foo) {
-    return (
-      <Alert
-        message="Incorrect Date Range"
-        description="The date range is invalid. Please make sure the check-out date is after the check-in date."
-        type="warning"
-        showIcon
-        closable
-      />
-    );
-  }
+export default async function Page() {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getUser();
+  console.log(data, error);
+
   return <p>Hello world</p>;
 }

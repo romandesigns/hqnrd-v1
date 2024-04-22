@@ -46,13 +46,9 @@ export async function createUserAction(prevState: any, formData: FormData) {
       },
     });
 
-    if (error?.message) {
-      console.log(error);
-      return {
-        errors: error.message,
-      };
-    }
-    revalidatePath("/", "layout");
+    if (error?.message) return error.message;
+
+    revalidatePath("/[lang]/iniciar-session, page");
     redirect("/[lang]/iniciar-session");
   } catch (e) {
     console.error("Validation error", e);

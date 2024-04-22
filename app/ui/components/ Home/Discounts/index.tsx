@@ -27,7 +27,7 @@ export function Discounts() {
             />
             <CardDiscount
               imgSrc="/assets/general/eight-percent.svg"
-              eligibleDays="Applicable When Booking 8 days"
+              eligibleDays="Applicable When Booking 15 days"
               borderColor="border-neutral-500"
               bgColor="bg-neutral-800/90"
             />
