@@ -1,10 +1,15 @@
 import { createClient } from "@/utils/supabase/server";
-import { Button, Input, Alert } from "antd";
 
 export default async function Page() {
   const supabase = createClient();
-  const { data, error } = await supabase.auth.getUser();
-  console.log(data, error);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  return <p>Hello world</p>;
+  if (!user) return <div>You are not logged in</div>;
+  return (
+    <>
+      <code>{JSON.stringify(user, null, 2)}</code>
+    </>
+  );
 }

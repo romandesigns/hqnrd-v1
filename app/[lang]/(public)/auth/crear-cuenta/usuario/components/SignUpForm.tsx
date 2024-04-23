@@ -4,7 +4,7 @@
  */
 
 import { InputAnt, InputPhone } from "@/app/ui/components/Form";
-import { Alert, Button, DatePicker, Flex, Radio } from "antd";
+import { Alert, Button, DatePicker, Flex, Radio, Input } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
@@ -107,6 +107,7 @@ export function SignUpForm({
               Crear Cuenta
             </Button>
           </div>
+          <Input type="text" value={lang} name="lang" className="!hidden" />
         </fieldset>
       </form>
     </>
