@@ -28,7 +28,7 @@ export function InputPhone({
         onChange={phoneNumber}
         value={phone}
         defaultCountry={locale as Country}
-        name="tel"
+        name="phone"
         required
         className="flex focus:outline-none focus:ring-primary-100 [&_input]:outline-none [&_input]:placeholder:text-xs [&_input]:placeholder:font-normal [&_input]:placeholder:text-neutral-300 [&_input]:hover:outline-none [&_input]:focus:outline-none [&_input]:sm:!py-[.2rem] [&_input]:lg:!py-[.03rem]"
       />

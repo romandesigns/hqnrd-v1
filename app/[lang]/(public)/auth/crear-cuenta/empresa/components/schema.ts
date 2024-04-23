@@ -15,7 +15,7 @@ export const signUpUserSchema = z
       .refine((val) => val !== undefined, { message: "Gender is required" }),
     email: z.string().email({ message: "Invalid email address" }),
     telCountry: z.string(),
-    tel: z.string(),
+    phone: z.string(),
     password: z
       .string()
       .min(4, { message: "password must be at least 4 characters long" })
