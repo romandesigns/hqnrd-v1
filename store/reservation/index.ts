@@ -39,7 +39,7 @@ const autoToggleDrawerOnReservationsChange =
 export const useReservation = create<NavigationState>()(
   devtools(
     persist(
-      autoToggleDrawerOnReservationsChange((set, get) => ({
+      autoToggleDrawerOnReservationsChange((set: any, get: any) => ({
         isOpen: false,
         reservations: [],
         closeReservationDrawer: () => set(() => ({ isOpen: false })),

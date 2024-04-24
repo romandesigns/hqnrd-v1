@@ -1,4 +1,5 @@
+import { Loader } from "@/app/ui/features";
+
 export default function Loading() {
-  // Or a custom loading skeleton component
-  return <p>Loading...</p>;
+  return <Loader />;
 }

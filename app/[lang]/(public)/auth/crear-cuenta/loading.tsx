@@ -1,3 +1,5 @@
+import { Loader } from "@/app/ui/features";
+
 export default function Loading() {
-  return <div>Loading</div>;
+  return <Loader />;
 }

@@ -16,7 +16,7 @@ export function Drawer({
   title: string;
   placement: "top" | "right" | "bottom" | "left";
   className?: string;
-  closeDrawer: () => void;
+  closeDrawer?: () => void;
 }) {
   return (
     <DrawerComponent
@@ -24,7 +24,9 @@ export function Drawer({
       placement={placement}
       width={500}
       height={170}
-      onClose={() => (setOpen ? setOpen(false) : closeDrawer())}
+      onClose={() =>
+        setOpen ? setOpen(false) : closeDrawer ? closeDrawer() : null
+      }
       open={open}
       className={className}
     >
