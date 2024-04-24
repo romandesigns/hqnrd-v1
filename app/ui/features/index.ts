@@ -21,3 +21,4 @@ export { NotFoundCode } from "./NoFoundCode";
 export { NotificationTray } from "./NotificationsTray";
 export { BackgroundEffect } from "./BgEffect";
 export { Loader } from "./Loader";
+export { ConfettiComponent } from "./Confetti";

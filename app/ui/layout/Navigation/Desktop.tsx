@@ -1,11 +1,12 @@
 import { Locale } from "@/i18n-config";
+import { createClient } from "@/utils/supabase/server";
 import cn from "classnames";
 import { Brand } from "../../features/Brand";
 import { Wrapper } from "../Wrapper";
-import { ToggleClose } from "./components/ToggleCloseBtn";
 import { DesktopMenu } from "./components/DesktopMenu";
+import { ToggleClose } from "./components/ToggleCloseBtn";
 
-export function DesktopNav({
+export async function DesktopNav({
   className = "",
   lang,
 }: {

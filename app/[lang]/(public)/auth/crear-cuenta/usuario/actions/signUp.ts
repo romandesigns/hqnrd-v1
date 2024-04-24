@@ -46,12 +46,13 @@ export async function createUserAction(prevState: any, formData: FormData) {
   });
 
   if (error) {
-    console.log(error.message);
     redirect(
       `/${formData.get("lang")}/error?error=${encodeURIComponent(error.message)}`,
     );
   }
 
   revalidatePath("/", "layout");
-  redirect(`/${formData.get("lang")}/auth/iniciar-session`);
+  redirect(
+    `/${formData.get("lang")}/auth/confirmar?email=${data.email}&name=${data.name}`,
+  );
 }
