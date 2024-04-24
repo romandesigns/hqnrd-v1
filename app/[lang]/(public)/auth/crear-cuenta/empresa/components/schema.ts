@@ -14,7 +14,7 @@ export const signUpUserSchema = z
       .enum(["male", "female", "other"])
       .refine((val) => val !== undefined, { message: "Gender is required" }),
     email: z.string().email({ message: "Invalid email address" }),
-    telCountry: z.string(),
+    phoneCountry: z.string(),
     phone: z.string(),
     password: z
       .string()

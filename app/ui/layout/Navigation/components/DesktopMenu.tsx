@@ -1,9 +1,16 @@
 "use client";
 import { BsDoorOpenFill, GoHomeFill } from "@/app/ui/icons";
+import { createClient } from "@/utils/supabase/client";
 import { Button } from "antd";
 import Link from "next/link";
 
-export function DesktopMenu({ lang }: { lang: string }) {
+export async function DesktopMenu({ lang }: { lang: string }) {
+  const supabase = createClient();
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+  };
+
   return (
     <ul className="hidden gap-2 text-sm font-medium sm:flex">
       <li className="inline-block">

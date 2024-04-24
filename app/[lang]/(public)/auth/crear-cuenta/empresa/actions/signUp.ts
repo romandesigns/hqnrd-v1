@@ -5,13 +5,14 @@ import { redirect } from "next/navigation";
 import { signUpUserSchema } from "../components/schema";
 
 export async function createUserAction(prevState: any, formData: FormData) {
+  console.log("formData", formData);
   const data = {
     name: formData.get("name"),
     lastName: formData.get("lastName"),
     dateOfBirth: formData.get("dateOfBirth"),
     gender: formData.get("gender"),
     email: formData.get("email"),
-    telCountry: formData.get("telCountry"),
+    phoneCountry: formData.get("phoneCountry"),
     phone: formData.get("phone"),
     password: formData.get("password"),
     confirmPassword: formData.get("confirmPassword"),
@@ -39,7 +40,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
           dob: data.dateOfBirth as string,
           gender: data.gender as string,
           phone: data.phone as string,
-          tel_country: data.telCountry as string,
+          phone_country: data.phoneCountry as string,
           user_role: "guest",
           accountType: data.accountType as string,
         },

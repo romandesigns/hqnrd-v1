@@ -36,6 +36,7 @@ export function SignUpForm({
   };
 
   const { pending } = useFormStatus();
+
   return (
     <>
       {state?.path && state?.message && (
