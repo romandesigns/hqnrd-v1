@@ -46,7 +46,10 @@ export async function createUserAction(prevState: any, formData: FormData) {
   });
 
   if (error) {
-    redirect("/error");
+    console.log(error.message);
+    redirect(
+      `/${formData.get("lang")}/error?error=${encodeURIComponent(error.message)}`,
+    );
   }
 
   revalidatePath("/", "layout");
