@@ -8,7 +8,7 @@ import { Alert, Button } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
-import { createUserAction } from "../actions/signUp";
+import { createUserAction } from "@/utils/actions";
 
 type initialStateTypes = {
   path: string;

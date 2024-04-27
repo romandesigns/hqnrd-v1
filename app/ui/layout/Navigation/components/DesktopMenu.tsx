@@ -2,28 +2,20 @@
 import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
 import { Button } from "antd";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@/types";
 
 export async function DesktopMenu({ lang }: { lang: string }) {
-  const [isUser, setIsUser] = React.useState<User | null>(null);
-
-  React.useEffect(() => {
-    const getUser = async () => {
-      const supabase = createClient();
-      const { data, error } = await supabase.auth.getUser();
-      if (error) {
-        console.error(error);
-        return;
-      }
-      setIsUser(data.user as User);
-    };
-    getUser();
-  }, []);
+  const [isUser, setIsUser] = useState<User>();
+  const supabase = createClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
   const signOutUser = async () => {
-    await createClient().auth.signOut();
+    await supabase.auth.signOut();
   };
 
   return (
@@ -45,13 +37,12 @@ export async function DesktopMenu({ lang }: { lang: string }) {
             className="!flex items-center justify-center"
             size="middle"
             icon={<BsDoorOpenFill />}
-            onClick={() => signOutUser()}
           >
             Rooms
           </Button>
         </Link>
       </li>
-      {isUser?.aud === "authenticated" ? (
+      {user && user.aud === "authenticated" && (
         <>
           <li className="inline-block">
             <Link href={`/${lang}/portal`}>
@@ -68,12 +59,14 @@ export async function DesktopMenu({ lang }: { lang: string }) {
             <Button
               className="!flex items-center justify-center !bg-neutral-800 !text-white"
               size="middle"
+              onClick={() => signOutUser()}
             >
               Sign Out
             </Button>
           </li>
         </>
-      ) : (
+      )}
+      {!user && (
         <li className="inline-block">
           <Link href={`/${lang}/auth/iniciar-session`}>
             <Button

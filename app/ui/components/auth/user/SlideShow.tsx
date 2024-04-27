@@ -1,4 +1,3 @@
-"use client";
 import { CarouselTypes } from "@/types";
 import cn from "classnames";
 import { AuthCarousel } from "./Gallery";

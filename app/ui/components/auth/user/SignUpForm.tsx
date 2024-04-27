@@ -4,11 +4,11 @@
  */
 
 import { InputAnt, InputPhone } from "@/app/ui/components/Form";
-import { Alert, Button, DatePicker, Flex, Radio, Input } from "antd";
+import { createUserAction } from "@/utils/actions";
+import { Alert, Button, DatePicker, Flex, Input, Radio } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
-import { createUserAction } from "../actions/signUp";
 
 type initialStateTypes = {
   path: string;

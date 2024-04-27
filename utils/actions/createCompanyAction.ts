@@ -2,9 +2,9 @@
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { signUpUserSchema } from "../components/schema";
+import { companySchema } from "@/utils/schemas";
 
-export async function createUserAction(prevState: any, formData: FormData) {
+export async function createCompanyAction(prevState: any, formData: FormData) {
   console.log("formData", formData);
   const data = {
     name: formData.get("name"),
@@ -20,7 +20,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
   };
 
   try {
-    const validatedData = signUpUserSchema.safeParse(data);
+    const validatedData = companySchema.safeParse(data);
     if (!validatedData.success) {
       const { path, message } = validatedData.error.errors[0];
       return {
