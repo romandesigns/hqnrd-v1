@@ -1,10 +1,10 @@
-import { Brand, GoBack } from "@/app/ui/features";
+import { Brand, Carousel, GoBack } from "@/app/ui/features";
 import { Locale } from "@/i18n-config";
 import { Button } from "antd";
 import Link from "next/link";
 import { GoHomeFill } from "react-icons/go";
 import { Country } from "react-phone-number-input";
-import { SlideShow, images } from "../company";
+import { images } from "../company";
 import { SignUpForm } from "./SignUpForm";
 
 export function Content({
@@ -13,7 +13,7 @@ export function Content({
 }: Readonly<{ lang: Locale; locale: Country }>) {
   return (
     <>
-      <SlideShow images={images} className="relative hidden lg:flex" />
+      <Carousel images={images} className="relative hidden lg:flex" />
       <article className="m-auto grid max-w-lg grid-cols-1 grid-rows-1 flex-col rounded-md bg-white p-2 lg:rounded-bl-none lg:rounded-tl-none lg:px-4">
         <div className="grid grid-cols-1 grid-rows-[1fr_auto_auto]">
           <div className="rounded-m flex flex-col items-center justify-center self-center rounded-md border bg-white p-4 shadow-md lg:h-auto lg:p-2 lg:px-6">
