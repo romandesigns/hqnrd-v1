@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { devtools, persist, createJSONStorage } from "zustand/middleware";
 import { Reservation } from "@/types";
 
-// Define the state shape
+// Define the state shape for navigation
 export type NavigationState = {
   isOpen: boolean;
   reservations: Reservation[];
@@ -12,31 +12,25 @@ export type NavigationState = {
   removeReservation: (reservationId: string) => void;
 };
 
-// Custom middleware for opening the drawer when reservations increase
 const autoToggleDrawerOnReservationsChange =
   (config: any) => (set: any, get: any, api: any) =>
     config(
       (args: any) => {
-        // Open the drawer when a new reservation is added
         if (
           args.reservations &&
           args.reservations.length > get().reservations.length
         ) {
           set({ isOpen: true });
-        }
-        // Close the drawer when there are no reservations
-        if (args.reservations && args.reservations.length === 0) {
+        } else if (args.reservations && args.reservations.length === 0) {
           set({ isOpen: false });
         }
-        // Apply the rest of the state updates
         set(args);
       },
       get,
       api,
     );
 
-// Create the store with middleware
-export const useReservation = create<NavigationState>()(
+export const useReservation = create(
   devtools(
     persist(
       autoToggleDrawerOnReservationsChange((set: any, get: any) => ({
@@ -55,8 +49,8 @@ export const useReservation = create<NavigationState>()(
           set({ reservations }),
       })),
       {
-        name: "reservation-store", // unique name for localStorage key
-        getStorage: () => localStorage, // specify localStorage as the storage provider
+        name: "reservation-store",
+        storage: createJSONStorage(() => sessionStorage),
       },
     ),
   ),

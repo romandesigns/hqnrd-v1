@@ -69,7 +69,7 @@ export default async function Page({
                 </div>
                 <Description />
               </article>
-              <article className="rounded-md border  p-2">
+              <article className="rounded-md border p-2">
                 <Heading heading="Amenities Included" />
                 <Amenities />
               </article>

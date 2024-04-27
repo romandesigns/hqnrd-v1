@@ -1,7 +1,7 @@
 import { Locale } from "@/i18n-config";
+import { signOutAction } from "@/utils/actions/ signOut";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { signOutBtn } from "./SignOutBtn";
 
 export default async function Page({
   params: { lang },
@@ -17,7 +17,7 @@ export default async function Page({
   return (
     <>
       <form>
-        <button formAction={signOutBtn}>Sign out</button>
+        <button formAction={signOutAction}>Sign out</button>
       </form>
       <div>
         <h1>About Page {data.user.email}</h1>
