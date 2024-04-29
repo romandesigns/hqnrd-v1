@@ -3,8 +3,8 @@
 import { Backdrop, Blurdrop, ConfettiComponent } from "@/app/ui/features";
 import { useSearchParams } from "next/navigation";
 export default function Page() {
-  const params = useSearchParams();
 
+  const params = useSearchParams();
   const name = params.get("name");
   const email = params.get("email");
 

@@ -1,6 +1,7 @@
 import { Backdrop, Blurdrop, Brand, GoBack } from "@/app/ui/features";
 import { FaRegBuilding, GoHomeFill, HiOutlineUser } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
+import { CONSTANTS } from "@/utils/constants";
 import { Button } from "antd";
 import Link from "next/link";
 
@@ -25,7 +26,7 @@ export default function Page({
           <div className="flex flex-col items-center justify-center gap-8">
             <Brand />
             <p className="w-4/5 text-center text-xs font-bold underline">
-              CREATE ACCOUNT
+              {CONSTANTS.Heading.CREATE_ACCOUNT}
             </p>
             <div className="flex items-center justify-center gap-4">
               <Link
@@ -60,7 +61,7 @@ export default function Page({
                 Para preguntas porfavor llamarnos al number
               </span>
               <span className="block font-bold text-primary-500 underline">
-                809-577-3145
+                {CONSTANTS.Contact.PHONE_NUMBER}
               </span>
             </p>
           </div>
