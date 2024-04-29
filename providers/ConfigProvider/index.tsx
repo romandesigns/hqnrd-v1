@@ -40,6 +40,9 @@ export default function AntConfigProvider({
             paddingBlock: 5,
             activeShadow: "0 0 0 3px rgba(5, 145, 255, 0.15)",
           },
+          Message: {
+            contentPadding: "13px 16px",
+          },
         },
         cssVar: true,
         hashed: false,

@@ -1,5 +1,5 @@
 import { Locale } from "@/i18n-config";
-import { signOutAction } from "@/utils/actions/ signOut";
+import { signOutAction } from "@/utils/actions/signOut";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 

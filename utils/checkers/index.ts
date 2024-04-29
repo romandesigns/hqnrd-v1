@@ -1,0 +1,1 @@
+export { validateAdult } from "./validateAdult";

@@ -54,7 +54,7 @@ export async function createCompanyAction(prevState: any, formData: FormData) {
       };
     }
     revalidatePath("/", "layout");
-    redirect("/[lang]/iniciar-session");
+    redirect("/");
   } catch (e) {
     console.error("Validation error", e);
   }

@@ -49,6 +49,20 @@ export type RoomTypes = {
   slug: string;
   category: string;
 };
+export enum Gender {
+  MALE = "male",
+  FEMAKE = "female",
+  OTHER = "other",
+}
+
+export enum Roles {
+  GUEST = "huesped",
+  RECEPTIONIST = "recepcionist",
+  MANAGER = "manager",
+  HOUSEKEEPING = "housekeeping",
+  CEO = "ceo",
+  DEVELOPER = "developer",
+}
 
 export type Reservation = {
   adultsCount: number;

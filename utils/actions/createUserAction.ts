@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { signUpUserSchema } from "@/utils/schemas";
 
 export async function createUserAction(prevState: any, formData: FormData) {
-  console.log("formData", formData);
   const data = {
     name: formData.get("name"),
     lastName: formData.get("lastName"),
@@ -16,46 +15,44 @@ export async function createUserAction(prevState: any, formData: FormData) {
     phone: formData.get("phone"),
     password: formData.get("password"),
     confirmPassword: formData.get("confirmPassword"),
-    accountType: formData.get("accountType"),
+    user_role: formData.get("user_role"),
   };
 
-  try {
-    const validatedData = signUpUserSchema.safeParse(data);
-    if (!validatedData.success) {
-      const { path, message } = validatedData.error.errors[0];
-      return {
-        path: path[0],
-        message,
-      };
-    }
-    const supabase = createClient();
-    const { error } = await supabase.auth.signUp({
-      email: data.email as string,
-      password: data.password as string,
-      options: {
-        data: {
-          email: data.email as string,
-          name: data.name as string,
-          last_name: data.lastName as string,
-          dob: data.dateOfBirth as string,
-          gender: data.gender as string,
-          phone: data.phone as string,
-          phone_country: data.phoneCountry as string,
-          user_role: "guest",
-          accountType: data.accountType as string,
-        },
-      },
-    });
-
-    if (error?.message) {
-      console.log(error);
-      return {
-        errors: error.message,
-      };
-    }
-    revalidatePath("/", "layout");
-    redirect("/[lang]/iniciar-session");
-  } catch (e) {
-    console.error("Validation error", e);
+  const validatedData = signUpUserSchema.safeParse(data);
+  if (!validatedData.success) {
+    const { path, message } = validatedData.error.errors[0];
+    return {
+      path: path[0],
+      errors: message,
+    };
   }
+
+  const supabase = createClient();
+  const { error } = await supabase.auth.signUp({
+    email: data.email as string,
+    password: data.password as string,
+    options: {
+      data: {
+        email: data.email as string,
+        name: data.name as string,
+        last_name: data.lastName as string,
+        dob: data.dateOfBirth as string,
+        gender: data.gender as string,
+        phone: data.phone as string,
+        phone_country: data.phoneCountry as string,
+        user_role: data.user_role as string,
+      },
+    },
+  });
+
+  if (error?.message) {
+    return {
+      errors: error.message,
+    };
+  }
+
+  revalidatePath("/", "layout");
+  redirect(
+    `/${formData.get("lang")}/auth/confirmar?name=${data.name}&email=${data.email}`,
+  );
 }

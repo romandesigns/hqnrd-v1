@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { validateAdult } from "../checkers";
 
 export const signUpUserSchema = z
   .object({
@@ -28,7 +29,9 @@ export const signUpUserSchema = z
       .max(30, {
         message: "confirmation password must be less than 30 characters long",
       }),
-    dateOfBirth: z.string(),
+    dateOfBirth: z
+      .string()
+      .refine(validateAdult, { message: "You must be at least 18 years old" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",

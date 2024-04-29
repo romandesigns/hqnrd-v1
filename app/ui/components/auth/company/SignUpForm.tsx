@@ -72,7 +72,7 @@ export function SignUpForm({
         </fieldset>
         <input
           type="text"
-          name="accountType"
+          name="user_role"
           value="company"
           className="hidden"
         />

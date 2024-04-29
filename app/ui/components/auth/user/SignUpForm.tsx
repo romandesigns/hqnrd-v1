@@ -5,19 +5,19 @@
 
 import { InputAnt, InputPhone } from "@/app/ui/components/Form";
 import { createUserAction } from "@/utils/actions";
-import { Alert, Button, DatePicker, Flex, Input, Radio } from "antd";
+import { Button, DatePicker, Flex, Input, Radio, message } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
 
 type initialStateTypes = {
   path: string;
-  message: string;
+  errors: string;
 };
 
 const initialState: initialStateTypes = {
   path: "",
-  message: "",
+  errors: "",
 };
 
 export function SignUpForm({
@@ -31,23 +31,24 @@ export function SignUpForm({
 }) {
   const [phone, setPhone] = React.useState<string>("");
   const [state, formAction] = useFormState(createUserAction, initialState);
+  const [messageApi, contextHolder] = message.useMessage();
   const phoneNumber = (phone: string) => {
     setPhone(phone);
   };
 
   const { pending } = useFormStatus();
+
+  const error = () => {
+    messageApi.open({
+      type: "warning",
+      content: state?.errors,
+    });
+  };
+
   return (
     <>
-      {state?.path && state?.message && (
-        <Alert
-          message={`Invalid '${state?.path}'`}
-          description={`Property ${state?.message}`}
-          type="error"
-          showIcon
-          closable
-          className="!my-2 w-full"
-        />
-      )}
+      {state?.errors && error()}
+      {contextHolder}
 
       <form autoComplete="off" className="w-full" action={formAction}>
         <fieldset className="mb-4 space-y-4">
@@ -80,7 +81,7 @@ export function SignUpForm({
             </Radio.Group>
           </Flex>
         </fieldset>
-        <input type="text" name="accountType" value="user" className="hidden" />
+        <input type="text" name="user_role" value="guest" className="hidden" />
         <fieldset className="mb-4 space-y-4">
           <InputAnt name="email" placeholder="E-Mail" type="email" />
           <InputPhone
