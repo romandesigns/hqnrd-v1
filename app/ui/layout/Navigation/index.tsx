@@ -1,7 +1,6 @@
 import { Locale } from "@/i18n-config";
 import { DesktopNav } from "./Desktop";
 import { MobileNav } from "./Mobile";
-import { createClient } from "@/utils/supabase/client";
 
 export async function Navigation({ lang }: { lang: Locale }) {
   return (

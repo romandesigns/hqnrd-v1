@@ -45,7 +45,7 @@ export function SignInForm({
 
   return (
     <>
-      <form autoComplete="off" className="w-full" action={formAction}>
+      <form autoComplete="off" className="w-full">
         <fieldset className="mb-4 space-y-4">
           <InputAnt
             name="email"
@@ -69,6 +69,7 @@ export function SignInForm({
               block
               size="large"
               disabled={pending}
+              formAction={formAction}
             >
               Sign In
             </Button>
