@@ -15,6 +15,7 @@ import {
   Media,
   PageHeading,
   Summary,
+  Trending,
 } from "../../../../ui/components/Room";
 
 const fetchRoom = async (roomId: string) => {
@@ -79,6 +80,9 @@ export default async function Page({
             </div>
             <Aside roomId={roomId} pricePerNight={room.pricePerNight} />
           </section>
+        </Wrapper>
+        <Wrapper>
+          <Trending />
         </Wrapper>
       </main>
       <Summary />

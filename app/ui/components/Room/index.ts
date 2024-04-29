@@ -10,3 +10,4 @@ export { PageHeading } from "./PageHeading";
 export { ServicesAndAttractions } from "./ServicesAndAttractions";
 export { Summary } from "./Summary";
 export { Aside } from "./Aside";
+export { Trending } from "./Trending";

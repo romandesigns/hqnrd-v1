@@ -57,9 +57,7 @@ export default function Page({
               </Link>
             </div>
             <p className="pb-8 text-center text-xs font-bold">
-              <span className="block pb-2">
-                Para preguntas porfavor llamarnos al number
-              </span>
+              <span className="block pb-2">{CONSTANTS.Contact.PHONE_CTA}</span>
               <span className="block font-bold text-primary-500 underline">
                 {CONSTANTS.Contact.PHONE_NUMBER}
               </span>

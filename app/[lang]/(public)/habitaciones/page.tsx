@@ -6,7 +6,7 @@ import { Pagination } from "antd";
 import { useState } from "react";
 import { rooms as roomList } from "../../../../public/assets/data/roomsList";
 import { IoInformationCircle } from "@/app/ui/icons";
-import { BackgroundEffect } from "./BackgroundEffect";
+import { BackgroundEffect } from "../../../ui/components/Rooms/BackgroundEffect";
 
 export default function Page({
   params: { lang },

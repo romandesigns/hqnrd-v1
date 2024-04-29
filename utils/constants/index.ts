@@ -7,6 +7,7 @@ export const CONSTANTS = {
     CREATE_ACCOUNT: "CREATE ACCOUNT",
   },
   Contact: {
+    PHONE_CTA: "Para preguntas porfavor llamarnos al number",
     PHONE_NUMBER: "+1 (809) 753-7500",
   },
 };

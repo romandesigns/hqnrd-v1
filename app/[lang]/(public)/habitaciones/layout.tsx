@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 import { Locale, i18n } from "@/i18n-config";
-import { billboards } from "./billboards";
+import { billboards } from "../../../ui/components/Rooms/data/billboards";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
