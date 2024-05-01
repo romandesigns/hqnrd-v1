@@ -12,7 +12,6 @@ export async function DesktopMenu({ lang }: { lang: string }) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log(user);
 
   return (
     <ul className="hidden gap-2 text-sm font-medium sm:flex">

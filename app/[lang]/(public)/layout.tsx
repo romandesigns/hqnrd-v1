@@ -21,7 +21,7 @@ export default function RootLayout({
   children,
   params: { lang },
 }: Readonly<{
-  children: React.PropsWithChildren;
+  children: React.ReactNode;
   params: { lang: Locale };
 }>) {
   return (

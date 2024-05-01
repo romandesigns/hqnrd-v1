@@ -12,12 +12,12 @@ import { createUserAction } from "@/utils/actions";
 
 type initialStateTypes = {
   path: string;
-  message: string;
+  errors: string;
 };
 
 const initialState: initialStateTypes = {
   path: "",
-  message: "",
+  errors: "",
 };
 
 export function SignUpForm({
@@ -39,10 +39,10 @@ export function SignUpForm({
 
   return (
     <>
-      {state?.path && state?.message && (
+      {state?.path && state?.errors && (
         <Alert
           message={`Invalid '${state?.path}'`}
-          description={`Property ${state?.message}`}
+          description={`Property ${state?.errors}`}
           type="error"
           showIcon
           closable

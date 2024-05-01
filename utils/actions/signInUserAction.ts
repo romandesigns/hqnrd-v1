@@ -6,8 +6,8 @@ import { redirect } from "next/navigation";
 
 export async function signInUserAction(prevState: any, formData: FormData) {
   const data = {
-    email: formData.get("email"),
-    password: formData.get("password"),
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
   };
   const validatedFields = signInUserSchema.safeParse(data);
   if (!validatedFields.success) {

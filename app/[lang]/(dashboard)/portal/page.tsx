@@ -11,7 +11,6 @@ export default async function Page({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log(user);
 
   if (!user) return redirect(`/${lang}/auth/iniciar-session`);
   return <div>Dasboard Page</div>;

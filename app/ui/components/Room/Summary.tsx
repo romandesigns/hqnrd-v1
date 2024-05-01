@@ -2,6 +2,7 @@
 import { useReservation } from "@/store/reservation";
 import { SummaryItemCard } from ".";
 import { Drawer } from "../../layout/Navigation/components/Drawer";
+import { Reservation } from "@/types";
 
 export function Summary() {
   const { isOpen, reservations, closeReservationDrawer, removeReservation } =
@@ -20,7 +21,7 @@ export function Summary() {
           Total Rooms: {reservations.length}
         </h4>
         <ul className="flex flex-col gap-14">
-          {reservations.map((reservation) => {
+          {reservations.map((reservation: Reservation) => {
             return (
               <li
                 key={reservation.reservationId}

@@ -22,7 +22,6 @@ export default function Page({
 
   useEffect(() => {
     const filteredRooms = roomList.filter((room) => room.slug === category);
-    console.log("rooms", filteredRooms);
     setRooms(filteredRooms);
   }, [category]);
 

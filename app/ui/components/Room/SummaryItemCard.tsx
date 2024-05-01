@@ -10,8 +10,6 @@ export function SummaryItemCard({
   reservation: Reservation;
   removeReservation: (reservationId: string) => void;
 }) {
-  console.log();
-
   return (
     <>
       {/* Image */}
