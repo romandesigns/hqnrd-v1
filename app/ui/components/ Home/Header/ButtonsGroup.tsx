@@ -17,7 +17,7 @@ export function HeaderButtonsGroup({
       )}
     >
       <Link
-        href={`/${lang}/iniciar-session`}
+        href={`/${lang}/auth/iniciar-session`}
         className="w-full flex-1 md:max-w-80"
       >
         <Button
