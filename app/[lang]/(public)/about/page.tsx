@@ -11,7 +11,7 @@ export default async function Page({
   const supabase = createClient();
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
-    redirect(`/${lang}/iniciar-session`);
+    redirect(`/${lang}/auth/iniciar-session`);
   }
 
   return (

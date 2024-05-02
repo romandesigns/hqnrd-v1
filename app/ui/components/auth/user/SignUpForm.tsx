@@ -105,7 +105,7 @@ export function SignUpForm({
               size="large"
               aria-disabled={pending}
             >
-              Crear Cuenta
+              Sign Up
             </Button>
           </div>
           <Input type="text" value={lang} name="lang" className="!hidden" />
