@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { companySchema } from "@/utils/schemas";
 
 export async function createCompanyAction(prevState: any, formData: FormData) {
-  console.log("formData", formData);
   const data = {
     name: formData.get("name"),
     lastName: formData.get("lastName"),
@@ -48,7 +47,7 @@ export async function createCompanyAction(prevState: any, formData: FormData) {
     });
 
     if (error?.message) {
-      console.log(error);
+      console.error(error);
       return {
         errors: error.message,
       };

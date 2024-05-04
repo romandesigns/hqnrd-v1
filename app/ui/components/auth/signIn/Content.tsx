@@ -1,4 +1,4 @@
-import { Brand, GoBack } from "@/app/ui/features";
+import { Brand, GoBack, HeadingSection } from "@/app/ui/features";
 import Link from "next/link";
 import React from "react";
 import { GoHomeFill } from "react-icons/go";
@@ -24,13 +24,17 @@ export function Content({ lang }: { lang: Locale }) {
           </div>
           <div className="m-auto flex max-w-lg flex-col items-center justify-center gap-10 px-3 lg:px-16">
             <Brand />
-            <p className="w-4/5 text-center text-xs font-bold underline">
-              SIGN IN
-            </p>
+            <div>
+              <HeadingSection
+                highlight="Sign In"
+                title=""
+                className="relative z-[4] !my-0"
+              />
+            </div>
             <SignInForm lang={lang} />
             <div className="my-2 flex flex-col items-center justify-center gap-6">
               <Link
-                href={`/${lang}/iniciar-session`}
+                href={`/${lang}/auth/confirmar-actualizar-clave`}
                 className="ml-2 text-center text-xs font-medium text-primary-500 underline"
               >
                 Forgot Password

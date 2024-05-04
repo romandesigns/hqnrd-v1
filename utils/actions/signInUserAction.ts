@@ -1,8 +1,8 @@
 "use server";
-import { signInUserSchema } from "../schemas";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { signInUserSchema } from "../schemas";
 
 export async function signInUserAction(prevState: any, formData: FormData) {
   const data = {
@@ -19,9 +19,9 @@ export async function signInUserAction(prevState: any, formData: FormData) {
   const supabase = createClient();
   const { error } = await supabase.auth.signInWithPassword(data);
   if (error?.message) {
-    return {
-      errors: error.message,
-    };
+    redirect(
+      `/${formData.get("lang")}/auth/iniciar-session?errors=${error.message}`,
+    );
   }
 
   revalidatePath("/", "layout");

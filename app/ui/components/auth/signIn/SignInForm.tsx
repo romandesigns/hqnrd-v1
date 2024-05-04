@@ -5,7 +5,7 @@ import { InputAnt } from "@/app/ui/components/Form";
  */
 import { Locale } from "@/i18n-config";
 import { signInUserAction } from "@/utils/actions";
-import { Button, message } from "antd";
+import { Alert, Button } from "antd";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -31,10 +31,8 @@ export function SignInForm({
   const [password, setPassword] = React.useState("");
   // @ts-ignore
   const [state, formAction] = useFormState(signInUserAction, initialState);
-  const [messageApi, contextHolder] = message.useMessage();
   const { pending } = useFormStatus();
   const params = useSearchParams();
-
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -45,6 +43,14 @@ export function SignInForm({
 
   return (
     <>
+      {params.get("errors") && (
+        <Alert
+          message={params.get("errors")}
+          type="warning"
+          showIcon
+          closable
+        />
+      )}
       <form autoComplete="off" className="w-full">
         <fieldset className="mb-4 space-y-4">
           <InputAnt

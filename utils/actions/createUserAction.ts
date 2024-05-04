@@ -3,8 +3,10 @@ import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { signUpUserSchema } from "@/utils/schemas";
+import { headers } from "next/headers";
 
 export async function createUserAction(prevState: any, formData: FormData) {
+  const origin = headers().get("origin");
   const data = {
     name: formData.get("name"),
     lastName: formData.get("lastName"),
@@ -32,6 +34,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
     email: data.email as string,
     password: data.password as string,
     options: {
+      emailRedirectTo: `${origin}/auth/confirmar-cuenta`,
       data: {
         email: data.email as string,
         name: data.name as string,
@@ -46,13 +49,17 @@ export async function createUserAction(prevState: any, formData: FormData) {
   });
 
   if (error?.message) {
-    return {
-      errors: error.message,
-    };
+    console.error("Error", error?.message);
+    redirect(
+      `/${formData.get("lang")}/auth/confirmar-cuenta?name=${data.name}&email=${data.email}`,
+    );
+    // return {
+    //   errors: error.message,
+    // };
   }
 
   revalidatePath("/", "layout");
   redirect(
-    `/${formData.get("lang")}/auth/confirmar?name=${data.name}&email=${data.email}`,
+    `/${formData.get("lang")}/auth/confirmar-cuenta?name=${data.name}&email=${data.email}`,
   );
 }
