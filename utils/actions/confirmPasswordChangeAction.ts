@@ -20,7 +20,7 @@ export async function confirmPasswordChangeAction(formData: FormData) {
   const { data, error } = await supabase.auth.resetPasswordForEmail(
     formObj.email,
     {
-      redirectTo: `${origen}/${formData.get("lang")}/auth/confirmar-actualizar-clave`,
+      redirectTo: `${origen}/${formData.get("lang")}/auth/actualizar-clave`,
     },
   );
   if (error?.message) {
@@ -29,5 +29,7 @@ export async function confirmPasswordChangeAction(formData: FormData) {
     };
   }
   revalidatePath("/", "layout");
-  redirect(`${origen}/${formData.get("lang")}/actualizar-clave`);
+  redirect(
+    `${origen}/${formData.get("lang")}/auth/actualizar-clave?success=true&email=${formObj.email}`,
+  );
 }

@@ -2,17 +2,18 @@ import { z } from "zod";
 
 export const passwordChangeSchema = z
   .object({
+    code: z.string().uuid({ message: "code must be a valid UUID" }),
     password: z
       .string()
-      .min(4, { message: "password must be at least 4 characters long" })
-      .max(30, { message: "password must be less than 30 characters long" }),
+      .min(4, { message: "Password must be at least 4 characters long" })
+      .max(30, { message: "Password must be less than 30 characters long" }),
     confirmPassword: z
       .string()
       .min(4, {
-        message: "confirmation password must be at least 4 characters long",
+        message: "Confirmation password must be at least 4 characters long",
       })
       .max(30, {
-        message: "confirmation password must be less than 30 characters long",
+        message: "Confirmation password must be less than 30 characters long",
       }),
   })
   .refine((data) => data.password === data.confirmPassword, {

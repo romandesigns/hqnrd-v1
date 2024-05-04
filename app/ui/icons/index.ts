@@ -33,6 +33,7 @@ export {
   IoIosImages,
   IoLogoWhatsapp,
   IoMdArrowRoundBack,
+  IoIosWarning,
 } from "react-icons/io";
 export { IoClose, IoInformationCircle, IoCloseCircle } from "react-icons/io5";
 export { IoMdCloseCircleOutline } from "react-icons/io";

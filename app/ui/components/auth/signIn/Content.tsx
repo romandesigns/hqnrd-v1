@@ -6,7 +6,7 @@ import { Button } from "antd";
 import { Locale } from "@/i18n-config";
 import { SignInForm } from "./SignInForm";
 
-export function Content({ lang }: { lang: Locale }) {
+export function Content({ lang, success }: { lang: Locale; success: string }) {
   return (
     <main className="relative flex min-h-dvh items-center justify-center">
       <section className="absolute bottom-0 left-0 right-0 top-0 z-[2] h-full w-full bg-white p-4 lg:relative lg:h-auto lg:max-w-lg lg:rounded-md">
@@ -25,16 +25,23 @@ export function Content({ lang }: { lang: Locale }) {
           <div className="m-auto flex max-w-lg flex-col items-center justify-center gap-10 px-3 lg:px-16">
             <Brand />
             <div>
-              <HeadingSection
-                highlight="Sign In"
-                title=""
-                className="relative z-[4] !my-0"
-              />
+              {success === "true" ? (
+                <p className="rounded-md bg-primary-100/50 p-2 text-sm">
+                  Password successfuly changed, Sign In!{" "}
+                  <span className="text-2xl">🎉</span>
+                </p>
+              ) : (
+                <HeadingSection
+                  highlight="Sign In"
+                  title=""
+                  className="relative z-[4] !my-0"
+                />
+              )}
             </div>
             <SignInForm lang={lang} />
             <div className="my-2 flex flex-col items-center justify-center gap-6">
               <Link
-                href={`/${lang}/auth/confirmar-actualizar-clave`}
+                href={`/${lang}/auth/actualizar-clave`}
                 className="ml-2 text-center text-xs font-medium text-primary-500 underline"
               >
                 Forgot Password

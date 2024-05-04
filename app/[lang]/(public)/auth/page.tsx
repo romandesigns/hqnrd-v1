@@ -7,7 +7,8 @@ import Link from "next/link";
 
 export default function Page({
   params: { lang },
-}: Readonly<{ params: { lang: Locale } }>) {
+  searchParams: { success },
+}: Readonly<{ params: { lang: Locale }; searchParams: { success: string } }>) {
   return (
     <main className="relative flex min-h-dvh items-center justify-center">
       <section className="absolute bottom-0 left-0 right-0 top-0 z-[2] h-full w-full bg-white p-4 sm:relative sm:h-auto sm:max-w-lg sm:rounded-md">
