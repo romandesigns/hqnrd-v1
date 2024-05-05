@@ -1,11 +1,11 @@
 "use client";
 import { GoBack, RoomCard } from "@/app/ui/features";
+import { IoInformationCircle } from "@/app/ui/icons";
 import { Wrapper } from "@/app/ui/layout";
 import { Locale } from "@/i18n-config";
 import { Pagination } from "antd";
 import { useState } from "react";
 import { rooms as roomList } from "../../../../public/assets/data/roomsList";
-import { IoInformationCircle } from "@/app/ui/icons";
 import { BackgroundEffect } from "../../../ui/components/Rooms/BackgroundEffect";
 
 export default function Page({

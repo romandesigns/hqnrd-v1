@@ -26,7 +26,7 @@ export default async function Page({
   };
 }) {
   return (
-    <Card lang={lang}>
+    <Card lang={lang} className="min-h-dvh">
       <article
         className={twMerge(
           "align-center grid w-full grid-cols-1 grid-rows-1 justify-center gap-3 rounded-md border p-2 pb-10 text-center",

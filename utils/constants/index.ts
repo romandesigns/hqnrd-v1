@@ -4,7 +4,7 @@ export const CONSTANTS = {
     COMPANY_SLOGAN: "Como estar en casa!",
   },
   Heading: {
-    CREATE_ACCOUNT: "CREATE ACCOUNT",
+    CREATE_ACCOUNT: "SELECT ACCOUNT TYPE",
   },
   Contact: {
     PHONE_CTA: "Para preguntas porfavor llamarnos al number",

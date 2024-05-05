@@ -2,12 +2,11 @@
 import { GoBack, RoomCard } from "@/app/ui/features";
 import { Wrapper } from "@/app/ui/layout";
 import { Locale } from "@/i18n-config";
-import { Pagination } from "antd";
-import { useEffect, useState } from "react";
-import { rooms as roomList } from "../../../../../public/assets/data/roomsList";
-import { Empty } from "antd";
-import { twMerge } from "tailwind-merge";
+import { Empty, Pagination } from "antd";
 import classNames from "classnames";
+import { useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
+import { rooms as roomList } from "../../../../../public/assets/data/roomsList";
 
 export default function Page({
   params: { lang, category },

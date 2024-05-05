@@ -14,11 +14,5 @@ export const ConfettiComponent = () => {
     setHeight(dimension.height);
   }, [dimension]);
 
-  return (
-    <Confetti
-      className="absolute h-screen w-screen"
-      height={height}
-      width={width}
-    />
-  );
+  return <Confetti height={height} width={width} />;
 };

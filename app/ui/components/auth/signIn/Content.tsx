@@ -1,10 +1,8 @@
-import { Brand, ErrorMessage, GoBack, HeadingSection } from "@/app/ui/features";
+import { ErrorMessage, HeadingSection } from "@/app/ui/features";
 import { Locale } from "@/i18n-config";
-import { Button } from "antd";
 import Link from "next/link";
-import { GoHomeFill } from "react-icons/go";
-import { SignInForm } from "./SignInForm";
 import { Card } from "../Card";
+import { SignInForm } from "./SignInForm";
 
 export function Content({
   lang,
@@ -16,7 +14,7 @@ export function Content({
   errorMessage: string;
 }) {
   return (
-    <Card lang={lang}>
+    <Card lang={lang} className="min-h-dvh">
       <article className="relative flex items-stretch justify-stretch rounded-md border p-2">
         <div className="m-auto flex max-w-lg flex-col items-center justify-center gap-3 px-3 sm:p-16">
           <ErrorMessage

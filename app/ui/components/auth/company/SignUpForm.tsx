@@ -4,11 +4,11 @@
  */
 
 import { InputAnt, InputPhone } from "@/app/ui/components/Form";
+import { createUserAction } from "@/utils/actions";
 import { Alert, Button } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
-import { createUserAction } from "@/utils/actions";
 
 type initialStateTypes = {
   path: string;
