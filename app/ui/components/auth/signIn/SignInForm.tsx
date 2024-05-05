@@ -1,24 +1,6 @@
-"use client";
-import { InputAnt } from "@/app/ui/components/Form";
-/**
- * Renders a form for creating a new account.
- */
 import { Locale } from "@/i18n-config";
 import { signInUserAction } from "@/utils/actions";
-import { Alert, Button } from "antd";
-import { useSearchParams } from "next/navigation";
-import React from "react";
-import { useFormState, useFormStatus } from "react-dom";
-
-type initialStateTypes = {
-  path: string;
-  message: string;
-};
-
-const initialState: initialStateTypes = {
-  path: "",
-  message: "",
-};
+import { Button, Input } from "antd";
 
 export function SignInForm({
   lang,
@@ -27,55 +9,32 @@ export function SignInForm({
   lang: Locale;
   className?: string;
 }) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  // @ts-ignore
-  const [state, formAction] = useFormState(signInUserAction, initialState);
-  const { pending } = useFormStatus();
-  const params = useSearchParams();
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
   return (
     <>
-      {params.get("errors") && (
-        <Alert
-          message={params.get("errors")}
-          type="warning"
-          showIcon
-          closable
-        />
-      )}
       <form autoComplete="off" className="w-full">
         <fieldset className="mb-4 space-y-4">
-          <InputAnt
+          <Input
             name="email"
-            placeholder="E-Mail"
+            placeholder="E-mail"
             type="email"
-            value={email}
-            onChange={handleEmailChange}
+            size="large"
+            required
           />
-          <InputAnt
+          <Input
             name="password"
-            placeholder="Password"
+            placeholder="contraseña"
             type="password"
-            value={password}
-            onChange={handlePasswordChange}
+            size="large"
+            required
           />
-          <input name="lang" type="hidden" value={lang} />
+          <input name="lang" type="hidden" value={lang} readOnly />
           <div className="py-3 pb-2">
             <Button
               htmlType="submit"
               type="primary"
               block
               size="large"
-              disabled={pending}
-              formAction={formAction}
+              formAction={signInUserAction}
             >
               Sign In
             </Button>

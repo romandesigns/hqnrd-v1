@@ -3,7 +3,16 @@ import { Locale } from "@/i18n-config";
 
 export default function Page({
   params: { lang },
-  searchParams: { success },
-}: Readonly<{ params: { lang: Locale }; searchParams: { success: string } }>) {
-  return <Content lang={lang} success={success} />;
+  searchParams,
+}: Readonly<{
+  params: { lang: Locale };
+  searchParams: { success: string; error: string };
+}>) {
+  return (
+    <Content
+      lang={lang}
+      success={searchParams.success}
+      errorMessage={searchParams.error}
+    />
+  );
 }

@@ -12,19 +12,25 @@ export async function passwordChangeAction(formData: FormData) {
     confirmPassword: formData.get("confirmPassword") as string,
     code: formData.get("code") as string,
   };
+
   const validatedFields = passwordChangeSchema.safeParse(formObj);
   if (!validatedFields.success) {
+    const errorMessages = validatedFields.error.errors
+      .map((err) => err.message)
+      .join("; ");
+    const encodedErrorMessages = encodeURIComponent(errorMessages);
     redirect(
-      `${origen}/${formData.get("lang")}/auth/actualizar-clave?error=${validatedFields.error.errors.join(",")}`,
+      `/${formData.get("lang")}/auth/actualizar-clave?error=${encodedErrorMessages}&formType=clave`,
     );
   }
+
   const supabase = createClient();
 
   if (formObj.code) {
     const { error } = await supabase.auth.exchangeCodeForSession(formObj.code);
     if (error?.message) {
       redirect(
-        `${origen}/${formData.get("lang")}/auth/actualizar-clave?error=${error.message}`,
+        `${origen}/${formData.get("lang")}/auth/actualizar-clave?error=${error.message}&formType=clave`,
       );
     }
   }
@@ -35,7 +41,7 @@ export async function passwordChangeAction(formData: FormData) {
 
   if (error?.message) {
     redirect(
-      `${origen}/${formData.get("lang")}/auth/actualizar-clave?error=${error.message}`,
+      `${origen}/${formData.get("lang")}/auth/actualizar-clave?error=${error.message}&formType=clave`,
     );
   }
   revalidatePath("/", "layout");

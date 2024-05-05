@@ -23,3 +23,4 @@ export { BackgroundEffect } from "./BgEffect";
 export { Loader } from "./Loader";
 export { ConfettiComponent } from "./Confetti";
 export { Carousel } from "./Carousel";
+export { ErrorMessage } from "./ErrorMessage";

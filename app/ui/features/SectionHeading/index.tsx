@@ -30,13 +30,15 @@ export function HeadingSection({
           </span>
         )}
       </div>
-      <h2
-        className={twMerge(
-          `my-2 w-full text-center text-xl font-black text-neutral-800 underline ${descriptionClassName}`,
-        )}
-      >
-        {title}
-      </h2>
+      {title && (
+        <h2
+          className={twMerge(
+            `my-2 w-full text-center text-xl font-black text-neutral-800 underline ${descriptionClassName}`,
+          )}
+        >
+          {title}
+        </h2>
+      )}
     </div>
   );
 }
