@@ -16,11 +16,8 @@ export default async function Page({
 
   return (
     <section className="p-4">
-      <form>
-        <button formAction={signOutAction}>Sign out</button>
-      </form>
       <div>
-        <h1>Portal Page</h1>
+        <h1>Reservaciones Page</h1>
       </div>
     </section>
   );

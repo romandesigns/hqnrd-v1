@@ -28,12 +28,9 @@ export function TextHeadingSwiper({
     >
       {homeBillboards.map((slide, index) => {
         return (
-          <SwiperSlide
-            key={slide.title}
-            className="bg-gradient-to-b from-black/50 md:bg-none"
-          >
+          <SwiperSlide key={slide.title}>
             <h3
-              className={`text-md flex h-full items-center  justify-center font-bold text-white md:justify-start md:text-3xl`}
+              className={`text-md flex h-full items-center  justify-center font-bold text-white md:mb-4 md:justify-start md:text-3xl`}
             >
               {slide.title}
             </h3>

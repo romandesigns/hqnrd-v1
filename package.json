@@ -17,6 +17,7 @@
     "@formatjs/intl-localematcher": "^0.5.4",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.8",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@types/react-html-parser": "^2.0.6",
     "classnames": "^2.5.1",
     "daysjs": "^1.0.2",

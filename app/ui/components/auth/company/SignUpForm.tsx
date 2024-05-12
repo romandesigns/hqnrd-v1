@@ -5,7 +5,7 @@
 
 import { InputAnt, InputPhone } from "@/app/ui/components/Form";
 import { createUserAction } from "@/utils/actions";
-import { Alert, Button } from "antd";
+import { Button, DatePicker, Flex, Input, Radio, message } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
@@ -31,24 +31,24 @@ export function SignUpForm({
 }) {
   const [phone, setPhone] = React.useState<string>("");
   const [state, formAction] = useFormState(createUserAction, initialState);
+  const [messageApi, contextHolder] = message.useMessage();
   const phoneNumber = (phone: string) => {
     setPhone(phone);
   };
 
   const { pending } = useFormStatus();
 
+  const error = () => {
+    messageApi.open({
+      type: "warning",
+      content: state?.errors,
+    });
+  };
+
   return (
     <>
-      {state?.path && state?.errors && (
-        <Alert
-          message={`Invalid '${state?.path}'`}
-          description={`Property ${state?.errors}`}
-          type="error"
-          showIcon
-          closable
-          className="!my-2 w-full"
-        />
-      )}
+      {state?.errors && error()}
+      {contextHolder}
 
       <form autoComplete="off" className="w-full" action={formAction}>
         <fieldset className="mb-4 space-y-4">
@@ -64,11 +64,6 @@ export function SignUpForm({
             type="text"
             required={false}
           />
-          <InputAnt
-            name="address"
-            placeholder="Dirección de Empresa"
-            type="text"
-          />
         </fieldset>
         <input
           type="text"
@@ -76,7 +71,12 @@ export function SignUpForm({
           value="company"
           className="hidden"
         />
-        <fieldset className="mb-4 space-y-4">
+        <fieldset className="my-8 space-y-4">
+          <InputAnt
+            name="address"
+            placeholder="Dirección de Empresa"
+            type="text"
+          />
           <InputAnt name="email" placeholder="E-Mail" type="email" />
           <InputPhone
             phone={phone}
@@ -85,25 +85,27 @@ export function SignUpForm({
             placeholder="Phone Number"
             className="placeholder:text-md bg-white"
           />
+        </fieldset>
+        <fieldset className="my-8 space-y-4">
           <InputAnt name="password" placeholder="Password" type="password" />
           <InputAnt
             name="confirmPassword"
             placeholder="Confirm Password"
             type="password"
           />
-          <div className="py-3 pb-2">
-            <Button
-              htmlType="submit"
-              type="primary"
-              className="!bg-neutral-800"
-              block
-              size="large"
-              aria-disabled={pending}
-            >
-              Sign Up
-            </Button>
-          </div>
         </fieldset>
+        <div className="py-3 pb-2">
+          <Button
+            htmlType="submit"
+            type="primary"
+            className="!bg-neutral-800"
+            block
+            size="large"
+            aria-disabled={pending}
+          >
+            Sign Up
+          </Button>
+        </div>
       </form>
     </>
   );

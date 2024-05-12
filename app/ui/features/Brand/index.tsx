@@ -1,3 +1,4 @@
+import { Locale } from "@/i18n-config";
 import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,19 +11,23 @@ import Link from "next/link";
  */
 export function Brand({
   heading,
+  lang,
   subheading,
   headingLevel = "h1",
   className,
   logoSize = 22,
+  figClassName = "",
 }: {
+  lang?: Locale;
   heading?: string;
   subheading?: string;
   headingLevel?: string;
   className?: string;
+  figClassName?: string;
   logoSize?: number;
 }) {
   return (
-    <Link href="/" className={cn(className ? className : "")}>
+    <Link href={`/${lang}`} className={cn(className ? className : "")}>
       <figure className="flex gap-2">
         <Image
           src="/assets/images/brand/logo-original.svg"
@@ -30,17 +35,17 @@ export function Brand({
           height={logoSize}
           alt="Company logo -  Hotel Quinto Nivel RD"
         />
-        <figcaption>
+        <figcaption className={figClassName}>
           {headingLevel === "h1" ? (
-            <h1 className="text-xs mt-1 uppercase font-black">
+            <h1 className="mt-1 text-xs font-black uppercase">
               Hotel Quinto Nivel RD
             </h1>
           ) : (
-            <h2 className="font-black uppercase text-xs mt-1">
+            <h2 className="mt-1 text-xs font-black uppercase">
               Hotel Quinto Nivel RD
             </h2>
           )}
-          <p className="font-semibold text-xs text-left">Como estar en casa!</p>
+          <p className="text-left text-xs font-semibold">Como estar en casa!</p>
         </figcaption>
       </figure>
     </Link>

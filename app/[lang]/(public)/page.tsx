@@ -19,7 +19,7 @@ export default async function Home({
   return (
     <PublicLayout lang={lang}>
       <Wrapper className="p-0 pt-[57px] md:pt-[0]">
-        <Header className="flex h-[calc(100vh-57px)] items-stretch justify-stretch p-2 md:h-[calc(90vh)] md:pt-[60px]">
+        <Header className="flex h-[calc(100vh-57px)] items-stretch justify-stretch p-2 md:h-[calc(70vh)] md:pt-[60px]">
           <HeaderContent lang={lang} />
         </Header>
       </Wrapper>

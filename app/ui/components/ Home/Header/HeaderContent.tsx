@@ -27,10 +27,10 @@ export const HeaderContent = ({ lang }: { lang: Locale }) => {
   return (
     <section className="w-full md:flex md:flex-col md:items-start md:justify-center">
       <SubHeader lang={lang} />
-      <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-md md:p-4">
-        <div className="z-[3] mx-auto flex h-full w-full max-w-6xl flex-col overflow-hidden rounded-md md:grid md:h-auto md:grid-cols-2 md:grid-rows-1">
-          {/* Description */}
-          <div className="flex-[0.14] md:self-center">
+      <div className="relative grid h-full w-full grid-cols-1 grid-rows-1 overflow-hidden rounded-md md:p-4">
+        <div className="align-center z-[3] mx-auto grid h-full w-full grid-cols-1 grid-rows-[auto_auto_2rem_auto] overflow-hidden rounded-md md:h-auto md:max-w-6xl md:grid-cols-2 md:grid-rows-1">
+          {/* Description*/}
+          <div className="flex-[0.14] bg-gradient-to-b from-black/50 md:self-center md:bg-none">
             <GoogleRating className="hidden md:mb-4 md:inline-block" />
             <TextHeadingSwiper
               className="relative !z-[3]"
@@ -42,18 +42,21 @@ export const HeaderContent = ({ lang }: { lang: Locale }) => {
               lang={lang}
             />
           </div>
-          {/* Card Swipper */}
+
+          {/* Card Swipper*/}
           <CardSwiper
             controlledSwiper={controlledSwiper}
             textControlledSwipper={textControlledSwipper}
             homeBillboards={homeBillboards.billboard}
             className="flex-1"
           />
-          {/* Rating mobile */}
+
+          {/* Rating mobile  */}
           <GoogleRating className="flex-[0.11] md:hidden" />
-          {/* Buttons Group mobile */}
+
+          {/* Buttons Group mobile*/}
           <HeaderButtonsGroup
-            className="relative z-[3] flex-[0.11] md:hidden"
+            className="relative z-[3]  md:hidden"
             lang={lang}
           />
         </div>

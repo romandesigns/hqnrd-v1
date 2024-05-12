@@ -6,7 +6,7 @@ export function GoogleRating({ className = "" }: { className?: string }) {
   return (
     <div
       className={twMerge(
-        `z-[3] flex  items-end justify-center py-2 ${className}`,
+        `z-[3] flex items-center justify-center py-2 ${className}`,
       )}
     >
       <div className="flex  items-center justify-center gap-2 rounded-full bg-black/20 p-1 px-2">

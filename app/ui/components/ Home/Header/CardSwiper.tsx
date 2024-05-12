@@ -22,7 +22,7 @@ export function CardSwiper({
       grabCursor={true}
       modules={[EffectCards, Autoplay, Pagination, Controller]}
       className={twMerge(
-        `relative !z-[3] aspect-[9/16] h-[60vh] w-[70vw] place-self-center shadow-lg md:w-[22rem] md:place-content-start ${className}`,
+        `relative !z-[3] aspect-[9/16] h-[60vh] w-[70vw] place-self-center shadow-lg md:max-h-[45vh] md:w-[22rem] md:place-content-start ${className}`,
       )}
       pagination={{
         clickable: true,
