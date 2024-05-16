@@ -3,8 +3,16 @@ export {
   AiFillFacebook,
   AiFillPhone,
   AiOutlineYoutube,
+  AiFillMessage,
 } from "react-icons/ai";
-export { BiCloset, BiGroup, BiSolidWasher } from "react-icons/bi";
+export {
+  BiCloset,
+  BiGroup,
+  BiSolidWasher,
+  BiSolidBellRing,
+  BiSolidBellOff,
+  BiSolidBell,
+} from "react-icons/bi";
 export {
   BsCameraReels,
   BsDoorOpenFill,
@@ -21,8 +29,15 @@ export {
   FaRegBuilding,
   FaPen,
   FaRegTrashAlt,
+  FaCalendar,
+  FaDoorClosed,
 } from "react-icons/fa";
-export { FaCircleArrowDown, FaKitchenSet, FaPeopleRoof } from "react-icons/fa6";
+export {
+  FaCircleArrowDown,
+  FaKitchenSet,
+  FaPeopleRoof,
+  FaUserGroup,
+} from "react-icons/fa6";
 export { FcGoogle } from "react-icons/fc";
 export { GiCctvCamera, GiWaterBottle } from "react-icons/gi";
 export { GoHomeFill } from "react-icons/go";
@@ -64,7 +79,7 @@ export {
   PiShareNetworkBold,
   PiTelevisionSimple,
 } from "react-icons/pi";
-export { RiNetflixFill } from "react-icons/ri";
+export { RiNetflixFill, RiLayout6Fill } from "react-icons/ri";
 export {
   TbAirConditioning,
   TbBrandIntercom,

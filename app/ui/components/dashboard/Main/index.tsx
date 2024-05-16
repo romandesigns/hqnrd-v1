@@ -10,15 +10,11 @@ export function Main({
   children,
 }: Readonly<{ lang: Locale; className: string; children: React.ReactNode }>) {
   return (
-    <>
-      <main
-        className={twMerge(
-          `grid grid-cols-1 grid-rows-[auto_1fr] ${className}`,
-        )}
-      >
-        <Navigation lang={lang} />
-        {children}
-      </main>
-    </>
+    <main
+      className={twMerge(`grid grid-cols-1 grid-rows-[auto_1fr] ${className}`)}
+    >
+      <Navigation lang={lang} />
+      {children}
+    </main>
   );
 }
