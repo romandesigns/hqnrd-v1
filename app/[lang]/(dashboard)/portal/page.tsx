@@ -1,8 +1,8 @@
 import { signOutAction } from "@/utils/actions/signOut";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-
 import { Locale } from "@/i18n-config";
+
 export default async function Page({
   params: { lang },
 }: Readonly<{
