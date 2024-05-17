@@ -19,7 +19,11 @@ export {
   BsStars,
   BsTranslate,
 } from "react-icons/bs";
-export { CgSmartHomeRefrigerator } from "react-icons/cg";
+export {
+  CgSmartHomeRefrigerator,
+  CgMenuGridO,
+  CgProfile,
+} from "react-icons/cg";
 export {
   FaBed,
   FaIntercom,
@@ -50,7 +54,12 @@ export {
   IoMdArrowRoundBack,
   IoIosWarning,
 } from "react-icons/io";
-export { IoClose, IoInformationCircle, IoCloseCircle } from "react-icons/io5";
+export {
+  IoClose,
+  IoInformationCircle,
+  IoCloseCircle,
+  IoSettings,
+} from "react-icons/io5";
 export { IoMdCloseCircleOutline } from "react-icons/io";
 export { LiaBedSolid } from "react-icons/lia";
 export { LuUser2 } from "react-icons/lu";
@@ -69,6 +78,8 @@ export {
   MdSpaceDashboard,
   MdVpnKey,
   MdWifi,
+  MdLogout,
+  MdLogin,
 } from "react-icons/md";
 export {
   PiCoatHangerBold,

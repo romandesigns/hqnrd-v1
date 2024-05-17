@@ -2,6 +2,7 @@ import { signOutAction } from "@/utils/actions/signOut";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { Locale } from "@/i18n-config";
+import { Navigation } from "@/app/ui/components/dashboard/features/Navigation";
 
 export default async function Page({
   params: { lang },
@@ -15,13 +16,13 @@ export default async function Page({
   }
 
   return (
-    <section className="p-4">
-      <form>
-        <button formAction={signOutAction}>Sign out</button>
-      </form>
-      <div>
-        <h1>Portal Page</h1>
-      </div>
-    </section>
+    <>
+      <Navigation lang={lang}>
+        <div className="font-bold">DASHBOARD</div>
+      </Navigation>
+      <section className="p-4">
+        <article>Hello</article>
+      </section>
+    </>
   );
 }

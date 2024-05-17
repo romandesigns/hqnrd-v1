@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang={lang} className="min-h-dvh">
       <body
-        className={`${poppins.className} grid min-h-dvh grid-cols-1 grid-rows-[auto_1fr]`}
+        className={`${poppins.className} grid min-h-dvh grid-cols-1 grid-rows-[auto_1fr] antialiased`}
       >
         <AntConfigProvider lang={lang}>
           <AntdRegistry>{children}</AntdRegistry>

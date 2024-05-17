@@ -18,6 +18,18 @@ function getLocale(request: NextRequest): string | undefined {
 }
 
 export async function middleware(request: NextRequest) {
+  // Simulated values for development
+  const simulatedGeo = {
+    country: "US",
+    region: "California",
+    city: "San Francisco",
+  };
+
+  const simulatedIp = "192.0.2.1"; // This is an example IP address in documentation
+
+  console.log(`Simulated Geo: ${JSON.stringify(simulatedGeo)}`);
+  console.log(`Simulated IP: ${simulatedIp}`);
+
   await updateSession(request);
   const pathname = request.nextUrl.pathname;
   const pathnameIsMissingLocale = i18n.locales.every(

@@ -34,7 +34,7 @@
       "Poppins",
       sans-serif;
     text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
-    background: #f9f9fb;
+    background: #fcfcfd;
     color: #404040;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -43,5 +43,9 @@
     padding: 0;
     -webkit-text-size-adjust: none;
     overflow-x: hidden;
+  }
+
+  .hoveredUI {
+    @apply cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95];
   }
 }
