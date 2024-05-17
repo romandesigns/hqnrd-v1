@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextResponse, userAgent } from "next/server";
 import { i18n } from "./i18n-config";
 import { updateSession } from "@/utils/supabase/middleware";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
     region: "California",
     city: "San Francisco",
   };
-
+  const { device } = userAgent(request);
   const simulatedIp = "192.0.2.1"; // This is an example IP address in documentation
 
   console.log(`Simulated Geo: ${JSON.stringify(simulatedGeo)}`);

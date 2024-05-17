@@ -41,6 +41,7 @@ export {
   FaKitchenSet,
   FaPeopleRoof,
   FaUserGroup,
+  FaAddressBook,
 } from "react-icons/fa6";
 export { FcGoogle } from "react-icons/fc";
 export { GiCctvCamera, GiWaterBottle } from "react-icons/gi";
@@ -80,6 +81,8 @@ export {
   MdWifi,
   MdLogout,
   MdLogin,
+  MdOutlineContactSupport,
+  MdPayments,
 } from "react-icons/md";
 export {
   PiCoatHangerBold,
@@ -102,3 +105,4 @@ export {
   TbWheelchair,
 } from "react-icons/tb";
 export { TiGroup, TiWarning } from "react-icons/ti";
+export { TbSettings } from "react-icons/tb";
