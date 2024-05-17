@@ -45,6 +45,10 @@ button.ant-image-preview-close,
   border-radius: 0.4rem !important;
 }
 
+.ant-modal-root .ant-modal-mask {
+  backdrop-filter: blur(0.5rem);
+}
+
 @media (max-width: 768px) {
   .ant-drawer-content-wrapper:has(.custom) {
     top: 0rem !important;

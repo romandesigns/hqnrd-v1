@@ -1,15 +1,9 @@
-import {
-  IoSettings,
-  LuUser2,
-  MdLogout,
-  MdOutlineContactSupport,
-  TbSettings,
-} from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { AuthMenu } from "../AuthMenu";
+import { AuthMenuList } from "./AuthMenuList";
+import { NotificationList } from "./Notifications";
 
 export function Navigation({
   lang,
@@ -24,72 +18,12 @@ export function Navigation({
             icon="notificationMenu"
             dropDownMenuClassNames="bg-red-500 max-w-96 left-auto absolute top-[4.5rem] bg-white border-none  p-2"
           >
-            <ul className="h-96 overflow-y-auto">
-              <li className="">Monday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-              <li className="">Tuesday</li>
-            </ul>
+            <NotificationList lang={lang} />
           </AuthMenu>
         </li>
         <li className="flex transform-gpu items-center justify-center gap-8 rounded-md border p-1 px-2">
           <AuthMenu icon="profileMenu">
-            <ul>
-              <li className="w-full text-center text-sm ">
-                <Link
-                  href={`/${lang}/portal/perfil/${123456}`}
-                  className="flex items-center justify-start gap-2 p-4 py-4 text-primary-500 hover:text-primary-700 hover:underline"
-                >
-                  <span>
-                    <LuUser2 className="text-lg" />
-                  </span>
-                  <span>My Profile</span>
-                </Link>
-              </li>
-              <li className="w-full border-b border-dashed  text-center text-sm ">
-                <Link
-                  href={`/${lang}/portal/perfil/${123456}`}
-                  className="flex items-center justify-start gap-2 p-4 py-4 text-primary-500 hover:text-primary-700 hover:underline"
-                >
-                  <span>
-                    <TbSettings className="text-lg" />
-                  </span>
-                  <span>Account Settings</span>
-                </Link>
-              </li>
-              <li className="w-full border-b border-dashed  text-center text-sm ">
-                <Link
-                  href={`/${lang}/portal/perfil/${123456}`}
-                  className="flex items-center justify-start gap-2 p-4 py-4 text-primary-500 hover:text-primary-700 hover:underline"
-                >
-                  <span>
-                    <MdOutlineContactSupport className="text-lg" />
-                  </span>
-                  <span>Support</span>
-                </Link>
-              </li>
-              <li className="flex w-full items-center justify-start  gap-2 p-4 py-4 text-center text-sm text-red-500 hover:text-red-700 hover:underline">
-                <span>
-                  <MdLogout className="text-lg" />
-                </span>
-                <span>Logout</span>
-              </li>
-            </ul>
+            <AuthMenuList lang={lang} />
           </AuthMenu>
           <div className="flex items-center justify-start gap-4">
             <span className="hoveredUI">
