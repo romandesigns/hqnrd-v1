@@ -287,16 +287,6 @@ export const dataSource: Guest[] = [
 
 export const columns: TableColumnsType<Guest> = [
   {
-    title: "Verfied",
-    dataIndex: "verified",
-    key: "verified",
-  },
-  {
-    title: "Identification",
-    dataIndex: "identification",
-    key: "identification",
-  },
-  {
     title: "Name",
     dataIndex: "name",
     key: "name",
@@ -330,6 +320,16 @@ export const columns: TableColumnsType<Guest> = [
     title: "Email",
     dataIndex: "email",
     key: "email",
+  },
+  {
+    title: "Verfied",
+    dataIndex: "verified",
+    key: "verified",
+  },
+  {
+    title: "Identification",
+    dataIndex: "identification",
+    key: "identification",
   },
   {
     title: "Account Type",
