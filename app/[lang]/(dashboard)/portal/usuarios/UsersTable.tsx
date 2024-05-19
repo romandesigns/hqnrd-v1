@@ -1,30 +1,9 @@
 "use client";
-
-import React from "react";
-import { Table, Button } from "antd";
+import { Guest } from "@/types";
 import { Navigation } from "@/app/ui/components/dashboard/features/Navigation";
 import { Locale } from "@/i18n-config";
-import type { TableColumnsType, TableProps } from "antd";
-import { generateGuests } from "@/utils/contentGenerator/guests";
-
-type Guest = {
-  key: React.Key;
-  verified: "Yes" | "No";
-  avatar: string;
-  name: string;
-  lastName: string;
-  gender: string;
-  dateOfBirth: string;
-  age: number;
-  phone: string;
-  email: string;
-  totalReservations: number;
-  lastVisit: string;
-  accountType: string;
-  accountStatus: string;
-  identification: "Cedula" | "Passport";
-  pendingBalance: string;
-};
+import type { TableColumnsType } from "antd";
+import { Button, Table } from "antd";
 
 export function UsersTable({
   dataSource,

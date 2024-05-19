@@ -131,3 +131,37 @@ type User = {
   updated_at: string;
   is_anonymous: boolean;
 };
+
+type Guest = {
+  key: React.Key;
+  verified: "Yes" | "No";
+  identification: "Cedula" | "Passport";
+  name: string;
+  lastName: string;
+  gender: string;
+  dateOfBirth: string;
+  age: number;
+  phone: string;
+  email: string;
+  accountType: string;
+  accountStatus: string;
+};
+
+// type Guest = {
+//   key: string;
+//   verified: "Yes" | "No";
+//   avatar: string;
+//   name: string;
+//   lastName: string;
+//   gender: string;
+//   dateOfBirth: string;
+//   age: number;
+//   phone: string;
+//   email: string;
+//   totalReservations: number;
+//   lastVisit: string;
+//   accountType: string;
+//   accountStatus: string;
+//   identification: "Cedula" | "Passport";
+//   pendingBalance: string;
+// };

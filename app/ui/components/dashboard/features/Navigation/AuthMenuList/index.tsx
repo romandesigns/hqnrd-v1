@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export function AuthMenuList({ lang }: Readonly<{ lang: Locale }>) {
   return (
-    <ul>
+    <ul className="overflow">
       <li className="w-full text-center text-sm ">
         <Link
           href={`/${lang}/portal/perfil/${123456}`}
@@ -44,12 +44,12 @@ export function AuthMenuList({ lang }: Readonly<{ lang: Locale }>) {
           <span>Support</span>
         </Link>
       </li>
-      <li className="flex w-full items-center justify-start  gap-2 p-4 py-4 text-center text-sm text-red-500 hover:text-red-700 hover:underline">
+      <li className="flex w-full cursor-pointer items-center  justify-start gap-2 rounded-bl-md rounded-br-md bg-neutral-800 p-4 py-4 text-center text-sm text-neutral-100 hover:text-white">
         <span>
           <MdLogout className="text-lg" />
         </span>
         <form action={signOutAction}>
-          <button type="submit">Logout</button>
+          <button type="submit">Sign Out</button>
         </form>
       </li>
     </ul>

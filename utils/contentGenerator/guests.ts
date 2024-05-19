@@ -1,11 +1,11 @@
 import { faker } from "@faker-js/faker";
 import moment from "moment";
 
-function calculateAge(dob) {
+function calculateAge(dob: string | Date) {
   return moment().diff(moment(dob), "years");
 }
 
-export function generateGuests(numberOfGuests) {
+export function generateGuests(numberOfGuests: number) {
   const guests = [];
 
   for (let i = 0; i < numberOfGuests; i++) {

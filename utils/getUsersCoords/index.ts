@@ -7,7 +7,7 @@ function getClientLocation() {
   }
 }
 
-function showPosition(position) {
+function showPosition(position: any) {
   console.log(
     "Latitude: " +
       position.coords.latitude +
@@ -16,7 +16,7 @@ function showPosition(position) {
   );
 }
 
-function showError(error) {
+function showError(error: any) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
       console.log("User denied the request for Geolocation.");
