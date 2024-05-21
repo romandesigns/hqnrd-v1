@@ -8,12 +8,21 @@ import { NotificationList } from "./Notifications";
 export function Navigation({
   lang,
   children,
-}: Readonly<{ lang: Locale; children?: React.ReactNode }>) {
+  childrenClassName,
+}: Readonly<{
+  lang: Locale;
+  children?: React.ReactNode;
+  childrenClassName?: string;
+}>) {
   return (
-    <nav className="w-white flex w-full items-center justify-between border-b bg-white p-[0.41rem] px-4">
-      {children ? <div>{children}</div> : <div />}
+    <nav className="w-white grid w-full grid-cols-[1fr_auto] grid-rows-1 items-center justify-between border-b bg-white p-[0.41rem] px-4">
+      {children ? (
+        <div className={`${childrenClassName}`}>{children}</div>
+      ) : (
+        <div />
+      )}
       <ul className="flex h-full gap-8">
-        <li className=" flex items-center justify-center  ">
+        <li className=" ml-4 flex items-center justify-center">
           <AuthMenu
             icon="notificationMenu"
             dropDownMenuClassNames="bg-red-500 max-w-96 left-auto absolute top-[4.5rem] bg-white border-none  p-2"

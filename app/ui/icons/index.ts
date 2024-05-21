@@ -92,6 +92,7 @@ export {
   MdVpnKey,
   MdWifi,
   MdOutlineEmail,
+  MdConstruction,
 } from "react-icons/md";
 export {
   PiCoatHangerBold,

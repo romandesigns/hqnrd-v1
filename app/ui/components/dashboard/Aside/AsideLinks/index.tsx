@@ -8,6 +8,7 @@ import {
   FaDoorClosed,
   FaUserGroup,
   IoSettings,
+  MdConstruction,
   MdPayments,
   MdSpaceDashboard,
   RiLayout6Fill,
@@ -73,6 +74,11 @@ export const AsideLinks = ({
       label: "Notifications",
       path: "/notificaciones",
       icon: <BiSolidBell />,
+    },
+    {
+      label: "Support",
+      path: "/soporte-technico",
+      icon: <MdConstruction />,
     },
     {
       label: "Settings",
