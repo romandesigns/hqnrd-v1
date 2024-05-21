@@ -1,16 +1,13 @@
 "use client";
-import { Guest } from "@/types";
 import { Navigation } from "@/app/ui/components/dashboard/features/Navigation";
 import { Locale } from "@/i18n-config";
-import type { TableColumnsType } from "antd";
-import { Button, Table, Space } from "antd";
+import { Guest } from "@/types";
 import type { TableProps } from "antd";
+import { Button, Space, Table } from "antd";
 import React from "react";
 
-import Link from "next/link";
 import {
   BiBadge,
-  BiBadgeCheck,
   BiSolidBadgeCheck,
   BsPassport,
   BsTelephone,
@@ -172,7 +169,6 @@ export function UsersTable({
         <article className="grid h-full grid-cols-[1fr_20%] grid-rows-1 gap-4 rounded-md border bg-white p-10">
           <div>
             <h1>Usuarios Page</h1>
-
             <Space style={{ marginBottom: 16 }}>
               <Button>Clear filters</Button>
               <Button onClick={setAgeSort}>Sort age</Button>
@@ -184,7 +180,6 @@ export function UsersTable({
               columns={columns}
               bordered
               onChange={onChange}
-              sticky
             />
           </div>
           <div className="h-full w-full rounded-md border">Aside</div>

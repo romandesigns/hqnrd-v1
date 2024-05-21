@@ -132,17 +132,31 @@ type User = {
   is_anonymous: boolean;
 };
 
+export enum AccountStatusEnum {
+  ACTIVE = "Active",
+  INACTIVE = "Inactive",
+}
+export enum IdentificationEnum {
+  CEDULA = "Cedula",
+  PASSPORT = "Passport",
+}
+export enum GenderEnum {
+  MALE = "male",
+  FEMALE = "female",
+  OTHER = "other",
+}
+
 type Guest = {
   key: string;
-  verified: "Yes" | "No";
+  verified: striong;
   name: string;
   lastName: string;
-  gender: "male" | "female" | "other";
+  gender: string;
   dateOfBirth: string;
   age: number;
   email: string;
   phone: string;
   accountType: string;
-  accountStatus: "Active" | "Inactive";
-  identification: "Cedula" | "Passport";
+  accountStatus: string;
+  identification: string;
 };
