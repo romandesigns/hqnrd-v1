@@ -12,12 +12,17 @@ export {
   BiSolidBellOff,
   BiSolidBellRing,
   BiSolidWasher,
+  BiSolidBadgeCheck,
+  BiBadgeCheck,
+  BiBadge,
 } from "react-icons/bi";
 export {
   BsCameraReels,
   BsDoorOpenFill,
   BsStars,
   BsTranslate,
+  BsPassport,
+  BsTelephone,
 } from "react-icons/bs";
 export {
   CgMenuGridO,
@@ -35,6 +40,7 @@ export {
   FaPen,
   FaRegBuilding,
   FaRegTrashAlt,
+  FaPassport,
 } from "react-icons/fa";
 export {
   FaAddressBook,
@@ -85,6 +91,7 @@ export {
   MdSpaceDashboard,
   MdVpnKey,
   MdWifi,
+  MdOutlineEmail,
 } from "react-icons/md";
 export {
   PiCoatHangerBold,
@@ -94,6 +101,7 @@ export {
   PiIdentificationBadge,
   PiShareNetworkBold,
   PiTelevisionSimple,
+  PiIdentificationBadgeLight,
 } from "react-icons/pi";
 export { RiLayout6Fill, RiNetflixFill } from "react-icons/ri";
 export {

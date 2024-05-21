@@ -133,35 +133,16 @@ type User = {
 };
 
 type Guest = {
-  key: React.Key;
+  key: string;
   verified: "Yes" | "No";
-  identification: "Cedula" | "Passport";
   name: string;
   lastName: string;
-  gender: string;
+  gender: "male" | "female" | "other";
   dateOfBirth: string;
   age: number;
-  phone: string;
   email: string;
+  phone: string;
   accountType: string;
-  accountStatus: string;
+  accountStatus: "Active" | "Inactive";
+  identification: "Cedula" | "Passport";
 };
-
-// type Guest = {
-//   key: string;
-//   verified: "Yes" | "No";
-//   avatar: string;
-//   name: string;
-//   lastName: string;
-//   gender: string;
-//   dateOfBirth: string;
-//   age: number;
-//   phone: string;
-//   email: string;
-//   totalReservations: number;
-//   lastVisit: string;
-//   accountType: string;
-//   accountStatus: string;
-//   identification: "Cedula" | "Passport";
-//   pendingBalance: string;
-// };

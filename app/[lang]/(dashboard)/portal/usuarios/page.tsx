@@ -2,7 +2,7 @@ import { Locale } from "@/i18n-config";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { UsersTable } from "./UsersTable";
-import { dataSource, columns } from "./tableData";
+import guests from "@/public/assets/data/guests.json";
 
 export default async function Page({
   params: { lang },
@@ -15,9 +15,5 @@ export default async function Page({
     redirect(`/${lang}/auth/iniciar-session`);
   }
 
-  return (
-    <div>
-      <UsersTable dataSource={dataSource} columns={columns} lang={lang} />
-    </div>
-  );
+  return <UsersTable dataSource={guests} lang={lang} />;
 }

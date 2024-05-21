@@ -1,5 +1,7 @@
 import { faker } from "@faker-js/faker";
 import moment from "moment";
+import fs from "fs";
+import path from "path";
 
 function calculateAge(dob: string | Date) {
   return moment().diff(moment(dob), "years");
@@ -23,7 +25,7 @@ export function generateGuests(numberOfGuests: number) {
     guests.push({
       key: String(i + 1),
       verified: faker.helpers.arrayElement(["Yes", "No"]),
-      avatar: `https://randomuser.me/api/portraits/${gender.toLowerCase()}/${i}.jpg`,
+      // avatar: `https://randomuser.me/api/portraits/${gender.toLowerCase()}/${i}.jpg`,
       name: firstName,
       lastName: lastName,
       gender: gender,
@@ -35,22 +37,28 @@ export function generateGuests(numberOfGuests: number) {
       ),
       phone: faker.phone.number("###-###-####"),
 
-      totalReservations: faker.datatype.number({ min: 0, max: 20 }),
-      lastVisit: moment().format("MM/DD/YYYY"),
+      // totalReservations: faker.datatype.number({ min: 0, max: 20 }),
+      // lastVisit: moment().format("MM/DD/YYYY"),
       accountType: faker.helpers.arrayElement([
-        "Developer",
-        "CEO",
-        "Supervisor",
-        "Manager",
+        // "Developer",
+        // "CEO",
+        // "Supervisor",
+        // "Manager",
         "Guest",
-        "Receptionist",
-        "Housekeeping",
+        // "Receptionist",
+        // "Housekeeping",
       ]),
       accountStatus: faker.helpers.arrayElement(["Active", "Inactive"]),
       identification: faker.helpers.arrayElement(["Cedula", "Passport"]),
-      pendingBalance: `$${faker.commerce.price(0, 5000)}`,
+      // pendingBalance: `$${faker.commerce.price(0, 5000)}`,
     });
   }
 
-  return guests;
+  // const filePath = path.resolve(
+  //   process.cwd(),
+  //   "public/assets/data/guests.json",
+  // );
+  // fs.writeFileSync(filePath, JSON.stringify(guests, null, 2), "utf8");
+
+  // return guests;
 }
