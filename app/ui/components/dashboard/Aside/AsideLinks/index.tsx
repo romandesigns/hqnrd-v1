@@ -9,16 +9,15 @@ import {
   FaUserGroup,
   HiTicket,
   IoSettings,
-  MdConstruction,
   MdPayments,
   MdSpaceDashboard,
   RiLayout6Fill,
 } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
+import { Divider } from "antd";
 import cn from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Divider } from "antd";
 
 export const AsideLinks = ({
   lang,
