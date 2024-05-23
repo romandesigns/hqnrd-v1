@@ -15,12 +15,12 @@ export default function Page({
           <div className="font-bold">TECHNICAL SUPPORT</div>
           <ul className="flex items-center justify-center space-x-4">
             <li>
-              <Link href={`/${lang}/portal/soporte-technico/all-issues`}>
+              <Link href={`/${lang}/portal/soporte-technico/tickets`}>
                 All Issues
               </Link>
             </li>
             <li>
-              <Link href={`/${lang}/portal/soporte-technico/new`}>
+              <Link href={`/${lang}/portal/soporte-technico/tickets/crear`}>
                 New Issue
               </Link>
             </li>
@@ -28,7 +28,9 @@ export default function Page({
         </div>
       </Navigation>
       <section className="flex h-full w-full items-stretch justify-stretch p-4">
-        <article className="h-full w-full bg-white">Home</article>
+        <article className="h-full w-full rounded-md bg-white shadow-sm">
+          Home
+        </article>
       </section>
     </>
   );

@@ -117,3 +117,4 @@ export {
   TbWheelchair,
 } from "react-icons/tb";
 export { TiGroup, TiWarning } from "react-icons/ti";
+export { HiTicket } from "react-icons/hi2";

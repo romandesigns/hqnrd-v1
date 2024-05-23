@@ -41,7 +41,7 @@ export function AuthMenuList({ lang }: Readonly<{ lang: Locale }>) {
           <span>
             <MdOutlineContactSupport className="text-lg" />
           </span>
-          <span>Support</span>
+          <span>Tickets</span>
         </Link>
       </li>
       <li className="flex w-full cursor-pointer items-center  justify-start gap-2 rounded-bl-md rounded-br-md bg-neutral-800 p-4 py-4 text-center text-sm text-neutral-100 hover:text-white">

@@ -7,6 +7,7 @@ import {
   FaCalendar,
   FaDoorClosed,
   FaUserGroup,
+  HiTicket,
   IoSettings,
   MdConstruction,
   MdPayments,
@@ -76,9 +77,9 @@ export const AsideLinks = ({
       icon: <BiSolidBell />,
     },
     {
-      label: "Support",
-      path: "/soporte-technico",
-      icon: <MdConstruction />,
+      label: "Tickets",
+      path: "/tickets",
+      icon: <HiTicket />,
     },
     {
       label: "Settings",
