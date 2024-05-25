@@ -1,18 +1,18 @@
 "use client";
 
+import { Modal } from "@/app/ui/features";
 import { FaCheck } from "@/app/ui/icons";
 import { useModalToggle } from "@/store/modalToggle";
-import type { DatePickerProps, UploadProps, SelectProps, InputProps } from "antd";
-import { DatePicker, Input, Select, message, Button, Upload } from "antd";
+import { createNewTicketAction } from "@/utils/actions";
+import type { DatePickerProps, InputProps, SelectProps, UploadProps } from "antd";
+import { Button, DatePicker, Input, Select, Upload, message } from "antd";
 import en from "antd/es/date-picker/locale/en_US";
 import dayjs, { Dayjs } from "dayjs";
 import buddhistEra from "dayjs/plugin/buddhistEra";
-import { MdOutlineAttachFile } from "react-icons/md";
-import { useState } from "react";
-import { TicketHistory } from "./TicketHistory";
-import { Modal } from "@/app/ui/features";
-import { createNewTicketAction } from "@/utils/actions";
 import { useParams } from "next/navigation";
+import { useState } from "react";
+import { MdOutlineAttachFile } from "react-icons/md";
+import { TicketHistory } from "./TicketHistory";
 
 // Component level locale
 const buddhistLocale: typeof en = {
