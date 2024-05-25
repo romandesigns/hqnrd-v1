@@ -41,6 +41,7 @@ export {
   FaRegBuilding,
   FaRegTrashAlt,
   FaPassport,
+  FaCheck 
 } from "react-icons/fa";
 export {
   FaAddressBook,
@@ -93,6 +94,9 @@ export {
   MdWifi,
   MdOutlineEmail,
   MdConstruction,
+  MdAddCircle,
+  MdOutlineHistory,
+  MdOutlineAttachFile
 } from "react-icons/md";
 export {
   PiCoatHangerBold,

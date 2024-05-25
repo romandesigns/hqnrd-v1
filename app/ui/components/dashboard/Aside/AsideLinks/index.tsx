@@ -18,6 +18,7 @@ import { Divider } from "antd";
 import cn from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {Fragment} from "react";
 
 export const AsideLinks = ({
   lang,
@@ -77,7 +78,7 @@ export const AsideLinks = ({
     },
     {
       label: "Tickets",
-      path: "/tickets",
+      path: "/soporte-technico/tickets",
       icon: <HiTicket />,
     },
     {
@@ -87,67 +88,58 @@ export const AsideLinks = ({
     },
   ];
 
-  return links.map((link, i) => {
-    return (
-      <>
-        <li
-          className={cn(`group sm:hover:bg-neutral-200 ${className}`)}
-          key={i}
-        >
-          <Link
-            href={`/${lang}/portal${link.path}`}
-            className={cn(
-              `flex w-full items-center justify-between space-x-2 p-3 pl-4 group-hover:bg-neutral-100`,
-              {
-                "bg-primary-100/30":
-                  pathName === `/${lang}/portal${link.path}` ||
-                  link.label === link.label.toLowerCase(),
-              },
-            )}
+  return (
+    <>
+      {links.map((link, i) => (
+        <Fragment key={link.label + link.path}>
+          <li
+            className={cn(`group sm:hover:bg-neutral-200 ${className}`)}
           >
-            <div
-              className={cn(`flex w-[50%]`, {
-                "font-semibold text-primary-500":
-                  pathName === `/${lang}/portal${link.path}` ||
-                  link.label === link.label.toLowerCase(),
-              })}
-            >
-              <span className="flex items-center sm:mr-2">{link.icon}</span>
-              <p className="hidden text-sm sm:inline-block">{link.label}</p>
-            </div>
-            {link.label === "Reservations" && (
-              <div className="flex aspect-square h-6 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                {notificationsCount}
-              </div>
-            )}
-            {link.label === "Messages" && (
-              <div className="flex aspect-square h-6 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                {notificationsCount}
-              </div>
-            )}
-            {link.label === "Notifications" && (
-              <div className="flex aspect-square h-6 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                {notificationsCount}
-              </div>
-            )}
-            <span
+            <Link
+              href={`/${lang}/portal${link.path}`}
               className={cn(
-                `block h-8 w-1 rounded-md transition-all delay-100 group-hover:bg-neutral-400`,
+                `flex w-full items-center justify-between space-x-2 p-3 pl-4 group-hover:bg-neutral-100`,
                 {
-                  "bg-primary-500":
+                  "bg-primary-100/30":
                     pathName === `/${lang}/portal${link.path}` ||
                     link.label === link.label.toLowerCase(),
                 },
               )}
-            />
-          </Link>
-        </li>
-        {i === 4 && (
-          <Divider orientation="left" className="my-4">
-            <span className="rounded-full border p-1 px-3">Management</span>
-          </Divider>
-        )}
-      </>
-    );
-  });
+            >
+              <div
+                className={cn(`flex w-[50%]`, {
+                  "font-semibold text-primary-500":
+                    pathName === `/${lang}/portal${link.path}` ||
+                    link.label === link.label.toLowerCase(),
+                })}
+              >
+                <span className="flex items-center sm:mr-2">{link.icon}</span>
+                <p className="hidden text-sm sm:inline-block">{link.label}</p>
+              </div>
+              {["Reservations", "Messages", "Notifications"].includes(link.label) && (
+                <div className="flex aspect-square h-6 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                  {notificationsCount}
+                </div>
+              )}
+              <span
+                className={cn(
+                  `block h-8 w-1 rounded-md transition-all delay-100 group-hover:bg-neutral-400`,
+                  {
+                    "bg-primary-500":
+                      pathName === `/${lang}/portal${link.path}` ||
+                      link.label === link.label.toLowerCase(),
+                  },
+                )}
+              />
+            </Link>
+          </li>
+          {i === 4 && (
+            <Divider orientation="left" className="my-4">
+              <span className="rounded-full border p-1 px-3">Management</span>
+            </Divider>
+          )}
+        </Fragment>
+      ))}
+    </>
+  );
 };

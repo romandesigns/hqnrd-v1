@@ -9,7 +9,9 @@ export default function Page({
 }>) {
   return (
     <>
-      <Navigation lang={lang} />
+      <Navigation lang={lang}>
+        <h1 className="text-2xl font-bold">Tickets</h1>
+      </Navigation>
       <section className="flex h-full w-full items-stretch justify-stretch p-4">
         <article className="h-full w-full bg-white p-4">
           <Menu lang={lang} />

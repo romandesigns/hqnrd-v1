@@ -4,12 +4,12 @@ import React from "react";
 export const Modal = ({
   children,
   open,
-  setOpen,
+  onClose,
   title,
 }: {
   children: React.ReactNode;
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
   title: string;
 }) => {
   return (
@@ -19,7 +19,7 @@ export const Modal = ({
         centered
         open={open}
         footer={null}
-        onCancel={() => setOpen(false)}
+        onCancel={() => onClose()}
       >
         {children}
       </ModalComponent>
