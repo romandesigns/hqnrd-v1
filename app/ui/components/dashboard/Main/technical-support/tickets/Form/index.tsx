@@ -13,6 +13,7 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { MdOutlineAttachFile } from "react-icons/md";
 import { TicketHistory } from "./TicketHistory";
+import {ChangeEventHandler} from "react";
 
 // Component level locale
 const buddhistLocale: typeof en = {
@@ -83,27 +84,27 @@ export function TicketForm() {
   const { isOpen, closeModal } = useModalToggle((state) => state);
   const { lang } = useParams();
 
-  const handlePriorityChange: SelectProps<Option>['onChange'] = (value) => {
-    setTicketForm({ ...ticketForm, priority: value as string });
+  const handlePriorityChange = (value:string) => {
+    setTicketForm({ ...ticketForm, priority: value });
   };
 
   const handleDueDateChange: DatePickerProps['onChange'] = (date) => {
     setTicketForm({ ...ticketForm, dueDate: date! });
   };
 
-  const handleIssueTypeChange: SelectProps<Option>['onChange'] = (value) => {
+  const handleIssueTypeChange = (value:string) => {
     setTicketForm({ ...ticketForm, issueType: value as string });
   };
 
-  const handleLocationChange: SelectProps<Option>['onChange'] = (value) => {
+  const handleLocationChange = (value:string) => {
     setTicketForm({ ...ticketForm, location: value as string });
   };
 
-  const handleDescriptionChange: InputProps['onChange'] = (e) => {
+  const handleDescriptionChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setTicketForm({ ...ticketForm, description: e.target.value });
   };
 
-  const handleAssigneeChange: SelectProps<Option>['onChange'] = (value) => {
+  const handleAssigneeChange = (value:string) => {
     setTicketForm({ ...ticketForm, assignee: value as string });
   };
 
