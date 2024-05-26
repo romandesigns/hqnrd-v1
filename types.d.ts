@@ -160,3 +160,36 @@ type Guest = {
   accountStatus: string;
   identification: string;
 };
+
+// Define the type for the ticket form state
+export type TicketFormTypes = {
+  title: string;
+  priority: string;
+  dueDate: Dayjs;
+  issueType: string;
+  developmentType: string
+  location: string;
+  description: string;
+  assignee: string;
+};
+
+// Define the type for the Select component options
+export type TicketOption = {
+  value: string;
+  label: string;
+};
+
+// Types
+export type SupabaseUser = {
+  dob: string;
+  email: string;
+  email_verified: boolean;
+  gender: string;
+  last_name: string;
+  name: string;
+  phone: string;
+  phone_country: string;
+  phone_verified: boolean;
+  sub: string;
+  user_role: string;
+};

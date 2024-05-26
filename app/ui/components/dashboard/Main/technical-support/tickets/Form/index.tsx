@@ -3,17 +3,22 @@
 import { Modal } from "@/app/ui/features";
 import { FaCheck } from "@/app/ui/icons";
 import { useModalToggle } from "@/store/modalToggle";
+import { TicketFormTypes, TicketOption } from "@/types";
 import { createNewTicketAction } from "@/utils/actions";
-import type { DatePickerProps, InputProps, SelectProps, UploadProps } from "antd";
-import { Button, DatePicker, Input, Select, Upload, message } from "antd";
+import { createClient } from "@/utils/supabase/client";
+import type { DatePickerProps, UploadProps } from "antd";
+import { Button, DatePicker, Flex, Input, Radio, Select, Upload, message } from "antd";
 import en from "antd/es/date-picker/locale/en_US";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import buddhistEra from "dayjs/plugin/buddhistEra";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { ChangeEventHandler, useEffect, useMemo, useState } from "react";
 import { MdOutlineAttachFile } from "react-icons/md";
 import { TicketHistory } from "./TicketHistory";
-import {ChangeEventHandler} from "react";
+import { assigneeOptions, developmentTypeOptions, issueTypeOptions, locationOptions, priorityOptions } from "./Utils/options";
+import { useUserStore } from "@/store/user";
+import { UserMetadata } from "@supabase/supabase-js";
+
 
 // Component level locale
 const buddhistLocale: typeof en = {
@@ -27,98 +32,64 @@ const buddhistLocale: typeof en = {
   },
 };
 
-// Define the type for the ticket form state
-type TicketForm = {
-  title: string;
-  priority: string;
-  dueDate: Dayjs;
-  issueType: string;
-  location: string;
-  description: string;
-  assignee: string;
-};
-
-const initialTicketForm: TicketForm = {
+const initialTicketForm: TicketFormTypes = {
   title: '',
   priority: '',
   dueDate: dayjs(dayjs().format("MM/DD/YYYY hh:mm A")),
   issueType: '',
+  developmentType: '',
   location: '',
   description: '',
   assignee: '',
 };
 
-// Define the type for the Select component options
-type Option = {
-  value: string;
-  label: string;
-};
-
-const priorityOptions: Option[] = [
-  { value: 'low', label: 'Low' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'high', label: 'High' },
-];
-
-const issueTypeOptions: Option[] = [
-  { value: 'development', label: 'Development' },
-  { value: 'housekeeping', label: 'Housekeeping' },
-  { value: 'finance', label: 'Finance' },
-  { value: 'task', label: 'Task' },
-];
-
-const locationOptions: Option[] = [
-  { value: 'page', label: 'Page' },
-  { value: 'room', label: 'Room' },
-  { value: 'hotel', label: 'Hotel' },
-];
-
-const assigneeOptions: Option[] = [
-  { value: 'roman-feliz', label: 'Roman Feliz' },
-  { value: 'alipio-feliz-matos', label: 'Alipio Feliz Matos' },
-  { value: 'ayelin-de-la-cruz', label: 'Ayeling de la Cruz' },
-];
-
-export function TicketForm() {
-  const [ticketForm, setTicketForm] = useState<TicketForm>(initialTicketForm);
+export  function TicketForm() {
+  const [ticketForm, setTicketForm] = useState<TicketFormTypes>(initialTicketForm);
   const { isOpen, closeModal } = useModalToggle((state) => state);
+  const { staff, setStaff } = useState<{id:string,name:string}[]>([]);
   const { lang } = useParams();
+  const supabase = createClient();
+
+  const {user,setUser} = useUserStore(state => state);
+  
 
   const handlePriorityChange = (value:string) => {
     setTicketForm({ ...ticketForm, priority: value });
   };
-
   const handleDueDateChange: DatePickerProps['onChange'] = (date) => {
     setTicketForm({ ...ticketForm, dueDate: date! });
   };
-
   const handleIssueTypeChange = (value:string) => {
     setTicketForm({ ...ticketForm, issueType: value as string });
   };
-
+  const handleDevelopmentTypeChange = (value:string) => {
+    setTicketForm({ ...ticketForm, developmentType: value as string });
+  };
   const handleLocationChange = (value:string) => {
     setTicketForm({ ...ticketForm, location: value as string });
   };
-
   const handleDescriptionChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setTicketForm({ ...ticketForm, description: e.target.value });
   };
-
   const handleAssigneeChange = (value:string) => {
     setTicketForm({ ...ticketForm, assignee: value as string });
   };
-
-  const filterOption = (input: string, option?: Option) => {
+  const filterOption = (input: string, option?: TicketOption) => {
     return (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
   };
-
-  const filterSort = (optionA: Option, optionB: Option) => {
+  const filterSort = (optionA: TicketOption, optionB: TicketOption) => {
     return (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase());
   };
 
   dayjs.extend(buddhistEra);
 
   const defaultValue = dayjs(dayjs().format("MM/DD/YYYY hh:mm A")).locale(`${lang}`);
+
+  useEffect(() => {
+    supabase.auth.getUser()
+    .then(({data:{user}}) =>  setUser(user?.user_metadata as UserMetadata))
+    .catch((error) => console.error(error)); 
+  }, [setUser, supabase.auth]);
 
   const props: UploadProps = {
     name: "file",
@@ -158,7 +129,7 @@ export function TicketForm() {
           type="text"
           className="!hidden"
           name="author"
-          value={'Roman Feliz'}
+          value={`${user.name} ${user.last_name}`}
           
         />
         {/* Author Email*/}
@@ -166,7 +137,13 @@ export function TicketForm() {
           type="email"
           className="!hidden"
           name="authorEmail"
-          value={'romfeliz@gmail.com'}
+          value={`${user.email}`}
+        />
+        <Input
+          type="text"
+          className="!hidden"
+          name="autorId"
+          value={`${user.sub}`}
         />
         {/* Created On */}
         <Input
@@ -210,6 +187,30 @@ export function TicketForm() {
           options={issueTypeOptions}
           onChange={handleIssueTypeChange}
         />
+        {
+          ticketForm.issueType === 'development' && (
+          <>
+            <Select
+              size="large"
+              className="w-full"
+              placeholder="Development Type"
+              menuItemSelectedIcon={<FaCheck />}
+              optionFilterProp="children"
+              filterOption={filterOption}
+              filterSort={filterSort}
+              options={developmentTypeOptions}
+              onChange={handleDevelopmentTypeChange}
+            />
+            <Flex>
+              <Radio.Group>
+                <Radio value="Front End">Front End</Radio>
+                <Radio value="Back End">Back End</Radio>
+                <Radio value="Design">Design</Radio>
+              </Radio.Group>
+            </Flex>
+          </>
+          )
+        }
         {/* Ticket Location */}
         <Select
           size="large"
@@ -222,6 +223,28 @@ export function TicketForm() {
           options={locationOptions}
           onChange={handleLocationChange}
         />
+        {
+          ticketForm.location === 'page' && (
+          <>
+            <Flex gap={16}>
+            <Input
+          placeholder="Page name"
+          type="text"
+          size="large"
+          name="pageName"
+          required
+        />
+        <Input
+          placeholder="Component name"
+          type="text"
+          size="large"
+          name="componentName"
+          required
+        />
+            </Flex>
+          </>
+          )
+        }
         {/* Ticket Assignee */}
         <Select
           size="large"
