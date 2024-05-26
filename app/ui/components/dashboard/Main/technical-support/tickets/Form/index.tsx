@@ -18,7 +18,7 @@ import { TicketHistory } from "./TicketHistory";
 import { assigneeOptions, developmentTypeOptions, issueTypeOptions, locationOptions, priorityOptions } from "./Utils/options";
 import { useUserStore } from "@/store/user";
 import { UserMetadata } from "@supabase/supabase-js";
-
+import guests from "@/public/assets/data/guests.json";
 
 // Component level locale
 const buddhistLocale: typeof en = {
@@ -46,13 +46,11 @@ const initialTicketForm: TicketFormTypes = {
 export  function TicketForm() {
   const [ticketForm, setTicketForm] = useState<TicketFormTypes>(initialTicketForm);
   const { isOpen, closeModal } = useModalToggle((state) => state);
-  const { staff, setStaff } = useState<{id:string,name:string}[]>([]);
   const { lang } = useParams();
   const supabase = createClient();
 
   const {user,setUser} = useUserStore(state => state);
   
-
   const handlePriorityChange = (value:string) => {
     setTicketForm({ ...ticketForm, priority: value });
   };
@@ -84,6 +82,10 @@ export  function TicketForm() {
   dayjs.extend(buddhistEra);
 
   const defaultValue = dayjs(dayjs().format("MM/DD/YYYY hh:mm A")).locale(`${lang}`);
+
+  const staffs = useMemo(() => {
+    return guests.filter((guest) => guest.accountType !== 'Guest');
+  }, []);
 
   useEffect(() => {
     supabase.auth.getUser()
@@ -254,7 +256,7 @@ export  function TicketForm() {
           optionFilterProp="children"
           filterOption={filterOption}
           filterSort={filterSort}
-          options={assigneeOptions}
+          options={staffs}
           onChange={handleAssigneeChange}
         />
         {/* Ticket Description */}
