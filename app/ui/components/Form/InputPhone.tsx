@@ -1,4 +1,4 @@
-import PhoneInput, { Country } from "react-phone-number-input";
+import PhoneInput, { Country, Value as E164Number } from "react-phone-number-input";
 import { twMerge } from "tailwind-merge";
 
 export function InputPhone({
@@ -8,7 +8,7 @@ export function InputPhone({
   placeholder,
   className,
 }: {
-  phoneNumber: (phone: string) => void;
+  phoneNumber: (phone: E164Number) => void;
   phone: string;
   locale: Country;
   placeholder: string;
