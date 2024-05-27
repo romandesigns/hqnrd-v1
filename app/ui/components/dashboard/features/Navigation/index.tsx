@@ -15,7 +15,7 @@ export function Navigation({
   childrenClassName?: string;
 }>) {
   return (
-    <nav className="w-white grid w-full grid-cols-[1fr_auto] grid-rows-1 items-center justify-between border-b bg-white p-[0.41rem] px-4">
+    <nav className="w-white grid w-full grid-cols-[1fr_auto] grid-rows-1 items-center justify-between border-b bg-white p-[0.41rem] px-4 relative z-[1]">
       {children ? (
         <div className={`${childrenClassName}`}>{children}</div>
       ) : (

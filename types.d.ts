@@ -176,7 +176,7 @@ export type TicketFormTypes = {
 // Define the type for the Select component options
 export type TicketOption = {
   value: string;
-  label: string;
+  label: string | JSX.Element;
 };
 
 // Types

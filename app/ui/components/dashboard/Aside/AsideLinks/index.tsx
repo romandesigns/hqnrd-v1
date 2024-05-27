@@ -7,18 +7,18 @@ import {
   FaCalendar,
   FaDoorClosed,
   FaUserGroup,
-  HiTicket,
   IoSettings,
+  MdConstruction,
   MdPayments,
   MdSpaceDashboard,
-  RiLayout6Fill,
+  RiLayout6Fill
 } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { Divider } from "antd";
 import cn from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {Fragment} from "react";
+import { Fragment } from "react";
 
 export const AsideLinks = ({
   lang,
@@ -77,9 +77,9 @@ export const AsideLinks = ({
       icon: <BiSolidBell />,
     },
     {
-      label: "Tickets",
-      path: "/soporte-technico/tickets",
-      icon: <HiTicket />,
+      label: "Soporte Technico",
+      path: "/soporte-technico",
+      icon: <MdConstruction />,
     },
     {
       label: "Settings",
@@ -107,7 +107,7 @@ export const AsideLinks = ({
               )}
             >
               <div
-                className={cn(`flex w-[50%]`, {
+                className={cn(`flex w-[55%]`, {
                   "font-semibold text-primary-500":
                     pathName === `/${lang}/portal${link.path}` ||
                     link.label === link.label.toLowerCase(),

@@ -73,18 +73,36 @@ export  function TicketForm() {
     setTicketForm({ ...ticketForm, assignee: value as string });
   };
   const filterOption = (input: string, option?: TicketOption) => {
-    return (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+    return (option?.label ?? '').toString().toLowerCase().includes(input.toLowerCase());
   };
+  
   const filterSort = (optionA: TicketOption, optionB: TicketOption) => {
-    return (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase());
+    return (optionA?.label ?? '').toString().toLowerCase().localeCompare((optionB?.label ?? '').toString().toLowerCase());
   };
 
   dayjs.extend(buddhistEra);
 
   const defaultValue = dayjs(dayjs().format("MM/DD/YYYY hh:mm A")).locale(`${lang}`);
 
-  const staffs = useMemo(() => {
-    return guests.filter((guest) => guest.accountType !== 'Guest');
+  const staffs: TicketOption[] = useMemo(() => {
+    const filteredGuests = guests.filter((guest) => guest.accountType !== 'Guest');
+    // Group accountTypes
+    const groupedGuests = filteredGuests.reduce((acc, guest) => {
+      if (!acc[guest.accountType]) {
+        acc[guest.accountType] = [];
+      }
+      acc[guest.accountType].push(guest);
+      return acc;
+    }, {} as Record<string, typeof guests>);
+    // Map grouped accountTypes to options
+    return Object.entries(groupedGuests).map(([accountType, guests]) => ({
+      label: <span>{accountType}</span>,
+      value: accountType,
+      options: guests.map((guest) => ({
+        label: <span>{`${guest.name} ${guest.lastName}`}</span>,
+        value: `${guest.name} ${guest.lastName}`,
+      })),
+    }));
   }, []);
 
   useEffect(() => {
