@@ -2,10 +2,12 @@
 
 import { Modal } from "@/app/ui/features";
 import { FaCheck } from "@/app/ui/icons";
-import { useModalToggle } from "@/store/modalToggle";
+import guests from "@/public/assets/data/guests.json";
+import { useUserStore } from "@/store/user";
 import { TicketFormTypes, TicketOption } from "@/types";
 import { createNewTicketAction } from "@/utils/actions";
 import { createClient } from "@/utils/supabase/client";
+import { UserMetadata } from "@supabase/supabase-js";
 import type { DatePickerProps, UploadProps } from "antd";
 import { Button, DatePicker, Flex, Input, Radio, Select, Upload, message } from "antd";
 import en from "antd/es/date-picker/locale/en_US";
@@ -15,10 +17,7 @@ import { useParams } from "next/navigation";
 import { ChangeEventHandler, useEffect, useMemo, useState } from "react";
 import { MdOutlineAttachFile } from "react-icons/md";
 import { TicketHistory } from "./TicketHistory";
-import { assigneeOptions, developmentTypeOptions, issueTypeOptions, locationOptions, priorityOptions } from "./Utils/options";
-import { useUserStore } from "@/store/user";
-import { UserMetadata } from "@supabase/supabase-js";
-import guests from "@/public/assets/data/guests.json";
+import { developmentTypeOptions, issueTypeOptions, locationOptions, priorityOptions } from "./Utils/options";
 
 // Component level locale
 const buddhistLocale: typeof en = {
@@ -43,9 +42,11 @@ const initialTicketForm: TicketFormTypes = {
   assignee: '',
 };
 
-export  function TicketForm() {
+export  function TicketForm({openModal, setOpenModal}: {openModal: boolean, setOpenModal: (value:boolean) => void}) {
   const [ticketForm, setTicketForm] = useState<TicketFormTypes>(initialTicketForm);
-  const { isOpen, closeModal } = useModalToggle((state) => state);
+
+  
+  // const { isOpen, closeModal } = useModalToggle((state) => state);
   const { lang } = useParams();
   const supabase = createClient();
 
@@ -130,7 +131,7 @@ export  function TicketForm() {
   };
 
   return (
-    <Modal title="Create Ticket" open={isOpen} onClose={closeModal}>
+    <Modal title="Create Ticket" open={openModal} onClose={() => setOpenModal(!openModal)} >
       <TicketHistory />
       <form className="grid grid-cols-1 gap-4" action={async (formData: FormData) => {
           await createNewTicketAction(ticketForm, formData);
