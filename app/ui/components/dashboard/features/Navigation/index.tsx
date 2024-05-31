@@ -1,9 +1,9 @@
 import { Locale } from "@/i18n-config";
+import Image from "next/image";
 import React from "react";
 import { AuthMenu } from "../AuthMenu";
 import { AuthMenuList } from "./AuthMenuList";
 import { NotificationList } from "./Notifications";
-import { Avatar } from "./Avatar";
 
 export function Navigation({
   lang,
@@ -35,7 +35,13 @@ export function Navigation({
             <AuthMenuList lang={lang} />
           </AuthMenu>
           <div className="flex items-center justify-start gap-4">
-           <Avatar/>
+             <Image
+                src="/assets/general/male-user-placeholder.png"
+                alt="user avatar"
+                className="aspect-square rounded-md opacity-[0.20]"
+                width={45}
+                height={45}
+            />
             <div>
               <div className="text-sm font-bold">Roman Feliz</div>
               <small className="text-xs">Developer</small>

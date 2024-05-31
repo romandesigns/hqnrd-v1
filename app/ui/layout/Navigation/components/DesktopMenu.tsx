@@ -1,4 +1,4 @@
-import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
+import { BsDoorOpenFill, GoHomeFill } from "@/app/ui/icons";
 import { createClient } from "@/utils/supabase/client";
 import { Button } from "antd";
 import Link from "next/link";
@@ -31,17 +31,6 @@ export async function DesktopMenu({ lang }: { lang: string }) {
             icon={<BsDoorOpenFill />}
           >
             Rooms
-          </Button>
-        </Link>
-      </li>
-      <li className="inline-block">
-        <Link href={`/${lang}/about`}>
-          <Button
-            className="!flex items-center justify-center"
-            size="middle"
-            icon={<BsDoorOpenFill />}
-          >
-            About
           </Button>
         </Link>
       </li>

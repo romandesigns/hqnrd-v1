@@ -44,6 +44,7 @@ export async function createUserAction(prevState: any, formData: FormData) {
         phone: data.phone as string,
         phone_country: data.phoneCountry as string,
         user_role: data.user_role as string,
+        avatar: '',
       },
     },
   });

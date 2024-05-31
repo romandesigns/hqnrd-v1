@@ -39,7 +39,7 @@ export function MobileMenu({ lang }: { lang: Locale }) {
           </Link>
         </li>
         <li className="w-full" onClick={() => closeNavigation()}>
-          <Link href={`/${lang}/habitaciones`}>
+          <Link href={`/${lang}/portal`}>
             <Button
               block
               size="large"
@@ -73,7 +73,7 @@ export function MobileMenu({ lang }: { lang: Locale }) {
           className="mt-auto flex w-full gap-4"
           onClick={() => closeNavigation()}
         >
-          <Link href={`/${lang}/iniciar-session`} className="flex-1">
+          <Link href={`/${lang}/auth/iniciar-session`} className="flex-1">
             <Button
               type="primary"
               block

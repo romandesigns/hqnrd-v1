@@ -137,6 +137,7 @@ export default async function Page({
                 placeholder="Password"
                 size="large"
                 required
+                
               />
               <Input
                 type="password"

@@ -17,18 +17,18 @@ export function TechnicalSupportNavigation({
       <div className="font-bold">{pageTitle}</div>
       <ul className="flex items-center justify-center space-x-4">
         <li>
-            <Button icon={<RiHomeLine  />} className="!flex items-center">
-              <Link href={`/${lang}/portal/soporte-technico`}>
-                Home
-              </Link>
-            </Button>
+          <Button icon={<RiHomeLine  />} className="!flex items-center">
+            <Link href={`/${lang}/portal/soporte-technico`}>
+              Home
+            </Link>
+          </Button>
         </li>
         <li>
-            <Button icon={<IoTicketOutline />} className="!flex items-center">
-              <Link href={`/${lang}/portal/soporte-technico/tickets`}>
-                Tickets
-              </Link>
-            </Button>
+          <Button icon={<IoTicketOutline />} className="!flex items-center">
+            <Link href={`/${lang}/portal/soporte-technico/tickets`}>
+              Tickets
+            </Link>
+          </Button>
         </li>
       </ul>
     </div>

@@ -2,7 +2,7 @@ import { TechnicalSupportNavigation } from "@/app/ui/components/dashboard/Main/t
 import { Menu } from "@/app/ui/components/dashboard/Main/technical-support/tickets/Menu";
 import { HiOutlineUser } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
-import { Avatar, Button, Card, Image  } from 'antd';
+import { Avatar, Button, Card, Image } from 'antd';
 import Link from 'next/link';
 
 export default function Page({
