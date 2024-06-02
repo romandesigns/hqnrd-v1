@@ -210,3 +210,10 @@ export type Ticket = {
   pageLocation: string;
   priority: string;
 };
+
+export type TicketStaff = {
+  id: string;
+  name: string;
+  last_name: string;
+  user_role: string;
+}

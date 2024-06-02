@@ -5,11 +5,14 @@ import { Menu } from "@/app/ui/components/dashboard/Main/technical-support/ticke
 import { Locale } from "@/i18n-config";
 import { createClient } from "@/utils/supabase/server";
 
+
 const getTicket = async () => {
   const supabase = createClient();
   const { data, error } = await supabase.from('tickets').select('*');
   return data;
 };
+
+
 
 export default async function Page({
   params: { lang },
@@ -21,6 +24,7 @@ export default async function Page({
   
   const tickets = await getTicket();
 
+
   return (
     <>
       <TechnicalSupportNavigation lang={lang} pageTitle="Tickets" />
@@ -29,7 +33,7 @@ export default async function Page({
         <article className="grid grid-cols-4 grid-rows-[max-content] grid-flow-row  w-full h-full p-4 bg-white gap-4">
           {
             tickets?.map((ticket) => (
-              <TicketCard ticketId={ticketId} lang={lang} key={ticket.id} ticket={ticket} />
+              <TicketCard ticketId={ticketId} lang={lang} key={ticket.id} ticket={ticket}/>
             ))
           }
         </article>

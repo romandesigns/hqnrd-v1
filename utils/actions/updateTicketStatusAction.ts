@@ -24,7 +24,6 @@ export async function updateTicketStatusAction(formData: FormData) {
 
   if(data){
     revalidatePath(`/${formData.get('lang')}/portal/soporte-technico/tickets}`);
-    redirect(`/${formData.get('lang')}/portal/soporte-technico/tickets}`);
   }
   
   return {

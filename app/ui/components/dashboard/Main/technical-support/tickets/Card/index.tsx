@@ -1,12 +1,11 @@
-import React from 'react';
-import { Avatar, Button, Card, Image } from 'antd';
+import { UpdateStatusBtn } from '@/app/ui/features';
 import { HiOutlineUser } from "@/app/ui/icons";
-import Link from 'next/link';
 import { Locale } from '@/i18n-config';
 import { Ticket } from '@/types';
-import moment from 'moment';
-import { UpdateStatusBtn } from '@/app/ui/features';
 import { format } from "@/utils/formatter/format";
+import { Avatar, Button, Card, Image } from 'antd';
+import moment from 'moment';
+import Link from 'next/link';
 
 export function TicketCard({ticketId, lang,ticket}:{ticketId:string, lang:Locale,ticket: Ticket}) {
   return (
@@ -62,7 +61,7 @@ export function TicketCard({ticketId, lang,ticket}:{ticketId:string, lang:Locale
                   <tbody>
                     <tr>
                       <td className="border border-white bg-neutral-100/50"><b>Due Date</b></td>
-                      <td className="border border-white bg-neutral-100/50">05/24/2024</td>
+                      <td className="border border-white bg-neutral-100/50">{moment(ticket.dueDate).format('MM/DD/YYYY')}</td>
                       <td className="border border-white bg-neutral-100/50"><b>Time Remaining</b></td>
                       <td className="border border-white bg-neutral-100/50"><b></b>3h:25 mins</td>
                     </tr>

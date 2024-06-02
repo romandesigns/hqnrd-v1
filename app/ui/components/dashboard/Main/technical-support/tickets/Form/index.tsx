@@ -3,31 +3,18 @@
 import { Modal } from "@/app/ui/features";
 import { FaCheck } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
-import guests from "@/public/assets/data/guests.json";
 import { useUserStore } from "@/store/user";
-import { TicketFormTypes, TicketOption } from "@/types";
+import type { TicketFormTypes, TicketOption, TicketStaff } from "@/types";
 import { createNewTicketAction } from "@/utils/actions";
+import { createClient } from "@/utils/supabase/client";
 import type { DatePickerProps, UploadProps } from "antd";
 import { Button, DatePicker, Flex, Input, Radio, Select, Upload, message } from "antd";
-import en from "antd/es/date-picker/locale/en_US";
 import dayjs from "dayjs";
 import buddhistEra from "dayjs/plugin/buddhistEra";
-import { ChangeEventHandler, use, useEffect, useMemo, useState } from "react";
+import React, { ChangeEventHandler, useEffect, useMemo, useState } from "react";
 import { MdOutlineAttachFile } from "react-icons/md";
 import { TicketHistory } from "./TicketHistory";
 import { developmentTypeOptions, issueTypeOptions, priorityOptions } from "./Utils/options";
-import { createClient } from "@/utils/supabase/client";
-// Component level locale
-const buddhistLocale: typeof en = {
-  ...en,
-  lang: {
-    ...en.lang,
-    fieldDateFormat: "MM/DD/YYYY",
-    fieldDateTimeFormat: "MM/DD/YYYY  ~  hh:mm A",
-    yearFormat: "YYYY",
-    cellYearFormat: "YYYY",
-  },
-};
 
 const initialTicketForm: TicketFormTypes = {
   title: '',
@@ -40,20 +27,19 @@ const initialTicketForm: TicketFormTypes = {
   assignee: '',
 };
 
-const getStaff = async () => {
-  const { data, error } = await createClient().from('profiles').select('*');
-  if (error) {
-    console.log(error);
-  }
-  console.log(getStaff);
-  return data;
-};
-
 export  function TicketForm({lang, openModal, setOpenModal}: {lang:Locale,openModal: boolean, setOpenModal: (value:boolean) => void}) {
   const [ticketForm, setTicketForm] = useState<TicketFormTypes>(initialTicketForm);
+  const [staffMemembers, setStaffMembers] = useState<TicketStaff[]>([]);
 
-  // const { isOpen, closeModal } = useModalToggle((state) => state);
- 
+  useEffect(() => {
+    const getStaffs = async () => {
+      const supabase = createClient();
+      const {data} = await supabase.from('profiles').select('id, name, last_name, user_role').neq('user_role', 'guest');
+      setStaffMembers(data as TicketStaff[]);
+    };
+    getStaffs();
+  }, []);
+
   const {user,setUser} = useUserStore(state => state);
   
   const handlePriorityChange = (value: string) => {
@@ -77,37 +63,61 @@ export  function TicketForm({lang, openModal, setOpenModal}: {lang:Locale,openMo
   const handleAssigneeChange = (value:string) => {
     setTicketForm({ ...ticketForm, assignee: value as string });
   };
-  const filterOption = (input: string, option?: TicketOption) => {
-    return (option?.label ?? '').toString().toLowerCase().includes(input.toLowerCase());
+  
+  type LabelProps = {
+    children: React.ReactNode;
   };
-  const filterSort = (optionA: TicketOption, optionB: TicketOption) => {
-    return (optionA?.label ?? '').toString().toLowerCase().localeCompare((optionB?.label ?? '').toString().toLowerCase());
-  };
+
+const extractStringFromLabel = (label: string | React.ReactElement<LabelProps>) => {
+  if (typeof label === 'string') {
+    return label.toLowerCase();
+  } else if (React.isValidElement(label) && typeof label.props.children === 'string') {
+    // Asserting that props has the structure of LabelProps
+    const props = label.props as LabelProps;
+    if (typeof props.children === 'string') {
+      return props.children.toLowerCase();
+    }
+  }
+  return ''; // Default case if the label is neither string nor React element with string
+};
+
+// Function to filter options based on input
+const filterOption = (input: string, option?: TicketOption) => {
+  const labelString = extractStringFromLabel(option?.label as string);
+  return labelString.includes(input.toLowerCase());
+};
+
+// Function to sort options alphabetically
+const filterSort = (optionA: TicketOption, optionB: TicketOption) => {
+  const labelA = extractStringFromLabel(optionA.label as string);
+  const labelB = extractStringFromLabel(optionB.label as string);
+  return labelA.localeCompare(labelB);
+};
 
   dayjs.extend(buddhistEra);
 
-  const defaultValue = dayjs(dayjs().format("MM/DD/YYYY hh:mm A")).locale(`${lang}`);
+  const defaultValue = useMemo(() => {
+    return dayjs().locale(lang).format("MM/DD/YYYY hh:mm A");
+  }, [lang]);
 
   const staffs: TicketOption[] = useMemo(() => {
-    const filteredGuests = guests.filter((guest) => guest.accountType !== 'Guest');
-    // Group accountTypes
-    const groupedGuests = filteredGuests.reduce((acc, guest) => {
-      if (!acc[guest.accountType]) {
-        acc[guest.accountType] = [];
+    const groupedByRole = staffMemembers.reduce((accumulator, staff) => {
+      const role = staff.user_role || 'Other';
+      if (!accumulator[role]) {
+        accumulator[role] = [];
       }
-      acc[guest.accountType].push(guest);
-      return acc;
-    }, {} as Record<string, typeof guests>);
-    // Map grouped accountTypes to options
-    return Object.entries(groupedGuests).map(([accountType, guests]) => ({
-      label: <span>{accountType}</span>,
-      value: accountType,
-      options: guests.map((guest) => ({
-        label: <span>{`${guest.name} ${guest.lastName}`}</span>,
-        value: `${guest.name} ${guest.lastName}`,
+      accumulator[role].push(staff);
+      return accumulator;
+    }, {} as Record<string, TicketStaff[]>);
+    return Object.entries(groupedByRole).map(([role, members]) => ({
+      label: <span>{role}</span>,
+      value: role,
+      options: members.map(member => ({
+        label: <span>{`${member.name} ${member.last_name}`}</span>,
+        value: member.id,
       })),
     }));
-  }, []);
+  }, [staffMemembers]);
 
   const props: UploadProps = {
     name: "file",
@@ -150,13 +160,15 @@ export  function TicketForm({lang, openModal, setOpenModal}: {lang:Locale,openMo
           type="text"
           className="!hidden"
           name="autorId"
-          value={user?.user?.id}
+          defaultValue={user?.user?.id}
+          readOnly
         />
         <Input
           type="text"
           className="!hidden"
           name="lang"
-          value={lang}
+          defaultValue={lang}
+          readOnly
         />
         {/* Ticket Priority */}
         <Select
@@ -175,10 +187,9 @@ export  function TicketForm({lang, openModal, setOpenModal}: {lang:Locale,openMo
           minDate={dayjs()}
           placeholder="Due Date"
           size="large"
-          defaultValue={defaultValue}
+          defaultValue={dayjs(defaultValue)}
           showTime={{ use12Hours: true, format: "HH:mm A" }}
           showWeek
-          locale={buddhistLocale}
           onChange={handleDueDateChange}
           required
         />
