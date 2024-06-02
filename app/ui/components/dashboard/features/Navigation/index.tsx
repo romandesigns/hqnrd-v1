@@ -4,8 +4,11 @@ import React from "react";
 import { AuthMenu } from "../AuthMenu";
 import { AuthMenuList } from "./AuthMenuList";
 import { NotificationList } from "./Notifications";
+import { createClient } from "@/utils/supabase/server";
+import { UserMetadata } from "@supabase/supabase-js";
+import { format } from "@/utils/formatter/format";
 
-export function Navigation({
+export async function Navigation({
   lang,
   children,
   childrenClassName,
@@ -14,6 +17,9 @@ export function Navigation({
   children?: React.ReactNode;
   childrenClassName?: string;
 }>) {
+  const supabase = createClient(); 
+  const {data:{user:{user_metadata}}} = await supabase.auth.getUser() as UserMetadata;
+
   return (
     <nav className="w-white grid w-full grid-cols-[1fr_auto] grid-rows-1 items-center justify-between border-b bg-white p-[0.41rem] px-4 relative z-[1]">
       {children ? (
@@ -43,8 +49,8 @@ export function Navigation({
                 height={45}
             />
             <div>
-              <div className="text-sm font-bold">Roman Feliz</div>
-              <small className="text-xs">Developer</small>
+              <div className="text-sm font-bold">{`${user_metadata.name} ${user_metadata.last_name}`}</div>
+              <small className="text-xs">{`${format.firstLetterToUpperCase(user_metadata.user_role)}`}</small>
             </div>
           </div>
         </li>
