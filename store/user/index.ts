@@ -15,7 +15,7 @@ const fetchUserData = async () => {
       throw error;
     }
     return data;
-  } catch (error) {
+  } catch (error:any) {
     console.error("Error fetching user data:", error.message);
     return null;
   }
@@ -31,18 +31,20 @@ type DateOfBirth = {
   dob: String;
 };
 
-const initialUserState: UserStateTypes = {
-  dob: '',
-  email: '',
-  email_verified: false,
-  gender: '',
-  last_name: '',
-  name: '',
-  phone: '',
-  phone_country: '',
-  phone_verified: false,
-  sub: '',
-  user_role: ''
+const initialUserState = {
+  user:{
+    dob: '',
+    email: '',
+    email_verified: false,
+    gender: '',
+    last_name: '',
+    name: '',
+    phone: '',
+    phone_country: '',
+    phone_verified: false,
+    sub: '',
+    user_role: ''
+  }
 };
 
 // Store

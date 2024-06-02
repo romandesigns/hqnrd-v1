@@ -1,5 +1,5 @@
-import moment from "moment";
 import { Locale } from "@/i18n-config";
+import moment from "moment";
 
 export const format = {
   currency: (num: number) => {

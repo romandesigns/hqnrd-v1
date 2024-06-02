@@ -13,7 +13,8 @@ import {
 } from "../../constants";
 import { Drawer } from "../../layout/Navigation/components/Drawer";
 import { FlagsList } from "../../layout/Navigation/components/FlagsList";
-import { ExternalLink, Modal, WaveDot } from "..";
+import { ExternalLink, WaveDot } from "..";
+import {Modal} from 'antd';
 
 export function HorizontalContactWidget({
   setOpen,
@@ -84,7 +85,7 @@ export function HorizontalContactWidget({
           </div>
         </Drawer>
       ) : (
-        <Modal open={open} setOpen={setOpen} title="Select Language">
+        <Modal open={open} onCancel={() => setOpen(false)} title="Select Language">
           <div className="my-8 grid h-32 w-full grid-cols-[1fr_1fr_1fr] grid-rows-1 gap-6 px-2">
             <FlagsList lang={lang} />
           </div>
