@@ -19,7 +19,7 @@ export const ToggleModalBtn = function ({lang}: {lang: Locale}) {
       >
         <span className="ml-1">New</span>
       </Button>
-      <TicketForm openModal={openModal} setOpenModal={setOpenModal}/>
+      <TicketForm openModal={openModal} setOpenModal={setOpenModal} lang={lang}/>
     </>
   );
 };

@@ -25,3 +25,5 @@ export { SubHeader } from "./SubHeader";
 export { SwiperComponent } from "./Swiper";
 export { WaveDot } from "./WaveDot";
 export { WeatherWidget } from "./WeatherWidget";
+export { TextEditor } from "./TextEditor";
+export { UpdateStatusBtn } from "./UpdateStatusBtn";

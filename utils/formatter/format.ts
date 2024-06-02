@@ -11,6 +11,9 @@ export const format = {
       .map((word) => word[0].toUpperCase() + word.slice(1))
       .join(" ");
   },
+   convertAllWordsToLowerCase: (str: string) => {
+    return str.toLowerCase();
+  },
   convertDate: (date: number) => {
     return moment.unix(date).format("MMMM Do YYYY, h:mm:ss a");
   },

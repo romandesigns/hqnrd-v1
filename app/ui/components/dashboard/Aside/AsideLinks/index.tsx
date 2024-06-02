@@ -8,18 +8,14 @@ import {
   FaDoorClosed,
   FaUserGroup,
   HiMenuAlt1,
-  IoCloseCircle,
-  IoMdCloseCircleOutline,
   IoSettings,
   MdConstruction,
   MdPayments,
   MdSpaceDashboard,
   RiLayout6Fill
 } from "@/app/ui/icons";
-import { Drawer } from "antd";
 import { Locale } from "@/i18n-config";
 import useViewportDimensions from "@/utils/hooks/useViewPort";
-import { Divider } from "antd";
 import cn from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -49,7 +45,7 @@ export const AsideLinks = ({
     { label: "Website", path: "/website", icon: <RiLayout6Fill /> },
     { label: "Notifications", path: "/notificaciones", icon: <BiSolidBell /> },
     { label: "Soporte Technico", path: "/soporte-technico", icon: <MdConstruction /> },
-    { label: "Settings", path: "/configuraciones", icon: <IoSettings /> },
+    { label: "Settings", path: "/configuracion", icon: <IoSettings /> },
   ];
 
   const visibleLinks = width <= 640 ? links.slice(0, 5) : links;
@@ -60,7 +56,7 @@ export const AsideLinks = ({
 
   return (
     <>
-      {visibleLinks.map((link, i) => (
+      {links.map((link, i) => (
         <Fragment key={`${link.label}-${link.path}`}>
           <li className={cn("group sm:hover:bg-neutral-200 flex-1", className)}>
             <Link
@@ -69,7 +65,7 @@ export const AsideLinks = ({
                 "flex w-full items-center justify-between space-x-2 p-3 pl-4 group-hover:bg-neutral-100 relative",
                 {
                   "bg-primary-100/30": pathName === `/${lang}/portal${link.path}`,
-                  "font-semibold text-primary-500": pathName === `/${lang}/portal${link.path}`,
+                  "text-primary-500": pathName === `/${lang}/portal${link.path}`,
                 }
               )}
             >
@@ -96,7 +92,7 @@ export const AsideLinks = ({
         </Fragment>
       ))}
       {/* Menu Drawer */}
-      <Drawer
+      {/* <Drawer
         headerStyle={{  display: "flex", padding: "1rem"}}
         closeIcon={<IoCloseCircle size={20} className="text-neutral-700"/>}
         title="Menu"
@@ -120,7 +116,7 @@ export const AsideLinks = ({
             ))}
         </ul>
         </div>
-      </Drawer>
+      </Drawer> */}
       {/* Menu Icon */}
       <HiMenuAlt1 className="text-3xl fixed bottom-24 right-5 z-10 sm:hidden" onClick={handleMenuClick} />
     </>

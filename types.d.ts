@@ -193,3 +193,20 @@ export type SupabaseUser = {
   sub: string;
   user_role: string;
 };
+
+export type Ticket = {
+  id: string;
+  status: string;
+  created_at: string; // ISO 8601 datetime
+  title: string;
+  author_id: string;
+  assignee: string;
+  description: string;
+  dueDate: string; // ISO 8601 datetime
+  implementationType: string;
+  issueType: string;
+  location: string;
+  pageComponent: string;
+  pageLocation: string;
+  priority: string;
+};

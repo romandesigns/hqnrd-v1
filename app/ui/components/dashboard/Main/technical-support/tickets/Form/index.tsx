@@ -2,23 +2,21 @@
 
 import { Modal } from "@/app/ui/features";
 import { FaCheck } from "@/app/ui/icons";
+import { Locale } from "@/i18n-config";
 import guests from "@/public/assets/data/guests.json";
 import { useUserStore } from "@/store/user";
 import { TicketFormTypes, TicketOption } from "@/types";
 import { createNewTicketAction } from "@/utils/actions";
-import { createClient } from "@/utils/supabase/client";
-import { UserMetadata } from "@supabase/supabase-js";
 import type { DatePickerProps, UploadProps } from "antd";
 import { Button, DatePicker, Flex, Input, Radio, Select, Upload, message } from "antd";
 import en from "antd/es/date-picker/locale/en_US";
 import dayjs from "dayjs";
 import buddhistEra from "dayjs/plugin/buddhistEra";
-import { useParams } from "next/navigation";
-import { ChangeEventHandler, useEffect, useMemo, useState } from "react";
+import { ChangeEventHandler, use, useEffect, useMemo, useState } from "react";
 import { MdOutlineAttachFile } from "react-icons/md";
 import { TicketHistory } from "./TicketHistory";
-import { developmentTypeOptions, issueTypeOptions, locationOptions, priorityOptions } from "./Utils/options";
-
+import { developmentTypeOptions, issueTypeOptions, priorityOptions } from "./Utils/options";
+import { createClient } from "@/utils/supabase/client";
 // Component level locale
 const buddhistLocale: typeof en = {
   ...en,
@@ -42,21 +40,27 @@ const initialTicketForm: TicketFormTypes = {
   assignee: '',
 };
 
-export  function TicketForm({openModal, setOpenModal}: {openModal: boolean, setOpenModal: (value:boolean) => void}) {
+const getStaff = async () => {
+  const { data, error } = await createClient().from('profiles').select('*');
+  if (error) {
+    console.log(error);
+  }
+  console.log(getStaff);
+  return data;
+};
+
+export  function TicketForm({lang, openModal, setOpenModal}: {lang:Locale,openModal: boolean, setOpenModal: (value:boolean) => void}) {
   const [ticketForm, setTicketForm] = useState<TicketFormTypes>(initialTicketForm);
 
-  
   // const { isOpen, closeModal } = useModalToggle((state) => state);
-  const { lang } = useParams();
-  const supabase = createClient();
-
+ 
   const {user,setUser} = useUserStore(state => state);
   
-  const handlePriorityChange = (value:string) => {
+  const handlePriorityChange = (value: string) => {
     setTicketForm({ ...ticketForm, priority: value });
   };
   const handleDueDateChange: DatePickerProps['onChange'] = (date) => {
-    setTicketForm({ ...ticketForm, dueDate: date! });
+    setTicketForm({ ...ticketForm, dueDate: date ? date.toISOString() : undefined });
   };
   const handleIssueTypeChange = (value:string) => {
     setTicketForm({ ...ticketForm, issueType: value as string });
@@ -76,7 +80,6 @@ export  function TicketForm({openModal, setOpenModal}: {openModal: boolean, setO
   const filterOption = (input: string, option?: TicketOption) => {
     return (option?.label ?? '').toString().toLowerCase().includes(input.toLowerCase());
   };
-  
   const filterSort = (optionA: TicketOption, optionB: TicketOption) => {
     return (optionA?.label ?? '').toString().toLowerCase().localeCompare((optionB?.label ?? '').toString().toLowerCase());
   };
@@ -106,12 +109,6 @@ export  function TicketForm({openModal, setOpenModal}: {openModal: boolean, setO
     }));
   }, []);
 
-  useEffect(() => {
-    supabase.auth.getUser()
-    .then(({data:{user}}) =>  setUser(user?.user_metadata as UserMetadata))
-    .catch((error) => console.error(error)); 
-  }, [setUser, supabase.auth]);
-
   const props: UploadProps = {
     name: "file",
     action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
@@ -134,7 +131,10 @@ export  function TicketForm({openModal, setOpenModal}: {openModal: boolean, setO
     <Modal title="Create Ticket" open={openModal} onClose={() => setOpenModal(!openModal)} >
       <TicketHistory />
       <form className="grid grid-cols-1 gap-4" action={async (formData: FormData) => {
-          await createNewTicketAction(ticketForm, formData);
+          const response = await createNewTicketAction(ticketForm, formData);
+          if(response.success){
+            setOpenModal(!openModal);
+          }
         }}>
         {/* Ticket Title */}
         <Input
@@ -145,32 +145,18 @@ export  function TicketForm({openModal, setOpenModal}: {openModal: boolean, setO
           onChange={(e) => setTicketForm({ ...ticketForm, title: e.target.value })}
           required
         />
-        {/* Author */}
-        <Input
-          type="text"
-          className="!hidden"
-          name="author"
-          value={`${user.name} ${user.last_name}`}
-          
-        />
-        {/* Author Email*/}
-        <Input
-          type="email"
-          className="!hidden"
-          name="authorEmail"
-          value={`${user.email}`}
-        />
+        {/* Author Id*/}
         <Input
           type="text"
           className="!hidden"
           name="autorId"
-          value={`${user.sub}`}
+          value={user?.user?.id}
         />
-        {/* Created On */}
         <Input
+          type="text"
           className="!hidden"
-          name="createdOn"
-          value={new Date().toISOString()}
+          name="lang"
+          value={lang}
         />
         {/* Ticket Priority */}
         <Select
@@ -223,17 +209,33 @@ export  function TicketForm({openModal, setOpenModal}: {openModal: boolean, setO
               onChange={handleDevelopmentTypeChange}
             />
             <Flex>
-              <Radio.Group>
+              <Radio.Group name="implementationType">
                 <Radio value="Front End">Front End</Radio>
                 <Radio value="Back End">Back End</Radio>
                 <Radio value="Design">Design</Radio>
               </Radio.Group>
             </Flex>
+            <Flex gap={16}>
+              <Input
+                placeholder="Page name"
+                type="text"
+                size="large"
+                name="pageLocation"
+                required
+              />
+              <Input
+                placeholder="Component name"
+                type="text"
+                size="large"
+                name="pageComponent"
+                required
+              />
+            </Flex>
           </>
           )
         }
         {/* Ticket Location */}
-        <Select
+        {/* <Select
           size="large"
           className="w-full"
           placeholder="Location"
@@ -243,29 +245,7 @@ export  function TicketForm({openModal, setOpenModal}: {openModal: boolean, setO
           filterSort={filterSort}
           options={locationOptions}
           onChange={handleLocationChange}
-        />
-        {
-          ticketForm.location === 'page' && (
-          <>
-            <Flex gap={16}>
-            <Input
-          placeholder="Page name"
-          type="text"
-          size="large"
-          name="pageName"
-          required
-        />
-        <Input
-          placeholder="Component name"
-          type="text"
-          size="large"
-          name="componentName"
-          required
-        />
-            </Flex>
-          </>
-          )
-        }
+        /> */}
         {/* Ticket Assignee */}
         <Select
           size="large"
