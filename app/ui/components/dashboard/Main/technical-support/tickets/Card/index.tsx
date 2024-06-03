@@ -7,15 +7,15 @@ import { Avatar, Button, Card, Image } from 'antd';
 import moment from 'moment';
 import Link from 'next/link';
 
-export function TicketCard({ticketId, lang,ticket}:{ticketId:string, lang:Locale,ticket: Ticket}) {
+export function TicketCard({id, lang,ticket}:{id:string, lang:Locale, ticket: Ticket}) {
+  console.log();
   return (
     <div className='rounded-xs'>
       <Card className="[&_.ant-card-extra]:w-full" extra={
-        <div className="p-3 px-1 flex gap-2 items-center justify-center">
-          <UpdateStatusBtn ticketStatus="Begin"  ticketId={ticket.id}/>
-          <UpdateStatusBtn ticketStatus="Done" ticketId={ticket.id}/>
-          <UpdateStatusBtn ticketStatus="Cancel" ticketId={ticket.id}/>
-        <Button className="ml-auto" size='small' type="default">History</Button>
+        <div className="p-3 px-1 flex gap-2 items-center justify-start">
+          <UpdateStatusBtn ticketStatus="Begin"  ticketId={ticket.id} className='border !border-primary-500/60 !bg-primary-500/20' />
+          <UpdateStatusBtn ticketStatus="Done" ticketId={ticket.id} className='border !border-green-500/60 !bg-green-500/20' />
+          {ticket.author_id === ticket.staff.author.id ? <Button className="ml-auto border !border-red-500/60 !bg-red-500/20" size='small' type="default">Delete</Button> : <div/>}
       </div>
     } bordered={false}>
         <div className="grid grid-cols-[auto_1fr] grid-rows-1 gap-4">
@@ -27,21 +27,21 @@ export function TicketCard({ticketId, lang,ticket}:{ticketId:string, lang:Locale
               <h2 className="text-lg font-bold">{ticket.title}</h2>
               <p className="space-x-4">
                 <b>Created by: </b>
-                Alipio Feliz 
+                {ticket.staff.author.name} {ticket.staff.author.last_name}
                 <b>Date: </b>
                 {moment(ticket.created_at).format('MM/DD/YYYY')}</p>
             </div>
 
             <div className="flex items-center justify-start flex-1 w-full">
               <div className="w-full">
-                <p><b>Assignee:</b> Roman Feliz</p>
+                <p><b>Assignee:</b> {ticket.staff.assignee.name} {ticket.staff.assignee.last_name}</p>
                 <div className="flex items-start justify-end gap-4">
                   <p><b>Priority:</b> {format.firstLetterToUpperCase(ticket.priority)}</p>
                   <p><b>Status:</b> {format.firstLetterToUpperCase(ticket.status)}</p>
                   <div className="ml-auto">
                     {
-                      ticketId !== ticket.id ? <Link href={`/${lang}/portal/soporte-technico/tickets?ticketId=${ticket.id}`}>View Details</Link> :
-                      ticketId === ticket.id && <Link href={`/${lang}/portal/soporte-technico/tickets`}>Close Details</Link>
+                      id !== ticket.id ? <Link href={`/${lang}/portal/soporte-technico/tickets?id=${ticket.id}`}>View Details</Link> :
+                      id === ticket.id && <Link href={`/${lang}/portal/soporte-technico/tickets`}>Close Details</Link>
                     }
                   </div>
                 </div>
@@ -50,35 +50,33 @@ export function TicketCard({ticketId, lang,ticket}:{ticketId:string, lang:Locale
           </div>
                   
           {
-            ticketId === ticket.id  && (
+            id === ticket.id  && (
               <div className="col-span-2 flex flex-col gap-4">
                 <div>
-                  <h3 className="font-bold text-sm">Development Ticket</h3>
-                  <p>New Implementation - Front End</p>
+                  <h3 className="font-bold text-sm">{format.firstLetterToUpperCase(ticket.issueType)} Ticket</h3>
+                  <p>New Implementation - {format.firstLetterToUpperCase(ticket.implementationType)}</p>
                 </div>
 
-                <table className="border-separate border-spacing-2 border table-auto border-neutral-100/50">
+                <table className="border-separate border-spacing-2 border table-auto border-neutral-100">
                   <tbody>
                     <tr>
-                      <td className="border border-white bg-neutral-100/50"><b>Due Date</b></td>
-                      <td className="border border-white bg-neutral-100/50">{moment(ticket.dueDate).format('MM/DD/YYYY')}</td>
-                      <td className="border border-white bg-neutral-100/50"><b>Time Remaining</b></td>
-                      <td className="border border-white bg-neutral-100/50"><b></b>3h:25 mins</td>
+                      <td className="border border-white bg-neutral-100/50 px-2"><b>Due Date</b></td>
+                      <td className="border border-white bg-neutral-100/50 px-2">{moment(ticket.dueDate).format('MM/DD/YYYY')}</td>
+                      <td className="border border-white bg-neutral-100/50 px-2"><b>Time Remaining</b></td>
+                      <td className="border border-white bg-neutral-100/50 px-2"><b></b>3h:25 mins</td>
                     </tr>
                     <tr>
-                      <td className="border border-white bg-neutral-100/50"><b>Page</b></td>
-                      <td className="border border-white bg-neutral-100/50">Dashboard</td>
-                      <td className="border border-white bg-neutral-100/50"><b>Component</b></td>
-                      <td className="border border-white bg-neutral-100/50"><b></b>Aside</td>
+                      <td className="border border-white bg-neutral-100/50 px-2"><b>Page</b></td>
+                      <td className="border border-white bg-neutral-100/50 px-2">{format.firstLetterToUpperCase(ticket.pageLocation)}</td>
+                      <td className="border border-white bg-neutral-100/50 px-2"><b>Component</b></td>
+                      <td className="border border-white bg-neutral-100/50 px-2"><b></b>{format.firstLetterToUpperCase(ticket.pageComponent)}</td>
                     </tr>
                   </tbody>
                 </table>
                 <div>
                   <h4 className="font-bold text-sm">Description</h4>
                   <p>
-                    Generate Lorem Ipsum placeholder text for use in your graphic, print
-                    and web layouts, and discover plugins for your favorite writing, design
-                    and blogging tools.
+                   {format.firstLetterToUpperCase(ticket.description)}
                   </p>
                 </div>
                 <div className="overflow-hidden rounded-md h-48 [&>div]:h-[100%] [&>div]:w-full">
@@ -89,7 +87,6 @@ export function TicketCard({ticketId, lang,ticket}:{ticketId:string, lang:Locale
                     className="rounded-md"
                   />
                 </div>
-
               </div>
              )
           }

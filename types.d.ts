@@ -194,6 +194,11 @@ export type SupabaseUser = {
   user_role: string;
 };
 
+export type Staff = {
+  assignee: { id:string, name: string, last_name: string },
+  author: { id:string,name: string, last_name: string }
+}
+
 export type Ticket = {
   id: string;
   status: string;
@@ -209,6 +214,7 @@ export type Ticket = {
   pageComponent: string;
   pageLocation: string;
   priority: string;
+  staff: Staff;
 };
 
 export type TicketStaff = {

@@ -1,12 +1,12 @@
 import { Locale } from "@/i18n-config";
+import { format } from "@/utils/formatter/format";
+import { createClient } from "@/utils/supabase/server";
+import { UserMetadata } from "@supabase/supabase-js";
 import Image from "next/image";
 import React from "react";
 import { AuthMenu } from "../AuthMenu";
 import { AuthMenuList } from "./AuthMenuList";
 import { NotificationList } from "./Notifications";
-import { createClient } from "@/utils/supabase/server";
-import { UserMetadata } from "@supabase/supabase-js";
-import { format } from "@/utils/formatter/format";
 
 export async function Navigation({
   lang,
