@@ -209,6 +209,7 @@ export type Ticket = {
   description: string;
   dueDate: string; // ISO 8601 datetime
   implementationType: string;
+  developmentType: string;
   issueType: string;
   location: string;
   pageComponent: string;

@@ -32,6 +32,8 @@ export default async function Page({
 }>) {
   
   const tickets = await getTickets();
+  const supabase = createClient();
+  const user = await supabase.auth.getUser();
 
   return (
     <>

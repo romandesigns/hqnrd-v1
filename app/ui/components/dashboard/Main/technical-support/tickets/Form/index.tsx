@@ -7,7 +7,7 @@ import { useUserStore } from "@/store/user";
 import type { TicketFormTypes, TicketOption, TicketStaff } from "@/types";
 import { createNewTicketAction } from "@/utils/actions";
 import { createClient } from "@/utils/supabase/client";
-import type { DatePickerProps, UploadProps } from "antd";
+import type { DatePickerProps, PickerLocale, UploadProps } from "antd";
 import { Button, DatePicker, Flex, Input, Radio, Select, Upload, message } from "antd";
 import dayjs from "dayjs";
 import buddhistEra from "dayjs/plugin/buddhistEra";
@@ -187,11 +187,13 @@ const filterSort = (optionA: TicketOption, optionB: TicketOption) => {
           minDate={dayjs()}
           placeholder="Due Date"
           size="large"
+          format="MM/DD/YYYY h:mm A"
           defaultValue={dayjs(defaultValue)}
-          showTime={{ use12Hours: true, format: "HH:mm A" }}
+          showTime={{ use12Hours: true, format: "h:mm A" }}
           showWeek
           onChange={handleDueDateChange}
           required
+          locale={lang as PickerLocale }
         />
         {/* Ticket Issue type */}
         <Select

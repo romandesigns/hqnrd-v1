@@ -15,12 +15,13 @@ export async function createNewTicketAction(prevState: any, formData: FormData) 
     assignee: prevState.assignee,
     author_id: supadata?.user?.id,
     description: prevState.description,
-    dueDate: prevState.dueDate,
-    implementationType: formData.get('implementationType'),
-    issueType: prevState.issueType,
     location: prevState.location || 'N/A',
     pageComponent: formData.get('pageComponent'),
     pageLocation: formData.get('pageLocation'),
+    implementationType: formData.get('implementationType'), 
+    developmentType: prevState.developmentType, 
+    issueType: prevState.issueType,
+    dueDate: prevState.dueDate,
     priority: prevState.priority,
     title: formData.get("title")
   };

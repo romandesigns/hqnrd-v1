@@ -7,8 +7,10 @@ import { Avatar, Button, Card, Image } from 'antd';
 import moment from 'moment';
 import Link from 'next/link';
 
+
+
 export function TicketCard({id, lang,ticket}:{id:string, lang:Locale, ticket: Ticket}) {
-  console.log();
+
   return (
     <div className='rounded-xs'>
       <Card className="[&_.ant-card-extra]:w-full" extra={
@@ -54,7 +56,7 @@ export function TicketCard({id, lang,ticket}:{id:string, lang:Locale, ticket: Ti
               <div className="col-span-2 flex flex-col gap-4">
                 <div>
                   <h3 className="font-bold text-sm">{format.firstLetterToUpperCase(ticket.issueType)} Ticket</h3>
-                  <p>New Implementation - {format.firstLetterToUpperCase(ticket.implementationType)}</p>
+                  <p>{format.firstLetterToUpperCase(ticket.developmentType)} - {format.firstLetterToUpperCase(ticket.implementationType)}</p>
                 </div>
 
                 <table className="border-separate border-spacing-2 border table-auto border-neutral-100">
@@ -63,7 +65,7 @@ export function TicketCard({id, lang,ticket}:{id:string, lang:Locale, ticket: Ti
                       <td className="border border-white bg-neutral-100/50 px-2"><b>Due Date</b></td>
                       <td className="border border-white bg-neutral-100/50 px-2">{moment(ticket.dueDate).format('MM/DD/YYYY')}</td>
                       <td className="border border-white bg-neutral-100/50 px-2"><b>Time Remaining</b></td>
-                      <td className="border border-white bg-neutral-100/50 px-2"><b></b>3h:25 mins</td>
+                      <td className="border border-white bg-neutral-100/50 px-2"><b></b>{format.getRemainingTime(ticket.dueDate)}</td>
                     </tr>
                     <tr>
                       <td className="border border-white bg-neutral-100/50 px-2"><b>Page</b></td>
