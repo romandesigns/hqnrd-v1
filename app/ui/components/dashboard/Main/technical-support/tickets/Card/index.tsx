@@ -3,13 +3,15 @@ import { HiOutlineUser } from "@/app/ui/icons";
 import { Locale } from '@/i18n-config';
 import { Ticket } from '@/types';
 import { format } from "@/utils/formatter/format";
+import { UserMetadata } from '@supabase/supabase-js';
 import { Avatar, Button, Card, Image } from 'antd';
+import cn from 'classnames';
 import moment from 'moment';
 import Link from 'next/link';
 
 
 
-export function TicketCard({id, lang,ticket}:{id:string, lang:Locale, ticket: Ticket}) {
+export function TicketCard({id, lang,ticket, user}:{id:string, lang:Locale, ticket: Ticket, user:UserMetadata | undefined}) {
 
   return (
     <div className='rounded-xs'>
@@ -39,7 +41,13 @@ export function TicketCard({id, lang,ticket}:{id:string, lang:Locale, ticket: Ti
                 <p><b>Assignee:</b> {ticket.staff.assignee.name} {ticket.staff.assignee.last_name}</p>
                 <div className="flex items-start justify-end gap-4">
                   <p><b>Priority:</b> {format.firstLetterToUpperCase(ticket.priority)}</p>
-                  <p><b>Status:</b> {format.firstLetterToUpperCase(ticket.status)}</p>
+                  <p><b>Status:</b> <span className={cn("rounded-md border py-[0.15rem] px-3",{
+                    // 'text-red-500': ticket.status === 'begin' ,
+                    'text-green-500 border-green-500/60 bg-green-500/10': ticket.status === 'done' ,
+                    'text-primary-500 border-primary-500/60 bg-primary-500/10': ticket.status === 'begin' ,
+                    'text-neutral-700 border-black/60 bg-black/10': ticket.status === 'backlog' ,
+                  })}>{format.firstLetterToUpperCase(ticket.status)}</span></p>
+                  
                   <div className="ml-auto">
                     {
                       id !== ticket.id ? <Link href={`/${lang}/portal/soporte-technico/tickets?id=${ticket.id}`}>View Details</Link> :

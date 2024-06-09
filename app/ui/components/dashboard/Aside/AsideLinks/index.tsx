@@ -58,7 +58,7 @@ export const AsideLinks = ({
     <>
       {links.map((link, i) => (
         <Fragment key={`${link.label}-${link.path}`}>
-          <li className={cn("group sm:hover:bg-neutral-200 flex-1", className)}>
+          <li className={cn("group md:hover:bg-neutral-200 flex-1", className)}>
             <Link
               href={`/${lang}/portal${link.path}`}
               className={cn(
@@ -70,7 +70,7 @@ export const AsideLinks = ({
               )}
             >
               <div className="flex w-[55%]">
-                <span className="flex items-center sm:mr-2 text-xl">{link.icon}</span>
+                <span className="flex items-center md:mr-2 text-xl">{link.icon}</span>
                 <p className="hidden md:text-sm md:inline-block">{link.label}</p>
               </div>
               {["Reservations", "Messages", "Notifications"].includes(link.label) && (
@@ -109,7 +109,7 @@ export const AsideLinks = ({
             {links.slice(5).map((link, i) => (
               <li key={`${link.label}-${link.path}`}>
                 <Link href={`/${lang}/portal${link.path}`}  className="p-8 rounded-md border flex items-center justify-center flex-col gap-2">
-                  <span className="flex items-center sm:mr-2 text-xl">{link.icon}</span>
+                  <span className="flex items-center md:mr-2 text-xl">{link.icon}</span>
                   <span className="flex items-center text-xs">{link.label === "Soporte Technico" ? "Soporte" : link.label}</span>
                 </Link>
               </li>
@@ -118,7 +118,7 @@ export const AsideLinks = ({
         </div>
       </Drawer> */}
       {/* Menu Icon */}
-      <HiMenuAlt1 className="text-3xl fixed bottom-24 right-5 z-10 sm:hidden" onClick={handleMenuClick} />
+      <HiMenuAlt1 className="text-3xl fixed bottom-24 right-5 z-10 md:hidden" onClick={handleMenuClick} />
     </>
   );
 };

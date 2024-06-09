@@ -27,12 +27,12 @@ export default function DashboardLayout({
   return (
     <html lang={lang} className="min-h-dvh">
       <body
-        className={`${poppins.className} flex min-h-dvh sm:flex-row flex-col`}
+        className={`${poppins.className} flex min-h-dvh md:flex-row flex-col`}
       >
         <AntConfigProvider lang={lang}>
           <AntdRegistry>
-            <Aside lang={lang} className="order-2 sm:order-1 border-2" />
-            <Main className="order-1 sm:order-2 flex-1 border-2" lang={lang}>
+            <Aside lang={lang} className="order-2 md:order-1 border-2" />
+            <Main className="order-1 md:order-2 flex-1 border-2" lang={lang}>
               {children}
             </Main>
           </AntdRegistry>

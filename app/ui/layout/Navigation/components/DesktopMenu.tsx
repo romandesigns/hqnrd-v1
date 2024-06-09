@@ -24,6 +24,17 @@ export async function DesktopMenu({ lang }: { lang: string }) {
         </Link>
       </li>
       <li className="inline-block">
+        <Link href={`/${lang}/playground`}>
+          <Button
+            className="!flex items-center justify-center"
+            size="middle"
+            icon={<BsDoorOpenFill />}
+          >
+            Playground
+          </Button>
+        </Link>
+      </li>
+      <li className="inline-block">
         <Link href={`/${lang}/habitaciones`}>
           <Button
             className="!flex items-center justify-center"

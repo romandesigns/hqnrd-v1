@@ -10,7 +10,7 @@ export function Aside({
 }: Readonly<{ lang: Locale; className: string }>) {
   return (
     <aside className={twMerge(`display: flex border-r bg-white items-center justify-center md:items-start ${className}`)}>
-      <ul className="flex items-center justify-center sm:flex-col sm:items-stretch flex-row relative">
+      <ul className="flex items-center justify-center md:flex-col md:items-stretch flex-row relative">
         <li className="border-b p-2 md:p-4 md:px-16 hidden md:block">
           <Brand lang={lang} figClassName="hidden md:inline-block" />
         </li>
