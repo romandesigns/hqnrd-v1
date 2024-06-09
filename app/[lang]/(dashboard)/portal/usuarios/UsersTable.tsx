@@ -1,5 +1,5 @@
 "use client";
-import { Navigation } from "@/app/ui/components/dashboard/features/Navigation";
+import { Navigation } from "@/app/ui/components/dashboard/layout/features/Navigation";
 import { Locale } from "@/i18n-config";
 import { Guest } from "@/types";
 import type { TableProps } from "antd";
