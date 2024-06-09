@@ -1,4 +1,4 @@
-import { HeaderContent } from "@/app/ui/components/Rooms/HeaderContent";
+import { HeaderContent } from "@/app/ui/components/site/Rooms/HeaderContent";
 import { Header, PublicLayout, Wrapper } from "@/app/ui/layout";
 import type { Metadata } from "next";
 
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 import { Locale, i18n } from "@/i18n-config";
-import { billboards } from "../../../ui/components/Rooms/data/billboards";
+import { billboards } from "../../../../public/assets/data/billbaord";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));

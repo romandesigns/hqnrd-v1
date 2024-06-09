@@ -20,8 +20,8 @@ export default async function Page({
       <Navigation lang={lang}>
         <div className="font-bold">DASHBOARD</div>
       </Navigation>
-      <section className="p-4">
-        <article>Hello</article>
+      <section className="p-2 overflow-hidden">
+        <article className="w-full h-full bg-white rounded-md">Hello</article>
       </section>
     </>
   );

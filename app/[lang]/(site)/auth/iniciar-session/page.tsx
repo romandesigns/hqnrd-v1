@@ -1,4 +1,4 @@
-import { Content } from "@/app/ui/components/auth/signIn/Content";
+import { Content } from "@/app/ui/components/site/auth/signIn/Content";
 import { Locale } from "@/i18n-config";
 
 export default function Page({

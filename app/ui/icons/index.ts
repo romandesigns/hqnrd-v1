@@ -69,6 +69,7 @@ export {
   IoLogIn,
   IoLogOut,
   IoSettings,
+  IoConstruct 
 } from "react-icons/io5";
 export { LiaBedSolid } from "react-icons/lia";
 export { LuUser2 } from "react-icons/lu";
