@@ -61,6 +61,7 @@ export {
   IoLogoWhatsapp,
   IoMdArrowRoundBack,
   IoMdCloseCircleOutline,
+  IoMdAddCircleOutline 
 } from "react-icons/io";
 export {
   IoClose,

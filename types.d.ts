@@ -160,3 +160,26 @@ type Guest = {
   accountStatus: string;
   identification: string;
 };
+
+export enum IssuesTypes {
+  DEVELOPMENT = "Development",
+  ADMINISTRATIVE = "Administrative",
+}
+
+export type DataSource = {
+  key: React.Key;
+  title: string;
+  type: string;
+  assignee: string;
+  priority: string;
+  location: string;
+  component: string;
+  status: string;
+  description: string;
+}[];
+
+export type SupportTableProps = {
+  lang: Locale;
+  className?: string;
+  dataSource: DataSource;
+};

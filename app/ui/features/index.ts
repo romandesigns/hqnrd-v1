@@ -26,3 +26,4 @@ export { SwiperComponent } from "./Swiper";
 export { WaveDot } from "./WaveDot";
 export { WeatherWidget } from "./WeatherWidget";
 export { FloatingBtn } from "./FloatingBtn";
+export { TableTag } from "./Table/Tag";

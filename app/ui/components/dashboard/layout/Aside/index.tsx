@@ -12,7 +12,7 @@ export function Aside({
      <FloatingBtn />
      <ul className="flex items-center justify-center md:flex-col md:items-start md:justify-start w-full">
         <li className="md:px-3 md:pb-4 flex items-center justify-start border-b">
-          <Brand lang={lang} className="hidden md:inline-block"/>
+          <Brand lang={lang} className="hidden md:inline-block [&_h1]:max-xl:hidden [&_p]:max-xl:hidden"/>
         </li>
         <li className="py-8 hidden md:block"/>
         <MenuLinks lang={lang} />
