@@ -5,14 +5,16 @@ import { PulseLoader } from "react-spinners";
 
 export function Loader() {
   return (
-    <div className="relative row-span-full flex h-screen w-screen items-center justify-center overflow-hidden">
-      <div className="flex h-full w-full flex-col items-center justify-center gap-12">
-        <Brand className="relative z-[2]" />
-        <div className="relative z-[2]">
-          <PulseLoader color="#1a73b2 " />
+    <div className="row-span-full flex  items-stretch justify-strech overflow-hidden relative">
+      <div className="h-full w-full flex items-center justify-center">
+        <div className="flex flex-col gap-4">
+          <Brand className="relative z-[2]" />
+          <div className="relative z-[2] flex items-center justify-center">
+            <PulseLoader color="#1a73b2 " />
+          </div>
         </div>
-        <BackgroundEffect />
       </div>
+      <BackgroundEffect />
     </div>
   );
 }
