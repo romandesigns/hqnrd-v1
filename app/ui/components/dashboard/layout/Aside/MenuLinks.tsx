@@ -9,14 +9,14 @@ export function MenuLinks({
 }: Readonly<{ lang: Locale; }>) {
   return (
     <>
-        <li className="p-2 md:p-3 rounded-md">
+        <li className="p-2 md:p-3 rounded-md md:w-full">
             <Link href={`/${lang}/portal`} className="flex items-center justify-start md:gap-2 text-xl md:text-sm">
                 <span className="p-2 rounded-md border"><MdSpaceDashboard /></span>
                 <p className="font-medium hidden md:inline-block">Portal</p>
             </Link>
         </li>
-        <li className="p-2 md:p-3 rounded-md">
-            <Link href={`/${lang}/suporte`} className="flex items-center justify-start md:gap-2 text-xl md:text-sm">
+        <li className="p-2 md:p-3 rounded-md md:w-full">
+            <Link href={`/${lang}/portal/soporte`} className="flex items-center justify-start md:gap-2 text-xl md:text-sm">
                 <span className="p-2 rounded-md border"><IoConstruct /></span>
                 <p className="font-medium hidden md:inline-block">Support</p>
             </Link>

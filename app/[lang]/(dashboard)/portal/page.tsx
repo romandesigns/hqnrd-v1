@@ -21,7 +21,7 @@ export default async function Page({
         <div className="font-bold">DASHBOARD</div>
       </Navigation>
       <section className="p-2 overflow-hidden">
-        <article className="w-full h-full bg-white rounded-md">Hello</article>
+        <article className="w-full h-full bg-white rounded-md">Portal Page</article>
       </section>
     </>
   );

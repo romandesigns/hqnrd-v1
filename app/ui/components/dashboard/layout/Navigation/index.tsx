@@ -11,9 +11,10 @@ export function Navigation({
   children,
 }: Readonly<{ lang: Locale; children?: React.ReactNode }>) {
   return (
-    <nav className="w-white flex w-full items-center justify-between p-2 md:p-4">
+    <nav className="w-white flex w-full items-center justify-between p-2 md:p-4 md:pt-6 md:pb-3">
        <Brand lang={lang} className="md:hidden"/>
-      <p>Items</p>
+       {children}
+       <div>Icon</div>
     </nav>
   );
 }
