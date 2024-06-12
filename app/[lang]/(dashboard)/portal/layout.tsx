@@ -4,11 +4,10 @@ import type { Metadata } from "next";
 import "../../../ui/styles/globals.css";
 import { poppins } from "../../../ui/typography";
 
+import { Aside, Main } from "@/app/ui/components/dashboard/layout";
 import { Locale, i18n } from "@/i18n-config";
 import AntConfigProvider from "@/providers/ConfigProvider";
 import { CONSTANTS } from "@/utils/constants";
-import { generateGuests } from "@/utils/contentGenerator/guests";
-import { Aside, Main } from "@/app/ui/components/dashboard/layout";
 
 export const metadata: Metadata = {
   title: `${CONSTANTS.Brand.COMPANY_NAME} - Home`,
@@ -28,17 +27,19 @@ export default function DashboardLayout({
 }>) {
   return (
     <html lang={lang} className="min-h-dvh">
-      <body
-        className={`${poppins.className} grid min-h-dvh grid-rows-[1fr_auto] md:grid-cols-[auto_1fr]`}
-      >
-        <AntConfigProvider lang={lang}>
-          <AntdRegistry>
-            <Aside lang={lang} className="order-1 md:order-1" />
-            <Main className="md:order-2" lang={lang}>
-              {children}
-            </Main>
-          </AntdRegistry>
-        </AntConfigProvider>
+      <body className={`${poppins.className}`}>
+        <section
+          className={`grid min-h-dvh grid-rows-[1fr_auto] md:grid-cols-[auto_1fr]`}
+        >
+          <AntConfigProvider lang={lang}>
+            <AntdRegistry>
+              <Aside lang={lang} className="order-1 md:order-1" />
+              <Main className="md:order-2" lang={lang}>
+                {children}
+              </Main>
+            </AntdRegistry>
+          </AntConfigProvider>
+        </section>
       </body>
     </html>
   );

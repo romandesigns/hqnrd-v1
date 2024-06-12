@@ -61,7 +61,8 @@ export {
   IoLogoWhatsapp,
   IoMdArrowRoundBack,
   IoMdCloseCircleOutline,
-  IoMdAddCircleOutline 
+  IoMdAddCircleOutline,
+  IoMdEye,
 } from "react-icons/io";
 export {
   IoClose,
@@ -70,7 +71,7 @@ export {
   IoLogIn,
   IoLogOut,
   IoSettings,
-  IoConstruct 
+  IoConstruct,
 } from "react-icons/io5";
 export { LiaBedSolid } from "react-icons/lia";
 export { LuUser2 } from "react-icons/lu";

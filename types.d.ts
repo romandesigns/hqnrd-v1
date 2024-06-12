@@ -183,3 +183,16 @@ export type SupportTableProps = {
   className?: string;
   dataSource: DataSource;
 };
+
+export type TicketTableDataTypes = {
+  key: React.Key;
+  title: string;
+  assignee: string;
+  type: string;
+  priority: string;
+  location: string;
+  component: string;
+  status: string;
+  description: string;
+  actions: React.ReactNode | React.ReactNode[] | undefined;
+};
