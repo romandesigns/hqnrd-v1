@@ -1,53 +1,67 @@
 "use client";
 import { Modal } from "@/app/ui/features";
-import { IoMdAddCircleOutline } from "@/app/ui/icons";
-import { type RadioChangeEvent } from "antd";
-import { Button, Input, Select, DatePicker } from "antd";
+import { IoMdAddCircleOutline, RiErrorWarningFill } from "@/app/ui/icons";
+import { Locale } from "@/i18n-config";
+import { DevTaskTypes, StaffMember } from "@/types";
+import { createSupportTicketAction } from "@/utils/actions/createSupportTicketAction";
+import { format } from "@/utils/formatter/format";
+import { Button, DatePicker, Input, Select, notification } from "antd";
 import dayjs from "dayjs";
-import React, { useMemo, useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 
-type StaffMember = {
-  role: string;
-  name: string;
-};
+type ResponseTypes =
+  | {
+      path: string | number | null;
+      errors: string | null;
+      message: string | null;
+    }
+  | undefined;
 
 type TicketFormTypes = {
   title?: string;
   type?: string;
   priority?: string;
   assignee?: string;
-  developmentType?: string;
-  location?: string;
+  dev_task?: DevTaskTypes;
+  page?: string;
   component?: string;
   description?: string;
   dueDate?: string;
+  lang: Locale;
+  status: string;
+  authorId: string;
 };
 
-export function TicketForm() {
+export function TicketForm({
+  lang,
+  userId,
+  staffMembers,
+}: Readonly<{ lang: Locale; userId: string; staffMembers: StaffMember[] }>) {
   const [open, setOpen] = React.useState(false);
-  const [formData, setFormData] = React.useState<TicketFormTypes>({});
+  const [api, contextHolder] = notification.useNotification();
+  const [formData, setFormData] = React.useState<TicketFormTypes>({
+    lang: lang,
+    status: "backlog",
+    authorId: userId,
+  });
 
   const handleChange = useCallback((key: keyof TicketFormTypes, value: any) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   }, []);
 
-  const staffMembers: StaffMember[] = useMemo(
-    () => [
-      { role: "Development", name: "Roman" },
-      { role: "Administrative", name: "Ayelin" },
-      { role: "Administrative", name: "Ashley" },
-    ],
-    [],
-  );
+  const handleFormSubmission = () => {
+    setFormData({} as TicketFormTypes);
+    setOpen(false);
+  };
 
   const groupedOptions = useMemo(
     () =>
       staffMembers.reduce(
         (acc, staff) => {
-          acc[staff.role] = acc[staff.role] || [];
-          acc[staff.role].push({
+          acc[staff.user_role] = acc[staff.user_role] || [];
+          acc[staff.user_role].push({
             label: <span>{staff.name}</span>,
-            value: staff.name,
+            value: staff.id,
           });
           return acc;
         },
@@ -56,8 +70,19 @@ export function TicketForm() {
     [staffMembers],
   );
 
+  const openNotification = (errorMessage: ResponseTypes) => {
+    api.open({
+      message: errorMessage?.path
+        ? `${format.firstLetterToUpperCase(errorMessage?.path as string)} name is incorrect!`
+        : "",
+      description: errorMessage?.errors,
+      icon: <RiErrorWarningFill size={20} className="text-red-500" />,
+    });
+  };
+
   return (
     <>
+      {contextHolder}
       <div className="flex w-full items-center justify-end p-8 px-4 pb-4">
         <Button
           onClick={() => setOpen(!open)}
@@ -69,11 +94,31 @@ export function TicketForm() {
         </Button>
       </div>
       <Modal open={open} setOpen={setOpen} title="Create Ticket">
-        <form className="space-y-4 p-2">
+        <form
+          className="space-y-4 p-2"
+          action={async (e) => {
+            const response: ResponseTypes =
+              await createSupportTicketAction(formData);
+            if (response?.errors) {
+              openNotification(response);
+            }
+            if (response?.message === "success") {
+              handleFormSubmission();
+            }
+          }}
+        >
           <Input
             placeholder="Ticket title"
             size="large"
             onChange={(e) => handleChange("title", e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            name="lang"
+            value={lang}
+            className="hidden"
+            readOnly
           />
           <Select
             placeholder="Priority"
@@ -90,7 +135,9 @@ export function TicketForm() {
             showTime={{ format: "hh:mm A" }}
             placeholder="Due Date"
             size="large"
+            defaultValue={dayjs()}
             minDate={dayjs()}
+            required
             format="MM/DD/YYYY ~ hh:mm:ss A"
             style={{ width: "100%" }}
             onChange={(value) =>
@@ -111,9 +158,9 @@ export function TicketForm() {
             <div className="space-y-4">
               <fieldset className="flex items-center justify-center gap-2">
                 <Input
-                  placeholder="Location"
+                  placeholder="Page"
                   size="large"
-                  onChange={(e) => handleChange("location", e.target.value)}
+                  onChange={(e) => handleChange("page", e.target.value)}
                 />
                 <Input
                   placeholder="Component"
@@ -126,11 +173,12 @@ export function TicketForm() {
                   placeholder="Development Type"
                   style={{ width: "100%" }}
                   size="large"
-                  onChange={(e) =>
-                    handleChange("developmentType", e.target.value)
-                  }
+                  onChange={(value) => handleChange("dev_task", value)}
                   options={[
-                    { label: "New Implementation", value: "new" },
+                    {
+                      label: "New Implementation",
+                      value: "new implementation",
+                    },
                     { label: "Fix", value: "fix" },
                     { label: "Optimization", value: "optimization" },
                   ]}
@@ -155,6 +203,17 @@ export function TicketForm() {
             placeholder="disable resize"
             style={{ height: 120 }}
           />
+
+          <div className="pt-2">
+            <Button
+              type="primary"
+              size="large"
+              className="w-full"
+              htmlType="submit"
+            >
+              Create
+            </Button>
+          </div>
         </form>
       </Modal>
     </>

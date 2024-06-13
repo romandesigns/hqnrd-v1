@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import { Locale } from "@/i18n-config";
 
 export type CarouselTypes = {
   src: string;
@@ -172,27 +173,74 @@ export type DataSource = {
   type: string;
   assignee: string;
   priority: string;
-  location: string;
+  page: string;
   component: string;
   status: string;
   description: string;
 }[];
 
+export type StaffMember = {
+  id: string;
+  user_role: string;
+  name: string;
+};
+
 export type SupportTableProps = {
   lang: Locale;
   className?: string;
-  dataSource: DataSource;
+  dataSource?: TicketTableDataTypes[]; // dataSource can now be undefined
+  userId: string;
+  staffMembers: StaffMember[];
+};
+
+// export type TicketTableDataTypes = {
+//   key: React.Key;
+//   title: string;
+//   assignee: string;
+//   type: string;
+//   priority: string;
+//   page: string;
+//   component: string;
+//   status: string;
+//   description: string;
+//   actions: React.ReactNode | React.ReactNode[] | undefined;
+// };
+
+export enum DevTaskTypes {
+  FIX = "fix",
+  NEW_IMPLEMENTATION = "new implementation",
+  OPTIMIZATION = "optimization",
+}
+
+export type TicketFormTypes = {
+  title: string;
+  type: string;
+  priority: string;
+  assigneeId: string;
+  authorId: string;
+  developmentType?: string;
+  page?: string;
+  component?: string;
+  description?: string;
+  due: string;
+  lang?: Locale;
+  status: string;
+  devtask: DevTaskTypes;
 };
 
 export type TicketTableDataTypes = {
-  key: React.Key;
+  id: React.Key;
   title: string;
-  assignee: string;
-  type: string;
-  priority: string;
-  location: string;
+  type: "development" | "administrative"; // Include other possible types if they exist
+  priority: "high" | "medium" | "low"; // Extend based on all possible priority levels
+  devtask: "new implementation" | "fix" | "optimization"; // Extend based on all possible dev tasks
+  page: string;
   component: string;
-  status: string;
   description: string;
-  actions: React.ReactNode | React.ReactNode[] | undefined;
+  due: string; // Using string type for date-time, consider using Date type if processing dates in TypeScript
+  status: "backlog" | "in progress" | "done" | "cancelled"; // Extend based on all possible statuses
+  created_at: string; // Using string type for date-time, consider using Date type if processing dates in TypeScript
+  assignee: string;
+  author: string;
+  authorId: string;
 };

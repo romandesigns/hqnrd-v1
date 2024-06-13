@@ -106,7 +106,11 @@ export {
   PiTelevisionSimple,
   PiIdentificationBadgeLight,
 } from "react-icons/pi";
-export { RiLayout6Fill, RiNetflixFill } from "react-icons/ri";
+export {
+  RiLayout6Fill,
+  RiNetflixFill,
+  RiErrorWarningFill,
+} from "react-icons/ri";
 export {
   TbAirConditioning,
   TbBrandIntercom,

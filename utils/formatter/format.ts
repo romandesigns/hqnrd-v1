@@ -62,4 +62,16 @@ export const format = {
   sanitizePath: (path: string) => {
     return path?.replace(/['"]+/g, "").replace(/;+/g, "");
   },
+  toLowerCase: (str: string) => {
+    return str.toLowerCase();
+  },
+  sentenceCapitalize: (str: string) => {
+    return str
+      .split(/(?<=[.!?])\s+/) // Split the string into sentences
+      .map(
+        (sentence) =>
+          sentence.charAt(0).toUpperCase() + sentence.slice(1).toLowerCase(),
+      ) // Capitalize the first letter of each sentence
+      .join(" "); // Rejoin sentences
+  },
 };
