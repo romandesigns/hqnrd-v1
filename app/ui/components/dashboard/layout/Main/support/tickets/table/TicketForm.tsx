@@ -83,7 +83,7 @@ export function TicketForm({
   return (
     <>
       {contextHolder}
-      <div className="flex w-full items-center justify-end p-8 px-4 pb-4">
+      <div className="flex w-full items-center justify-start p-8 px-4 pb-4">
         <Button
           onClick={() => setOpen(!open)}
           type="primary"

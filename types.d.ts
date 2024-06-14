@@ -226,20 +226,21 @@ export type TicketFormTypes = {
   lang?: Locale;
   status: string;
   devtask: DevTaskTypes;
+  assigned: boolean;
 };
 
 export type TicketTableDataTypes = {
   id: React.Key;
   title: string;
-  type: "development" | "administrative"; // Include other possible types if they exist
-  priority: "high" | "medium" | "low"; // Extend based on all possible priority levels
-  devtask: "new implementation" | "fix" | "optimization"; // Extend based on all possible dev tasks
+  type: "development" | "administrative";
+  priority: "high" | "medium" | "low";
+  devtask: "new implementation" | "fix" | "optimization";
   page: string;
   component: string;
   description: string;
-  due: string; // Using string type for date-time, consider using Date type if processing dates in TypeScript
-  status: "backlog" | "in progress" | "done" | "cancelled"; // Extend based on all possible statuses
-  created_at: string; // Using string type for date-time, consider using Date type if processing dates in TypeScript
+  due: string;
+  status: "backlog" | "in progress" | "done" | "cancelled";
+  created_at: string;
   assignee: string;
   author: string;
   authorId: string;
