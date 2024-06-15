@@ -3,7 +3,7 @@ import { Modal } from "@/app/ui/features";
 import { IoMdAddCircleOutline, RiErrorWarningFill } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { DevTaskTypes, StaffMember } from "@/types";
-import { createSupportTicketAction } from "@/utils/actions/createSupportTicketAction";
+import { createSupportTicketAction } from "@/utils/actions/supportTicketActions";
 import { format } from "@/utils/formatter/format";
 import { Button, DatePicker, Input, Select, notification } from "antd";
 import dayjs from "dayjs";

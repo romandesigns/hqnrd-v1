@@ -59,7 +59,6 @@ export function SupportTicketsTable({
       key: "status",
       render: (priority: string) => <TableTag label={priority} />,
       sorter: (a, b) => a.status.length - b.status.length,
-      responsive: ["sm"],
     },
     {
       title: "Description",
@@ -75,7 +74,13 @@ export function SupportTicketsTable({
       render: (_, record) => {
         return (
           <div className="flex gap-2">
-            <ActionBtns authorId={userId} userId={record.authorId} />
+            <ActionBtns
+              authorId={userId}
+              userId={record.authorId}
+              ticketId={record.id}
+              assigned={record.assigned}
+              lang={lang}
+            />
           </div>
         );
       },
@@ -87,7 +92,7 @@ export function SupportTicketsTable({
       <TicketForm lang={lang} userId={userId} staffMembers={staffMembers} />
       <div className="p-2 md:p-4">
         <Table
-          className="[&_td>button]:lg:opacity-0"
+          className="[&_td>button]:lg:opacity-0 [&_td]:capitalize"
           dataSource={dataSource}
           // @ts-ignore
           columns={columns}
@@ -111,7 +116,13 @@ export function SupportTicketsTable({
                 <li className="mt-2 flex flex-col gap-1 border-t py-2">
                   <strong>Actions</strong>
                   <div className="flex gap-1">
-                    <ActionBtns authorId={userId} userId={record.authorId} />
+                    <ActionBtns
+                      authorId={userId}
+                      userId={record.authorId}
+                      ticketId={record.id}
+                      assigned={record.assigned}
+                      lang={lang}
+                    />
                   </div>
                 </li>
               </ul>

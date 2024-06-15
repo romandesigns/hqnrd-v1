@@ -67,11 +67,11 @@ export const format = {
   },
   sentenceCapitalize: (str: string) => {
     return str
-      .split(/(?<=[.!?])\s+/) // Split the string into sentences
+      .split(/(?<=[.!?])\s+/)
       .map(
         (sentence) =>
           sentence.charAt(0).toUpperCase() + sentence.slice(1).toLowerCase(),
-      ) // Capitalize the first letter of each sentence
-      .join(" "); // Rejoin sentences
+      )
+      .join(" ");
   },
 };

@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { format } from "../formatter/format";
 
 export async function createSupportTicketAction(prevState: any) {
+  const supabase = createClient();
   const formData: TicketFormTypes = {
     title: format.toLowerCase(prevState.title),
     priority: format.toLowerCase(prevState.priority),
@@ -31,7 +32,6 @@ export async function createSupportTicketAction(prevState: any) {
     };
   }
 
-  const supabase = createClient();
   const { data, error } = await supabase
     .from("tickets")
     .insert([formData])
@@ -47,6 +47,34 @@ export async function createSupportTicketAction(prevState: any) {
 
   if (data) {
     revalidatePath(`/${prevState.lang}/portal/soporte`);
+    return {
+      path: null,
+      errors: null,
+      message: "success",
+    };
+  }
+}
+
+export async function updateIsTicketAssignedAction(formData: FormData) {
+  const supabase = createClient();
+  // Get the ticket ID
+  const statusData = formData.get("status");
+  const ticketId = formData.get("ticketId");
+  const lang = formData.get("lang");
+
+  // Update assigned status
+  const { data, error } = await supabase
+    .from("tickets")
+    .update({ assigned: statusData === "assigned" })
+    .eq("id", ticketId)
+    .select();
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (data) {
+    revalidatePath(`/${lang}/portal/soporte/tickets`);
     return {
       path: null,
       errors: null,

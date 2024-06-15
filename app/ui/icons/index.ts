@@ -23,6 +23,7 @@ export {
   BsTranslate,
   BsPassport,
   BsTelephone,
+  BsThreeDotsVertical,
 } from "react-icons/bs";
 export {
   CgMenuGridO,
