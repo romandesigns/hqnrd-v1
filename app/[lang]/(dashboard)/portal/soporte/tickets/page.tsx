@@ -25,7 +25,6 @@ export default async function Page({
       author:profiles!tickets_authorId_fkey (id,name, last_name)
     `);
 
-  console.log(data);
   const tickets = data?.map((ticket) => ({
     ...ticket,
     key: ticket.id,

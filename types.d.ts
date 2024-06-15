@@ -245,4 +245,5 @@ export type TicketTableDataTypes = {
   author: string;
   authorId: string;
   assigned: boolean;
+  assigneeId: string;
 };

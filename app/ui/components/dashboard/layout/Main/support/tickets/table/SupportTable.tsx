@@ -75,10 +75,11 @@ export function SupportTicketsTable({
         return (
           <div className="flex gap-2">
             <ActionBtns
-              authorId={userId}
-              userId={record.authorId}
+              authorId={record.authorId}
+              userId={userId}
               ticketId={record.id}
               assigned={record.assigned}
+              assigneeId={record.assigneeId}
               lang={lang}
             />
           </div>
@@ -117,10 +118,11 @@ export function SupportTicketsTable({
                   <strong>Actions</strong>
                   <div className="flex gap-1">
                     <ActionBtns
-                      authorId={userId}
-                      userId={record.authorId}
+                      authorId={record.authorId}
+                      userId={userId}
                       ticketId={record.id}
                       assigned={record.assigned}
+                      assigneeId={record.assigneeId}
                       lang={lang}
                     />
                   </div>
