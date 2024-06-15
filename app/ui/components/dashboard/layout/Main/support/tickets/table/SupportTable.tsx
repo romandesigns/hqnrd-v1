@@ -74,7 +74,7 @@ export function SupportTicketsTable({
       responsive: ["lg"],
       render: (_, record) => {
         return (
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <ActionBtns authorId={userId} userId={record.authorId} />
           </div>
         );

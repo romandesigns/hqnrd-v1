@@ -20,21 +20,12 @@ export default async function Page({
     .not("user_role", "eq", "guest");
 
   const { data } = await supabase.from("tickets").select(`
-      id,
-      title,
-      type,
-      priority,
-      devtask,
-      page,
-      component,
-      description,
-      due,
-      status,
-      created_at,
+      *,
       assignee:profiles!tickets_assigneeId_fkey (id,name, last_name),
       author:profiles!tickets_authorId_fkey (id,name, last_name)
     `);
 
+  console.log(data);
   const tickets = data?.map((ticket) => ({
     ...ticket,
     key: ticket.id,
@@ -50,11 +41,11 @@ export default async function Page({
 
   return (
     <>
-      <Navigation lang={lang} className="px-4">
+      <Navigation lang={lang} className="flex justify-between px-4">
         <div className="hidden font-bold md:inline-block">DASHBOARD</div>
       </Navigation>
       <section className="overflow-hidden p-2">
-        <article className="grid h-full w-full grid-rows-[auto_auto_1fr]  rounded-md bg-white">
+        <article className="grid h-full w-full grid-rows-[auto_auto_1fr] rounded-md bg-white">
           <div className="flex justify-start border-b p-4">
             <TicketNavMenu lang={lang} />
           </div>

@@ -20,11 +20,11 @@ export default async function Page({
         <div className="hidden font-bold md:inline-block">DASHBOARD</div>
       </Navigation>
       <section className="overflow-hidden p-2">
-        <article className="h-full rounded-md bg-white p-2">
+        <article className="grid h-full w-full grid-rows-[auto_auto_1fr] rounded-md bg-white">
           <div className="flex justify-start border-b p-4">
             <TicketNavMenu lang={lang} />
           </div>
-          Support Page!
+          <div className="p-2 md:p-4">Support Page!</div>
         </article>
       </section>
     </>

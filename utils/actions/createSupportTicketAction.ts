@@ -18,7 +18,7 @@ export async function createSupportTicketAction(prevState: any) {
     authorId: format.toLowerCase(prevState.authorId),
     description: prevState.description,
     status: format.toLowerCase(prevState.status),
-    assigned: false,
+    assigned: prevState.assigned,
   };
 
   const validatedData = createSupportTicketSchema.safeParse(formData);

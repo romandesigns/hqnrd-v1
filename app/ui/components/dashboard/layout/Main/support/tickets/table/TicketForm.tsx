@@ -120,6 +120,13 @@ export function TicketForm({
             className="hidden"
             readOnly
           />
+          <input
+            type="text"
+            name="asssigned"
+            value="false"
+            className="hidden"
+            readOnly
+          />
           <Select
             placeholder="Priority"
             style={{ width: "100%" }}

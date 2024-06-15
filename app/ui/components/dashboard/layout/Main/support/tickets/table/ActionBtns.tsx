@@ -7,41 +7,44 @@ export function ActionBtns({
   return (
     <>
       <Button
-        type="primary"
-        className="!flex items-center justify-center rounded-md !bg-green-400  shadow-md"
+        className="!flex items-center justify-center rounded-md !border-green-400  shadow-md"
         onClick={() => console.log("Start")}
       >
-        <span className="text-white">Start</span>
+        <span className="text-green-400">Start</span>
       </Button>
       <Button
-        type="primary"
-        className="!flex items-center justify-center rounded-md !bg-blue-400  shadow-md"
+        className="!flex items-center justify-center rounded-md !border-blue-400  shadow-md"
         onClick={() => console.log("Complete")}
       >
-        <span className="text-white">Complete</span>
+        <span className="text-blue-400">Complete</span>
       </Button>
 
       <Button
-        type="primary"
-        className="!flex items-center justify-center rounded-md  !bg-orange-400  shadow-md"
+        className="!flex items-center justify-center rounded-md  !border-orange-400  shadow-md"
         onClick={() => console.log("Cancel")}
       >
-        <span className="text-white">Cancel</span>
+        <span className="text-orange-400">Cancel</span>
       </Button>
       <Button
-        type="primary"
-        className="!flex items-center justify-center rounded-md  !bg-red-400  shadow-md"
+        className="!flex items-center justify-center rounded-md  !border-purple-400  shadow-md"
         onClick={() => console.log("Delete")}
       >
-        <span className="text-white">Delete</span>
+        <span className="text-purple-400">Backlog</span>
       </Button>
       <Button
-        type="primary"
-        className="!flex items-center justify-center rounded-md  !bg-neutral-400  shadow-md"
+        className="!flex items-center justify-center rounded-md  !border-red-400  shadow-md"
         onClick={() => console.log("Delete")}
       >
-        <span className="text-white">Assigned</span>
+        <span className="text-red-400">Delete</span>
       </Button>
+      {authorId === userId && (
+        <Button
+          className="!flex items-center justify-center rounded-md  !border-neutral-400  shadow-md"
+          onClick={() => console.log("Delete")}
+        >
+          <span className="text-neutral-400">Assigned</span>
+        </Button>
+      )}
     </>
   );
 }
