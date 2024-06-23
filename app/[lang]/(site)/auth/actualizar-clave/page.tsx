@@ -1,4 +1,4 @@
-import { Card } from "@/app/ui/components/auth/Card";
+import { Card } from "@/app/ui/components/site/auth/Card";
 import { ErrorMessage, HeadingSection } from "@/app/ui/features";
 import { IoIosWarning } from "@/app/ui/icons";
 import {

@@ -1,5 +1,5 @@
 import { Locale } from "@/i18n-config";
-import { RoomTypes } from "@/types";
+import { RoomTypes } from "@/types/types";
 import { Button } from "antd";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,8 +1,13 @@
-
 import { Locale } from "@/i18n-config";
 import { Header, PublicLayout, Wrapper } from "../../ui/layout";
 import { HeaderContent } from "@/app/ui/components/site/Home/Header/HeaderContent";
-import { Testimonials, Discounts, CommonAreaAndEntertainment, Categories, FrequentlyAskedQuestions } from "@/app/ui/components/site/Home";
+import {
+  Testimonials,
+  Discounts,
+  CommonAreaAndEntertainment,
+  Categories,
+  FrequentlyAskedQuestions,
+} from "@/app/ui/components/site/Home";
 import { Amenities, Trending } from "@/app/ui/components/site/Room";
 
 export default async function Home({

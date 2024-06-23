@@ -1,5 +1,5 @@
 "use client";
-import { ShareDataPropTypes } from "@/types";
+import { ShareDataPropTypes } from "@/types/types";
 import { twMerge } from "tailwind-merge";
 import { PiShareNetworkBold } from "../../icons";
 

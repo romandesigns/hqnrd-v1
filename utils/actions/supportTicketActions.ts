@@ -1,5 +1,5 @@
 "use server";
-import { DevTaskTypes, TicketFormTypes } from "@/types";
+import { DevTaskTypes, TicketFormTypes } from "@/types/types";
 import { createSupportTicketSchema } from "@/utils/schemas";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
@@ -7,22 +7,41 @@ import { format } from "../formatter/format";
 
 export async function createSupportTicketAction(prevState: any) {
   const supabase = createClient();
-  const formData: TicketFormTypes = {
-    title: format.toLowerCase(prevState.title),
-    priority: format.toLowerCase(prevState.priority),
-    due: prevState.dueDate,
-    type: format.toLowerCase(prevState.type),
-    page: format.toLowerCase(prevState.page) || "N/A",
-    component: format.toLowerCase(prevState.component) || "N/A",
-    devtask: format.toLowerCase(prevState.dev_task) as DevTaskTypes,
-    assigneeId: format.toLowerCase(prevState.assignee),
-    authorId: format.toLowerCase(prevState.authorId),
-    description: prevState.description,
-    status: format.toLowerCase(prevState.status),
+  const user = supabase.auth.getUser();
+
+  if (!user) {
+    return {
+      path: null,
+      errors: "User is not authenticated",
+      message: null,
+    };
+  }
+
+  const staffs = {
+    author_id: prevState.author.split(",")[1],
+    author_name: prevState.author.split(",")[0],
+    assignee_id: prevState.assignee.split(",")[1],
+    assignee_name: prevState.assignee.split(",")[0],
+  }
+  const ticket: TicketFormTypes = {
     assigned: prevState.assigned,
+    assignee_id: staffs.assignee_id,
+    author_id: staffs.author_id,
+    author_name: staffs.author_name,
+    assignee_name: staffs.assignee_name,
+    component: format.toLowerCase(prevState.component) || "N/A",
+    description: prevState.description,
+    dev_task: format.toLowerCase(prevState.dev_task) as DevTaskTypes,
+    due: prevState.dueDate,
+    page: format.toLowerCase(prevState.page) || "N/A",
+    priority: format.toLowerCase(prevState.priority),
+    status: format.toLowerCase(prevState.status),
+    title: format.toLowerCase(prevState.title),
+    type: format.toLowerCase(prevState.type),
   };
 
-  const validatedData = createSupportTicketSchema.safeParse(formData);
+  const validatedData = createSupportTicketSchema.safeParse(ticket);
+
   if (!validatedData.success) {
     const { path, message } = validatedData.error.errors[0];
     return {
@@ -34,7 +53,7 @@ export async function createSupportTicketAction(prevState: any) {
 
   const { data, error } = await supabase
     .from("tickets")
-    .insert([formData])
+    .insert([ticket])
     .select();
 
   if (error) {
@@ -58,14 +77,26 @@ export async function createSupportTicketAction(prevState: any) {
 export async function updateIsTicketAssignedAction(formData: FormData) {
   const supabase = createClient();
   // Get the ticket ID
-  const statusData = formData.get("status");
+  const status = formData.get("status");
   const ticketId = formData.get("ticketId");
   const lang = formData.get("lang");
+
+  const dataToUpdate: {
+    [key: string]: string | boolean | FormDataEntryValue | null;
+  } = {};
+
+  if (status === "assigned" || status === "unassigned") {
+    dataToUpdate.assigned = status === "assigned";
+  }
+
+  if (status !== "assigned" && status !== "unassigned") {
+    dataToUpdate.status = status;
+  }
 
   // Update assigned status
   const { data, error } = await supabase
     .from("tickets")
-    .update({ assigned: statusData === "assigned" })
+    .update(dataToUpdate)
     .eq("id", ticketId)
     .select();
 

@@ -1,4 +1,4 @@
-import { Card } from "@/app/ui/components/auth/Card";
+import { Card } from "@/app/ui/components/site/auth/Card";
 import { HeadingSection } from "@/app/ui/features";
 import { FaRegBuilding, HiOutlineUser } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";

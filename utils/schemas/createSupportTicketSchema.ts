@@ -5,12 +5,16 @@ export const createSupportTicketSchema = z.object({
     .string()
     .min(3, { message: "Title must be at least 3 characters long" })
     .max(20, { message: "Title must be less than 20 characters long" }),
+  author_name: z
+    .string(),
+  assignee_name: z
+    .string(),
   type: z
     .enum(["development", "administrative"])
     .refine((val) => val !== undefined, {
       message: "Development type is required",
     }),
-  assigneeId: z.string().uuid({ message: "Assignee ID must be a valid UUID" }),
+  assignee_id: z.string().uuid({ message: "Assignee ID must be a valid UUID" }),
   priority: z
     .enum(["high", "medium", "low"])
     .refine((val) => val !== undefined, {
@@ -25,7 +29,7 @@ export const createSupportTicketSchema = z.object({
       message: "Due Date must be a valid ISO 8601 date-time string",
     },
   ),
-  devtask: z
+  dev_task: z
     .enum(["fix", "new implementation", "optimization"])
     .refine((val) => val !== undefined, {
       message: "Task type is required",
@@ -47,5 +51,5 @@ export const createSupportTicketSchema = z.object({
     .string()
     .min(3, { message: "Description must be at least 3 characters long" })
     .max(30, { message: "Description must be less than 30 characters long" }),
-  authorId: z.string().uuid({ message: "Author ID must be a valid UUID" }),
+  author_id: z.string().uuid({ message: "Author ID must be a valid UUID" }),
 });

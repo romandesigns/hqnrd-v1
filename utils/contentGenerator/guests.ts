@@ -17,10 +17,10 @@ export function generateGuests(numberOfGuests: number) {
     );
     const lastName = faker.person.lastName();
     // Generate date of birth to ensure guest is at least 18 years old
-    const dateOfBirth = moment(faker.date.between("1950-01-01", new Date()))
+    const dob = moment(faker.date.between("1950-01-01", new Date()))
       .subtract(18, "years")
       .toDate();
-    const age = calculateAge(dateOfBirth);
+    const age = calculateAge(dob);
 
     guests.push({
       key: String(i + 1),
@@ -29,7 +29,7 @@ export function generateGuests(numberOfGuests: number) {
       name: firstName,
       lastName: lastName,
       gender: gender,
-      dateOfBirth: moment(dateOfBirth).format("MM/DD/YYYY"),
+      dob: moment(dob).format("MM/DD/YYYY"),
       age: age,
       email: faker.internet.email(
         firstName.toLowerCase(),

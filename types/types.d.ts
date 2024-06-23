@@ -93,7 +93,7 @@ type IdentityData = {
   phone_verified: boolean;
   sub: string;
   tel_country: string;
-  user_role: string;
+  role: string;
 };
 
 type Identity = {
@@ -153,7 +153,7 @@ type Guest = {
   name: string;
   lastName: string;
   gender: string;
-  dateOfBirth: string;
+  dob: string;
   age: number;
   email: string;
   phone: string;
@@ -181,15 +181,21 @@ export type DataSource = {
 
 export type StaffMember = {
   id: string;
-  user_role: string;
+  role: string;
   name: string;
 };
+
+export type UserSignUpTypes = {
+  id: string;
+  name: string;
+};
+
 
 export type SupportTableProps = {
   lang: Locale;
   className?: string;
   dataSource?: TicketTableDataTypes[]; // dataSource can now be undefined
-  userId: string;
+  user: UserSignUpTypes;
   staffMembers: StaffMember[];
 };
 
@@ -216,8 +222,6 @@ export type TicketFormTypes = {
   title: string;
   type: string;
   priority: string;
-  assigneeId: string;
-  authorId: string;
   developmentType?: string;
   page?: string;
   component?: string;
@@ -225,8 +229,12 @@ export type TicketFormTypes = {
   due: string;
   lang?: Locale;
   status: string;
-  devtask: DevTaskTypes;
+  dev_task: DevTaskTypes;
   assigned: boolean;
+  assignee_id: string;
+  author_id: string;
+  assignee_name: string;
+  author_name: string;
 };
 
 export type TicketTableDataTypes = {
@@ -243,7 +251,26 @@ export type TicketTableDataTypes = {
   created_at: string;
   assignee: string;
   author: string;
-  authorId: string;
+  author: string;
   assigned: boolean;
-  assigneeId: string;
+  assignee: string;
 };
+
+export type UserSignUpPayloadTypes = {
+  name: string;
+  lastName: string;
+  dob: string;
+  gender: string;
+  email: string;
+  phone_country: string;
+  phone: string;
+  password: string;
+  confirmPassword: string;
+  role: string;
+}
+
+export type StaffMemberTypes = {
+  id: string;
+  role: string;
+  name: string;
+}

@@ -1,6 +1,7 @@
-"use client";
 import { Image } from "antd";
-
+import Video from "next-video";
+const videoSource =
+  "https://cknwdpehwpqvbkikbtqr.supabase.co/storage/v1/object/public/hqnrd/assets/videos/20231005_144349.mp4?t=2024-06-23T00%3A18%3A18.817Z";
 export function Media() {
   return (
     <>
@@ -13,11 +14,12 @@ export function Media() {
       <div>
         <h3 className="py-4 font-bold">Walkaround</h3>
         <div className="max-w-lg overflow-hidden rounded-md p-4">
-          <video
-            src="https://eexwpgqzilclwdjimovo.supabase.co/storage/v1/object/public/hqnrd/rooms/201/video/20230330_115323.mp4?t=2024-04-19T17%3A39%3A20.184Z"
+          <Video
+            accentColor="#ffc531"
+            src={videoSource}
             controls
             muted
-            className="rounded-md"
+            className="overflow-hidden rounded-md"
           />
         </div>
       </div>

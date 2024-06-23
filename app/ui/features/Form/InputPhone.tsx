@@ -1,5 +1,6 @@
 import PhoneInput, { Country } from "react-phone-number-input";
 import { twMerge } from "tailwind-merge";
+import { E164Number } from "libphonenumber-js";
 
 export function InputPhone({
   phoneNumber,
@@ -8,8 +9,8 @@ export function InputPhone({
   placeholder,
   className,
 }: {
-  phoneNumber: (phone: string) => void;
-  phone: string;
+  phoneNumber: (value?: E164Number | undefined) => void;
+  phone: E164Number | undefined;
   locale: Country;
   placeholder: string;
   className?: string;
@@ -26,7 +27,7 @@ export function InputPhone({
         rules={[{ required: true, message: "Please input your phone number!" }]}
         placeholder={placeholder}
         onChange={phoneNumber}
-        value={phone}
+        value={phone as E164Number | undefined}
         defaultCountry={locale as Country}
         name="phone"
         required

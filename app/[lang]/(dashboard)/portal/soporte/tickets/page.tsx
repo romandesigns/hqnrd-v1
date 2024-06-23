@@ -2,41 +2,31 @@ import { TicketNavMenu } from "@/app/ui/components/dashboard/layout";
 import { SupportTicketsTable } from "@/app/ui/components/dashboard/layout/Main/support/tickets/table/SupportTable";
 import { Navigation } from "@/app/ui/components/dashboard/layout/Navigation";
 import { Locale } from "@/i18n-config";
+import { StaffMemberTypes, TicketTableDataTypes } from "@/types/types";
+import { format } from "@/utils/formatter/format";
+import {
+  getStaffMembers,
+  getUser,
+  getAllTickets,
+} from "@/utils/supabase/queries";
 import { createClient } from "@/utils/supabase/server";
+import { UserMetadata } from "@supabase/supabase-js";
 
 export default async function Page({
   params: { lang },
 }: {
   params: { lang: Locale };
 }) {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [user, staffMembers, tickets] = await Promise.all([
+    getUser(),
+    getStaffMembers(),
+    getAllTickets(),
+  ]);
 
-  const staffMembers = await supabase
-    .from("profiles")
-    .select("id,user_role,name")
-    .not("user_role", "eq", "guest");
-
-  const { data } = await supabase.from("tickets").select(`
-      *,
-      assignee:profiles!tickets_assigneeId_fkey (id,name, last_name),
-      author:profiles!tickets_authorId_fkey (id,name, last_name)
-    `);
-
-  const tickets = data?.map((ticket) => ({
-    ...ticket,
-    key: ticket.id,
-    //@ts-ignore
-    assignee: `${ticket.assignee.name as string} ${ticket.assignee.last_name as string}`,
-    //@ts-ignore
-    assigneeId: ticket.assignee.id,
-    //@ts-ignore
-    author: `${ticket.author.name as string} ${ticket.author.last_name as string}`,
-    //@ts-ignore
-    authorId: ticket.author.id,
-  }));
+  const userData = {
+    name: `${format.firstLetterToUpperCase(user?.user_metadata.name)} ${format.firstLetterToUpperCase(user?.user_metadata.last_name)}`,
+    id: user?.user_metadata.sub,
+  };
 
   return (
     <>
@@ -45,15 +35,15 @@ export default async function Page({
       </Navigation>
       <section className="overflow-hidden p-2">
         <article className="grid h-full w-full grid-rows-[auto_auto_1fr] rounded-md bg-white">
-          <div className="flex justify-start border-b p-4">
+          <div className="flex justify-start border-b p-4 px-2">
             <TicketNavMenu lang={lang} />
           </div>
           <SupportTicketsTable
-            dataSource={tickets}
+            dataSource={tickets.data as TicketTableDataTypes[]}
             lang={lang}
-            userId={user?.id as string}
+            user={userData}
             // @ts-ignore
-            staffMembers={staffMembers.data}
+            staffMembers={staffMembers}
           />
         </article>
       </section>

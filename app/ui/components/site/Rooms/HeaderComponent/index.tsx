@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Header } from "../../../layout/Header";
 import { Select } from "../HeaderContent/Select";
 import { Locale } from "@/i18n-config";
+import { Header } from "@/app/ui/layout/Header";
 
 export const HeaderComponent = ({
   billboards,

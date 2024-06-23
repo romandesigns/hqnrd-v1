@@ -2,7 +2,7 @@
 import { Modal } from "@/app/ui/features";
 import { IoMdAddCircleOutline, RiErrorWarningFill } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
-import { DevTaskTypes, StaffMember } from "@/types";
+import { DevTaskTypes, StaffMember, UserSignUpTypes } from "@/types/types";
 import { createSupportTicketAction } from "@/utils/actions/supportTicketActions";
 import { format } from "@/utils/formatter/format";
 import { Button, DatePicker, Input, Select, notification } from "antd";
@@ -29,20 +29,26 @@ type TicketFormTypes = {
   dueDate?: string;
   lang: Locale;
   status: string;
-  authorId: string;
+  author: string;
+  assigned: boolean;
 };
 
 export function TicketForm({
   lang,
-  userId,
+  author,
   staffMembers,
-}: Readonly<{ lang: Locale; userId: string; staffMembers: StaffMember[] }>) {
+}: Readonly<{
+  lang: Locale;
+  author: UserSignUpTypes;
+  staffMembers: StaffMember[];
+}>) {
   const [open, setOpen] = React.useState(false);
   const [api, contextHolder] = notification.useNotification();
   const [formData, setFormData] = React.useState<TicketFormTypes>({
     lang: lang,
     status: "backlog",
-    authorId: userId,
+    author: `${author.name},${author.id}`,
+    assigned: false,
   });
 
   const handleChange = useCallback((key: keyof TicketFormTypes, value: any) => {
@@ -58,10 +64,10 @@ export function TicketForm({
     () =>
       staffMembers.reduce(
         (acc, staff) => {
-          acc[staff.user_role] = acc[staff.user_role] || [];
-          acc[staff.user_role].push({
+          acc[staff.role] = acc[staff.role] || [];
+          acc[staff.role].push({
             label: <span>{staff.name}</span>,
-            value: staff.id,
+            value: `${staff.name},${staff.id}`,
           });
           return acc;
         },

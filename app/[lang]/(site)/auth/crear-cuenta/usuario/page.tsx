@@ -1,10 +1,10 @@
 /**
  * Renders a form for creating a new account.
  */
+import { Content } from "@/app/ui/components/site/auth/user/Content";
 import { Locale } from "@/i18n-config";
 import { headers } from "next/headers";
 import { Country } from "react-phone-number-input";
-import { Content } from "../../../../../ui/components/auth/user";
 /**
  * Page component for creating a new account.
  * @returns JSX.Element representing the page.

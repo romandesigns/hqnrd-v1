@@ -15,7 +15,7 @@ export const signUpUserSchema = z
       .enum(["male", "female", "other"])
       .refine((val) => val !== undefined, { message: "Gender is required" }),
     email: z.string().email({ message: "Invalid email address" }),
-    phoneCountry: z.string(),
+    phone_country: z.string(),
     phone: z.string(),
     password: z
       .string()
@@ -29,7 +29,7 @@ export const signUpUserSchema = z
       .max(30, {
         message: "confirmation password must be less than 30 characters long",
       }),
-    dateOfBirth: z
+    dob: z
       .string()
       .refine(validateAdult, { message: "You must be at least 18 years old" }),
   })

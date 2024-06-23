@@ -16,7 +16,7 @@ import {
   PageHeading,
   Summary,
   Trending,
-} from "../../../../ui/components/Room";
+} from "../../../../ui/components/site/Room";
 
 const fetchRoom = async (roomId: string) => {
   const room = rooms.find((room) => room.roomNumber === Number(roomId));
@@ -74,7 +74,7 @@ export default async function Page({
                 <Heading heading="Amenities Included" />
                 <Amenities />
               </article>
-              <article className="grid grid-cols-[1fr] grid-rows-1  gap-2 lg:grid-cols-[20rem_1fr]">
+              <article className="grid grid-cols-[1fr] grid-rows-1 gap-2 lg:grid-cols-[20rem_1fr]">
                 <Media />
               </article>
             </div>

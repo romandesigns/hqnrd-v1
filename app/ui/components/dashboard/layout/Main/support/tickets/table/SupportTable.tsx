@@ -1,16 +1,16 @@
 "use client";
 
 import { TableTag } from "@/app/ui/features";
-import { SupportTableProps, TicketTableDataTypes } from "@/types";
+import { SupportTableProps, TicketTableDataTypes } from "@/types/types";
 import type { TableColumnsType } from "antd";
-import { Button, Table } from "antd";
-import { TicketForm } from "./TicketForm";
+import { Table } from "antd";
 import { ActionBtns } from "./ActionBtns";
+import { TicketForm } from "./TicketForm";
 
 export function SupportTicketsTable({
   lang,
   dataSource,
-  userId,
+  user,
   staffMembers,
 }: Readonly<SupportTableProps>) {
   const columns: TableColumnsType<TicketTableDataTypes> = [
@@ -75,11 +75,12 @@ export function SupportTicketsTable({
         return (
           <div className="flex gap-2">
             <ActionBtns
-              authorId={record.authorId}
-              userId={userId}
+              ticketStatus={record.status}
+              author={record.author}
+              authorId={user.id}
               ticketId={record.id}
               assigned={record.assigned}
-              assigneeId={record.assigneeId}
+              assigneeId={record.assignee}
               lang={lang}
             />
           </div>
@@ -90,7 +91,7 @@ export function SupportTicketsTable({
 
   return (
     <>
-      <TicketForm lang={lang} userId={userId} staffMembers={staffMembers} />
+      <TicketForm lang={lang} author={user} staffMembers={staffMembers} />
       <div className="p-2 md:p-4">
         <Table
           className="[&_td>button]:lg:opacity-0 [&_td]:capitalize"
@@ -118,11 +119,12 @@ export function SupportTicketsTable({
                   <strong>Actions</strong>
                   <div className="flex gap-1">
                     <ActionBtns
-                      authorId={record.authorId}
-                      userId={userId}
+                      ticketStatus={record.status}
+                      author={record.author}
+                      authorId={user.id}
                       ticketId={record.id}
                       assigned={record.assigned}
-                      assigneeId={record.assigneeId}
+                      assigneeId={record.assignee}
                       lang={lang}
                     />
                   </div>

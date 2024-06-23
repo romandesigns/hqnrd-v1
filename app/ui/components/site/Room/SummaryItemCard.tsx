@@ -1,4 +1,4 @@
-import { Reservation } from "@/types";
+import { Reservation } from "@/types/types";
 import Image from "next/image";
 import { FaPen, FaRegTrashAlt } from "../../../icons";
 import { format } from "@/utils/formatter/format";
@@ -71,7 +71,7 @@ export function SummaryItemCard({
         </p>
       </div>
 
-      <div className="absolute -right-2 -top-4  flex gap-1 lg:-bottom-2 lg:top-auto">
+      <div className="absolute -right-2 -top-4 flex gap-1 lg:-bottom-2 lg:top-auto">
         <span className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-md bg-yellow-300">
           <FaPen />
         </span>

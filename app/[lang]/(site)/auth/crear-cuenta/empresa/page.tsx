@@ -1,7 +1,7 @@
 /**
  * Renders a form for creating a new account.
  */
-import { Content } from "@/app/ui/components/auth/company";
+import { Content } from "@/app/ui/components/site/auth/company";
 import { Locale } from "@/i18n-config";
 import { headers } from "next/headers";
 import { Country } from "react-phone-number-input";

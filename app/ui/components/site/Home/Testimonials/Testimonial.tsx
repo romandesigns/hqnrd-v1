@@ -1,6 +1,6 @@
 "use client";
 import { SwiperComponent } from "@/app/ui/features/Swiper";
-import { TestimonialPropTypes } from "@/types";
+import { TestimonialPropTypes } from "@/types/types";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 import { ReviewCard } from "./TestimonialCard";

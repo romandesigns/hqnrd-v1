@@ -15,7 +15,7 @@ export function MenuLinks({ lang }: Readonly<{ lang: Locale }>) {
           <span className="rounded-md border p-2">
             <MdSpaceDashboard />
           </span>
-          <p className="font-medium  max-xl:hidden">Portal</p>
+          <p className="font-medium max-xl:hidden">Portal</p>
         </Link>
       </li>
       <li className="rounded-md p-2 md:w-full md:p-3">

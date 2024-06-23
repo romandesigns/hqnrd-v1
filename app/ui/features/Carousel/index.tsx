@@ -1,5 +1,5 @@
 "use client";
-import { CarouselTypes } from "@/types";
+import { CarouselTypes } from "@/types/types";
 import { Carousel as CarouselComponent } from "antd";
 import Image from "next/image";
 import React from "react";

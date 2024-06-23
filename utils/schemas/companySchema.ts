@@ -28,7 +28,7 @@ export const companySchema = z
       .max(30, {
         message: "confirmation password must be less than 30 characters long",
       }),
-    dateOfBirth: z.string(),
+    dob: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",

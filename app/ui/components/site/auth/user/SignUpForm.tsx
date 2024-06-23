@@ -1,7 +1,4 @@
 "use client";
-/**
- * Renders a form for creating a new account.
- */
 
 import { InputAnt, InputPhone } from "@/app/ui/features/Form";
 import { createUserAction } from "@/utils/actions";
@@ -9,6 +6,7 @@ import { Button, DatePicker, Flex, Input, Radio, message } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
+import { E164Number } from "libphonenumber-js";
 
 type initialStateTypes = {
   path: string;
@@ -29,11 +27,12 @@ export function SignUpForm({
   locale: Country;
   className?: string;
 }) {
-  const [phone, setPhone] = React.useState<string>("");
+  const [phone, setPhone] = React.useState<E164Number>();
   const [state, formAction] = useFormState(createUserAction, initialState);
   const [messageApi, contextHolder] = message.useMessage();
-  const phoneNumber = (phone: string) => {
-    setPhone(phone);
+
+  const phoneNumber = (value?: E164Number | undefined) => {
+    setPhone(value);
   };
 
   const { pending } = useFormStatus();
@@ -58,10 +57,9 @@ export function SignUpForm({
             variant="outlined"
             className="w-full !py-[.38rem] focus-within:!border-primary-400 focus-within:!shadow-[0_0_0_3px_rgba(5,_145,_255,_0.15)] [&_input]:sm:!py-[.2rem] [&_input]:lg:!py-[.02rem]"
             size="middle"
-            format="MM/DD/YYYY"
             allowClear={true}
             needConfirm={true}
-            name="dateOfBirth"
+            name="dob"
             style={{ width: "100%" }}
             placeholder="Date of Birth"
             required
@@ -81,7 +79,7 @@ export function SignUpForm({
             </Radio.Group>
           </Flex>
         </fieldset>
-        <input type="text" name="user_role" value="guest" className="hidden" />
+        <input type="text" name="role" value="guest" className="hidden" />
         <fieldset className="mb-4 space-y-4">
           <InputAnt name="email" placeholder="E-Mail" type="email" />
           <InputPhone
@@ -108,7 +106,13 @@ export function SignUpForm({
               Sign Up
             </Button>
           </div>
-          <Input type="text" value={lang} name="lang" className="!hidden" />
+          <Input
+            type="text"
+            defaultValue={lang}
+            name="lang"
+            className="!hidden"
+            readOnly
+          />
         </fieldset>
       </form>
     </>

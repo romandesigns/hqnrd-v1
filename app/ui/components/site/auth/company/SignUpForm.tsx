@@ -9,6 +9,7 @@ import { Button, DatePicker, Flex, Input, Radio, message } from "antd";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Country } from "react-phone-number-input";
+import { E164Number } from "libphonenumber-js";
 
 type initialStateTypes = {
   path: string;
@@ -29,11 +30,11 @@ export function SignUpForm({
   locale: Country;
   className?: string;
 }) {
-  const [phone, setPhone] = React.useState<string>("");
+  const [phone, setPhone] = React.useState<E164Number>();
   const [state, formAction] = useFormState(createUserAction, initialState);
   const [messageApi, contextHolder] = message.useMessage();
-  const phoneNumber = (phone: string) => {
-    setPhone(phone);
+  const phoneNumber = (value?: E164Number | undefined) => {
+    setPhone(value);
   };
 
   const { pending } = useFormStatus();
@@ -65,12 +66,7 @@ export function SignUpForm({
             required={false}
           />
         </fieldset>
-        <input
-          type="text"
-          name="user_role"
-          value="company"
-          className="hidden"
-        />
+        <input type="text" name="role" value="company" className="hidden" />
         <fieldset className="my-8 space-y-4">
           <InputAnt
             name="address"

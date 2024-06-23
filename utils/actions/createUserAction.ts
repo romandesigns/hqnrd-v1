@@ -1,61 +1,64 @@
 "use server";
-import { createClient } from "@/utils/supabase/server";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { UserSignUpPayloadTypes } from "@/types/types";
 import { signUpUserSchema } from "@/utils/schemas";
+import { createClient } from "@/utils/supabase/server";
+import moment from "moment";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { format } from "../formatter/format";
 
 export async function createUserAction(prevState: any, formData: FormData) {
   const origin = headers().get("origin");
-  const data = {
-    name: formData.get("name"),
-    lastName: formData.get("lastName"),
-    dateOfBirth: formData.get("dateOfBirth"),
-    gender: formData.get("gender"),
-    email: formData.get("email"),
-    phoneCountry: formData.get("phoneCountry"),
-    phone: formData.get("phone"),
-    password: formData.get("password"),
-    confirmPassword: formData.get("confirmPassword"),
-    user_role: formData.get("user_role"),
+
+  const data:UserSignUpPayloadTypes = {
+    confirmPassword: (formData.get("confirmPassword") as string),
+    dob: moment((formData.get("dob") as string)).format("MM-DD-YYYY"),
+    email: format.toLowerCase((formData.get("email") as string)),
+    gender: format.toLowerCase((formData.get("gender") as string)),
+    lastName: format.toLowerCase((formData.get("lastName") as string)),
+    name: format.toLowerCase((formData.get("name") as string)),
+    password: (formData.get("password") as string),
+    phone: (formData.get("phone") as string),
+    phone_country: (formData.get("phoneCountry") as string),
+    role: format.toLowerCase((formData.get("role") as string))
   };
 
   const validatedData = signUpUserSchema.safeParse(data);
+  
   if (!validatedData.success) {
     const { path, message } = validatedData.error.errors[0];
     return {
-      path: path[0],
-      errors: message,
+      errors: `${path[0]} ${message}`,
     };
   }
 
   const supabase = createClient();
-  const { error } = await supabase.auth.signUp({
-    email: data.email as string,
-    password: data.password as string,
+  const response = await supabase.auth.signUp({
+    email: (data.email as string),
     options: {
-      emailRedirectTo: `${origin}/auth/confirmar-cuenta`,
       data: {
-        email: data.email as string,
-        name: data.name as string,
-        last_name: data.lastName as string,
-        dob: data.dateOfBirth as string,
-        gender: data.gender as string,
-        phone: data.phone as string,
-        phone_country: data.phoneCountry as string,
-        user_role: data.user_role as string,
+        dob: (data.dob as string),
+        email: (data.email as string),
+        gender: (data.gender as string),
+        last_name: (data.lastName as string),
+        name: (data.name as string),
+        phone: (data.phone as string),
+        phone_country: (data.phone_country as string),
+        role: (data.role as string)
       },
+      emailRedirectTo: `${origin}/${formData.get("lang")}/auth/confirmar-cuenta`
     },
+    password: (data.password as string),
+    phone: (data.phone as string)
   });
 
-  if (error?.message) {
-    console.error("Error", error?.message);
+
+  if (response.error?.message) {
+    console.error("Error", response.error?.message);
     redirect(
       `/${formData.get("lang")}/auth/confirmar-cuenta?name=${data.name}&email=${data.email}`,
     );
-    // return {
-    //   errors: error.message,
-    // };
   }
 
   revalidatePath("/", "layout");

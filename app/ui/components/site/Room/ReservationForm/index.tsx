@@ -1,6 +1,6 @@
 "use client";
 import { useReservation } from "@/store/reservation";
-import { Reservation } from "@/types";
+import { Reservation } from "@/types/types";
 import { Button, Input } from "antd";
 import moment from "moment";
 import React from "react";

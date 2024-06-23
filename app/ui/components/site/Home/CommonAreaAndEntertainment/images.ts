@@ -1,4 +1,4 @@
-import { HomeImageGallery } from "@/types";
+import { HomeImageGallery } from "@/types/types";
 
 export const roofTopImages: HomeImageGallery[] = [
   {
