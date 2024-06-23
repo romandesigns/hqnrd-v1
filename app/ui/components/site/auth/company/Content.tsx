@@ -1,12 +1,10 @@
-import { Brand, Carousel, GoBack } from "@/app/ui/features";
+import { Carousel } from "@/app/ui/features";
 import { Locale } from "@/i18n-config";
-import { Button } from "antd";
 import Link from "next/link";
-import { GoHomeFill } from "react-icons/go";
 import { Country } from "react-phone-number-input";
+import { Card } from "../Card";
 import { images } from "../company";
 import { SignUpForm } from "./SignUpForm";
-import { Card } from "../Card";
 
 export function Content({
   lang,

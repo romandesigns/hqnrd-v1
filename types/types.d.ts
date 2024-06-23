@@ -254,6 +254,9 @@ export type TicketTableDataTypes = {
   author: string;
   assigned: boolean;
   assignee: string;
+  assignee_id: string;
+  author_id: string;
+  userId: string;
 };
 
 export type UserSignUpPayloadTypes = {

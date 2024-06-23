@@ -10,10 +10,10 @@ export function TableTag({ label }: { label: string }) {
         `inline-block rounded-md px-2 text-center`,
         cn({
           "bg-red-500 text-white": label === "high",
-          "bg-green-500 text-white": label === "medium",
-          "bg-blue-500 text-white": label === "low",
+          "bg-orange-500 text-white": label === "medium",
+          "bg-yellow-500 text-white":
+            label === "low" || label === "in progress",
           "bg-neutral-500 text-white": label === "backlog",
-          "bg-yellow-500 text-white": label === "in progress",
           "bg-green-400 text-white": label === "started",
           "bg-blue-400 text-white": label === "completed",
           "bg-purple-400 text-white": label === "cancelled",
