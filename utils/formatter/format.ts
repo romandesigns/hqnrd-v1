@@ -6,10 +6,10 @@ export const format = {
     return `${num.toLocaleString()}`;
   },
   firstLetterToUpperCase: (str: string) => {
-    return str
+    return str ? str
       .split(" ")
       .map((word) => word[0].toUpperCase() + word.slice(1))
-      .join(" ");
+      .join(" ") : 'Input not supported';
   },
   convertDate: (date: number) => {
     return moment.unix(date).format("MMMM Do YYYY, h:mm:ss a");
@@ -61,5 +61,18 @@ export const format = {
   },
   sanitizePath: (path: string) => {
     return path?.replace(/['"]+/g, "").replace(/;+/g, "");
+  },
+  toLowerCase: (str: string) => {
+    console.log(str);
+    return str.toLowerCase();
+  },
+  sentenceCapitalize: (str: string) => {
+    return str
+      .split(/(?<=[.!?])\s+/)
+      .map(
+        (sentence) =>
+          sentence.charAt(0).toUpperCase() + sentence.slice(1).toLowerCase(),
+      )
+      .join(" ");
   },
 };

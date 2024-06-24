@@ -23,6 +23,7 @@ export {
   BsTranslate,
   BsPassport,
   BsTelephone,
+  BsThreeDotsVertical,
 } from "react-icons/bs";
 export {
   CgMenuGridO,
@@ -41,6 +42,9 @@ export {
   FaRegBuilding,
   FaRegTrashAlt,
   FaPassport,
+  FaPlay,
+  FaCheck,
+  FaTimes
 } from "react-icons/fa";
 export {
   FaAddressBook,
@@ -61,6 +65,9 @@ export {
   IoLogoWhatsapp,
   IoMdArrowRoundBack,
   IoMdCloseCircleOutline,
+  IoMdAddCircleOutline,
+  IoMdEye,
+  IoMdRefresh,
 } from "react-icons/io";
 export {
   IoClose,
@@ -69,6 +76,7 @@ export {
   IoLogIn,
   IoLogOut,
   IoSettings,
+  IoConstruct,
 } from "react-icons/io5";
 export { LiaBedSolid } from "react-icons/lia";
 export { LuUser2 } from "react-icons/lu";
@@ -92,6 +100,8 @@ export {
   MdVpnKey,
   MdWifi,
   MdOutlineEmail,
+  MdDelete,
+  MdAssignment
 } from "react-icons/md";
 export {
   PiCoatHangerBold,
@@ -103,7 +113,11 @@ export {
   PiTelevisionSimple,
   PiIdentificationBadgeLight,
 } from "react-icons/pi";
-export { RiLayout6Fill, RiNetflixFill } from "react-icons/ri";
+export {
+  RiLayout6Fill,
+  RiNetflixFill,
+  RiErrorWarningFill,
+} from "react-icons/ri";
 export {
   TbAirConditioning,
   TbBrandIntercom,
@@ -116,3 +130,4 @@ export {
   TbWheelchair,
 } from "react-icons/tb";
 export { TiGroup, TiWarning } from "react-icons/ti";
+export { VscDebugStart } from "react-icons/vsc";

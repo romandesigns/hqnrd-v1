@@ -1,4 +1,4 @@
-import { SectionPropTypes } from "@/types";
+import { SectionPropTypes } from "@/types/types";
 import { twMerge } from "tailwind-merge";
 
 export const Section = ({ children, className = "" }: SectionPropTypes) => {

@@ -3,3 +3,4 @@ export { signInUserSchema } from "./signInUserSchema";
 export { signUpUserSchema } from "./signUpUserSchema";
 export { confirmPasswordChangeSchema } from "./confirmPasswordChangeSchema";
 export { passwordChangeSchema } from "./passwordChangeSchema";
+export { createSupportTicketSchema } from "./createSupportTicketSchema";

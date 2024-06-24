@@ -1,4 +1,4 @@
-import { ShareDataPropTypes } from "@/types";
+import { ShareDataPropTypes } from "@/types/types";
 import {
   BUSINESS_ADDRESS,
   BUSINESS_DEVELOPER_EMAIL,

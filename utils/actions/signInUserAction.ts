@@ -23,7 +23,7 @@ export async function signInUserAction(formData: FormData) {
 
   const supabase = createClient();
   let { data: foundEmail, error: queryError } = await supabase
-    .from("profiles")
+    .from("guests")
     .select("email")
     .eq("email", data.email);
 

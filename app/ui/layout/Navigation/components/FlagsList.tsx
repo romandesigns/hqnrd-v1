@@ -1,4 +1,4 @@
-import { FlagsTypes } from "@/types";
+import { FlagsTypes } from "@/types/types";
 import classNames from "classnames";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
@@ -33,7 +33,7 @@ export function FlagsList({ lang }: { lang: string }) {
     >
       <span
         className={twMerge(
-          `flex h-full w-full flex-[2] items-center justify-center  font-semibold  uppercase text-neutral-800`,
+          `flex h-full w-full flex-[2] items-center justify-center font-semibold uppercase text-neutral-800`,
           classNames({ "text-primary-700": flag.locale === lang }),
         )}
       >

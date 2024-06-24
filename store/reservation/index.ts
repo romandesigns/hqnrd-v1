@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist, createJSONStorage } from "zustand/middleware";
-import { Reservation } from "@/types";
+import { Reservation } from "@/types/types";
 
 // Define the state shape for navigation
 export type NavigationState = {
