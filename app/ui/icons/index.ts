@@ -42,6 +42,9 @@ export {
   FaRegBuilding,
   FaRegTrashAlt,
   FaPassport,
+  FaPlay,
+  FaCheck,
+  FaTimes
 } from "react-icons/fa";
 export {
   FaAddressBook,
@@ -97,6 +100,8 @@ export {
   MdVpnKey,
   MdWifi,
   MdOutlineEmail,
+  MdDelete,
+  MdAssignment
 } from "react-icons/md";
 export {
   PiCoatHangerBold,
@@ -125,3 +130,4 @@ export {
   TbWheelchair,
 } from "react-icons/tb";
 export { TiGroup, TiWarning } from "react-icons/ti";
+export { VscDebugStart } from "react-icons/vsc";

@@ -113,3 +113,32 @@ export async function updateIsTicketAssignedAction(formData: FormData) {
     };
   }
 }
+
+export async function deleteTicketAction(formData: FormData) {
+  const supabase = createClient();
+  // Get the ticket ID
+  const ticketId = formData.get("ticketId");
+  const lang = formData.get("lang");
+
+  // Update assigned status
+  const { data, error } = await supabase
+    .from("tickets")
+    .delete()
+    .eq("id", ticketId)
+    .select();
+
+
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (data) {
+    revalidatePath(`/${lang}/portal/soporte/tickets`);
+    return {
+      path: null,
+      errors: null,
+      message: "success",
+    };
+  }
+}

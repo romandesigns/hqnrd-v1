@@ -2,15 +2,13 @@ import { TicketNavMenu } from "@/app/ui/components/dashboard/layout";
 import { SupportTicketsTable } from "@/app/ui/components/dashboard/layout/Main/support/tickets/table/SupportTable";
 import { Navigation } from "@/app/ui/components/dashboard/layout/Navigation";
 import { Locale } from "@/i18n-config";
-import { StaffMemberTypes, TicketTableDataTypes } from "@/types/types";
+import { TicketTableDataTypes, TicketTypes } from "@/types/types";
 import { format } from "@/utils/formatter/format";
 import {
+  getAllTickets,
   getStaffMembers,
   getUser,
-  getAllTickets,
 } from "@/utils/supabase/queries";
-import { createClient } from "@/utils/supabase/server";
-import { UserMetadata } from "@supabase/supabase-js";
 
 export default async function Page({
   params: { lang },
@@ -23,7 +21,7 @@ export default async function Page({
     getAllTickets(),
   ]);
 
-  const userData = {
+  const userData: { id: string; name: string } = {
     name: `${format.firstLetterToUpperCase(user?.user_metadata.name)} ${format.firstLetterToUpperCase(user?.user_metadata.last_name)}`,
     id: user?.user_metadata.sub,
   };
@@ -39,7 +37,7 @@ export default async function Page({
             <TicketNavMenu lang={lang} />
           </div>
           <SupportTicketsTable
-            dataSource={tickets.data as TicketTableDataTypes[]}
+            dataSource={tickets.data as TicketTypes[]}
             lang={lang}
             user={userData}
             // @ts-ignore

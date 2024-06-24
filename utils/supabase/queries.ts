@@ -36,5 +36,13 @@ export const getAllTickets = cache(async () => {
   .from('tickets')
   .select('*') // Explicitly list columns
   .order('created_at', { ascending: false });
-  return tickets;
+  const addingKeyPropToTickers = tickets.data?.map(ticket => ({
+    ...ticket,
+    key: ticket.id
+  }))
+  const ticketsResponse = {
+    ...tickets,
+    data: addingKeyPropToTickers
+  }
+  return ticketsResponse;
 });

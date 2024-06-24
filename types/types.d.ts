@@ -1,5 +1,5 @@
-import { CSSProperties } from "react";
 import { Locale } from "@/i18n-config";
+import { CSSProperties } from "react";
 
 export type CarouselTypes = {
   src: string;
@@ -276,4 +276,32 @@ export type StaffMemberTypes = {
   id: string;
   role: string;
   name: string;
+}
+
+export type TicketTypes = {
+  key?: React.Key,
+  id: string,
+  created_at: string,
+  title: string,
+  author_name: string,
+  assigned: boolean,
+  assignee_name: string,
+  component: string,
+  description: string,
+  dev_task: "new implementation" | "fix" | "optimization",
+  due: string,
+  page:string,
+  priority: "high" | "medium" | "low",
+  status:"backlog" | "in progress" | "done" | "cancelled",
+  type: "development" | "administrative",
+  assignee_id:string,
+  author_id: string
+}
+
+export type TicketResponseTypes = {
+  error:any,
+  data:TicketTypes
+  count: any,
+  status: number,
+  statusText: string
 }

@@ -1,7 +1,12 @@
 import { Locale } from "@/i18n-config";
-import { updateIsTicketAssignedAction } from "@/utils/actions/supportTicketActions";
+import {
+  updateIsTicketAssignedAction,
+  deleteTicketAction,
+} from "@/utils/actions/supportTicketActions";
 import { Button } from "antd";
 import React from "react";
+import { StatusActionBtns } from "./StatusActionBtns";
+import { MdAssignment, MdDelete } from "@/app/ui/icons";
 
 export function ActionBtns({
   authorId,
@@ -27,59 +32,59 @@ export function ActionBtns({
     formData.append("lang", lang);
     await updateIsTicketAssignedAction(formData);
   };
+
+  const handleDeleteTicket = async (ticketId: string) => {
+    const formData = new FormData();
+    formData.append("ticketId", String(ticketId));
+    formData.append("lang", lang);
+    await deleteTicketAction(formData);
+  };
+
   return (
     <>
-      {assigned && (
+      <StatusActionBtns
+        handleUpdateIsTicketAssigned={handleUpdateIsTicketAssigned}
+        ticketStatus={ticketStatus}
+      />
+      {userId === assigneeId ? (
         <>
           <Button
-            className="!flex items-center justify-center rounded-md !border-green-400 shadow-md"
-            onClick={() => handleUpdateIsTicketAssigned("started")}
+            className="!flex items-center justify-center rounded-md !border-red-400 shadow-md"
+            onClick={() => handleDeleteTicket(ticketId as string)}
           >
-            <span className="text-green-400">
-              {ticketStatus == "started" ? "Started" : "Start"}
-            </span>
-          </Button>
-          <Button
-            className="!flex items-center justify-center rounded-md !border-blue-400 shadow-md"
-            onClick={() => handleUpdateIsTicketAssigned("completed")}
-          >
-            <span className="text-blue-400">
-              {ticketStatus == "completed" ? "Completed" : "Complete"}
-            </span>
-          </Button>
-          <Button
-            className="!flex items-center justify-center rounded-md !border-purple-400 shadow-md"
-            onClick={() => handleUpdateIsTicketAssigned("cancelled")}
-          >
-            <span className="text-purple-400">
-              {ticketStatus == "cancelled" ? "Cancelled" : "Cancel"}
+            <span className="text-red-400">
+              <MdDelete />
             </span>
           </Button>
         </>
-      )}
-      {authorId === userId && !assigned && (
-        <Button
-          className="!flex items-center justify-center rounded-md !border-red-400 shadow-md"
-          onClick={() => handleUpdateIsTicketAssigned("deleted")}
-        >
-          <span className="text-red-400">
-            {ticketStatus == "deleted" ? "Deleted" : "Delete"}
-          </span>
-        </Button>
-      )}
+      ) : null}
 
-      {authorId === userId && userId !== assigneeId && (
-        <Button
-          className="!flex items-center justify-center rounded-md !border-neutral-400 shadow-md"
-          onClick={() =>
-            handleUpdateIsTicketAssigned(assigned ? "unassigned" : "assigned")
-          }
-        >
-          <span className="text-neutral-400">
-            {assigned ? "Unassign" : "Assign"}
-          </span>
-        </Button>
-      )}
+      {userId !== assigneeId ? (
+        <>
+          <Button
+            className="!flex items-center justify-center rounded-md !border-red-400 shadow-md"
+            onClick={() => handleUpdateIsTicketAssigned(ticketId as string)}
+          >
+            <span className="text-red-400">
+              <MdDelete />
+            </span>
+          </Button>
+          {authorId !== assigneeId && (
+            <Button
+              className="!flex items-center justify-center rounded-md !border-neutral-400 shadow-md"
+              onClick={() =>
+                handleUpdateIsTicketAssigned(
+                  assigned ? "unassigned" : "assigned",
+                )
+              }
+            >
+              <span className="text-neutral-400">
+                <MdAssignment />
+              </span>
+            </Button>
+          )}
+        </>
+      ) : null}
     </>
   );
 }

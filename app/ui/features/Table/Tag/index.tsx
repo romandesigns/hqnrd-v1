@@ -1,6 +1,5 @@
 import { format } from "@/utils/formatter/format";
 import cn from "classnames";
-import React from "react";
 import { twMerge } from "tailwind-merge";
 
 export function TableTag({ label }: { label: string }) {
@@ -14,7 +13,7 @@ export function TableTag({ label }: { label: string }) {
           "bg-yellow-500 text-white":
             label === "low" || label === "in progress",
           "bg-neutral-500 text-white": label === "backlog",
-          "bg-green-400 text-white": label === "started",
+          "bg-yellow-400 text-white": label === "started",
           "bg-blue-400 text-white": label === "completed",
           "bg-purple-400 text-white": label === "cancelled",
           "bg-red-400 text-white": label === "deleted",
