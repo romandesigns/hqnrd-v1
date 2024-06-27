@@ -2,7 +2,7 @@ import { TicketNavMenu } from "@/app/ui/components/dashboard/layout";
 import { SupportTicketsTable } from "@/app/ui/components/dashboard/layout/Main/support/tickets/table/SupportTable";
 import { Navigation } from "@/app/ui/components/dashboard/layout/Navigation";
 import { Locale } from "@/i18n-config";
-import { TicketTableDataTypes, TicketTypes } from "@/types/types";
+import { TicketTypes } from "@/types/types";
 import { format } from "@/utils/formatter/format";
 import {
   getAllTickets,

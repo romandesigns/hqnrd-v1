@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { cache } from 'react';
-import { format } from "../formatter/format";
+import { format } from "../../formatter/format";
+import { StaffMemberTypes } from "@/types/types";
 
 export const getUser = cache(async () => {
   const supabase = createClient();
@@ -22,27 +23,10 @@ export const getStaffMembers = cache(async () => {
   if (!data) {
     return []; // or handle no data case as needed
   }
-  const staffMembers = data.map((member) => ({
+  const staffMembers = data.map((member:StaffMemberTypes) => ({
     id: member.id,
     role: member.role,
     name: `${format.firstLetterToUpperCase(member.name)} ${format.firstLetterToUpperCase(member.last_name)}`, // Concatenate name and last_name
   }));
   return staffMembers;
-});
-
-export const getAllTickets = cache(async () => {
-  const supabase = createClient();
-  const tickets = await supabase
-  .from('tickets')
-  .select('*') // Explicitly list columns
-  .order('created_at', { ascending: false });
-  const addingKeyPropToTickers = tickets.data?.map(ticket => ({
-    ...ticket,
-    key: ticket.id
-  }))
-  const ticketsResponse = {
-    ...tickets,
-    data: addingKeyPropToTickers
-  }
-  return ticketsResponse;
 });

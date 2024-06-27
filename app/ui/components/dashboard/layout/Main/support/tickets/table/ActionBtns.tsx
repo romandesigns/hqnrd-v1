@@ -46,7 +46,7 @@ export function ActionBtns({
         handleUpdateIsTicketAssigned={handleUpdateIsTicketAssigned}
         ticketStatus={ticketStatus}
       />
-      {userId === assigneeId ? (
+      {userId === assigneeId && ticketStatus !== "completed" ? (
         <>
           <Button
             className="!flex items-center justify-center rounded-md !border-red-400 shadow-md"
@@ -59,7 +59,7 @@ export function ActionBtns({
         </>
       ) : null}
 
-      {userId !== assigneeId ? (
+      {userId !== assigneeId && ticketStatus !== "completed" ? (
         <>
           <Button
             className="!flex items-center justify-center rounded-md !border-red-400 shadow-md"

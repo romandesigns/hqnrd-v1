@@ -8,7 +8,11 @@ export function StatusActionBtns({
   handleUpdateIsTicketAssigned: (status: string) => void;
   ticketStatus: string;
 }) {
-  return (
+  return ticketStatus === "completed" ? (
+    <div className="rounded-md bg-neutral-200 p-1 px-2 opacity-75">
+      Ticket Closed
+    </div>
+  ) : (
     <>
       <Button
         title="Start"

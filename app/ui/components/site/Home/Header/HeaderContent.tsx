@@ -16,7 +16,8 @@ import {
   GoogleRating,
   HeaderButtonsGroup,
   TextHeadingSwiper,
-} from "."; // Assuming index.js is properly set in your components folder
+} from ".";
+
 export const HeaderContent = ({ lang }: { lang: Locale }) => {
   const [controlledSwiper, setControlledSwiper] = useState<SwiperType | null>(
     null,
@@ -56,7 +57,7 @@ export const HeaderContent = ({ lang }: { lang: Locale }) => {
 
           {/* Buttons Group mobile*/}
           <HeaderButtonsGroup
-            className="relative z-[3]  md:hidden"
+            className="relative z-[3] md:hidden"
             lang={lang}
           />
         </div>

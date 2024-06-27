@@ -276,6 +276,7 @@ export type StaffMemberTypes = {
   id: string;
   role: string;
   name: string;
+  last_name: string;
 }
 
 export type TicketTypes = {
@@ -295,7 +296,8 @@ export type TicketTypes = {
   status:"backlog" | "in progress" | "done" | "cancelled",
   type: "development" | "administrative",
   assignee_id:string,
-  author_id: string
+  author_id: string,
+  ticket_duration: string
 }
 
 export type TicketResponseTypes = {
@@ -304,4 +306,20 @@ export type TicketResponseTypes = {
   count: any,
   status: number,
   statusText: string
+}
+
+export type UserProfileTypes = {
+  authenticated: string | undefined,
+  dob: string,
+  email: string,
+  email_verified: boolean,
+  gender: string,
+  id: string,
+  last_name: string,
+  name: string,
+  phone: string,
+  phone_country: string,
+  phone_verified: boolean,
+  role: string,
+  sub: string
 }

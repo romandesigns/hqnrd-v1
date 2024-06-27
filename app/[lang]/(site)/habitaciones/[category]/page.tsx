@@ -56,7 +56,7 @@ export default function Page({
             )}
           >
             {currentRooms.length === 0 ? (
-              <Empty className="p-20 " />
+              <Empty className="p-20" />
             ) : (
               currentRooms.map((room, index) => (
                 <RoomCard

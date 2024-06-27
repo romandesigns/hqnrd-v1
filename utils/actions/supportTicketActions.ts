@@ -4,6 +4,7 @@ import { createSupportTicketSchema } from "@/utils/schemas";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { format } from "../formatter/format";
+import { redirect } from "next/navigation";
 
 export async function createSupportTicketAction(prevState: any) {
   const supabase = createClient();
@@ -23,6 +24,7 @@ export async function createSupportTicketAction(prevState: any) {
     assignee_id: prevState.assignee.split(",")[1],
     assignee_name: prevState.assignee.split(",")[0],
   }
+
   const ticket: TicketFormTypes = {
     assigned: prevState.assigned,
     assignee_id: staffs.assignee_id,
@@ -76,7 +78,7 @@ export async function createSupportTicketAction(prevState: any) {
 
 export async function updateIsTicketAssignedAction(formData: FormData) {
   const supabase = createClient();
-  // Get the ticket ID
+
   const status = formData.get("status");
   const ticketId = formData.get("ticketId");
   const lang = formData.get("lang");
@@ -93,7 +95,6 @@ export async function updateIsTicketAssignedAction(formData: FormData) {
     dataToUpdate.status = status;
   }
 
-  // Update assigned status
   const { data, error } = await supabase
     .from("tickets")
     .update(dataToUpdate)
@@ -116,18 +117,15 @@ export async function updateIsTicketAssignedAction(formData: FormData) {
 
 export async function deleteTicketAction(formData: FormData) {
   const supabase = createClient();
-  // Get the ticket ID
+
   const ticketId = formData.get("ticketId");
   const lang = formData.get("lang");
 
-  // Update assigned status
   const { data, error } = await supabase
     .from("tickets")
     .delete()
     .eq("id", ticketId)
     .select();
-
-
 
   if (error) {
     console.log(error);
@@ -141,4 +139,39 @@ export async function deleteTicketAction(formData: FormData) {
       message: "success",
     };
   }
+}
+
+export async function handleTicketCompletionAction(formData: FormData) {
+  const supabase = createClient();
+
+  const payload = {
+    id: formData.get("ticketId") as string,
+    ticket_duration: formData.get("completionDuration") as string,
+  }
+
+ 
+  const { data: ticket, ticketError } = await supabase
+  .from('tickets')
+  .select('ticket_duration')
+  .eq('id', payload.id);
+
+  if(!ticket[0].ticket_duration){
+    const { data, error } = await supabase
+    .from("tickets")
+    .update({ticket_duration: payload.ticket_duration})
+    .eq("id", payload.id)
+    .select();
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (data) {
+    revalidatePath(`/${formData.get("lang")}/portal/soporte/tickets`);
+    redirect(`/${formData.get("lang")}/portal/soporte/tickets`);
+  }
+}
+
+
+
 }

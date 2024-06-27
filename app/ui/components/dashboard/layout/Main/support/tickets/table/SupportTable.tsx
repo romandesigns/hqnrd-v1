@@ -3,7 +3,7 @@
 import { TableTag } from "@/app/ui/features";
 import { Locale } from "@/i18n-config";
 import { StaffMemberTypes, TicketTypes } from "@/types/types";
-import { calculateRemainingTime } from "@/utils/countDownTimer";
+import CountdownTimer from "@/utils/countDownTimer";
 import { createClient } from "@/utils/supabase/client";
 import type { TableColumnsType } from "antd";
 import { Table } from "antd";
@@ -30,11 +30,7 @@ export function SupportTicketsTable({
   const [tickets, setTickets] = useState<TicketTypes[]>(dataSource);
   const supabase = createClient();
 
-  const calculateRemainingTimeToCompleteTask = (due: string | undefined) => {
-    const remainingTime = calculateRemainingTime(due);
-    return remainingTime;
-  };
-
+  // Supabase RealTime
   useEffect(() => {
     const fetchTickets = async () => {
       supabase
@@ -43,7 +39,6 @@ export function SupportTicketsTable({
           "postgres_changes",
           { event: "INSERT", schema: "public", table: "tickets" },
           (payload) => {
-            console.log(payload);
             setTickets((prevTickets) => [...(prevTickets as any), payload.new]);
           },
         )
@@ -60,9 +55,12 @@ export function SupportTicketsTable({
         .on(
           "postgres_changes",
           { event: "DELETE", schema: "public", table: "tickets" },
-          (payload) => {
-            console.log("Change received!", payload);
-          },
+          (payload) =>
+            setTickets((prevTickets: any) =>
+              prevTickets.filter(
+                (ticket: TicketTypes) => ticket.id !== payload.old.id,
+              ),
+            ),
         )
         .subscribe();
     };
@@ -126,11 +124,19 @@ export function SupportTicketsTable({
       title: "Duration",
       dataIndex: "due",
       key: "due",
-      render: (_, record) =>
-        calculateRemainingTimeToCompleteTask(`${record.due as string}`),
+      render: (_, record) => (
+        <CountdownTimer
+          targetDate={record.due}
+          ticketId={record.id}
+          ticketStatus={record.status}
+          lang={lang}
+          ticketDuration={record.ticket_duration}
+        />
+      ),
     },
     {
       title: "Actions",
+
       dataIndex: "actions",
       key: "actions",
       responsive: ["lg"],
@@ -157,6 +163,8 @@ export function SupportTicketsTable({
       <TicketForm lang={lang} author={user} staffMembers={staffMembers} />
       <div className="p-2 md:p-4">
         <Table
+          size="small"
+          tableLayout="auto"
           className="[&_td>button]:lg:opacity-0 [&_td]:capitalize"
           dataSource={tickets as TicketTypes[]}
           // @ts-ignore
