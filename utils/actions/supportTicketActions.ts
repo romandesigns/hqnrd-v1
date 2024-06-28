@@ -150,12 +150,13 @@ export async function handleTicketCompletionAction(formData: FormData) {
     }
 
   
-    const { data: ticket, ticketError } = await supabase
+    const ticket = await supabase
     .from('tickets')
     .select('ticket_duration')
     .eq('id', payload.id);
 
-    if(!ticket[0].ticket_duration){
+    //@ts-ignore
+    if(!ticket.data[0].ticket_duration || ticket.data[0].ticket_duration === null){
       const { data, error } = await supabase
       .from("tickets")
       .update({ticket_duration: payload.ticket_duration})
