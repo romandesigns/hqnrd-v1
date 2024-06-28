@@ -3,8 +3,8 @@ import { DevTaskTypes, TicketFormTypes } from "@/types/types";
 import { createSupportTicketSchema } from "@/utils/schemas";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
-import { format } from "../formatter/format";
 import { redirect } from "next/navigation";
+import { format } from "../formatter/format";
 
 export async function createSupportTicketAction(prevState: any) {
   const supabase = createClient();
@@ -142,36 +142,33 @@ export async function deleteTicketAction(formData: FormData) {
 }
 
 export async function handleTicketCompletionAction(formData: FormData) {
-  const supabase = createClient();
+    const supabase = createClient();
 
-  const payload = {
-    id: formData.get("ticketId") as string,
-    ticket_duration: formData.get("completionDuration") as string,
+    const payload = {
+      id: formData.get("ticketId") as string,
+      ticket_duration: formData.get("completionDuration") as string,
+    }
+
+  
+    const { data: ticket, ticketError } = await supabase
+    .from('tickets')
+    .select('ticket_duration')
+    .eq('id', payload.id);
+
+    if(!ticket[0].ticket_duration){
+      const { data, error } = await supabase
+      .from("tickets")
+      .update({ticket_duration: payload.ticket_duration})
+      .eq("id", payload.id)
+      .select();
+
+    if (error) {
+      console.log(error);
+    }
+
+    if (data) {
+      revalidatePath(`/${formData.get("lang")}/portal/soporte/tickets`);
+      redirect(`/${formData.get("lang")}/portal/soporte/tickets`);
+    }
   }
-
- 
-  const { data: ticket, ticketError } = await supabase
-  .from('tickets')
-  .select('ticket_duration')
-  .eq('id', payload.id);
-
-  if(!ticket[0].ticket_duration){
-    const { data, error } = await supabase
-    .from("tickets")
-    .update({ticket_duration: payload.ticket_duration})
-    .eq("id", payload.id)
-    .select();
-
-  if (error) {
-    console.log(error);
-  }
-
-  if (data) {
-    revalidatePath(`/${formData.get("lang")}/portal/soporte/tickets`);
-    redirect(`/${formData.get("lang")}/portal/soporte/tickets`);
-  }
-}
-
-
-
 }

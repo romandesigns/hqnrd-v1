@@ -57,14 +57,16 @@ const CountdownTimer = ({
       setIsCounting(true);
     } else if (ticketStatus === "completed") {
       setIsCounting(false);
-      handleUpdateIsTicketAssigned(remainingTime, lang);
+      if (remainingTime && !ticketDuration) {
+        handleUpdateIsTicketAssigned(remainingTime, lang);
+      }
     }
 
     if (isCounting) {
       const interval = setInterval(updateCountdown, 1000);
       return () => clearInterval(interval);
     }
-  }, [targetDate, ticketStatus, isCounting]);
+  }, [targetDate, ticketStatus, isCounting, remainingTime, lang, ticketId]);
 
   const isExpired = Number(remainingTime.split(" ")[0]) < 0 ? true : false;
 
