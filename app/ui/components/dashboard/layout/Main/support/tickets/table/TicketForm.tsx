@@ -7,7 +7,7 @@ import { createSupportTicketAction } from "@/utils/actions/supportTicketActions"
 import { format } from "@/utils/formatter/format";
 import { Button, DatePicker, Input, Select, notification } from "antd";
 import dayjs from "dayjs";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 
 type ResponseTypes =
   | {
@@ -44,6 +44,8 @@ export function TicketForm({
 }>) {
   const [open, setOpen] = React.useState(false);
   const [api, contextHolder] = notification.useNotification();
+  const formRef = useRef<any>();
+
   const [formData, setFormData] = React.useState<TicketFormTypes>({
     lang: lang,
     status: "backlog",
@@ -56,8 +58,8 @@ export function TicketForm({
   }, []);
 
   const handleFormSubmission = () => {
-    setFormData({} as TicketFormTypes);
     setOpen(false);
+    formRef.current?.resetFields();
   };
 
   const groupedOptions = useMemo(
@@ -211,20 +213,24 @@ export function TicketForm({
             }))}
           />
           <Input.TextArea
+            maxLength={50}
             showCount
             onChange={(e) => handleChange("description", e.target.value)}
             placeholder="disable resize"
             style={{ height: 120 }}
           />
 
-          <div className="pt-2">
+          <div className="my-4 flex w-full flex-1 gap-4 pt-2">
             <Button
               type="primary"
               size="large"
-              className="w-full"
+              className="my-4 flex w-full items-end"
               htmlType="submit"
             >
               Create
+            </Button>
+            <Button size="large" className="my-4 w-full" htmlType="reset">
+              Reset
             </Button>
           </div>
         </form>

@@ -1,5 +1,5 @@
 "use server";
-import { DevTaskTypes, TicketFormTypes } from "@/types/types";
+import { DevTaskTypes, TicketFormTypes, closeTicketPayloadTypes } from "@/types/types";
 import { createSupportTicketSchema } from "@/utils/schemas";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
@@ -29,13 +29,13 @@ export async function createSupportTicketAction(prevState: any) {
     assigned: prevState.assigned,
     assignee_id: staffs.assignee_id,
     author_id: staffs.author_id,
-    author_name: staffs.author_name,
-    assignee_name: staffs.assignee_name,
-    component: format.toLowerCase(prevState.component) || "N/A",
+    author_name: format.toLowerCase(staffs.author_name),
+    assignee_name: format.toLowerCase(staffs.assignee_name),
+    component: format.toLowerCase(prevState.component  || "N/A"),
     description: prevState.description,
-    dev_task: format.toLowerCase(prevState.dev_task) as DevTaskTypes,
+    dev_task: format.toLowerCase(prevState.dev_task || "N/A") as DevTaskTypes,
     due: prevState.dueDate,
-    page: format.toLowerCase(prevState.page) || "N/A",
+    page: format.toLowerCase(prevState.page || "N/A"),
     priority: format.toLowerCase(prevState.priority),
     status: format.toLowerCase(prevState.status),
     title: format.toLowerCase(prevState.title),
@@ -95,6 +95,11 @@ export async function updateIsTicketAssignedAction(formData: FormData) {
     dataToUpdate.status = status;
   }
 
+  if (status == "started") {
+    dataToUpdate.status = status;
+    dataToUpdate.started_date = new Date().toISOString();
+  }
+
   const { data, error } = await supabase
     .from("tickets")
     .update(dataToUpdate)
@@ -107,6 +112,45 @@ export async function updateIsTicketAssignedAction(formData: FormData) {
 
   if (data) {
     revalidatePath(`/${lang}/portal/soporte/tickets`);
+    return {
+      path: null,
+      errors: null,
+      message: "success",
+    };
+  }
+}
+
+
+
+export async function closeTicketAction(formDate:FormData) {
+  const supabase = createClient();
+
+  const payload = {
+    status : 'completed',
+    resolution : formDate.get("description") as string,
+    ticketId : formDate.get("ticketId") as string,
+    ticket_duration : formDate.get("completionDuration") as string,
+    lang : formDate.get("lang") as string,
+    completion_date: new Date().toISOString()
+  }
+
+  const { data, error } = await supabase
+    .from("tickets")
+    .update({
+      status: payload.status,
+      resolution: payload.resolution,
+      ticket_duration: payload.ticket_duration,
+      completion_date: payload.completion_date
+    })
+    .eq("id", payload.ticketId)
+    .select();
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (data) {
+    revalidatePath(`/${payload.lang}/portal/soporte/tickets`);
     return {
       path: null,
       errors: null,

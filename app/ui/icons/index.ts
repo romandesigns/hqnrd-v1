@@ -56,7 +56,7 @@ export {
 export { FcGoogle } from "react-icons/fc";
 export { GiCctvCamera, GiWaterBottle } from "react-icons/gi";
 export { GoHomeFill } from "react-icons/go";
-export { GrToast } from "react-icons/gr";
+export { GrToast,GrPowerReset  } from "react-icons/gr";
 export { HiMenuAlt1, HiOutlineUser, HiUserGroup } from "react-icons/hi";
 export { ImInstagram } from "react-icons/im";
 export {

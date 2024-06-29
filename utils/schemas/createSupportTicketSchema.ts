@@ -30,7 +30,7 @@ export const createSupportTicketSchema = z.object({
     },
   ),
   dev_task: z
-    .enum(["fix", "new implementation", "optimization"])
+    .enum(["fix", "new implementation", "optimization",'n/a'])
     .refine((val) => val !== undefined, {
       message: "Task type is required",
     }),
@@ -50,6 +50,6 @@ export const createSupportTicketSchema = z.object({
   description: z
     .string()
     .min(3, { message: "Description must be at least 3 characters long" })
-    .max(30, { message: "Description must be less than 30 characters long" }),
+    .max(50, { message: "Description must be less than 50 characters long" }),
   author_id: z.string().uuid({ message: "Author ID must be a valid UUID" }),
 });

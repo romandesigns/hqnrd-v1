@@ -4,9 +4,13 @@ import { Button } from "antd";
 export function StatusActionBtns({
   handleUpdateIsTicketAssigned,
   ticketStatus,
+  ticketId,
+  handleFormResolutionSubmission,
 }: {
   handleUpdateIsTicketAssigned: (status: string) => void;
   ticketStatus: string;
+  ticketId: string | React.Key;
+  handleFormResolutionSubmission: (value: string) => void;
 }) {
   return ticketStatus === "completed" ? (
     <div className="rounded-md bg-neutral-200 p-1 px-2 opacity-75">
@@ -26,7 +30,7 @@ export function StatusActionBtns({
       <Button
         title="Start"
         className="!flex items-center justify-center rounded-md !border-blue-400 shadow-md"
-        onClick={() => handleUpdateIsTicketAssigned("completed")}
+        onClick={() => handleFormResolutionSubmission(ticketId as string)}
       >
         <span className="text-blue-400">
           <FaCheck />

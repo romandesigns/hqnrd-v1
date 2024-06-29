@@ -216,6 +216,7 @@ export enum DevTaskTypes {
   FIX = "fix",
   NEW_IMPLEMENTATION = "new implementation",
   OPTIMIZATION = "optimization",
+  NA = "n/a",
 }
 
 export type TicketFormTypes = {
@@ -322,4 +323,12 @@ export type UserProfileTypes = {
   phone_verified: boolean,
   role: string,
   sub: string
+}
+
+export type closeTicketPayloadTypes = {
+  status: string;
+  resolution: string;
+  ticketId: string;
+  lang: string;
+  taskCompletionDuration: string;
 }

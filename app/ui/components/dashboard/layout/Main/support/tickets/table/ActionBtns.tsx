@@ -1,12 +1,12 @@
+import { MdAssignment, MdDelete } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import {
-  updateIsTicketAssignedAction,
   deleteTicketAction,
+  updateIsTicketAssignedAction,
 } from "@/utils/actions/supportTicketActions";
 import { Button } from "antd";
 import React from "react";
 import { StatusActionBtns } from "./StatusActionBtns";
-import { MdAssignment, MdDelete } from "@/app/ui/icons";
 
 export function ActionBtns({
   authorId,
@@ -16,6 +16,8 @@ export function ActionBtns({
   assigneeId,
   ticketStatus,
   lang,
+  setTicketId,
+  handleFormResolutionSubmission,
 }: Readonly<{
   authorId: string;
   userId: string;
@@ -24,6 +26,8 @@ export function ActionBtns({
   assigneeId: string;
   ticketStatus: string;
   lang: Locale;
+  setTicketId: React.Dispatch<React.SetStateAction<string>>;
+  handleFormResolutionSubmission: (value: string) => void;
 }>) {
   const handleUpdateIsTicketAssigned = async (status: string) => {
     const formData = new FormData();
@@ -45,6 +49,8 @@ export function ActionBtns({
       <StatusActionBtns
         handleUpdateIsTicketAssigned={handleUpdateIsTicketAssigned}
         ticketStatus={ticketStatus}
+        handleFormResolutionSubmission={handleFormResolutionSubmission}
+        ticketId={ticketId}
       />
       {userId === assigneeId && ticketStatus !== "completed" ? (
         <>
