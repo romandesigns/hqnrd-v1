@@ -10,7 +10,7 @@ export function Discounts() {
         <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
       </div>
 
-      <div className="absolute  bottom-auto left-auto right-0 top-0 -z-[1] h-[500px] w-[500px] -translate-x-[70vw] translate-y-[40%] rounded-full bg-orange-300/60 opacity-50 blur-[80px]" />
+      <div className="absolute bottom-auto left-auto right-0 top-0 -z-[1] h-[500px] w-[500px] -translate-x-[70vw] translate-y-[40%] rounded-full bg-orange-300/60 opacity-50 blur-[80px]" />
 
       <article className="z-[2] h-full w-full rounded-md">
         <div className="flex flex-col items-center justify-center">
@@ -18,7 +18,7 @@ export function Discounts() {
             highlight="Discounts Available!"
             title="Stay Longer by Spending Less"
           />
-          <div className="flex w-full flex-col items-center justify-center gap-10 md:flex-row md:gap-20">
+          <div className="flex w-full flex-col items-center justify-center gap-6 md:flex-row md:gap-10">
             <CardDiscount
               imgSrc="/assets/general/five-percent.svg"
               eligibleDays="Applicable When Booking 5 days"
