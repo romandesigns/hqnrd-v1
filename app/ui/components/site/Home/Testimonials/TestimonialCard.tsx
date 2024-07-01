@@ -1,5 +1,11 @@
 import Image from "next/image";
 
+const reviewRatings = [
+  { rating: 5.0, label: "Rooms" },
+  { rating: 5.0, label: "Service" },
+  { rating: 4.0, label: "Location" },
+];
+
 export function ReviewCard() {
   return (
     <div className="relative grid w-full grid-cols-[auto_1fr] grid-rows-[1fr_auto] rounded-md bg-white p-1 py-4">
@@ -22,15 +28,18 @@ export function ReviewCard() {
       <span className="p-1 pl-10 pt-2 text-2xl font-bold md:pl-8">4/5</span>
       <div className="flex items-center justify-start p-1 pl-5 pt-2">
         <div className="space-x-1 text-left text-[0.75rem] text-neutral-800">
-          <span className="rounded-md bg-primary-100 p-1 px-2 font-semibold">
-            Rooms <span className="py-1 font-bold text-neutral-800">5.0</span>
-          </span>
-          <span className="inline-block rounded-md bg-primary-100 p-1 px-2 font-semibold">
-            Service <span className="font-bold text-neutral-800">5.0</span>
-          </span>
-          <span className="inline-block rounded-md bg-primary-100 p-1 px-2 font-semibold">
-            Location <span className="font-bold text-neutral-800">4.0</span>
-          </span>
+          {reviewRatings.map((rating, index) => (
+            <span
+              key={index}
+              className="rounded-md bg-primary-100 p-1 px-2 font-medium"
+            >
+              {rating.label}
+              {": "}
+              <span className="py-1 font-bold text-neutral-800">
+                {rating.rating}
+              </span>
+            </span>
+          ))}
         </div>
         <div className="flex items-center"></div>
       </div>
