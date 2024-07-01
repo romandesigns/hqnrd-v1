@@ -41,7 +41,7 @@ export default async function Home({
         <Discounts />
         <Amenities />
         <CommonAreaAndEntertainment />
-        <Categories />
+        <Categories lang={lang} />
         <Trending />
         <FrequentlyAskedQuestions />
       </main>

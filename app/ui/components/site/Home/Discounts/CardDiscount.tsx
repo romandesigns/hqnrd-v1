@@ -17,7 +17,7 @@ export function CardDiscount({
     <div className="relative h-full w-full rounded-md">
       <div className="rounded-md bg-white p-6 shadow-sm">
         <div className="flex h-full w-full flex-col items-center justify-center rounded-md border-2 border-dashed p-10">
-          <h4 className="text-lg font-bold">{eligibleDays}</h4>
+          <h4 className="text-md font-bold underline">{eligibleDays}</h4>
           <figure className="my-10">
             <Image
               width={300}
@@ -29,15 +29,15 @@ export function CardDiscount({
           </figure>
           <div
             className={twMerge(
-              `relative w-full rounded-md border p-3  ${borderColor}`,
+              `relative w-full max-w-sm rounded-md border p-3 ${borderColor}`,
             )}
           >
-            <span className="relative z-[2] font-bold uppercase text-white ">
+            <span className="relative z-[2] font-bold uppercase text-white">
               Special Offer
             </span>
             <span
               className={twMerge(
-                `absolute -left-2 top-2 block h-full  w-full rounded-md ${bgColor}`,
+                `absolute -left-2 top-2 block h-full w-full animate-bounce rounded-md ${bgColor}`,
               )}
             />
           </div>

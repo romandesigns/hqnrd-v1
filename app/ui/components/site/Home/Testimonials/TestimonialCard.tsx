@@ -9,7 +9,7 @@ const reviewRatings = [
 export function ReviewCard() {
   return (
     <div className="relative grid w-full grid-cols-[auto_1fr] grid-rows-[1fr_auto] rounded-md bg-white p-1 py-4">
-      <figure className="absolute -left-1 -top-1 h-24 w-24 overflow-hidden rounded-md bg-slate-500 shadow-[7px_8px_12px_-4px_rgba(0,0,0,0.3)]">
+      <figure className="absolute -top-1 h-24 w-24 overflow-hidden rounded-md bg-slate-500 shadow-[7px_8px_12px_-4px_rgba(0,0,0,0.3)] md:-left-1">
         <Image
           width={200}
           height={200}

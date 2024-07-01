@@ -1,8 +1,11 @@
 import { HeadingSection } from "@/app/ui/features";
-import { BiGroup } from "@/app/ui/icons";
+import { FaBed, FaStar, FaSuitcase, MdFamilyRestroom } from "@/app/ui/icons";
 import { Section } from "@/app/ui/layout";
+import { Locale } from "@/i18n-config";
+import { Button } from "antd";
+import Link from "next/link";
 
-export function Categories() {
+export function Categories({ lang }: { lang: Locale }) {
   return (
     <Section>
       <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full bg-transparent">
@@ -13,85 +16,129 @@ export function Categories() {
         title="Select your Room Type and reserve now!"
         className="relative z-[4]"
       />
-      <article className="relative h-full w-full overflow-hidden rounded-md p-2 md:p-40">
-        <div className="relative z-[3] mx-auto lg:max-w-3xl">
-          <ul className="grid h-[36rem] w-full grid-cols-2 grid-rows-4 gap-2 sm:h-[40rem] lg:gap-4">
-            <li className="flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:delay-75">
-              <div className="relative flex h-full w-full flex-col items-center justify-center rounded-md border ease-out hover:cursor-pointer focus:shadow-sm md:transition md:duration-150 md:hover:shadow-lg md:hover:ease-in">
-                <span className="text-xs">Basic</span>
-                <p className="absolute bottom-1 right-1 flex items-center justify-center rounded-full bg-neutral-100/10 p-2 py-1 md:bottom-2 md:right-2 md:bg-neutral-200/40">
-                  <span>
-                    <BiGroup size={15} />
-                  </span>
-                  <span className="translate-t-4 ml-1 text-[.6rem] text-xs font-semibold md:text-[.7rem]">
-                    4 Max
-                  </span>
-                </p>
+      <article className="h-auto w-full max-w-5xl overflow-hidden rounded-md p-2">
+        <div className="z-[3] mx-auto h-full">
+          <ul className="grid h-full grid-cols-2 grid-rows-4 gap-2 lg:gap-4">
+            <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
+              <span className="absolute left-4 top-4 rounded-md border p-2">
+                <FaBed />
+              </span>
+              <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
+                <span className="border-l-2 border-neutral-500 pl-2">
+                  <h5 className="mb-2 text-xs">Basic</h5>
+                  <p className="text-xs font-normal text-neutral-500">
+                    Essential amenities for <strong>1-2</strong> guests,
+                    offering a functional stay.
+                  </p>
+                </span>
+                <Button className="!bg-neutral-800 !text-white">
+                  <Link href={`/${lang}/habitaciones/basicas`}>
+                    Select Category
+                  </Link>
+                </Button>
               </div>
             </li>
-            <li className="flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:row-start-2 md:row-end-4 md:delay-75">
-              <div className="relative flex h-full w-full flex-col items-center justify-center rounded-md border ease-out hover:cursor-pointer focus:shadow-sm md:transition md:duration-150 md:hover:shadow-lg md:hover:ease-in">
-                <span className="text-xs">Double Room</span>
-                <p className="absolute bottom-1 right-1 flex items-center justify-center rounded-full bg-neutral-100/10 p-2 py-1 md:bottom-2 md:right-2 md:bg-neutral-200/40">
-                  <span>
-                    <BiGroup size={15} />
-                  </span>
-                  <span className="ml-1 text-[.6rem] text-xs font-semibold md:text-[.7rem]">
-                    4 Max
-                  </span>
-                </p>
+            <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
+              <span className="absolute left-4 top-4 rounded-md border p-2">
+                <FaBed className="-translate-x-1 -translate-y-1" />
+                <span className="absolute left-3 top-3 opacity-50">
+                  <FaBed />
+                </span>
+              </span>
+              <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
+                <span className="border-l-2 border-neutral-500 pl-2">
+                  <h5 className="mb-2 text-xs">Double Room</h5>
+                  <p className="text-xs font-normal text-neutral-500">
+                    Two separate rooms with a shared bathroom, fits up to
+                    <strong> 8 </strong>
+                    guests.
+                  </p>
+                </span>
+                <Button className="!bg-neutral-800 !text-white">
+                  <Link href={`/${lang}/habitaciones/doble`}>
+                    Select Category
+                  </Link>
+                </Button>
               </div>
             </li>
-            <li className="flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:delay-75">
-              <div className="relative flex h-full w-full flex-col items-center justify-center rounded-md border ease-out hover:cursor-pointer focus:shadow-sm md:transition md:duration-150 md:hover:shadow-lg md:hover:ease-in">
-                <span className="text-xs">Standard</span>
-                <p className="absolute bottom-1 right-1 flex items-center justify-center rounded-full bg-neutral-100/10 p-2 py-1 md:bottom-2 md:right-2 md:bg-neutral-200/40">
-                  <span>
-                    <BiGroup size={15} />
-                  </span>
-                  <span className="ml-1 text-[.6rem] text-xs font-semibold md:text-[.7rem]">
-                    4 Max
-                  </span>
-                </p>
+            <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
+              <span className="absolute left-4 top-4 rounded-md border p-2">
+                <FaStar />
+              </span>
+              <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
+                <span className="border-l-2 border-neutral-500 pl-2">
+                  <h5 className="mb-2 text-xs">Standard</h5>
+                  <p className="text-xs font-normal text-neutral-500">
+                    Comfort for <strong> 1-2 </strong> guests, equipped with
+                    necessary amenitie.
+                  </p>
+                </span>
+                <Button className="!bg-neutral-800 !text-white">
+                  <Link href={`/${lang}/habitaciones/standards`}>
+                    Select Category
+                  </Link>
+                </Button>
               </div>
             </li>
-            <li className="row-start-2 row-end-4 flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:delay-75">
-              <div className="bor/15 shadow-sky--pointer relative flex h-full w-full flex-col items-center justify-center rounded-md border shadow-sm focus:shadow-sm md:transition md:duration-150 md:hover:shadow-lg md:hover:ease-in">
-                <span className="text-xs">Double Bed</span>
-                <p className="absolute bottom-1 right-1 flex items-center justify-center rounded-full bg-neutral-100/10 p-2 py-1 md:bottom-2 md:right-2 md:bg-neutral-200/40">
-                  <span>
-                    <BiGroup size={15} />
-                  </span>
-                  <span className="ml-1 text-[.6rem] text-xs font-semibold md:text-[.7rem]">
-                    4 Max
-                  </span>
-                </p>
+            <li className="relative row-start-2 row-end-4 flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
+              <span className="absolute left-4 top-4 rounded-md border p-2">
+                <span className="absolute -top-3 left-6 rounded-md border bg-white p-1 text-xs">
+                  2x
+                </span>
+                <FaBed />
+              </span>
+              <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
+                <span className="border-l-2 border-neutral-500 pl-2">
+                  <h5 className="mb-2 text-xs">Double Bed</h5>
+                  <p className="text-xs font-normal text-neutral-500">
+                    Spacious room with two full-size beds and a twin bed,
+                    suitable for up to <strong> 8 </strong> guests.
+                  </p>
+                </span>
+                <Button className="!bg-neutral-800 !text-white">
+                  <Link href={`/${lang}/habitaciones/doble-camas`}>
+                    Select Category
+                  </Link>
+                </Button>
               </div>
             </li>
-            <li className="col-start-1 col-end-3 row-start-4 row-end-5 flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:col-start-1 md:col-end-2 md:delay-75">
-              <div className="shadow-ky-500/20 hover:sm relative flex h-full w-full flex-col items-center justify-center rounded-md border ease-out md:transition md:duration-150 md:hover:shadow-lg md:hover:ease-in">
-                <span className="text-xs">Family</span>
-                <p className="absolute bottom-1 right-1 flex items-center justify-center rounded-full bg-neutral-100/10 p-2 py-1 md:bottom-2 md:right-2 md:bg-neutral-200/40">
-                  <span>
-                    <BiGroup size={15} />
-                  </span>
-                  <span className="ml-1 text-[.6rem] text-xs font-semibold md:text-[.7rem]">
-                    4 Max
-                  </span>
-                </p>
+            <li className="relative col-start-1 col-end-3 row-start-4 row-end-5 flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
+              <span className="absolute left-4 top-4 rounded-md border p-2">
+                <MdFamilyRestroom />
+              </span>
+              <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
+                <span className="border-l-2 border-neutral-500 pl-2">
+                  <h5 className="mb-2 text-xs">Family</h5>
+                  <p className="text-xs font-normal text-neutral-500">
+                    Full apartment with separate rooms, accommodating up to
+                    <strong> 10 </strong>
+                    guests.
+                  </p>
+                </span>
+                <Button className="!bg-neutral-800 !text-white">
+                  <Link href={`/${lang}/habitaciones/familiares`}>
+                    Select Category
+                  </Link>
+                </Button>
               </div>
             </li>
-            <li className="flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:row-start-4 md:row-end-5 md:delay-75">
-              <div className="relative flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-md border focus:shadow-sm md:transition md:duration-150 md:hover:shadow-lg md:hover:ease-in">
-                <span className="text-xs">Executive</span>
-                <p className="absolute bottom-1 right-1 flex items-center justify-center rounded-full bg-neutral-100/10 p-2 py-1 md:bottom-2 md:right-2 md:bg-neutral-200/40">
-                  <span>
-                    <BiGroup size={15} />
-                  </span>
-                  <span className="ml-1 text-[.6rem] text-xs font-semibold md:text-[.7rem]">
-                    4 Max
-                  </span>
-                </p>
+            <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
+              <span className="absolute left-4 top-4 rounded-md border p-2">
+                <FaSuitcase />
+              </span>
+              <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
+                <span className="border-l-2 border-neutral-500 pl-2">
+                  <h5 className="mb-2 text-xs">Executive</h5>
+                  <p className="text-xs font-normal text-neutral-500">
+                    For <strong>1-3</strong> business travelers, includes
+                    premium services.
+                  </p>
+                </span>
+                <Button className="!bg-neutral-800 !text-white">
+                  <Link href={`/${lang}/habitaciones/ejecutivas`}>
+                    Select Category
+                  </Link>
+                </Button>
               </div>
             </li>
           </ul>

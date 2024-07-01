@@ -44,7 +44,10 @@ export {
   FaPassport,
   FaPlay,
   FaCheck,
-  FaTimes
+  FaTimes,
+  FaRegStar,
+  FaSuitcase,
+  FaStar 
 } from "react-icons/fa";
 export {
   FaAddressBook,
@@ -101,7 +104,8 @@ export {
   MdWifi,
   MdOutlineEmail,
   MdDelete,
-  MdAssignment
+  MdAssignment,
+  MdFamilyRestroom 
 } from "react-icons/md";
 export {
   PiCoatHangerBold,
@@ -111,7 +115,7 @@ export {
   PiIdentificationBadge,
   PiShareNetworkBold,
   PiTelevisionSimple,
-  PiIdentificationBadgeLight,
+  PiIdentificationBadgeLight
 } from "react-icons/pi";
 export {
   RiLayout6Fill,
