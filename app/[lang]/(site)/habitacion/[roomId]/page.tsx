@@ -74,7 +74,7 @@ export default async function Page({
                 <Heading heading="Amenities Included" />
                 <Amenities />
               </article>
-              <article className="grid grid-cols-[1fr] grid-rows-1 gap-2 lg:grid-cols-[20rem_1fr]">
+              <article className="align-center grid justify-center md:grid-cols-[40%_1fr]">
                 <Media />
               </article>
             </div>

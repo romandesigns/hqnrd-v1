@@ -1,5 +1,4 @@
 import { Locale } from "@/i18n-config";
-import { createClient } from "@/utils/supabase/server";
 import cn from "classnames";
 import { Brand } from "../../features/Brand";
 import { Wrapper } from "../Wrapper";
