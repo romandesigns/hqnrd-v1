@@ -20,8 +20,8 @@ export function Categories({ lang }: { lang: Locale }) {
         <div className="z-[3] mx-auto h-full">
           <ul className="grid h-full grid-cols-2 grid-rows-4 gap-2 lg:gap-4">
             <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md border p-2">
-                <FaBed />
+              <span className="absolute left-4 top-4 rounded-md bg-blue-100 p-2">
+                <FaBed className="text-blue-500" />
               </span>
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
                 <span className="border-l-2 border-neutral-500 pl-2">
@@ -39,10 +39,10 @@ export function Categories({ lang }: { lang: Locale }) {
               </div>
             </li>
             <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md border p-2">
-                <FaBed className="-translate-x-1 -translate-y-1" />
+              <span className="absolute left-4 top-4 rounded-md bg-blue-100 p-2">
+                <FaBed className="-translate-x-1 -translate-y-1 text-blue-500" />
                 <span className="absolute left-3 top-3 opacity-50">
-                  <FaBed />
+                  <FaBed className="text-blue-500" />
                 </span>
               </span>
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
@@ -62,8 +62,8 @@ export function Categories({ lang }: { lang: Locale }) {
               </div>
             </li>
             <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md border p-2">
-                <FaStar />
+              <span className="absolute left-4 top-4 rounded-md bg-yellow-100 p-2">
+                <FaStar className="text-yellow-500" />
               </span>
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
                 <span className="border-l-2 border-neutral-500 pl-2">
@@ -81,11 +81,11 @@ export function Categories({ lang }: { lang: Locale }) {
               </div>
             </li>
             <li className="relative row-start-2 row-end-4 flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md border p-2">
-                <span className="absolute -top-3 left-6 rounded-md border bg-white p-1 text-xs">
+              <span className="absolute left-4 top-4 rounded-md bg-blue-100 p-2">
+                <span className="absolute -top-3 left-6 rounded-md bg-blue-200 p-1 text-xs text-pink-500">
                   2x
                 </span>
-                <FaBed />
+                <FaBed className="text-blue-500" />
               </span>
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
                 <span className="border-l-2 border-neutral-500 pl-2">
@@ -103,8 +103,8 @@ export function Categories({ lang }: { lang: Locale }) {
               </div>
             </li>
             <li className="relative col-start-1 col-end-3 row-start-4 row-end-5 flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md border p-2">
-                <MdFamilyRestroom />
+              <span className="absolute left-4 top-4 rounded-md bg-violet-100 p-2">
+                <MdFamilyRestroom className="text-violet-500" />
               </span>
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
                 <span className="border-l-2 border-neutral-500 pl-2">
@@ -123,8 +123,8 @@ export function Categories({ lang }: { lang: Locale }) {
               </div>
             </li>
             <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md border p-2">
-                <FaSuitcase />
+              <span className="absolute left-4 top-4 rounded-md bg-neutral-100 p-2">
+                <FaSuitcase className="text-neutral-500" />
               </span>
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
                 <span className="border-l-2 border-neutral-500 pl-2">
