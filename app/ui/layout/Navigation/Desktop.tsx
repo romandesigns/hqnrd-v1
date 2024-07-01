@@ -22,7 +22,7 @@ export async function DesktopNav({
       >
         <Wrapper className="sm:p-3 lg:p-2">
           <div className="flex w-full items-center justify-between">
-            <Brand />
+            <Brand lang={lang} />
             <div className="flex items-center">
               <DesktopMenu lang={lang} />
               <ToggleClose className="sm:hidden" />

@@ -18,7 +18,7 @@ export function PublicLayout({
       <VerticalContactWidgetLayout lang={lang}>
         {children}
       </VerticalContactWidgetLayout>
-      <Footer />
+      <Footer lang={lang} />
       <NotificationTray />
     </>
   );

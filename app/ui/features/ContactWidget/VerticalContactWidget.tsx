@@ -27,7 +27,7 @@ export function VerticalContactWidget({
     <MotionVerticalContactWidget showWidget={Number(scrollY) > 80}>
       <ul
         className={twMerge(
-          `fixed left-2 top-[50vh] !z-[20] hidden flex-col space-y-2 rounded-md bg-white p-2 shadow-md transition-transform duration-300 md:block lg:left-48`,
+          `fixed left-2 top-[50vh] !z-[50] hidden flex-col space-y-2 rounded-md bg-white p-2 shadow-md transition-transform duration-300 md:block`,
         )}
       >
         <li>
