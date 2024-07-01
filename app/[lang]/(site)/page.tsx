@@ -28,12 +28,11 @@ export default async function Home({
   params: { lang: Locale };
 }) {
   const user = await getUserData();
-
   return (
     <PublicLayout lang={lang}>
       <Wrapper className="p-0 pt-[57px] md:pt-[0]">
         <Header className="flex h-[calc(100vh-57px)] items-stretch justify-stretch p-2 md:h-[calc(70vh)] md:pt-[60px]">
-          <HeaderContent lang={lang} />
+          <HeaderContent lang={lang} user={user} />
         </Header>
       </Wrapper>
       <main className="relative flex flex-col items-center">

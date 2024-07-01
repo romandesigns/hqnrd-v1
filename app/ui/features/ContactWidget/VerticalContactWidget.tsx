@@ -1,20 +1,19 @@
 "use client";
 import { Button } from "antd";
+import React from "react";
 import { BsTranslate } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
+import { twMerge } from "tailwind-merge";
+import { WaveDot } from "..";
 import {
   BUSINESS_EMAIL_FROM_VISITOR,
   BUSINESS_MAP_LOCATION,
   BUSINESS_WHATSAPP_DIRECT_CHAT,
 } from "../../constants";
-import { ExternalLink } from "../ExternalLink";
-import React from "react";
-import { twMerge } from "tailwind-merge";
-import classNames from "classnames";
-import { WaveDot } from "..";
 import { MotionVerticalContactWidget } from "../../motion/MotionVerticalContactWidget";
+import { ExternalLink } from "../ExternalLink";
 
 export function VerticalContactWidget({
   setOpen,

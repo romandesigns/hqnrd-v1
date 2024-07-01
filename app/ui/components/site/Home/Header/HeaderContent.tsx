@@ -1,15 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // Import only used Swiper styles to reduce bundle size
 import { SubHeader } from "@/app/ui/features";
 import { Locale } from "@/i18n-config";
 import homeBillboards from "@/public/assets/data/homeBillboard.json";
 import type { Swiper as SwiperType } from "swiper";
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/effect-cards";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+
 import {
   BackgroundSwiper,
   CardSwiper,
@@ -17,13 +13,25 @@ import {
   HeaderButtonsGroup,
   TextHeadingSwiper,
 } from ".";
+import { UserProfileTypes } from "@/types/types";
 
-export const HeaderContent = ({ lang }: { lang: Locale }) => {
+export const HeaderContent = ({
+  lang,
+  user,
+}: {
+  lang: Locale;
+  user: UserProfileTypes;
+}) => {
+  const [userProfile, setUserProfile] = useState<UserProfileTypes>(user);
   const [controlledSwiper, setControlledSwiper] = useState<SwiperType | null>(
     null,
   );
   const [textControlledSwipper, setTextControlledSwipper] =
     useState<SwiperType | null>(null);
+
+  useEffect(() => {
+    setUserProfile(user);
+  }, [user]);
 
   return (
     <section className="w-full md:flex md:flex-col md:items-start md:justify-center">
@@ -39,6 +47,7 @@ export const HeaderContent = ({ lang }: { lang: Locale }) => {
               setTextControlledSwipper={setTextControlledSwipper}
             />
             <HeaderButtonsGroup
+              userProfile={userProfile}
               className="relative z-[3] hidden pr-32 md:flex md:p-0 md:py-4"
               lang={lang}
             />
@@ -57,6 +66,7 @@ export const HeaderContent = ({ lang }: { lang: Locale }) => {
 
           {/* Buttons Group mobile*/}
           <HeaderButtonsGroup
+            userProfile={userProfile}
             className="relative z-[3] md:hidden"
             lang={lang}
           />
