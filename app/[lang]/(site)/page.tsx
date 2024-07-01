@@ -1,12 +1,13 @@
 import {
+  Amenities,
   Categories,
   CommonAreaAndEntertainment,
   Discounts,
   FrequentlyAskedQuestions,
   Testimonials,
+  Trending,
 } from "@/app/ui/components/site/Home";
 import { HeaderContent } from "@/app/ui/components/site/Home/Header/HeaderContent";
-import { Amenities, Trending } from "@/app/ui/components/site/Home";
 import { Locale } from "@/i18n-config";
 import { getUser } from "@/utils/supabase/queries";
 import { User } from "@supabase/supabase-js";

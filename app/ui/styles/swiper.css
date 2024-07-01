@@ -15,29 +15,29 @@
   transform: translateY(-0.4rem) translateX(0.5rem);
 }
 
-.swiper-button-prev,
-.swiper-button-next {
-  background: #fff;
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  opacity: 0;
+}
+
+.testimonails-swiper .swiper-button-prev,
+.testimonails-swiper .swiper-button-next {
   border-radius: 100rem;
-  box-shadow: 0 0.2rem 0.4rem -0.1rem #3d3d3d;
+  box-shadow: 0 0.2rem 0.35rem -0.1rem #828282;
   width: 2rem !important;
   height: 2rem !important;
 }
 
-.testimonails-swiper .swiper-button-prev::after {
-  background: url("/assets/icons/directional/left-arrow.svg");
+.testimonails-swiper .swiper-button-prev {
+  background: url("/assets/icons/directional/left-arrow.svg"), #fff;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 95%;
+  background-size: 65% !important;
 }
 
-.testimonails-swiper .swiper-button-next::after {
-  background: url("/assets/icons/directional/right-arrow.svg");
+.testimonails-swiper .swiper-button-next {
+  background: url("/assets/icons/directional/right-arrow.svg"), #fff;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 95%;
+  background-size: 65% !important;
 }
-
-/* .trending-swiper {
-  padding-left: 0px !important;
-} */
