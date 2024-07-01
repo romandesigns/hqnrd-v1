@@ -6,7 +6,7 @@ import { BlurredBackground } from "./BlurredBackground";
 
 export function Testimonials() {
   return (
-    <Section className="relative w-full rounded-md">
+    <Section>
       <BlurredBackground />
       <article className="flex h-full w-full max-w-6xl items-center justify-center">
         <div className="relative h-full w-full rounded-md">

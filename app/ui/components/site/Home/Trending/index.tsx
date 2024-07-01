@@ -18,7 +18,7 @@ export function Trending() {
     { e: 1 },
   ];
   return (
-    <Section className="relative my-2 w-full rounded-md">
+    <Section className="my-2">
       <div className="bg-trasparent absolute top-0 -z-10 h-full w-full">
         <div className="absolute bottom-auto left-auto right-0 top-0 h-[50vh] w-[50vw] -translate-x-[80%] translate-y-[100%] rounded-full bg-primary-500/50 opacity-50 blur-[80px]" />
       </div>

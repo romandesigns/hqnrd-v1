@@ -9,7 +9,7 @@ export function Wrapper({
   className?: string;
 }) {
   return (
-    <div className={twMerge(`m-auto w-full max-w-[90rem] px-2 ${className}`)}>
+    <div className={twMerge(`max-width m-auto w-full px-2 ${className}`)}>
       {children}
     </div>
   );

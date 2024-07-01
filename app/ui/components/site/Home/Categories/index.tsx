@@ -4,7 +4,7 @@ import { Section } from "@/app/ui/layout";
 
 export function Categories() {
   return (
-    <Section className="relative">
+    <Section>
       <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full bg-transparent">
         <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
       </div>
@@ -29,7 +29,7 @@ export function Categories() {
                 </p>
               </div>
             </li>
-            <li className="flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:row-start-2 md:row-end-4  md:delay-75">
+            <li className="flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:row-start-2 md:row-end-4 md:delay-75">
               <div className="relative flex h-full w-full flex-col items-center justify-center rounded-md border ease-out hover:cursor-pointer focus:shadow-sm md:transition md:duration-150 md:hover:shadow-lg md:hover:ease-in">
                 <span className="text-xs">Double Room</span>
                 <p className="absolute bottom-1 right-1 flex items-center justify-center rounded-full bg-neutral-100/10 p-2 py-1 md:bottom-2 md:right-2 md:bg-neutral-200/40">
@@ -42,8 +42,8 @@ export function Categories() {
                 </p>
               </div>
             </li>
-            <li className="flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold   md:delay-75">
-              <div className="relative flex h-full w-full flex-col items-center justify-center rounded-md border ease-out hover:cursor-pointer focus:shadow-sm md:transition  md:duration-150 md:hover:shadow-lg md:hover:ease-in">
+            <li className="flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:delay-75">
+              <div className="relative flex h-full w-full flex-col items-center justify-center rounded-md border ease-out hover:cursor-pointer focus:shadow-sm md:transition md:duration-150 md:hover:shadow-lg md:hover:ease-in">
                 <span className="text-xs">Standard</span>
                 <p className="absolute bottom-1 right-1 flex items-center justify-center rounded-full bg-neutral-100/10 p-2 py-1 md:bottom-2 md:right-2 md:bg-neutral-200/40">
                   <span>
@@ -56,7 +56,7 @@ export function Categories() {
               </div>
             </li>
             <li className="row-start-2 row-end-4 flex items-center justify-center overflow-hidden rounded-md border bg-white p-3 font-bold md:delay-75">
-              <div className="bor/15 shadow-sky--pointer relative flex h-full w-full flex-col items-center justify-center rounded-md border shadow-sm focus:shadow-sm md:transition  md:duration-150 md:hover:shadow-lg md:hover:ease-in">
+              <div className="bor/15 shadow-sky--pointer relative flex h-full w-full flex-col items-center justify-center rounded-md border shadow-sm focus:shadow-sm md:transition md:duration-150 md:hover:shadow-lg md:hover:ease-in">
                 <span className="text-xs">Double Bed</span>
                 <p className="absolute bottom-1 right-1 flex items-center justify-center rounded-full bg-neutral-100/10 p-2 py-1 md:bottom-2 md:right-2 md:bg-neutral-200/40">
                   <span>

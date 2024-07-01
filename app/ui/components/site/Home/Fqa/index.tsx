@@ -6,7 +6,7 @@ import { Section } from "../../../../layout";
 
 export const FrequentlyAskedQuestions = () => {
   return (
-    <Section className="relative w-full max-w-[90rem] pb-32">
+    <Section className="max-width pb-32">
       <HeadingSection
         className="z-[2]"
         highlight="Your comfort is our priority"

@@ -5,8 +5,8 @@ import { Gallery } from "./Gallery";
 
 export function Amenities() {
   return (
-    <Section className="relative">
-      <div className="absolute  bottom-auto left-auto right-0 top-0 -z-[1] h-[500px] w-[500px] -translate-x-[10vw] translate-y-[40%] rounded-full bg-orange-300/50 opacity-50 blur-[80px]" />
+    <Section>
+      <div className="absolute bottom-auto left-auto right-0 top-0 -z-[1] h-[500px] w-[500px] -translate-x-[10vw] translate-y-[40%] rounded-full bg-orange-300/50 opacity-50 blur-[80px]" />
       <HeadingSection
         highlight="Your comfort is our priority"
         title="Providing the best amenities for your stay!"

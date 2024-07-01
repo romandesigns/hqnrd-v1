@@ -7,7 +7,7 @@ import { SocialMedia } from "./SocialMedia";
 export function Footer() {
   return (
     <footer className="bg-primary-500 px-2 py-10">
-      <Section className="mx-auto flex w-full max-w-[90rem] items-center justify-between rounded-md bg-white/10 px-4 py-2 pb-4">
+      <Section className="max-width mx-auto flex w-full items-center justify-between rounded-md bg-white/10 px-4 py-2 pb-4">
         <div className="relative flex w-full items-center justify-start py-5">
           <Brand className="!text-white" headingLevel="h2" />
         </div>
