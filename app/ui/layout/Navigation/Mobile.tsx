@@ -1,11 +1,11 @@
 import { Locale } from "@/i18n-config";
+import { UserProfileTypes } from "@/types/types";
 import cn from "classnames";
 import { Brand } from "../../features/Brand";
 import { MotionMobileNav } from "../../motion/MotionMobileNav";
 import { Wrapper } from "../Wrapper";
 import { MobileMenu } from "./components/MobileMenu";
 import { ToggleOpen } from "./components/ToggleOpenBtn";
-import { UserProfileTypes } from "@/types/types";
 
 export function MobileNav({
   className = "",

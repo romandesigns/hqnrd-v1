@@ -3,6 +3,7 @@ import { Header, PublicLayout, Wrapper } from "@/app/ui/layout";
 import { Locale } from "@/i18n-config";
 import { shareData } from "@/public/assets/data";
 import { rooms } from "@/public/assets/data/roomsList";
+import { getUser } from "@/utils/supabase/queries";
 import { notFound } from "next/navigation";
 import {
   Amenities,
@@ -17,7 +18,6 @@ import {
   Summary,
   Trending,
 } from "../../../../ui/components/site/Room";
-import { getUser } from "@/utils/supabase/queries";
 
 const fetchRoom = async (roomId: string) => {
   const room = rooms.find((room) => room.roomNumber === Number(roomId));

@@ -9,10 +9,10 @@ import {
 } from "@/app/ui/components/site/Home";
 import { HeaderContent } from "@/app/ui/components/site/Home/Header/HeaderContent";
 import { Locale } from "@/i18n-config";
+import { UserProfileTypes } from "@/types/types";
 import { getUser } from "@/utils/supabase/queries";
 import { User } from "@supabase/supabase-js";
 import { Header, PublicLayout, Wrapper } from "../../ui/layout";
-import { UserProfileTypes } from "@/types/types";
 
 const getUserData = async () => {
   const userData: User | null = await getUser();

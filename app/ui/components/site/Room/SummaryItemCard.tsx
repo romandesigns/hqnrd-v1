@@ -1,7 +1,7 @@
 import { Reservation } from "@/types/types";
+import { format } from "@/utils/formatter/format";
 import Image from "next/image";
 import { FaPen, FaRegTrashAlt } from "../../../icons";
-import { format } from "@/utils/formatter/format";
 
 export function SummaryItemCard({
   reservation,

@@ -1,10 +1,10 @@
 import { Locale } from "@/i18n-config";
+import { UserProfileTypes } from "@/types/types";
 import React from "react";
+import { NotificationTray } from "../../features";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
 import { VerticalContactWidgetLayout } from "../VerticalContactWidget";
-import { NotificationTray } from "../../features";
-import { UserProfileTypes } from "@/types/types";
 
 export async function PublicLayout({
   lang,

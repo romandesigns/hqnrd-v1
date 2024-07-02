@@ -1,10 +1,10 @@
 import { Locale } from "@/i18n-config";
+import { UserProfileTypes } from "@/types/types";
 import cn from "classnames";
 import { Brand } from "../../features/Brand";
 import { Wrapper } from "../Wrapper";
 import { DesktopMenu } from "./components/DesktopMenu";
 import { ToggleClose } from "./components/ToggleCloseBtn";
-import { UserProfileTypes } from "@/types/types";
 
 export async function DesktopNav({
   className = "",

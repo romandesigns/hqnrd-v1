@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 };
 
 import { Locale, i18n } from "@/i18n-config";
-import { billboards } from "../../../../public/assets/data/billbaord";
 import { getUser } from "@/utils/supabase/queries";
+import { billboards } from "../../../../public/assets/data/billbaord";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));

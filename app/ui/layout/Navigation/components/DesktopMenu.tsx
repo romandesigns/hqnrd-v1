@@ -1,8 +1,8 @@
 import { BsDoorOpenFill, GoHomeFill } from "@/app/ui/icons";
+import { UserProfileTypes } from "@/types/types";
 import { Button } from "antd";
 import Link from "next/link";
 import { AuthBtns } from "./AuthBtns";
-import { UserProfileTypes } from "@/types/types";
 
 export async function DesktopMenu({
   lang,

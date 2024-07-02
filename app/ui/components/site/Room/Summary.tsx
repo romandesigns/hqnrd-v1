@@ -1,8 +1,8 @@
 "use client";
 import { useReservation } from "@/store/reservation";
+import { Reservation } from "@/types/types";
 import { SummaryItemCard } from ".";
 import { Drawer } from "../../../layout/Navigation/components/Drawer";
-import { Reservation } from "@/types/types";
 
 export function Summary() {
   const { isOpen, reservations, closeReservationDrawer, removeReservation } =

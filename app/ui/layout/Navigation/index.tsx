@@ -1,7 +1,7 @@
 import { Locale } from "@/i18n-config";
+import { UserProfileTypes } from "@/types/types";
 import { DesktopNav } from "./Desktop";
 import { MobileNav } from "./Mobile";
-import { UserProfileTypes } from "@/types/types";
 
 export async function Navigation({
   lang,

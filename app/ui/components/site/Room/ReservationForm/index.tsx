@@ -4,13 +4,17 @@ import { Reservation } from "@/types/types";
 import { Button, Input } from "antd";
 import moment from "moment";
 import React from "react";
-import { LuUser2, MdChildCare } from "../../../../icons";
+import {
+  IoMdCloseCircleOutline,
+  LuUser2,
+  MdChildCare,
+  TiWarning,
+} from "../../../../icons";
+import { MotionSlideUpDownWarning } from "../../../../motion";
 import { Summary } from "../Summary";
 import { DateTimePickerSection } from "./DateTimePickerSection";
 import { HiddenInputs } from "./HIddenInputs";
 import { InputNumberSection } from "./InputNumberSection";
-import { IoMdCloseCircleOutline, TiWarning } from "../../../../icons";
-import { MotionSlideUpDownWarning } from "../../../../motion";
 
 export function ReservationForm({
   roomNumber,
