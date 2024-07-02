@@ -3,7 +3,7 @@ import { MdSpaceDashboard } from "@/app/ui/icons";
 import { createClient } from "@/utils/supabase/server";
 import { Button } from "antd";
 import Link from "next/link";
-import { SignOutBtn } from "./SignOutBtn";
+import { SignOutBtn } from "../../../features";
 
 export async function AuthBtns({ lang }: { lang: string }) {
   const supabase = createClient();

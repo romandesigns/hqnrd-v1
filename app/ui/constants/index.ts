@@ -32,3 +32,18 @@ export const ROLES = [
   ROLE_DEVELOPER,
 ];
 
+// Notification Types
+export const NOTIFICATION_NEW_TASK = "new task";
+export const NOTIFICATION_NEW_USER = "new user";
+export const NOTIFICATION_NEW_RESERVATION = "new reservation";
+export const NOTIFICATION_NEW_PAYMENT = "new payment";
+export const NOTIFICATION_NEW_MESSAGE = "new message";
+
+
+export const NOTIFICATION_TYPES = [
+  NOTIFICATION_NEW_TASK,
+  NOTIFICATION_NEW_USER,
+  NOTIFICATION_NEW_RESERVATION,
+  NOTIFICATION_NEW_PAYMENT,
+  NOTIFICATION_NEW_MESSAGE,
+];

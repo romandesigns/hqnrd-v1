@@ -25,7 +25,7 @@ export function HeaderButtonsGroup({
           className="w-full flex-1 md:max-w-80"
         >
           <Button
-            className="w-full !border-none !bg-neutral-800 font-semibold uppercase !text-neutral-100"
+            className="w-full !border-none !bg-neutral-800 !font-semibold uppercase !text-neutral-100"
             size="large"
           >
             View All Rooms
@@ -50,7 +50,7 @@ export function HeaderButtonsGroup({
             className="w-full flex-1 md:max-w-80"
           >
             <Button
-              className="w-full !border-none !bg-neutral-800 font-semibold uppercase !text-neutral-100"
+              className="w-full !border-none !bg-neutral-800 uppercase !text-neutral-100"
               size="large"
             >
               View All Rooms

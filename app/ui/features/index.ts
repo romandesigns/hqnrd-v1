@@ -27,3 +27,4 @@ export { WaveDot } from "./WaveDot";
 export { WeatherWidget } from "./WeatherWidget";
 export { FloatingBtn } from "./FloatingBtn";
 export { TableTag } from "./Table/Tag";
+export { SignOutBtn } from "./SignOutBtn";

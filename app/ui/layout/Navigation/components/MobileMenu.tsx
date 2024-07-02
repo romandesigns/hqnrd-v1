@@ -1,13 +1,20 @@
 "use client";
-import { HorizontalContactWidget } from "@/app/ui/features";
+import { HorizontalContactWidget, SignOutBtn } from "@/app/ui/features";
 import { BsDoorOpenFill, GoHomeFill, MdSpaceDashboard } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import { useNavToggle } from "@/store/mobile-navigation";
+import { UserProfileTypes } from "@/types/types";
 import { Button } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 
-export function MobileMenu({ lang }: { lang: Locale }) {
+export function MobileMenu({
+  lang,
+  user,
+}: {
+  lang: Locale;
+  user: UserProfileTypes;
+}) {
   const { closeNavigation } = useNavToggle();
   const [open, setOpen] = useState(false);
 
@@ -58,45 +65,41 @@ export function MobileMenu({ lang }: { lang: Locale }) {
             component="drawer"
           />
         </li>
-        {/* <li className="w-full flex gap-4 mt-auto">
-        <Link href={`/${lang}/cerrar-session`} className="flex-1">
-          <Button
-            block
-            size="large"
-            className="!flex items-center justify-center shadow-lg !bg-neutral-800 !border-none !text-neutral-100 gap-2"
-          >
-            Cerrar Session
-          </Button>
-        </Link>
-      </li> */}
-        <li
-          className="mt-auto flex w-full gap-4"
-          onClick={() => closeNavigation()}
-        >
-          <Link href={`/${lang}/iniciar-session`} className="flex-1">
-            <Button
-              type="primary"
-              block
-              size="large"
-              className="!flex items-center justify-center gap-2 !border-none bg-white shadow-lg"
-            >
-              Sign In
-            </Button>
-          </Link>
-          <Link
-            href={`/${lang}/auth`}
-            className="flex-1"
+        {!user?.authenticated ? (
+          <li
+            className="mt-auto flex w-full gap-4"
             onClick={() => closeNavigation()}
           >
-            <Button
-              block
-              size="large"
-              className="!flex items-center justify-center gap-2 !border-none !bg-neutral-800 !text-neutral-100 shadow-lg"
+            <Link href={`/${lang}/auth/iniciar-session`} className="flex-1">
+              <Button
+                type="primary"
+                block
+                size="large"
+                className="!flex items-center justify-center gap-2 !border-none bg-white shadow-lg"
+              >
+                Sign In
+              </Button>
+            </Link>
+            <Link
+              href={`/${lang}/auth`}
+              className="flex-1"
+              onClick={() => closeNavigation()}
             >
-              Create Account
-            </Button>
-          </Link>
-        </li>
+              <Button
+                block
+                size="large"
+                className="!flex items-center justify-center gap-2 !border-none !bg-neutral-800 !text-neutral-100 shadow-lg"
+              >
+                Create Account
+              </Button>
+            </Link>
+          </li>
+        ) : (
+          <>
+            <br />
+            <SignOutBtn size="large" formClassName="w-full" />
+          </>
+        )}
       </ul>
     </>
   );

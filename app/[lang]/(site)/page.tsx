@@ -12,6 +12,7 @@ import { Locale } from "@/i18n-config";
 import { getUser } from "@/utils/supabase/queries";
 import { User } from "@supabase/supabase-js";
 import { Header, PublicLayout, Wrapper } from "../../ui/layout";
+import { UserProfileTypes } from "@/types/types";
 
 const getUserData = async () => {
   const userData: User | null = await getUser();
@@ -27,9 +28,10 @@ export default async function Home({
 }: {
   params: { lang: Locale };
 }) {
-  const user = await getUserData();
+  //@ts-ignore
+  const user: UserProfileTypes = await getUserData();
   return (
-    <PublicLayout lang={lang}>
+    <PublicLayout lang={lang} user={user}>
       <Wrapper className="p-0 pt-[57px] md:pt-[0]">
         <Header className="flex h-[calc(100vh-57px)] items-stretch justify-stretch p-2 md:h-[calc(70vh)] md:pt-[60px]">
           <HeaderContent lang={lang} user={user} />
