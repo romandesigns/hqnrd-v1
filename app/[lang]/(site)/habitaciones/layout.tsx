@@ -9,20 +9,23 @@ export const metadata: Metadata = {
 
 import { Locale, i18n } from "@/i18n-config";
 import { billboards } from "../../../../public/assets/data/billbaord";
+import { getUser } from "@/utils/supabase/queries";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default function RoomsLayout({
+export default async function RoomsLayout({
   children,
   params: { lang },
 }: Readonly<{
   children: React.ReactNode;
   params: { lang: Locale };
 }>) {
+  //@ts-ignore
+  const user: UserProfileTypes = await getUser();
   return (
-    <PublicLayout lang={lang}>
+    <PublicLayout lang={lang} user={user}>
       <Wrapper className="p-0 pt-[57px] md:pt-[0]">
         <Header className="flex h-[calc(100vh-60vh)] items-stretch justify-stretch p-2 md:h-[calc(100vh-40vh)] md:pt-[60px]">
           <HeaderContent lang={lang} billboards={billboards} />
