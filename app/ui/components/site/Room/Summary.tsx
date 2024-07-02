@@ -13,28 +13,33 @@ export function Summary() {
       placement="right"
       title="My Selection"
       open={isOpen}
-      className="custom"
+      className="custom relative"
       closeDrawer={closeReservationDrawer}
     >
-      <section>
-        <h4 className="mb-4 text-sm font-semibold">
-          Total Rooms: {reservations.length}
-        </h4>
-        <ul className="flex flex-col gap-14">
-          {reservations.map((reservation: Reservation) => {
-            return (
-              <li
-                key={reservation.reservationId}
-                className="relative my-2 grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] gap-2 border p-1 pr-2 lg:p-2"
-              >
-                <SummaryItemCard
-                  reservation={reservation}
-                  removeReservation={removeReservation}
-                />
-              </li>
-            );
-          })}
-        </ul>
+      <section className="relative flex h-full flex-col justify-start bg-red-500">
+        <article>
+          <h4 className="mb-4 text-sm font-semibold">
+            Total Rooms: {reservations.length}
+          </h4>
+          <ul className="flex flex-col gap-14">
+            {reservations.map((reservation: Reservation) => {
+              return (
+                <li
+                  key={reservation.reservationId}
+                  className="relative my-2 grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] gap-2 border p-1 pr-2 lg:p-2"
+                >
+                  <SummaryItemCard
+                    reservation={reservation}
+                    removeReservation={removeReservation}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </article>
+        <div className="fix bottom-0 w-full bg-violet-500">
+          <button>Hello</button>
+        </div>
       </section>
     </Drawer>
   );
