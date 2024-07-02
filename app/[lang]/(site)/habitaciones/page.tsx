@@ -6,7 +6,6 @@ import { Locale } from "@/i18n-config";
 import { Pagination } from "antd";
 import { useState } from "react";
 import { rooms as roomList } from "../../../../public/assets/data/roomsList";
-import delay from "delay";
 
 export default async function Page({
   params: { lang },

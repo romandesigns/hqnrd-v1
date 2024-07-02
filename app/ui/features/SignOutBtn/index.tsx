@@ -17,9 +17,9 @@ export function SignOutBtn({
         htmlType="submit"
         size={size}
         type="default"
-        className="flex-end !flex !w-full !bg-neutral-800 text-xs !text-white"
+        className="!flex !w-full items-center justify-center !bg-neutral-800 text-xs !text-white"
         formAction={signOutAction}
-        icon={<IoLogOut className="!flex items-center justify-center" />}
+        icon={<IoLogOut className="!flex items-end justify-center" />}
       >
         Sign Out
       </Button>
