@@ -12,7 +12,7 @@ export async function Navigation({
 }) {
   return (
     <nav className="fixed z-[11] grid w-full grid-cols-1 grid-rows-1">
-      <DesktopNav lang={lang} />
+      <DesktopNav lang={lang} user={user} />
       <MobileNav lang={lang} user={user} />
     </nav>
   );

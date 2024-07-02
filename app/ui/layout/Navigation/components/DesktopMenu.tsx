@@ -2,8 +2,15 @@ import { BsDoorOpenFill, GoHomeFill } from "@/app/ui/icons";
 import { Button } from "antd";
 import Link from "next/link";
 import { AuthBtns } from "./AuthBtns";
+import { UserProfileTypes } from "@/types/types";
 
-export async function DesktopMenu({ lang }: { lang: string }) {
+export async function DesktopMenu({
+  lang,
+  user,
+}: {
+  lang: string;
+  user: UserProfileTypes;
+}) {
   return (
     <ul className="hidden gap-2 text-sm font-medium sm:flex">
       <li className="inline-block">

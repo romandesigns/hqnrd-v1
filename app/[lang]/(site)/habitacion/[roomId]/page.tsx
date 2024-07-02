@@ -17,6 +17,7 @@ import {
   Summary,
   Trending,
 } from "../../../../ui/components/site/Room";
+import { getUser } from "@/utils/supabase/queries";
 
 const fetchRoom = async (roomId: string) => {
   const room = rooms.find((room) => room.roomNumber === Number(roomId));
@@ -33,8 +34,11 @@ export default async function Page({
     return notFound();
   }
 
+  //@ts-ignore
+  const user: UserProfileTypes = await getUser();
+
   return (
-    <PublicLayout lang={lang}>
+    <PublicLayout lang={lang} user={user}>
       <Wrapper className="relative z-[1] p-0 pt-[57px] md:pt-[0]">
         <Header className="flex items-center justify-center p-2 md:pt-[60px]">
           <section className="h-full w-full">

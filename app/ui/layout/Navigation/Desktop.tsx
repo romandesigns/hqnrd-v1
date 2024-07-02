@@ -4,13 +4,16 @@ import { Brand } from "../../features/Brand";
 import { Wrapper } from "../Wrapper";
 import { DesktopMenu } from "./components/DesktopMenu";
 import { ToggleClose } from "./components/ToggleCloseBtn";
+import { UserProfileTypes } from "@/types/types";
 
 export async function DesktopNav({
   className = "",
   lang,
+  user,
 }: {
   className?: string;
   lang: Locale;
+  user: UserProfileTypes;
 }) {
   return (
     <>
@@ -23,7 +26,7 @@ export async function DesktopNav({
           <div className="flex w-full items-center justify-between">
             <Brand lang={lang} />
             <div className="flex items-center">
-              <DesktopMenu lang={lang} />
+              <DesktopMenu lang={lang} user={user} />
               <ToggleClose className="sm:hidden" />
             </div>
           </div>

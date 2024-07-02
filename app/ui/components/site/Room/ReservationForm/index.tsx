@@ -9,25 +9,24 @@ import { Summary } from "../Summary";
 import { DateTimePickerSection } from "./DateTimePickerSection";
 import { HiddenInputs } from "./HIddenInputs";
 import { InputNumberSection } from "./InputNumberSection";
-
-type ErrorTypes = {
-  show: boolean;
-  type: string;
-  title: string;
-  description: string;
-};
+import { IoMdCloseCircleOutline, TiWarning } from "../../../../icons";
+import { MotionSlideUpDownWarning } from "../../../../motion";
 
 export function ReservationForm({
   roomNumber,
   pricePerNight,
-  setError,
 }: {
   roomNumber: string;
   pricePerNight: number;
-  setError: React.Dispatch<React.SetStateAction<ErrorTypes>>;
 }) {
   const { TextArea } = Input;
   const { updateReservations, reservations } = useReservation((state) => state);
+  const [error, setError] = React.useState({
+    show: false,
+    type: "",
+    title: "",
+    description: "",
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -73,6 +72,33 @@ export function ReservationForm({
 
   return (
     <>
+      <MotionSlideUpDownWarning toggle={!!error.show}>
+        <div className="my-4 bg-yellow-200 p-2">
+          <div className="flex w-full items-center justify-start text-sm font-bold text-yellow-800">
+            <span>
+              <TiWarning />
+            </span>
+            <span>Warning!</span>
+            <button
+              className="ml-auto"
+              onClick={() =>
+                setError({
+                  show: false,
+                  type: "",
+                  title: "",
+                  description: "",
+                })
+              }
+            >
+              <IoMdCloseCircleOutline size={25} />
+            </button>
+          </div>
+          <p className="text-xs font-semibold text-yellow-800">
+            Check out date should be after Check in date!
+          </p>
+        </div>
+      </MotionSlideUpDownWarning>
+
       <form className="py-10" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-3">
           {/* Fields for Adults and Infants */}
