@@ -60,7 +60,6 @@ export default async function Page({
           <div className="my-5 mb-8">
             <GoBack />
           </div>
-
           <section className="flex flex-col gap-3 lg:flex-row">
             <div className="flex-[2] rounded-md bg-white p-3 lg:p-5">
               <article className="pb-5">

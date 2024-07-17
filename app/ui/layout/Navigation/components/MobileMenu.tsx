@@ -45,18 +45,22 @@ export function MobileMenu({
             </Button>
           </Link>
         </li>
-        <li className="w-full" onClick={() => closeNavigation()}>
-          <Link href={`/${lang}/habitaciones`}>
-            <Button
-              block
-              size="large"
-              icon={<MdSpaceDashboard size={18} className="text-neutral-700" />}
-              className="!flex items-center justify-center gap-2 bg-white !py-5 shadow-lg"
-            >
-              Dashboard
-            </Button>
-          </Link>
-        </li>
+        {user?.authenticated && (
+          <li className="w-full" onClick={() => closeNavigation()}>
+            <Link href={`/${lang}/habitaciones`}>
+              <Button
+                block
+                size="large"
+                icon={
+                  <MdSpaceDashboard size={18} className="text-neutral-700" />
+                }
+                className="!flex items-center justify-center gap-2 bg-white !py-5 shadow-lg"
+              >
+                Dashboard
+              </Button>
+            </Link>
+          </li>
+        )}
         <li className="mt-10 w-full">
           <HorizontalContactWidget
             setOpen={setOpen}

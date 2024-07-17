@@ -78,7 +78,7 @@ export function Features() {
           >
             {feature.icon}
           </span>
-          <span className="md:text-md text-sm">{feature.text}</span>
+          <span className="ml-1 text-xs">{feature.text}</span>
         </li>
       ))}
     </ul>

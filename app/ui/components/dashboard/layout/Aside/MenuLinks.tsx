@@ -1,6 +1,6 @@
 "use client";
 
-import { IoConstruct, MdSpaceDashboard } from "@/app/ui/icons";
+import { BsDoorOpenFill, IoConstruct, MdSpaceDashboard } from "@/app/ui/icons";
 import { Locale } from "@/i18n-config";
 import Link from "next/link";
 
@@ -27,6 +27,17 @@ export function MenuLinks({ lang }: Readonly<{ lang: Locale }>) {
             <IoConstruct />
           </span>
           <p className="font-medium max-xl:hidden">Support</p>
+        </Link>
+      </li>
+      <li className="rounded-md p-2 md:w-full md:p-3">
+        <Link
+          href={`/${lang}/portal/rooms`}
+          className="flex items-center justify-start text-xl md:gap-2 md:text-sm"
+        >
+          <span className="rounded-md border p-2">
+            <BsDoorOpenFill />
+          </span>
+          <p className="font-medium max-xl:hidden">Rooms</p>
         </Link>
       </li>
     </>
