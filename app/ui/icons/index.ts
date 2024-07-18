@@ -47,7 +47,8 @@ export {
   FaTimes,
   FaRegStar,
   FaSuitcase,
-  FaStar 
+  FaStar,
+  FaTrash 
 } from "react-icons/fa";
 export {
   FaAddressBook,

@@ -20,34 +20,33 @@ export async function Navigation({
   } = await supabase.auth.getUser();
 
   return (
-    <nav
+    <div
       className={twMerge(
-        `w-white flex w-full items-center justify-between p-2 pb-0 md:pb-0 md:pt-4 ${className}`,
+        `w-white flex w-full items-center justify-between p-2 ${className}`,
       )}
     >
       <Brand lang={lang} className="md:hidden" />
       {children}
-      <div>
-        <div className="flex items-center justify-start gap-4">
-          <Avatar
-            style={{ backgroundColor: "#1677ff" }}
-            icon={<LuUser2 />}
-            size="large"
-            shape="square"
-          />
-          <div className="flex flex-col">
-            <span className="text-sm font-semibold">
-              {user?.user_metadata.name} {user?.user_metadata.last_name}
-            </span>
-            <span className="text-xs font-medium">
-              {format.firstLetterToUpperCase(user?.user_metadata?.role)}
-            </span>
-          </div>
-          <div className="rounded-md bg-white/70 p-1 py-2">
-            <BsThreeDotsVertical size={25} color="#1677ff" />
-          </div>
+
+      <div className="flex items-center justify-start gap-4">
+        <Avatar
+          style={{ backgroundColor: "#1677ff" }}
+          icon={<LuUser2 />}
+          size="large"
+          shape="square"
+        />
+        <div className="flex flex-col">
+          <span className="text-sm font-semibold">
+            {user?.user_metadata.name} {user?.user_metadata.last_name}
+          </span>
+          <span className="text-xs font-medium">
+            {format.firstLetterToUpperCase(user?.user_metadata?.role)}
+          </span>
+        </div>
+        <div className="rounded-md bg-white/70 p-1 py-2">
+          <BsThreeDotsVertical size={25} color="#1677ff" />
         </div>
       </div>
-    </nav>
+    </div>
   );
 }

@@ -31,7 +31,7 @@ export function MenuLinks({ lang }: Readonly<{ lang: Locale }>) {
       </li>
       <li className="rounded-md p-2 md:w-full md:p-3">
         <Link
-          href={`/${lang}/portal/rooms`}
+          href={`/${lang}/portal/habitaciones`}
           className="flex items-center justify-start text-xl md:gap-2 md:text-sm"
         >
           <span className="rounded-md border p-2">

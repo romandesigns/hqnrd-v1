@@ -6,6 +6,7 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { ShareBtn } from "../ShareBtn";
 import { amenityIcons } from "./Icons";
+import { FaPen, FaTrash } from "../../icons";
 
 export const shareData = {
   title: "MDN",
@@ -17,10 +18,16 @@ export const RoomCard = ({
   className,
   lang,
   room,
+  portal,
+  roomEditPath,
+  roomDeletePath,
 }: {
   className?: string;
   lang?: Locale;
   room?: RoomTypes;
+  portal?: boolean;
+  roomEditPath?: string;
+  roomDeletePath?: string;
 }) => {
   return (
     <div
@@ -28,7 +35,29 @@ export const RoomCard = ({
         `grid-col-1 min-500:grid-rows-[13rem,205px] group my-8 mt-0 grid w-full grid-rows-[15rem,205px] rounded-md bg-white ${className}`,
       )}
     >
-      <div className="h-full w-full pb-2">
+      <div className="relative h-full w-full pb-2">
+        {portal && (
+          <div className="absolute top-2 z-[3] flex w-full justify-center">
+            <div className="flex min-w-28 justify-center gap-1 rounded-full bg-neutral-700 p-1">
+              {roomEditPath && roomDeletePath && (
+                <>
+                  <Link
+                    href={roomEditPath}
+                    className="flex h-6 w-6 items-center justify-center rounded-full bg-yellow-500"
+                  >
+                    <FaPen size={10} />
+                  </Link>
+                  <Link
+                    href={roomDeletePath}
+                    className="flex h-6 w-6 items-center justify-center rounded-full bg-red-500"
+                  >
+                    <FaTrash size={10} />
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        )}
         <figure className="relative h-full w-full overflow-hidden rounded-md shadow-[0_0.7rem_0.5rem_-0.4rem_rgba(0,0,0,0.5)]">
           <Image
             className="absolute h-full w-full object-cover transition-transform duration-300 lg:group-hover:scale-[1.05]"

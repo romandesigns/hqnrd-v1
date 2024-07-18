@@ -27,7 +27,7 @@ export default function DashboardLayout({
 }>) {
   return (
     <html lang={lang} className="min-h-dvh">
-      <body className={`${poppins.className}`}>
+      <body className={`${poppins.className} sm:overflow-hidden`}>
         <section
           className={`grid min-h-dvh grid-rows-[1fr_auto] md:grid-cols-[auto_1fr]`}
         >
