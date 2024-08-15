@@ -332,3 +332,8 @@ export type closeTicketPayloadTypes = {
   lang: string;
   taskCompletionDuration: string;
 }
+
+export type NewRoomCategoryTypes = {
+  title: string;
+  slug: string;
+}

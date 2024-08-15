@@ -57,7 +57,7 @@ export const format = {
     }
   },
   currencyConversion: (currency: number, locale: string) => {
-    return currency.toLocaleString();
+    return currency.toLocaleString(locale);
   },
   sanitizePath: (path: string) => {
     return path?.replace(/['"]+/g, "").replace(/;+/g, "");
@@ -75,4 +75,7 @@ export const format = {
       )
       .join(" ");
   },
+  generateSlug: (str: string) => {
+    return str.toLowerCase().replace(/\s+/g, '-');
+  }
 };

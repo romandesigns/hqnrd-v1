@@ -4,7 +4,7 @@ export const roomsNavContent = [
       label: "Inicio",
     },
     {
-      path: `/portal/habitaciones/todas`,
-      label: "Ver Todas Habitaciones",
+      path: `/portal/habitaciones/ver-todas`,
+      label: "Habitaciones",
     },
   ];

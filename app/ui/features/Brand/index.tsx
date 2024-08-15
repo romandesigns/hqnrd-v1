@@ -37,7 +37,7 @@ export function Brand({
         />
         <figcaption className={figClassName}>
           {headingLevel === "h1" ? (
-            <h1 className="mt-1 text-xs font-black uppercase">
+            <h1 className="mt-1 text-[0.7rem] font-black uppercase">
               Hotel Quinto Nivel RD
             </h1>
           ) : (

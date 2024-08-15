@@ -37,7 +37,7 @@ export async function Navigation({
         />
         <div className="flex flex-col">
           <span className="text-sm font-semibold">
-            {user?.user_metadata.name} {user?.user_metadata.last_name}
+            {format.firstLetterToUpperCase(user?.user_metadata.name)}
           </span>
           <span className="text-xs font-medium">
             {format.firstLetterToUpperCase(user?.user_metadata?.role)}

@@ -4,9 +4,9 @@ import { Button } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
+import { FaPen, FaTrash, IoMdEye } from "../../icons";
 import { ShareBtn } from "../ShareBtn";
 import { amenityIcons } from "./Icons";
-import { FaPen, FaTrash } from "../../icons";
 
 export const shareData = {
   title: "MDN",
@@ -53,6 +53,12 @@ export const RoomCard = ({
                   >
                     <FaTrash size={10} />
                   </Link>
+                  <Link
+                    href={roomDeletePath}
+                    className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500"
+                  >
+                    <IoMdEye size={15} />
+                  </Link>
                 </>
               )}
             </div>
@@ -80,9 +86,7 @@ export const RoomCard = ({
           </p>
         </div>
         <div className="flex items-center justify-between py-1">
-          <h3 className="text-sm font-extrabold text-neutral-800">
-            {room?.category}
-          </h3>
+          <h3 className="text-sm font-extrabold text-neutral-800">Basica</h3>
           <ShareBtn
             data={shareData}
             className="border border-neutral-400 text-neutral-800"

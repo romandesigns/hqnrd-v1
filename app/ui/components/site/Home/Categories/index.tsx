@@ -17,20 +17,20 @@ export function Categories({ lang }: { lang: Locale }) {
         className="relative z-[4]"
       />
       <article className="h-auto w-full max-w-5xl overflow-hidden rounded-md p-2">
-        <div className="z-[3] mx-auto h-full">
+        <div className="relative z-[3] mx-auto h-full">
           <ul className="grid h-full grid-cols-2 grid-rows-4 gap-2 lg:gap-4">
-            <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md bg-blue-100 p-2">
-                <FaBed className="text-blue-500" />
-              </span>
+            <li className="flex items-center justify-center overflow-hidden rounded-md bg-white p-5 font-bold">
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
-                <span className="border-l-2 border-neutral-500 pl-2">
-                  <h5 className="mb-2 text-xs">Basic</h5>
-                  <p className="text-xs font-normal text-neutral-500">
-                    Essential amenities for <strong>1-2</strong> guests,
-                    offering a functional stay.
-                  </p>
-                </span>
+                <div className="flex items-center justify-start gap-4">
+                  <span className="rounded-md bg-blue-100 p-2">
+                    <FaBed className="text-blue-500" />
+                  </span>
+                  <h5 className="text-sm">Basic</h5>
+                </div>
+                <p className="text-xs font-normal leading-relaxed text-neutral-500">
+                  Essential amenities for <strong>1-2</strong> guests, offering
+                  a functional stay.
+                </p>
                 <Button className="!bg-neutral-800 !text-white">
                   <Link href={`/${lang}/habitaciones/basicas`}>
                     Select Category
@@ -38,22 +38,25 @@ export function Categories({ lang }: { lang: Locale }) {
                 </Button>
               </div>
             </li>
-            <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md bg-blue-100 p-2">
-                <FaBed className="-translate-x-1 -translate-y-1 text-blue-500" />
-                <span className="absolute left-3 top-3 opacity-50">
-                  <FaBed className="text-blue-500" />
-                </span>
-              </span>
+
+            <li className="flex items-center justify-center overflow-hidden rounded-md bg-white p-5 font-bold">
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
-                <span className="border-l-2 border-neutral-500 pl-2">
-                  <h5 className="mb-2 text-xs">Double Room</h5>
-                  <p className="text-xs font-normal text-neutral-500">
-                    Two separate rooms with a shared bathroom, fits up to
-                    <strong> 8 </strong>
-                    guests.
-                  </p>
-                </span>
+                <div className="flex items-center justify-start gap-4">
+                  <span className="relative rounded-md bg-blue-100 p-2">
+                    <FaBed className="-translate-x-1 -translate-y-1 text-blue-500" />
+                    <span className="absolute left-3 top-3 opacity-50">
+                      <FaBed className="text-blue-500" />
+                    </span>
+                  </span>
+                  <h5 className="text-sm">Double Room</h5>
+                </div>
+
+                <p className="text-xs font-normal leading-relaxed text-neutral-500">
+                  Two separate rooms with a shared bathroom, fits up to
+                  <strong> 8 </strong>
+                  guests.
+                </p>
+
                 <Button className="!bg-neutral-800 !text-white">
                   <Link href={`/${lang}/habitaciones/doble`}>
                     Select Category
@@ -61,18 +64,19 @@ export function Categories({ lang }: { lang: Locale }) {
                 </Button>
               </div>
             </li>
-            <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md bg-yellow-100 p-2">
-                <FaStar className="text-yellow-500" />
-              </span>
+
+            <li className="flex items-center justify-center overflow-hidden rounded-md bg-white p-5 font-bold">
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
-                <span className="border-l-2 border-neutral-500 pl-2">
-                  <h5 className="mb-2 text-xs">Standard</h5>
-                  <p className="text-xs font-normal text-neutral-500">
-                    Comfort for <strong> 1-2 </strong> guests, equipped with
-                    necessary amenitie.
-                  </p>
-                </span>
+                <div className="flex items-center justify-start gap-4">
+                  <span className="rounded-md bg-yellow-100 p-2">
+                    <FaStar className="text-yellow-500" />
+                  </span>
+                  <h5 className="text-sm">Standard</h5>
+                </div>
+                <p className="text-xs font-normal leading-relaxed text-neutral-500">
+                  Comfort for <strong> 1-2 </strong> guests, equipped with
+                  necessary amenitie.
+                </p>
                 <Button className="!bg-neutral-800 !text-white">
                   <Link href={`/${lang}/habitaciones/standards`}>
                     Select Category
@@ -80,21 +84,22 @@ export function Categories({ lang }: { lang: Locale }) {
                 </Button>
               </div>
             </li>
-            <li className="relative row-start-2 row-end-4 flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md bg-blue-100 p-2">
-                <span className="absolute -top-3 left-6 rounded-md bg-blue-200 p-1 text-xs text-pink-500">
-                  2x
-                </span>
-                <FaBed className="text-blue-500" />
-              </span>
+
+            <li className="row-start-2 row-end-4 flex items-center justify-center overflow-hidden rounded-md bg-white p-5 font-bold">
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
-                <span className="border-l-2 border-neutral-500 pl-2">
-                  <h5 className="mb-2 text-xs">Double Bed</h5>
-                  <p className="text-xs font-normal text-neutral-500">
-                    Spacious room with two full-size beds and a twin bed,
-                    suitable for up to <strong> 8 </strong> guests.
-                  </p>
-                </span>
+                <div className="flex items-center justify-start gap-4">
+                  <span className="relative rounded-md bg-blue-100 p-2">
+                    <span className="absolute -top-3 left-6 rounded-md bg-blue-200 p-1 text-xs text-blue-500">
+                      2x
+                    </span>
+                    <FaBed className="text-blue-500" />
+                  </span>
+                  <h5 className="text-sm">Double Bed</h5>
+                </div>
+                <p className="text-xs font-normal leading-relaxed text-neutral-500">
+                  Spacious room with two full-size beds and a twin bed, suitable
+                  for up to <strong> 8 </strong> guests.
+                </p>
                 <Button className="!bg-neutral-800 !text-white">
                   <Link href={`/${lang}/habitaciones/doble-camas`}>
                     Select Category
@@ -102,19 +107,20 @@ export function Categories({ lang }: { lang: Locale }) {
                 </Button>
               </div>
             </li>
-            <li className="relative col-start-1 col-end-3 row-start-4 row-end-5 flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md bg-violet-100 p-2">
-                <MdFamilyRestroom className="text-violet-500" />
-              </span>
+
+            <li className="col-start-1 col-end-3 row-start-4 row-end-5 flex items-center justify-center overflow-hidden rounded-md bg-white p-5 font-bold">
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
-                <span className="border-l-2 border-neutral-500 pl-2">
-                  <h5 className="mb-2 text-xs">Family</h5>
-                  <p className="text-xs font-normal text-neutral-500">
-                    Full apartment with separate rooms, accommodating up to
-                    <strong> 10 </strong>
-                    guests.
-                  </p>
-                </span>
+                <div className="flex items-center justify-start gap-4">
+                  <span className="rounded-md bg-violet-100 p-2">
+                    <MdFamilyRestroom className="text-violet-500" />
+                  </span>
+                  <h5 className="text-sm">Family</h5>
+                </div>
+                <p className="text-xs font-normal leading-relaxed text-neutral-500">
+                  Full apartment with separate rooms, accommodating up to
+                  <strong> 10 </strong>
+                  guests.
+                </p>
                 <Button className="!bg-neutral-800 !text-white">
                   <Link href={`/${lang}/habitaciones/familiares`}>
                     Select Category
@@ -122,18 +128,19 @@ export function Categories({ lang }: { lang: Locale }) {
                 </Button>
               </div>
             </li>
-            <li className="relative flex items-center justify-center overflow-hidden rounded-md bg-white p-3 pt-10 font-bold">
-              <span className="absolute left-4 top-4 rounded-md bg-neutral-100 p-2">
-                <FaSuitcase className="text-neutral-500" />
-              </span>
+
+            <li className="flex items-center justify-center overflow-hidden rounded-md bg-white p-5 font-bold">
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
-                <span className="border-l-2 border-neutral-500 pl-2">
-                  <h5 className="mb-2 text-xs">Executive</h5>
-                  <p className="text-xs font-normal text-neutral-500">
-                    For <strong>1-3</strong> business travelers, includes
-                    premium services.
-                  </p>
-                </span>
+                <div className="flex items-center justify-start gap-4">
+                  <span className="rounded-md bg-neutral-100 p-2">
+                    <FaSuitcase className="text-neutral-500" />
+                  </span>
+                  <h5 className="text-sm">Executive</h5>
+                </div>
+                <p className="text-xs font-normal leading-relaxed text-neutral-500">
+                  For <strong>1-3</strong> business travelers, includes premium
+                  services.
+                </p>
                 <Button className="!bg-neutral-800 !text-white">
                   <Link href={`/${lang}/habitaciones/ejecutivas`}>
                     Select Category
