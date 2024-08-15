@@ -68,8 +68,8 @@ export function Categories({ lang }: { lang: Locale }) {
             <li className="flex items-center justify-center overflow-hidden rounded-md bg-white p-5 font-bold">
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
                 <div className="flex items-center justify-start gap-4">
-                  <span className="rounded-md bg-yellow-100 p-2">
-                    <FaStar className="text-yellow-500" />
+                  <span className="rounded-md bg-blue-100 p-2">
+                    <FaStar className="text-blue-500" />
                   </span>
                   <h5 className="text-sm">Standard</h5>
                 </div>
@@ -111,8 +111,8 @@ export function Categories({ lang }: { lang: Locale }) {
             <li className="col-start-1 col-end-3 row-start-4 row-end-5 flex items-center justify-center overflow-hidden rounded-md bg-white p-5 font-bold">
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
                 <div className="flex items-center justify-start gap-4">
-                  <span className="rounded-md bg-violet-100 p-2">
-                    <MdFamilyRestroom className="text-violet-500" />
+                  <span className="rounded-md bg-blue-100 p-2">
+                    <MdFamilyRestroom className="text-blue-500" />
                   </span>
                   <h5 className="text-sm">Family</h5>
                 </div>
@@ -132,8 +132,8 @@ export function Categories({ lang }: { lang: Locale }) {
             <li className="flex items-center justify-center overflow-hidden rounded-md bg-white p-5 font-bold">
               <div className="flex w-full flex-col items-start justify-center gap-4 py-12 pt-10 text-left md:max-w-64 md:p-2">
                 <div className="flex items-center justify-start gap-4">
-                  <span className="rounded-md bg-neutral-100 p-2">
-                    <FaSuitcase className="text-neutral-500" />
+                  <span className="rounded-md bg-blue-100 p-2">
+                    <FaSuitcase className="text-blue-500" />
                   </span>
                   <h5 className="text-sm">Executive</h5>
                 </div>
