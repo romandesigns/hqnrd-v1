@@ -42,8 +42,8 @@ export default async function Home({
         <Testimonials />
         <Discounts />
         <Amenities />
-        <CommonAreaAndEntertainment />
         <Categories lang={lang} />
+        <CommonAreaAndEntertainment />
         <Trending />
         <FrequentlyAskedQuestions />
       </main>
