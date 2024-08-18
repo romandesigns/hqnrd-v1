@@ -16,7 +16,9 @@ export function PageHeading({
         <div className="relative !m-0 mt-4 inline-flex items-center justify-center rounded-full bg-neutral-800 p-1 px-8 text-xs font-bold text-white">
           <p className="font-semibold">Unit #{unit}</p>
         </div>
-        <p className="text-xs lg:text-sm">{metaDescription}</p>
+        <p className="mx-auto max-w-3xl text-xs leading-relaxed">
+          {metaDescription}
+        </p>
       </div>
     </div>
   );

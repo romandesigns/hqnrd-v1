@@ -46,8 +46,7 @@ export default async function Page({
             <PageHeading
               unit={String(room.roomNumber)}
               title={room.category}
-              metaDescription="Discover comfort in our Basic Room. An inviting space for relaxation
-          and tranquility. Your ideal escape awaits!"
+              metaDescription="Discover comfort in our Basic Room, offering an inviting space for relaxation and tranquility. Whether you're here for a quick getaway or an extended stay, your ideal escape awaits with all the amenities you need to unwind."
             />
             <ImageGallery />
           </section>
