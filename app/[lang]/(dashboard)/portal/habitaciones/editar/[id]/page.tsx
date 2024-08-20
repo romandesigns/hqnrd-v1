@@ -6,10 +6,8 @@ import cn from "classnames";
 
 export default async function Page({
   params: { lang, id },
-  ...args
 }: Readonly<{
   params: { lang: Locale; id: string };
-  id: string;
 }>) {
   return (
     <>

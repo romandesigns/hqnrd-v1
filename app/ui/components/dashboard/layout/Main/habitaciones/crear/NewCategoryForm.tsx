@@ -1,5 +1,4 @@
 import { Locale } from "@/i18n-config";
-import { newRoomCategoryAction } from "@/utils/actions";
 import { Button, Input } from "antd";
 import Link from "next/link";
 
@@ -34,7 +33,6 @@ export default async function NewCategoryForm({
           type="primary"
           size="large"
           className="!rounded-bl-none !rounded-tl-none"
-          formAction={newRoomCategoryAction}
         >
           Add Category
         </Button>

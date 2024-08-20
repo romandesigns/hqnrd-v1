@@ -334,6 +334,7 @@ export type closeTicketPayloadTypes = {
 }
 
 export type NewRoomCategoryTypes = {
-  title: string;
+  name: string;
   slug: string;
+  lang: string;
 }

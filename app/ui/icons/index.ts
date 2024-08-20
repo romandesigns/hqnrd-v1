@@ -15,6 +15,7 @@ export {
   BiSolidBadgeCheck,
   BiBadgeCheck,
   BiBadge,
+  BiCabinet
 } from "react-icons/bi";
 export {
   BsCameraReels,
@@ -48,7 +49,8 @@ export {
   FaRegStar,
   FaSuitcase,
   FaStar,
-  FaTrash 
+  FaMusic ,
+  FaTrash
 } from "react-icons/fa";
 export {
   FaAddressBook,
@@ -98,6 +100,7 @@ export {
   MdOutlineBlender,
   MdOutlineContactSupport,
   MdOutlineLocalLaundryService,
+  MdLocalLaundryService ,
   MdOutlineTranslate,
   MdOutlineWaterDrop,
   MdPayments,
@@ -107,7 +110,9 @@ export {
   MdOutlineEmail,
   MdDelete,
   MdAssignment,
-  MdFamilyRestroom 
+  MdFamilyRestroom,
+  MdOutlineDinnerDining,
+  MdAdd
 } from "react-icons/md";
 export {
   PiCoatHangerBold,
@@ -125,6 +130,7 @@ export {
   RiErrorWarningFill,
 } from "react-icons/ri";
 export {
+  TbParkingCircle ,
   TbAirConditioning,
   TbBrandIntercom,
   TbMapSearch,
@@ -134,6 +140,9 @@ export {
   TbToolsKitchen,
   TbTrafficCone,
   TbWheelchair,
+  TbCooker,
+  TbDeviceSpeaker
 } from "react-icons/tb";
 export { TiGroup, TiWarning } from "react-icons/ti";
 export { VscDebugStart } from "react-icons/vsc";
+export { CiMountain1 } from "react-icons/ci";

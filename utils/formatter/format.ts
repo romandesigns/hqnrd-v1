@@ -62,8 +62,7 @@ export const format = {
   sanitizePath: (path: string) => {
     return path?.replace(/['"]+/g, "").replace(/;+/g, "");
   },
-  toLowerCase: (str: string) => {
-    console.log(str);
+  toLowerCase: (str: string) => {;
     return str.toLowerCase();
   },
   sentenceCapitalize: (str: string) => {

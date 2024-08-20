@@ -27,7 +27,6 @@ export async function Navigation({
     >
       <Brand lang={lang} className="md:hidden" />
       {children}
-
       <div className="flex items-center justify-start gap-4">
         <Avatar
           style={{ backgroundColor: "#1677ff" }}

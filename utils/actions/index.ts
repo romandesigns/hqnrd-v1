@@ -4,4 +4,4 @@ export { signInUserAction } from "./signInUserAction";
 export { confirmPasswordChangeAction } from "./confirmPasswordChangeAction";
 export { passwordChangeAction } from "./passwordChangeAction";
 export { createSupportTicketAction } from "./supportTicketActions";
-export { newRoomCategoryAction } from "./newRoomCategoryAction";
+export { newRoomCategoryAction } from "./roomActions";

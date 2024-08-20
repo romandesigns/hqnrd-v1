@@ -51,7 +51,7 @@ export default async function Page({
               </span>
             </div>
           </div>
-          <div className="mb-10 grid grid-cols-1 gap-4 rounded-md bg-white sm:grid-cols-2 lg:grid-cols-3 lg:p-10">
+          <div className="mb-2 grid grid-cols-1 gap-4 rounded-md bg-white sm:grid-cols-2 lg:grid-cols-3 lg:p-10">
             {currentRooms.map((room, index) => (
               <RoomCard
                 key={`${room.id}-${index}`}
