@@ -44,6 +44,7 @@ export async function newRoomCategoryAction(category_name:string, lang:string) {
     }
   }
 
+  // Send response if data is available
   if(data?.length){
     const {id,name,slug} = data[0]
     return {data:[{id,name,slug}]};

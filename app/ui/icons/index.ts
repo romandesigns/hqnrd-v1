@@ -146,3 +146,4 @@ export {
 export { TiGroup, TiWarning } from "react-icons/ti";
 export { VscDebugStart } from "react-icons/vsc";
 export { CiMountain1 } from "react-icons/ci";
+export { LuRockingChair } from "react-icons/lu";

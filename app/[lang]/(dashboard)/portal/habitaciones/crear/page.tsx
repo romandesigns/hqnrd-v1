@@ -24,7 +24,7 @@ export default async function Page({
       </Navigation>
       <section className="grid rounded-md bg-white max-sm:grid-cols-1 max-sm:grid-rows-[auto_1fr] lg:p-2">
         <nav>
-          <div className="sticky -top-8 z-[4] col-span-full flex justify-start border-b p-4">
+          <div className="sticky -top-8 z-[4] col-span-full flex justify-start border-b p-2">
             <TopMenuContent lang={lang} menuLinks={roomsNavContent} />
           </div>
         </nav>
