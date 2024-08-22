@@ -5,3 +5,4 @@ export { confirmPasswordChangeSchema } from "./confirmPasswordChangeSchema";
 export { passwordChangeSchema } from "./passwordChangeSchema";
 export { createSupportTicketSchema } from "./createSupportTicketSchema";
 export { newRoomCategorySchema } from "./newRoomCategorySchema";
+export { newRoomSchema } from "./roomSchema";

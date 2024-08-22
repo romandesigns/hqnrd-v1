@@ -1,45 +1,29 @@
 "use client";
 
-import { MdAdd } from "@/app/ui/icons";
-import { Locale } from "@/i18n-config";
-import { newRoomCategoryAction } from "@/utils/actions/roomActions";
 import {
-  Button,
-  Divider,
-  Input,
-  InputRef,
-  message,
-  Select,
-  Space,
-  Switch,
-} from "antd";
-import { useEffect, useRef, useState } from "react";
+  NewRoomActionResponse,
+  NewRoomFormDetailsProps,
+  RoomCategory,
+  RoomDetails,
+  RoomDetailsPayload,
+} from "@/types/types";
+import {
+  newRoomAction,
+  newRoomCategoryAction,
+  roomFeaturedCardImage,
+} from "@/utils/actions/roomActions";
+import { Button, InputRef, message, Switch } from "antd";
+import { useRef, useState } from "react";
+import Amenities from "./Amenities";
+import Description from "./Description";
+import Features from "./Features";
+import MetaData from "./MetaData";
 import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
-
-interface RoomCategory {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-interface NewRoomFormDetailsProps {
-  params: { lang: Locale };
-  fetchedCategories: RoomCategory[];
-}
-
-interface RoomDetails {
-  categoryId?: number;
-  roomNumber?: number;
-  metaDescription?: string;
-  title?: string;
-  pricePerNight?: number;
-  pageDescription?: string;
-  bedQuantity?: number;
-  squareFeet?: number;
-  features?: { iconName: string; value: boolean }[];
-  amenities?: { iconName: string; value: boolean }[];
-  [key: string]: any; // Additional dynamic properties
-}
+import { createClient } from "@/utils/supabase/client";
+import { useRoomStore } from "@/store/rooms";
+import { Upload } from "antd";
+import type { GetProp, UploadFile, UploadProps } from "antd";
+import ImgCrop from "antd-img-crop";
 
 export default function NewRoomFormDetails({
   params: { lang },
@@ -50,30 +34,42 @@ export default function NewRoomFormDetails({
   const [newCategoryName, setNewCategoryName] = useState<string>("");
   const inputRef = useRef<InputRef>(null);
   const [messageApi, contextHolder] = message.useMessage();
-  const [roomDetails, setRoomDetails] = useState<RoomDetails>({});
+  const [roomDetails, setRoomDetails] = useState<RoomDetails | {}>({});
+  const [fileList, setFileList] = useState<UploadFile[]>([
+    {
+      uid: "-1",
+      name: "image.png",
+      status: "done",
+      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    },
+  ]);
+
+  const cardImageRef = useRef<HTMLDivElement>(null);
 
   const [selectedFeatures, setSelectedFeatures] = useState<
-    { iconName: string; value: boolean }[]
+    { iconName: string; defaultName: string; value: boolean }[]
   >(
     roomFeatures.map((feature) => ({
       iconName: feature.iconName,
+      defaultName: String(feature.defaultName),
       value: false,
     })),
   );
 
   const [selectedAmenities, setSelectedAmenities] = useState<
-    { iconName: string; value: boolean }[]
+    { iconName: string; defaultName: string; value: boolean }[]
   >(
     roomAmenities.map((amenity) => ({
       iconName: amenity.iconName,
+      defaultName: String(amenity.defaultName),
       value: false,
     })),
   );
 
-  useEffect(() => {
-    console.log(roomDetails);
-  }, [roomDetails]);
+  const supabase = createClient();
+  type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
+  const { setCreatedRoom, newRoom } = useRoomStore((state) => state);
   const handleNewCategory = async (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   ) => {
@@ -103,13 +99,70 @@ export default function NewRoomFormDetails({
     }
   };
 
-  const handleCreateNewRoom = () => {
-    const finalRoomDetails = {
-      ...roomDetails,
-      features: selectedFeatures,
-      amenities: selectedAmenities,
-    };
-    console.log("New room created:", finalRoomDetails);
+  function isNewRoomActionResponse(
+    response: any,
+  ): response is NewRoomActionResponse {
+    return (
+      response &&
+      typeof response === "object" &&
+      ("error" in response || "data" in response)
+    );
+  }
+
+  const handleCreateNewRoom = async (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+  ) => {
+    e.preventDefault();
+
+    try {
+      const finalRoomDetails = {
+        ...roomDetails,
+        features: selectedFeatures.map(({ iconName, defaultName, value }) => ({
+          iconName,
+          defaultName,
+          value,
+        })),
+        amenities: selectedAmenities.map(
+          ({ iconName, defaultName, value }) => ({
+            iconName,
+            defaultName,
+            value,
+          }),
+        ),
+      };
+
+      const response = await newRoomAction(finalRoomDetails, lang);
+
+      if (isNewRoomActionResponse(response)) {
+        if (response.error) {
+          messageApi.error(response.error);
+        } else if (response.data) {
+          setCreatedRoom(response.data[0]);
+          messageApi.success("Room created successfully!");
+          // Reset the form if needed
+          setRoomDetails({});
+          setSelectedFeatures(
+            roomFeatures.map((feature) => ({
+              iconName: feature.iconName,
+              defaultName: String(feature.defaultName),
+              value: false,
+            })),
+          );
+          setSelectedAmenities(
+            roomAmenities.map((amenity) => ({
+              iconName: amenity.iconName,
+              defaultName: String(amenity.defaultName),
+              value: false,
+            })),
+          );
+        }
+      } else {
+        messageApi.error("Unexpected response format. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error creating room:", error);
+      messageApi.error("Failed to create the room. Please try again.");
+    }
   };
 
   const handlePreview = () => {
@@ -150,7 +203,10 @@ export default function NewRoomFormDetails({
     type: "feature" | "amenity",
   ) =>
     items.map((item, index) => (
-      <div className="flex items-start justify-between gap-2" key={index}>
+      <div
+        className="my-[0.1rem] flex items-start justify-between gap-2"
+        key={index}
+      >
         <div className="flex items-center justify-start gap-2">
           <item.defaultName />
           <p className="text-xs">{item.description}</p>
@@ -171,177 +227,160 @@ export default function NewRoomFormDetails({
       </div>
     ));
 
+  const handleFileUpload = async (
+    newRoom: RoomDetailsPayload | {},
+    file: UploadFile<any>[],
+  ) => {
+    try {
+      const { slug: roomCategory } = categories.filter(
+        (category) =>
+          category.id === (newRoom as RoomDetailsPayload).category_id,
+      )[0];
+      const { room_number } = newRoom as RoomDetailsPayload;
+      const imageFile = file[0].originFileObj as File;
+
+      // Read the file into a buffer
+      const buffer = await imageFile.arrayBuffer();
+
+      // Define the path for the image
+      const path = `rooms/${roomCategory}/${String(room_number)}/image.webp`;
+
+      // Call the API route
+      const response = await fetch(`/${lang}/api/image-upload`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          path,
+          fileBuffer: Array.from(new Uint8Array(buffer)), // Convert buffer to Array
+          lang,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Uploaded optimized WebP file to path:", data.path);
+        message.success("Image uploaded successfully");
+      } else {
+        throw new Error(data.error || "Failed to upload image");
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      message.error("Failed to upload the image. Please try again.");
+    }
+  };
+
+  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    handleFileUpload(newRoom, newFileList);
+    setFileList(newFileList);
+  };
+
+  const onPreview = async (file: UploadFile) => {
+    let src = file.url as string;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj as FileType);
+        reader.onload = () => resolve(reader.result as string);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow?.document.write(image.outerHTML);
+  };
+
   return (
     <>
       {contextHolder}
-      <section className="mt-2 grid h-full w-full grid-cols-1 gap-4 p-2 lg:grid-cols-[3fr_4fr] 2xl:grid-cols-[2fr_4fr]">
-        <form className="relative flex h-full w-full flex-col gap-3 rounded-md bg-primary-100/10 p-3">
+      <section className="mt-2 grid h-full w-full grid-cols-1 items-stretch justify-stretch gap-4 p-2 lg:grid-cols-[3fr_4fr_4fr] 2xl:grid-cols-[3fr_4fr_4fr]">
+        <form className="relative grid h-full grid-cols-1 gap-4 rounded-md bg-primary-100/10 p-3">
           {/* Metadata */}
-          <fieldset className="w-full">
-            <div className="mb-1 flex items-center justify-between">
-              <legend className="text-xs font-bold uppercase underline">
-                Metadata
-              </legend>
-              <div className="flex items-center gap-2">
-                <Button type="primary" onClick={handleCreateNewRoom}>
-                  Save
-                </Button>
-                <Button className="md:!hidden" onClick={handlePreview}>
-                  Preview
-                </Button>
-              </div>
-            </div>
-            <div className="grid gap-2 rounded-md bg-primary-600/5 p-2">
-              <Select
-                size="large"
-                className="w-full placeholder:text-xs"
-                placeholder="Select category"
-                onChange={(value) => handleInputChange("categoryId", value)}
-                dropdownRender={(menu) => (
-                  <>
-                    {menu}
-                    <Divider style={{ margin: "8px 0" }} />
-                    <Space className="!grid w-full !grid-cols-[1fr_auto] items-center">
-                      <Input
-                        placeholder="Enter new category"
-                        ref={inputRef}
-                        className="flex-1 placeholder:text-xs"
-                        value={newCategoryName}
-                        onChange={(e) => setNewCategoryName(e.target.value)}
-                        onKeyDown={(e) => e.stopPropagation()}
-                      />
-                      <Button
-                        type="primary"
-                        icon={<MdAdd />}
-                        onClick={handleNewCategory}
-                      >
-                        Add item
-                      </Button>
-                    </Space>
-                  </>
-                )}
-                options={categories.map((category) => ({
-                  label: category.name,
-                  value: category.id,
-                }))}
-              />
-              <Input
-                size="large"
-                type="number"
-                min={0}
-                placeholder="Unit Number"
-                className="placeholder:text-xs"
-                onChange={(e) =>
-                  handleInputChange(
-                    "roomNumber",
-                    Number(e.target.value && e.target.value),
-                  )
-                }
-              />
-              <Input.TextArea
-                size="large"
-                placeholder="Meta Description"
-                maxLength={160}
-                autoSize={{ minRows: 3, maxRows: 5 }}
-                className="placeholder:text-xs"
-                onChange={(e) =>
-                  handleInputChange(
-                    "metaDescription",
-                    e.target.value && e.target.value,
-                  )
-                }
-              />
-            </div>
-          </fieldset>
-
+          <MetaData
+            handleCreateNewRoom={handleCreateNewRoom}
+            handlePreview={handlePreview}
+            handleInputChange={handleInputChange}
+            categories={categories}
+            newCategoryName={newCategoryName}
+            setNewCategoryName={setNewCategoryName}
+            handleNewCategory={handleNewCategory}
+          />
           {/* Description */}
-          <fieldset className="w-full">
-            <legend className="mb-1 text-xs font-bold uppercase underline">
-              Description
-            </legend>
-            <div className="grid gap-2 rounded-md bg-primary-600/5 p-2">
-              <div className="flex gap-2">
-                <Input
-                  size="large"
-                  placeholder="Title e.g. Basic"
-                  className="flex-[8] placeholder:text-xs"
-                  onChange={(e) => handleInputChange("title", e.target.value)}
-                />
-                <Input
-                  size="large"
-                  type="number"
-                  step={150}
-                  min={0}
-                  placeholder="Price e.g. 1500"
-                  className="flex-[3] placeholder:text-xs"
-                  onChange={(e) =>
-                    handleInputChange("pricePerNight", Number(e.target.value))
-                  }
-                />
-              </div>
-              <Input.TextArea
-                size="large"
-                placeholder="Page Description"
-                maxLength={304}
-                autoSize={{ minRows: 5, maxRows: 5 }}
-                className="placeholder:text-xs"
-                onChange={(e) =>
-                  handleInputChange("pageDescription", e.target.value)
-                }
-              />
-            </div>
-          </fieldset>
+          <Description handleInputChange={handleInputChange} />
 
           {/* Features */}
-          <fieldset className="w-full">
-            <legend className="mb-1 text-xs font-bold uppercase underline">
-              Features
-            </legend>
-            <div className="grid grid-cols-2 gap-4 rounded-md bg-primary-600/5 p-2 py-4">
-              {renderFeaturesAndAmenities(roomFeatures, "feature")}
-              <Divider style={{ margin: "8px 0" }} className="col-span-full" />
-              <div className="col-span-full grid grid-cols-2 gap-4">
-                <div className="flex items-center">
-                  <p className="mr-4 text-xs">Bed Quantity</p>
-                  <Input
-                    placeholder="1.5"
-                    size="middle"
-                    type="number"
-                    className="flex-1"
-                    onChange={(e) =>
-                      handleInputChange("bedQuantity", Number(e.target.value))
-                    }
-                  />
+          <Features
+            renderFeaturesAndAmenities={renderFeaturesAndAmenities}
+            roomFeatures={roomFeatures}
+            handleInputChange={handleInputChange}
+          />
+
+          {/* Amenities */}
+          <Amenities
+            roomAmenities={roomAmenities}
+            renderFeaturesAndAmenities={renderFeaturesAndAmenities}
+          />
+        </form>
+
+        <article className="grid w-full grid-cols-1 grid-rows-[auto_auto_auto] rounded-md bg-primary-100/10 p-3">
+          <div>
+            <div className="grid grid-cols-[1.4fr_1fr] grid-rows-1 gap-4">
+              {/* Open Graph Image */}
+              <div className="flex flex-col gap-2">
+                <h3 className="text-xs font-bold uppercase underline">
+                  Open Graph Image
+                </h3>
+                <div className="rounded-md bg-primary-600/5 p-2">
+                  <div className="w-full">
+                    <span className="mb-4 block">
+                      <figure className="aspect-og flex items-center justify-center bg-neutral-400">
+                        OG IMAGE
+                      </figure>
+                    </span>
+                    <Button type="primary">Save OG Image</Button>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <p className="mr-4 text-xs">Square Feet</p>
-                  <Input
-                    placeholder="250"
-                    size="middle"
-                    type="number"
-                    className="flex-1"
-                    onChange={(e) =>
-                      handleInputChange("squareFeet", Number(e.target.value))
-                    }
-                  />
+              </div>
+
+              {/* Open Graph Image */}
+              <div className="flex flex-col gap-2">
+                <h3 className="text-xs font-bold uppercase underline">
+                  Open Graph Image
+                </h3>
+                <div className="rounded-md bg-primary-600/5 p-2">
+                  <div className="w-full">
+                    <span className="mb-4 block">
+                      <ImgCrop rotationSlider aspect={4 / 3}>
+                        <Upload
+                          name="feature_image"
+                          listType="picture-card"
+                          fileList={fileList}
+                          onChange={onChange}
+                          onPreview={onPreview}
+                        >
+                          {fileList.length < 1 && (
+                            <Button type="primary">Save OG Image</Button>
+                          )}
+                        </Upload>
+                      </ImgCrop>
+                      <figure
+                        className="flex aspect-[4/3] items-center justify-center bg-neutral-400"
+                        ref={cardImageRef}
+                      >
+                        OG IMAGE
+                      </figure>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </fieldset>
+          </div>
+        </article>
 
-          {/* Amenities */}
-          <fieldset className="w-full">
-            <legend className="mb-1 text-xs font-bold uppercase underline">
-              Amenities
-            </legend>
-            <div className="grid grid-cols-2 gap-4 rounded-md bg-primary-600/5 p-2 py-4">
-              {renderFeaturesAndAmenities(roomAmenities, "amenity")}
-            </div>
-          </fieldset>
-        </form>
-
-        <article className="h-full w-full rounded-md border max-md:hidden">
-          Content Here
+        <article className="h-full w-full rounded-md bg-primary-100/10">
+          Preview
         </article>
       </section>
     </>

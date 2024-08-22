@@ -1,4 +1,4 @@
-import { AiOutlineYoutube, BiCabinet, CgSmartHomeRefrigerator, CiMountain1, FaKitchenSet, FaMusic, FaPeopleRoof, GiCctvCamera, GiWaterBottle, LiaBedSolid, LuRockingChair, MdBalcony, MdCoffeeMaker, MdOutlineBathtub, MdOutlineBlender, MdOutlineDinnerDining, MdOutlineLocalLaundryService, MdOutlineWaterDrop, MdVpnKey, MdWifi, PiCoatHangerBold, PiCouch, PiFanBold, PiTelevisionSimple, RiNetflixFill, TbAirConditioning, TbBrandIntercom, TbCooker, TbDeviceSpeaker, TbMicrowave, TbParkingCircle, TbRulerMeasure, TbWheelchair } from "@/app/ui/icons";
+import { AiOutlineYoutube, BiCabinet, CgSmartHomeRefrigerator, CiMountain1, FaKitchenSet, FaMusic, FaPeopleRoof, GiCctvCamera, GiWaterBottle, GrToast, LiaBedSolid, LuRockingChair, MdBalcony, MdCoffeeMaker, MdOutlineBathtub, MdOutlineBlender, MdOutlineDinnerDining, MdOutlineLocalLaundryService, MdOutlineWaterDrop, MdVpnKey, MdWifi, PiCoatHangerBold, PiCouch, PiFanBold, PiTelevisionSimple, RiNetflixFill, TbAirConditioning, TbBrandIntercom, TbCooker, TbDeviceSpeaker, TbMicrowave, TbParkingCircle, TbRulerMeasure, TbWheelchair } from "@/app/ui/icons";
 
 export const roomFeatures = [
   { iconName: "liabedsolid", defaultName: LiaBedSolid, description: "Bed" },
@@ -11,11 +11,11 @@ export const roomFeatures = [
   { iconName: "faparking", defaultName: TbParkingCircle, description: "Parking" },
   { iconName: "bisolidwasher", defaultName: MdOutlineLocalLaundryService, description: "Washer" },
   { iconName: "tbbrandintercom", defaultName: TbBrandIntercom, description: "Intercom" },
-  { iconName: "tbwheelchair", defaultName: TbWheelchair, description: "Disabled Guest" }
+  { iconName: "tbwheelchair", defaultName: TbWheelchair, description: "Disability Friendly" }
 ];
 
 export const roomAmenities = [
-  { iconName: "pitelevisionsimple", defaultName: PiTelevisionSimple, description: "Television" },
+  { iconName: "smarttv", defaultName: PiTelevisionSimple, description: "Smart Tv" },
   { iconName: "mdoutlinedinnerdining", defaultName: MdOutlineDinnerDining , description: "Dinner" },
   { iconName: "mdvpnkey", defaultName: MdVpnKey, description: "Key (Secure Entry)" },
   { iconName: "cgsmarthomerefrigerator", defaultName: CgSmartHomeRefrigerator, description: "Refrigerator" },
@@ -36,5 +36,6 @@ export const roomAmenities = [
   { iconName: "cabinet", defaultName: BiCabinet, description: "Cabinet" },
   { iconName: "stove", defaultName: TbCooker , description: "Stove" },
   { iconName: "lurockingchair", defaultName: LuRockingChair , description: "Rcoking Chair" },
-  { iconName: "mdoutlineblender", defaultName: MdOutlineBlender , description: "Blender" }
+  { iconName: "mdoutlineblender", defaultName: MdOutlineBlender , description: "Blender" },
+  { iconName: "grtoast", defaultName: GrToast , description: "Toaster" }
 ];

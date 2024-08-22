@@ -338,3 +338,61 @@ export type NewRoomCategoryTypes = {
   slug: string;
   lang: string;
 }
+
+export type RoomCategory = {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+export type NewRoomFormDetailsProps = {
+  params: { lang: Locale };
+  fetchedCategories: RoomCategory[];
+}
+
+export type NewRoomActionResponse = {
+  error?: string;
+  data?: any; // Adjust 'any' to the actual data type expected if known
+}
+
+export type RoomDetails  ={
+  categoryId: number;
+  roomNumber: number;
+  metaDescription: string;
+  title: string;
+  pricePerNight: number;
+  pageDescription: string;
+  bedQuantity: number;
+  squareFeet: number;
+  features: { iconName: string; defaultName: string; value: boolean }[];
+  amenities: { iconName: string; defaultName: string; value: boolean }[];
+  [key: string]: any; // Additional dynamic properties
+}
+
+export type RoomDetailsPayload  ={
+  category_id: string;
+  room_number: number;
+  meta_description: string;
+  title: string;
+  price_per_night: number;
+  page_description: string;
+  bed_quantity: number;
+  square_feet: number;
+  features: { iconName: string; defaultName: string; value: boolean }[];
+  amenities: { iconName: string; defaultName: string; value: boolean }[];
+  [key: string]: any; // Additional dynamic properties
+}
+
+export interface RooomMetaDataProps {
+  categories: { id: string; name: string }[];
+  newCategoryName: string;
+  setNewCategoryName: (value: string) => void;
+  handleNewCategory: (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+  ) => Promise<void>;
+  handleInputChange: (key: string, value: string | number) => void;
+  handleCreateNewRoom: (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+  ) => Promise<void>;
+  handlePreview: () => void;
+}
