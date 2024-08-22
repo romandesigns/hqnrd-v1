@@ -99,38 +99,3 @@ const { data, error } = await supabase
   return {data}
 
 }
-
-
-
-export async function roomFeaturedCardImage(path: string, file: File, lang: string) {
-  // Initialize supabase
-  const supabase = createClient();
-
-  // Read the file into a buffer
-  const buffer = await file.arrayBuffer();
-  const inputBuffer = Buffer.from(buffer);
-
-  // Optimize the image while preserving the aspect ratio and convert it to WebP
-  const optimizedBuffer = await sharp(inputBuffer)
-    .resize({
-      width: 800,
-      withoutEnlargement: true,
-    })
-    .webp({ quality: 80 })
-    .toBuffer();
-
-  // Upload the WebP image to Supabase
-  const { data, error } = await supabase.storage
-    .from("hqnrd")
-    .upload(path, optimizedBuffer, {
-      cacheControl: "3600",
-      upsert: true,
-      contentType: "image/webp",
-    });
-
-  if (error) {
-    throw new Error(`Failed to upload image to Supabase: ${error.message}`);
-  }
-
-  return data?.path;
-}

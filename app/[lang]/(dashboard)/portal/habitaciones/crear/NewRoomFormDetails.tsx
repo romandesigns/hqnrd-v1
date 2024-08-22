@@ -11,6 +11,7 @@ import {
   newRoomAction,
   newRoomCategoryAction,
   roomFeaturedCardImage,
+  roomFeaturedCardImageAction,
 } from "@/utils/actions/roomActions";
 import { Button, InputRef, message, Switch } from "antd";
 import { useRef, useState } from "react";
@@ -25,6 +26,11 @@ import { Upload } from "antd";
 import type { GetProp, UploadFile, UploadProps } from "antd";
 import ImgCrop from "antd-img-crop";
 
+interface FileListProps {
+  featuredImageCard: string;
+  ogImage: string;
+}
+
 export default function NewRoomFormDetails({
   params: { lang },
   fetchedCategories,
@@ -35,14 +41,7 @@ export default function NewRoomFormDetails({
   const inputRef = useRef<InputRef>(null);
   const [messageApi, contextHolder] = message.useMessage();
   const [roomDetails, setRoomDetails] = useState<RoomDetails | {}>({});
-  const [fileList, setFileList] = useState<UploadFile[]>([
-    {
-      uid: "-1",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-  ]);
+  const [fileList, setFileList] = useState<FileListProps>();
 
   const cardImageRef = useRef<HTMLDivElement>(null);
 
@@ -232,43 +231,26 @@ export default function NewRoomFormDetails({
     file: UploadFile<any>[],
   ) => {
     try {
-      const { slug: roomCategory } = categories.filter(
+      const { slug: roomCategory } = categories.find(
         (category) =>
           category.id === (newRoom as RoomDetailsPayload).category_id,
-      )[0];
+      )!;
       const { room_number } = newRoom as RoomDetailsPayload;
+      const path = `rooms/${roomCategory}/${String(room_number)}/image.webp`;
       const imageFile = file[0].originFileObj as File;
 
-      // Read the file into a buffer
-      const buffer = await imageFile.arrayBuffer();
+      const { data, error } = await supabase.storage
+        .from("hqnrd-public")
+        .upload(path, imageFile, {
+          cacheControl: "3600",
+          upsert: true,
+          contentType: "image/webp",
+        });
 
-      // Define the path for the image
-      const path = `rooms/${roomCategory}/${String(room_number)}/image.webp`;
-
-      // Call the API route
-      const response = await fetch(`/${lang}/api/image-upload`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          path,
-          fileBuffer: Array.from(new Uint8Array(buffer)), // Convert buffer to Array
-          lang,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Uploaded optimized WebP file to path:", data.path);
-        message.success("Image uploaded successfully");
-      } else {
-        throw new Error(data.error || "Failed to upload image");
-      }
+      console.log({ data, error });
     } catch (error) {
       console.error("Error uploading file:", error);
-      message.error("Failed to upload the image. Please try again.");
+      messageApi.error("Failed to upload the image. Please try again.");
     }
   };
 

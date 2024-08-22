@@ -6,6 +6,7 @@ const nextConfig = {
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
     NEXT_PUBLIC_ORIGIN: process.env.NEXT_PUBLIC_ORIGIN,
+    BASE_URL: process.env.BASE_URL,
   },
   images: {
     remotePatterns: [
