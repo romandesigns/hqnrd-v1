@@ -58,20 +58,20 @@ export async function newRoomCategoryAction(category_name:string, lang:string) {
 }
 
 
-export async function newRoomAction(formData:RoomDetails, lang:string) {
+export async function newRoomAction(formData:RoomDetailsPayload, lang:string) {
   // Initialize supabase
   const supabase = createClient();
 
   // Incoming payload
   const payload: RoomDetailsPayload = {
     title: formData.title,
-    page_description: formData.pageDescription,
-    category_id: formData.categoryId,
-    price_per_night: formData.pricePerNight,
-    room_number: formData.roomNumber,
-    meta_description: formData.metaDescription,
-    bed_quantity: formData.bedQuantity,
-    square_feet: formData.squareFeet,
+    page_description: formData.page_description,
+    category_id: formData.category_id,
+    price_per_night: formData.price_per_night,
+    room_number: formData.room_number,
+    meta_description: formData.meta_description,
+    bed_quantity: formData.bed_quantity,
+    square_feet: formData.square_feet,
     features: formData.features,
     amenities: formData.amenities
   };

@@ -26,7 +26,7 @@ export default function Description({
             placeholder="Price e.g. 1500"
             className="flex-[3] placeholder:text-xs"
             onChange={(e) =>
-              handleInputChange("pricePerNight", Number(e.target.value))
+              handleInputChange("price_per_night", Number(e.target.value))
             }
           />
         </div>
@@ -36,7 +36,9 @@ export default function Description({
           maxLength={304}
           className="placeholder:text-xs"
           autoSize={{ minRows: 3, maxRows: 5 }}
-          onChange={(e) => handleInputChange("pageDescription", e.target.value)}
+          onChange={(e) =>
+            handleInputChange("page_description", e.target.value)
+          }
         />
       </div>
     </fieldset>

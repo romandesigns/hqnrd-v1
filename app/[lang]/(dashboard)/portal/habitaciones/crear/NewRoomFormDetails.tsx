@@ -23,7 +23,13 @@ import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
 import { createClient } from "@/utils/supabase/client";
 import { useRoomStore } from "@/store/rooms";
 import { Upload } from "antd";
-import type { GetProp, UploadFile, UploadProps } from "antd";
+import type {
+  GetProp,
+  UploadFile,
+  UploadProps,
+  GetProp,
+  UploadProps,
+} from "antd";
 import ImgCrop from "antd-img-crop";
 
 interface FileListProps {
@@ -42,11 +48,32 @@ export default function NewRoomFormDetails({
   const [messageApi, contextHolder] = message.useMessage();
   const [roomDetails, setRoomDetails] = useState<RoomDetails | {}>({});
   const [fileList, setFileList] = useState<FileListProps>();
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
 
   const cardImageRef = useRef<HTMLDivElement>(null);
+  type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
+
+  const getBase64 = (img: FileType, callback: (url: string) => void) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => callback(reader.result as string));
+    reader.readAsDataURL(img);
+  };
+
+  const beforeUpload = (file: FileType) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      message.error("You can only upload JPG/PNG file!");
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error("Image must smaller than 2MB!");
+    }
+    return isJpgOrPng && isLt2M;
+  };
 
   const [selectedFeatures, setSelectedFeatures] = useState<
-    { iconName: string; defaultName: string; value: boolean }[]
+    { iconName: string; value: boolean }[]
   >(
     roomFeatures.map((feature) => ({
       iconName: feature.iconName,
@@ -56,7 +83,7 @@ export default function NewRoomFormDetails({
   );
 
   const [selectedAmenities, setSelectedAmenities] = useState<
-    { iconName: string; defaultName: string; value: boolean }[]
+    { iconName: string; value: boolean }[]
   >(
     roomAmenities.map((amenity) => ({
       iconName: amenity.iconName,
@@ -66,7 +93,7 @@ export default function NewRoomFormDetails({
   );
 
   const supabase = createClient();
-  type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
+  // type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
   const { setCreatedRoom, newRoom } = useRoomStore((state) => state);
   const handleNewCategory = async (
@@ -116,48 +143,42 @@ export default function NewRoomFormDetails({
     try {
       const finalRoomDetails = {
         ...roomDetails,
-        features: selectedFeatures.map(({ iconName, defaultName, value }) => ({
+        features: selectedFeatures.map(({ iconName, value }) => ({
           iconName,
-          defaultName,
           value,
         })),
-        amenities: selectedAmenities.map(
-          ({ iconName, defaultName, value }) => ({
-            iconName,
-            defaultName,
-            value,
-          }),
-        ),
+        amenities: selectedAmenities.map(({ iconName, value }) => ({
+          iconName,
+          value,
+        })),
       };
 
-      const response = await newRoomAction(finalRoomDetails, lang);
+      console.log("Final room details:", finalRoomDetails);
+      // const response = await newRoomAction(finalRoomDetails, lang);
 
-      if (isNewRoomActionResponse(response)) {
-        if (response.error) {
-          messageApi.error(response.error);
-        } else if (response.data) {
-          setCreatedRoom(response.data[0]);
-          messageApi.success("Room created successfully!");
-          // Reset the form if needed
-          setRoomDetails({});
-          setSelectedFeatures(
-            roomFeatures.map((feature) => ({
-              iconName: feature.iconName,
-              defaultName: String(feature.defaultName),
-              value: false,
-            })),
-          );
-          setSelectedAmenities(
-            roomAmenities.map((amenity) => ({
-              iconName: amenity.iconName,
-              defaultName: String(amenity.defaultName),
-              value: false,
-            })),
-          );
-        }
-      } else {
-        messageApi.error("Unexpected response format. Please try again.");
-      }
+      // if (isNewRoomActionResponse(response)) {
+      //   if (response.error) {
+      //     messageApi.error(response.error);
+      //   } else if (response.data) {
+      //     setCreatedRoom(response.data[0]);
+      //     messageApi.success("Room created successfully!");
+      //     setRoomDetails({});
+      //     setSelectedFeatures(
+      //       roomFeatures.map((feature) => ({
+      //         iconName: feature.iconName,
+      //         value: false,
+      //       })),
+      //     );
+      //     setSelectedAmenities(
+      //       roomAmenities.map((amenity) => ({
+      //         iconName: amenity.iconName,
+      //         value: false,
+      //       })),
+      //     );
+      //   }
+      // } else {
+      //   messageApi.error("Unexpected response format. Please try again.");
+      // }
     } catch (error) {
       console.error("Error creating room:", error);
       messageApi.error("Failed to create the room. Please try again.");
@@ -226,54 +247,6 @@ export default function NewRoomFormDetails({
       </div>
     ));
 
-  const handleFileUpload = async (
-    newRoom: RoomDetailsPayload | {},
-    file: UploadFile<any>[],
-  ) => {
-    try {
-      const { slug: roomCategory } = categories.find(
-        (category) =>
-          category.id === (newRoom as RoomDetailsPayload).category_id,
-      )!;
-      const { room_number } = newRoom as RoomDetailsPayload;
-      const path = `rooms/${roomCategory}/${String(room_number)}/image.webp`;
-      const imageFile = file[0].originFileObj as File;
-
-      const { data, error } = await supabase.storage
-        .from("hqnrd-public")
-        .upload(path, imageFile, {
-          cacheControl: "3600",
-          upsert: true,
-          contentType: "image/webp",
-        });
-
-      console.log({ data, error });
-    } catch (error) {
-      console.error("Error uploading file:", error);
-      messageApi.error("Failed to upload the image. Please try again.");
-    }
-  };
-
-  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    handleFileUpload(newRoom, newFileList);
-    setFileList(newFileList);
-  };
-
-  const onPreview = async (file: UploadFile) => {
-    let src = file.url as string;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj as FileType);
-        reader.onload = () => resolve(reader.result as string);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
-  };
-
   return (
     <>
       {contextHolder}
@@ -305,65 +278,6 @@ export default function NewRoomFormDetails({
             renderFeaturesAndAmenities={renderFeaturesAndAmenities}
           />
         </form>
-
-        <article className="grid w-full grid-cols-1 grid-rows-[auto_auto_auto] rounded-md bg-primary-100/10 p-3">
-          <div>
-            <div className="grid grid-cols-[1.4fr_1fr] grid-rows-1 gap-4">
-              {/* Open Graph Image */}
-              <div className="flex flex-col gap-2">
-                <h3 className="text-xs font-bold uppercase underline">
-                  Open Graph Image
-                </h3>
-                <div className="rounded-md bg-primary-600/5 p-2">
-                  <div className="w-full">
-                    <span className="mb-4 block">
-                      <figure className="aspect-og flex items-center justify-center bg-neutral-400">
-                        OG IMAGE
-                      </figure>
-                    </span>
-                    <Button type="primary">Save OG Image</Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Open Graph Image */}
-              <div className="flex flex-col gap-2">
-                <h3 className="text-xs font-bold uppercase underline">
-                  Open Graph Image
-                </h3>
-                <div className="rounded-md bg-primary-600/5 p-2">
-                  <div className="w-full">
-                    <span className="mb-4 block">
-                      <ImgCrop rotationSlider aspect={4 / 3}>
-                        <Upload
-                          name="feature_image"
-                          listType="picture-card"
-                          fileList={fileList}
-                          onChange={onChange}
-                          onPreview={onPreview}
-                        >
-                          {fileList.length < 1 && (
-                            <Button type="primary">Save OG Image</Button>
-                          )}
-                        </Upload>
-                      </ImgCrop>
-                      <figure
-                        className="flex aspect-[4/3] items-center justify-center bg-neutral-400"
-                        ref={cardImageRef}
-                      >
-                        OG IMAGE
-                      </figure>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article className="h-full w-full rounded-md bg-primary-100/10">
-          Preview
-        </article>
       </section>
     </>
   );

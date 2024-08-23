@@ -33,7 +33,7 @@ export default function MetaData({
           size="large"
           className="w-full placeholder:text-xs"
           placeholder="Select category"
-          onChange={(value) => handleInputChange("categoryId", value)}
+          onChange={(value) => handleInputChange("category_id", value)}
           dropdownRender={(menu) => (
             <>
               {menu}
@@ -70,7 +70,7 @@ export default function MetaData({
           className="placeholder:text-xs"
           onChange={(e) =>
             handleInputChange(
-              "roomNumber",
+              "room_number",
               Number(e.target.value && e.target.value),
             )
           }
@@ -83,7 +83,7 @@ export default function MetaData({
           autoSize={{ minRows: 3, maxRows: 5 }}
           onChange={(e) =>
             handleInputChange(
-              "metaDescription",
+              "meta_description",
               e.target.value && e.target.value,
             )
           }

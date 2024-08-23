@@ -36,7 +36,7 @@ export default function Features({
               type="number"
               className="flex-1"
               onChange={(e) =>
-                handleInputChange("bedQuantity", Number(e.target.value))
+                handleInputChange("bed_quantity", Number(e.target.value))
               }
             />
           </div>
@@ -48,7 +48,7 @@ export default function Features({
               type="number"
               className="flex-1"
               onChange={(e) =>
-                handleInputChange("squareFeet", Number(e.target.value))
+                handleInputChange("square_feet", Number(e.target.value))
               }
             />
           </div>

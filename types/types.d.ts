@@ -356,16 +356,16 @@ export type NewRoomActionResponse = {
 }
 
 export type RoomDetails  ={
-  categoryId: number;
-  roomNumber: number;
-  metaDescription: string;
+  category_id: string;
+  room_number: number;
+  meta_description: string;
   title: string;
-  pricePerNight: number;
-  pageDescription: string;
-  bedQuantity: number;
-  squareFeet: number;
-  features: { iconName: string; defaultName: string; value: boolean }[];
-  amenities: { iconName: string; defaultName: string; value: boolean }[];
+  price_per_night: number;
+  page_description: string;
+  bed_quantity: number;
+  square_feet: number;
+  features: { iconName: string; value: boolean }[];
+  amenities: { iconName: string; value: boolean }[];
   [key: string]: any; // Additional dynamic properties
 }
 
@@ -378,8 +378,8 @@ export type RoomDetailsPayload  ={
   page_description: string;
   bed_quantity: number;
   square_feet: number;
-  features: { iconName: string; defaultName: string; value: boolean }[];
-  amenities: { iconName: string; defaultName: string; value: boolean }[];
+  features: { iconName: string; value: boolean }[];
+  amenities: { iconName: string; value: boolean }[];
   [key: string]: any; // Additional dynamic properties
 }
 
