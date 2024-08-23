@@ -4,6 +4,9 @@ import { Locale } from "@/i18n-config";
 import { roomsNavContent } from "../navbarContent";
 import NewRoomFormDetails from "./NewRoomFormDetails";
 import { getAllCategories } from "@/utils/supabase/queries/categories";
+import { IoArrowBackCircleSharp } from "@/app/ui/icons";
+import Link from "next/link";
+import { Button } from "antd";
 
 export default async function Page({
   params: { lang },
@@ -23,10 +26,26 @@ export default async function Page({
         <div className="col-span-full my-4 font-bold">DASHBOARD</div>
       </Navigation>
       <section className="grid grid-rows-[auto_1fr] rounded-md border border-red-400 bg-white max-sm:grid-cols-1 lg:p-2">
-        <nav>
-          <div className="sticky -top-8 z-[4] col-span-full flex justify-start border-b p-2">
-            <TopMenuContent lang={lang} menuLinks={roomsNavContent} />
-          </div>
+        <nav className="col-span-full flex justify-between p-4">
+          <Link href={`/${lang}/portal/habitaciones`}>
+            <IoArrowBackCircleSharp className="text-neutral-900" size={30} />
+          </Link>
+          <ul className="relative grid w-full max-w-xs grid-cols-[auto_1fr_auto_1fr] items-center justify-center gap-4">
+            <li className="flex h-5 w-5 items-center justify-center rounded-full bg-red-500 p-4">
+              1
+            </li>
+            <li className="h-1 w-80 bg-red-500" />
+            <li className="flex h-5 w-5 items-center justify-center rounded-full bg-red-500 p-4">
+              2
+            </li>
+            <li className="h-1 w-80 bg-red-500" />
+            <li className="flex h-5 w-5 items-center justify-center rounded-full bg-red-500 p-4">
+              3
+            </li>
+          </ul>
+          <Button className="!bg-neutral-900 !text-white" size="large">
+            Finish
+          </Button>
         </nav>
         <article
           className={
