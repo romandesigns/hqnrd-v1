@@ -1,36 +1,21 @@
 "use client";
 
+import RoomDescriptionForm from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/RoomDescription";
+import { useRoomStore } from "@/store/rooms";
 import {
   NewRoomActionResponse,
   NewRoomFormDetailsProps,
   RoomCategory,
   RoomDetails,
-  RoomDetailsPayload,
 } from "@/types/types";
-import {
-  newRoomAction,
-  newRoomCategoryAction,
-  roomFeaturedCardImage,
-  roomFeaturedCardImageAction,
-} from "@/utils/actions/roomActions";
-import { Button, InputRef, message, Switch } from "antd";
+import { newRoomCategoryAction } from "@/utils/actions/roomActions";
+import { createClient } from "@/utils/supabase/client";
+import type { GetProp, UploadProps } from "antd";
+import { InputRef, message, Switch } from "antd";
 import { useRef, useState } from "react";
 import Amenities from "./Amenities";
-import Description from "./Description";
 import Features from "./Features";
-import MetaData from "./MetaData";
 import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
-import { createClient } from "@/utils/supabase/client";
-import { useRoomStore } from "@/store/rooms";
-import { Upload } from "antd";
-import type {
-  GetProp,
-  UploadFile,
-  UploadProps,
-  GetProp,
-  UploadProps,
-} from "antd";
-import ImgCrop from "antd-img-crop";
 
 interface FileListProps {
   featuredImageCard: string;
@@ -47,12 +32,15 @@ export default function NewRoomFormDetails({
   const inputRef = useRef<InputRef>(null);
   const [messageApi, contextHolder] = message.useMessage();
   const [roomDetails, setRoomDetails] = useState<RoomDetails | {}>({});
+  const [currentStep, setCurrentStep] = useState<number>(1);
   const [fileList, setFileList] = useState<FileListProps>();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
 
   const cardImageRef = useRef<HTMLDivElement>(null);
   type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
+
+  const steps = [1, 2, 3];
 
   const getBase64 = (img: FileType, callback: (url: string) => void) => {
     const reader = new FileReader();
@@ -217,7 +205,7 @@ export default function NewRoomFormDetails({
       );
     }
   };
-
+  console.log(currentStep);
   const renderFeaturesAndAmenities = (
     items: typeof roomFeatures | typeof roomAmenities,
     type: "feature" | "amenity",
@@ -250,33 +238,66 @@ export default function NewRoomFormDetails({
   return (
     <>
       {contextHolder}
-      <section className="mt-2 grid h-full w-full grid-cols-1 items-stretch justify-stretch gap-4 p-2 lg:grid-cols-[3fr_4fr_4fr] 2xl:grid-cols-[3fr_4fr_4fr]">
-        <form className="relative grid h-full grid-cols-1 gap-4 rounded-md bg-primary-100/10 p-3">
-          {/* Metadata */}
-          <MetaData
-            handleCreateNewRoom={handleCreateNewRoom}
-            handlePreview={handlePreview}
-            handleInputChange={handleInputChange}
-            categories={categories}
-            newCategoryName={newCategoryName}
-            setNewCategoryName={setNewCategoryName}
-            handleNewCategory={handleNewCategory}
-          />
-          {/* Description */}
-          <Description handleInputChange={handleInputChange} />
+      <div>
+        <ul className="relative mx-auto grid grid-cols-[auto_auto_auto_auto_auto] items-center justify-center gap-3 py-4 pt-5">
+          <li className="relative flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-4 text-xs text-white">
+            <span>1</span>
+            <span className="absolute top-10 text-xs text-red-500/30">
+              Description
+            </span>
+          </li>
+          <li className="h-1 w-20 bg-red-500" />
+          <li className="relative flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-4 text-xs text-white">
+            <span>2</span>
+            <span className="absolute top-10 text-xs text-red-500/30">
+              Offerings
+            </span>
+          </li>
+          <li className="h-1 w-20 bg-red-500" />
+          <li className="relative flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-4 text-xs text-white">
+            <span>3</span>
+            <span className="absolute top-10 text-xs text-red-500/30">
+              Media
+            </span>
+          </li>
+        </ul>
+      </div>
+      <section className="mx-auto mt-2 flex h-full w-full flex-col items-center justify-center gap-4 p-2">
+        <form className="relative grid w-full max-w-lg grid-cols-1 grid-rows-[auto_auto] gap-4 rounded-md">
+          {currentStep === 1 && (
+            <RoomDescriptionForm
+              handleCreateNewRoom={handleCreateNewRoom}
+              handlePreview={handlePreview}
+              handleInputChange={handleInputChange}
+              categories={categories}
+              newCategoryName={newCategoryName}
+              setNewCategoryName={setNewCategoryName}
+              handleNewCategory={handleNewCategory}
+              setSteps={setCurrentStep}
+              steps={steps}
+              currentStep={currentStep}
+            />
+          )}
+          {currentStep === 2 && (
+            <>
+              <Features
+                renderFeaturesAndAmenities={renderFeaturesAndAmenities}
+                roomFeatures={roomFeatures}
+                handleInputChange={handleInputChange}
+              />
+              <Amenities
+                roomAmenities={roomAmenities}
+                renderFeaturesAndAmenities={renderFeaturesAndAmenities}
+              />
+            </>
+          )}
 
-          {/* Features */}
-          <Features
-            renderFeaturesAndAmenities={renderFeaturesAndAmenities}
-            roomFeatures={roomFeatures}
-            handleInputChange={handleInputChange}
-          />
+          {/* Features
 
-          {/* Amenities */}
-          <Amenities
-            roomAmenities={roomAmenities}
-            renderFeaturesAndAmenities={renderFeaturesAndAmenities}
-          />
+
+         Amenities
+
+          */}
         </form>
       </section>
     </>

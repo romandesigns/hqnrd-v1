@@ -384,8 +384,11 @@ export type RoomDetailsPayload  ={
 }
 
 export interface RooomMetaDataProps {
+  currentStep: number;
   categories: { id: string; name: string }[];
   newCategoryName: string;
+  setSteps:Dispatch<SetStateAction<number>>;
+  steps:number[]
   setNewCategoryName: (value: string) => void;
   handleNewCategory: (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
