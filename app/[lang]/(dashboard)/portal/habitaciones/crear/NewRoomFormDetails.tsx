@@ -1,5 +1,6 @@
 "use client";
 
+import Offerings from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/Offerings";
 import RoomDescriptionForm from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/RoomDescription";
 import { useRoomStore } from "@/store/rooms";
 import {
@@ -13,9 +14,10 @@ import { createClient } from "@/utils/supabase/client";
 import type { GetProp, UploadProps } from "antd";
 import { InputRef, message, Switch } from "antd";
 import { useRef, useState } from "react";
-import Amenities from "./Amenities";
-import Features from "./Features";
 import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
+import { twMerge } from "tailwind-merge";
+import classNames from "classnames";
+import { Media } from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/Media";
 
 interface FileListProps {
   featuredImageCard: string;
@@ -32,7 +34,7 @@ export default function NewRoomFormDetails({
   const inputRef = useRef<InputRef>(null);
   const [messageApi, contextHolder] = message.useMessage();
   const [roomDetails, setRoomDetails] = useState<RoomDetails | {}>({});
-  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [currentStep, setCurrentStep] = useState<number>(3);
   const [fileList, setFileList] = useState<FileListProps>();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -65,7 +67,6 @@ export default function NewRoomFormDetails({
   >(
     roomFeatures.map((feature) => ({
       iconName: feature.iconName,
-      defaultName: String(feature.defaultName),
       value: false,
     })),
   );
@@ -75,7 +76,6 @@ export default function NewRoomFormDetails({
   >(
     roomAmenities.map((amenity) => ({
       iconName: amenity.iconName,
-      defaultName: String(amenity.defaultName),
       value: false,
     })),
   );
@@ -205,16 +205,20 @@ export default function NewRoomFormDetails({
       );
     }
   };
-  console.log(currentStep);
+
+  const handleIncreaseStep = () => {
+    setCurrentStep((prev) => prev + 1);
+  };
+  const handleDecreaseStep = () => {
+    setCurrentStep((prev) => prev - 1);
+  };
+
   const renderFeaturesAndAmenities = (
     items: typeof roomFeatures | typeof roomAmenities,
     type: "feature" | "amenity",
   ) =>
     items.map((item, index) => (
-      <div
-        className="my-[0.1rem] flex items-start justify-between gap-2"
-        key={index}
-      >
+      <div className="my-[0.1rem] flex items-start justify-between" key={index}>
         <div className="flex items-center justify-start gap-2">
           <item.defaultName />
           <p className="text-xs">{item.description}</p>
@@ -239,33 +243,57 @@ export default function NewRoomFormDetails({
     <>
       {contextHolder}
       <div>
-        <ul className="relative mx-auto grid grid-cols-[auto_auto_auto_auto_auto] items-center justify-center gap-3 py-4 pt-5">
-          <li className="relative flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-4 text-xs text-white">
-            <span>1</span>
-            <span className="absolute top-10 text-xs text-red-500/30">
+        <ul className="relative mx-auto grid grid-cols-[auto_auto_auto_auto_auto] items-center justify-center gap-3 py-8 pt-10">
+          <li
+            className={twMerge(
+              `relative flex h-2 w-2 items-center justify-center rounded-full bg-primary-100/30 p-3 text-xs text-white`,
+              currentStep >= 1 &&
+                "bg-primary-500/80 [&>span+span]:text-primary-500/80 [&>span]:text-white",
+            )}
+          >
+            <span className="text-primary-500/80">1</span>
+            <span className="absolute top-10 text-xs text-primary-500/30">
               Description
             </span>
           </li>
-          <li className="h-1 w-20 bg-red-500" />
-          <li className="relative flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-4 text-xs text-white">
-            <span>2</span>
-            <span className="absolute top-10 text-xs text-red-500/30">
+          <li className="h-1 w-20 bg-primary-100/30" />
+          <li
+            className={twMerge(
+              `relative flex h-2 w-2 items-center justify-center rounded-full bg-primary-100/30 p-3 text-xs text-white`,
+              currentStep >= 2 &&
+                "bg-primary-500/80 [&>span+span]:text-primary-500/80 [&>span]:text-white",
+            )}
+          >
+            <span className="text-primary-500/80">2</span>
+            <span className="absolute top-10 text-xs text-primary-500/30">
               Offerings
             </span>
           </li>
-          <li className="h-1 w-20 bg-red-500" />
-          <li className="relative flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-4 text-xs text-white">
-            <span>3</span>
-            <span className="absolute top-10 text-xs text-red-500/30">
+          <li className="h-1 w-20 bg-primary-100/30" />
+          <li
+            className={twMerge(
+              `relative flex h-2 w-2 items-center justify-center rounded-full bg-primary-100/30 p-3 text-xs text-white`,
+              currentStep === 3 &&
+                "bg-primary-500/80 [&>span+span]:text-primary-500/80 [&>span]:text-white",
+            )}
+          >
+            <span className="text-primary-500/80">3</span>
+            <span className="absolute top-10 text-xs text-primary-500/30">
               Media
             </span>
           </li>
         </ul>
       </div>
       <section className="mx-auto mt-2 flex h-full w-full flex-col items-center justify-center gap-4 p-2">
-        <form className="relative grid w-full max-w-lg grid-cols-1 grid-rows-[auto_auto] gap-4 rounded-md">
+        <form
+          className={twMerge(
+            `relative grid w-full max-w-2xl grid-cols-1 grid-rows-[auto_auto] gap-4 rounded-md`,
+            currentStep === 3 && "",
+          )}
+        >
           {currentStep === 1 && (
             <RoomDescriptionForm
+              handleIncreaseStep={handleIncreaseStep}
               handleCreateNewRoom={handleCreateNewRoom}
               handlePreview={handlePreview}
               handleInputChange={handleInputChange}
@@ -273,31 +301,28 @@ export default function NewRoomFormDetails({
               newCategoryName={newCategoryName}
               setNewCategoryName={setNewCategoryName}
               handleNewCategory={handleNewCategory}
-              setSteps={setCurrentStep}
-              steps={steps}
-              currentStep={currentStep}
             />
           )}
           {currentStep === 2 && (
             <>
-              <Features
+              <Offerings
                 renderFeaturesAndAmenities={renderFeaturesAndAmenities}
                 roomFeatures={roomFeatures}
-                handleInputChange={handleInputChange}
-              />
-              <Amenities
                 roomAmenities={roomAmenities}
-                renderFeaturesAndAmenities={renderFeaturesAndAmenities}
+                handleInputChange={handleInputChange}
+                handleDecreaseStep={handleDecreaseStep}
+                handleIncreaseStep={handleIncreaseStep}
               />
             </>
           )}
-
-          {/* Features
-
-
-         Amenities
-
-          */}
+          {currentStep === 3 && (
+            <>
+              <Media
+                handleDecreaseStep={handleDecreaseStep}
+                handleIncreaseStep={handleIncreaseStep}
+              />
+            </>
+          )}
         </form>
       </section>
     </>

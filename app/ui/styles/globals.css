@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "cropperjs/dist/cropper.css";
 @import "swiper/css";
 @import "swiper/css/autoplay";
 @import "swiper/css/effect-cards";
@@ -49,11 +50,19 @@
     -webkit-text-size-adjust: none;
     overflow-x: hidden;
   }
+}
 
+@layer utilities {
   .hoveredUI {
     @apply cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.05] active:scale-[0.95];
   }
   .max-width {
     @apply max-w-[90rem];
+  }
+  .og-image,
+  .ant-upload-wrapper,
+  .ant-upload-list,
+  .ant-upload-select {
+    @apply !h-full !w-full;
   }
 }

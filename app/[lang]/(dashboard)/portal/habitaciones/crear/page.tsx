@@ -26,7 +26,7 @@ export default async function Page({
       <section className="grid grid-cols-1 grid-rows-[auto_1fr] rounded-md bg-white lg:p-2">
         <nav className="flex justify-between border-b p-4">
           <Link href={`/${lang}/portal/habitaciones`}>
-            <IoArrowBackCircleSharp className="text-neutral-900" size={30} />
+            <IoArrowBackCircleSharp className="text-neutral-900" size={40} />
           </Link>
           <Button className="!bg-neutral-900 !text-white" size="large">
             Finish
@@ -34,7 +34,7 @@ export default async function Page({
         </nav>
         <article
           className={
-            "grid h-full w-full grid-cols-1 grid-rows-[auto_1fr] items-center justify-center rounded-md"
+            "grid h-full w-full grid-cols-1 grid-rows-[auto_1fr] items-center justify-center gap-4 rounded-md"
           }
         >
           <NewRoomFormDetails

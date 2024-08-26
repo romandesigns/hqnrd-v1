@@ -50,7 +50,8 @@ export {
   FaSuitcase,
   FaStar,
   FaMusic ,
-  FaTrash
+  FaTrash,
+  FaChevronLeft
 } from "react-icons/fa";
 export {
   FaAddressBook,

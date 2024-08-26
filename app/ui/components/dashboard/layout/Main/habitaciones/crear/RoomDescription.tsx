@@ -12,10 +12,7 @@ export default function RoomDescriptionForm({
   handleInputChange,
   handleCreateNewRoom,
   handlePreview,
-  setSteps,
-
-  currentStep,
-  steps,
+  handleIncreaseStep,
 }: RooomMetaDataProps) {
   const inputRef = useRef<InputRef>(null);
   return (
@@ -23,17 +20,15 @@ export default function RoomDescriptionForm({
       <div className="space-y-4 rounded-md bg-primary-100/10 p-3">
         <fieldset>
           <div className="mb-4 flex items-center justify-between">
-            <legend className="text-xs font-bold uppercase underline">
-              Metadata
-            </legend>
-            <div className="flex items-center gap-2">
+            <legend className="text-xs font-bold uppercase">Metadata</legend>
+            {/* <div className="flex items-center gap-2">
               <Button type="primary" onClick={handleCreateNewRoom}>
                 Save Room Description
               </Button>
               <Button className="md:!hidden" onClick={handlePreview}>
                 Preview
               </Button>
-            </div>
+            </div> */}
           </div>
           <div className="grid gap-2 rounded-md bg-primary-600/5 p-2">
             <Select
@@ -99,13 +94,14 @@ export default function RoomDescriptionForm({
         </fieldset>
 
         <fieldset>
-          <legend className="mb-4 text-xs font-bold uppercase underline">
+          <legend className="mb-4 text-xs font-bold uppercase">
             Description
           </legend>
           <div className="grid gap-2 rounded-md bg-primary-600/5 p-2">
             <div className="flex gap-2">
               <Input
                 size="large"
+                value={newCategoryName ? newCategoryName : ""}
                 placeholder="Title e.g. Basic"
                 className="flex-[8] placeholder:text-xs"
                 onChange={(e) => handleInputChange("title", e.target.value)}
@@ -137,7 +133,7 @@ export default function RoomDescriptionForm({
       </div>
 
       <Button
-        onClick={() => setSteps((currentStep += 1))}
+        onClick={() => handleIncreaseStep()}
         size="large"
         className="!h-auto w-full !bg-neutral-800 !py-2 !text-white"
       >

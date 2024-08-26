@@ -1,5 +1,6 @@
 import { Locale } from "@/i18n-config";
 import { CSSProperties } from "react";
+import {IconType} from "react-icons";
 
 export type CarouselTypes = {
   src: string;
@@ -384,11 +385,9 @@ export type RoomDetailsPayload  ={
 }
 
 export interface RooomMetaDataProps {
-  currentStep: number;
+  handleIncreaseStep: () => void;
   categories: { id: string; name: string }[];
   newCategoryName: string;
-  setSteps:Dispatch<SetStateAction<number>>;
-  steps:number[]
   setNewCategoryName: (value: string) => void;
   handleNewCategory: (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
@@ -398,4 +397,16 @@ export interface RooomMetaDataProps {
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   ) => Promise<void>;
   handlePreview: () => void;
+}
+
+export interface RoomOfferings {
+  handleIncreaseStep: () => void;
+  handleDecreaseStep: () => void;
+  renderFeaturesAndAmenities:(items: typeof roomFeatures | typeof roomAmenities, type: "feature" | "amenity") => JSX.Element[];
+  currentStep: number;
+  handleInputChange: (key: string, value: string | number) => void;
+  roomFeatures: { iconName: string; defaultName:IconType, value: boolean }[];
+  roomAmenities: { iconName: string; defaultName:IconType, value: boolean }[];
+  setCurrentStep:Dispatch<SetStateAction<number>>;
+  steps:number[]
 }

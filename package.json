@@ -21,6 +21,7 @@
     "@tailwindcss/container-queries": "^0.1.1",
     "@types/react-html-parser": "^2.0.6",
     "classnames": "^2.5.1",
+    "cropperjs": "^1.6.2",
     "daysjs": "^1.0.2",
     "delay": "^6.0.0",
     "framer-motion": "^11.3.28",
