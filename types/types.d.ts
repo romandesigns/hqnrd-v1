@@ -369,6 +369,13 @@ export type RoomDetails  ={
   amenities: { iconName: string; value: boolean }[];
   [key: string]: any; // Additional dynamic properties
 }
+export type MediaFileTypes = {
+  ogImg: string;
+  cardImg: string;
+  roomLayout: string;
+  roomVideo: string;
+  gallery: string[];
+}
 
 export type RoomDetailsPayload  ={
   category_id: string;
@@ -381,6 +388,7 @@ export type RoomDetailsPayload  ={
   square_feet: number;
   features: { iconName: string; value: boolean }[];
   amenities: { iconName: string; value: boolean }[];
+  mediaFiles: MediaFileTypes;
   [key: string]: any; // Additional dynamic properties
 }
 
@@ -393,9 +401,7 @@ export interface RooomMetaDataProps {
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   ) => Promise<void>;
   handleInputChange: (key: string, value: string | number) => void;
-  handleCreateNewRoom: (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-  ) => Promise<void>;
+
   handlePreview: () => void;
 }
 

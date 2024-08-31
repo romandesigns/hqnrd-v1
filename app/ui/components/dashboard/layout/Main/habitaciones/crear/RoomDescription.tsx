@@ -10,7 +10,6 @@ export default function RoomDescriptionForm({
   setNewCategoryName,
   handleNewCategory,
   handleInputChange,
-  handleCreateNewRoom,
   handlePreview,
   handleIncreaseStep,
 }: RooomMetaDataProps) {
@@ -45,7 +44,7 @@ export default function RoomDescriptionForm({
                       placeholder="Enter new category"
                       ref={inputRef}
                       className="flex-1 placeholder:text-xs"
-                      value={newCategoryName}
+                      // value={newCategoryName}
                       onChange={(e) => setNewCategoryName(e.target.value)}
                       onKeyDown={(e) => e.stopPropagation()}
                     />
@@ -101,7 +100,7 @@ export default function RoomDescriptionForm({
             <div className="flex gap-2">
               <Input
                 size="large"
-                value={newCategoryName ? newCategoryName : ""}
+                // value={newCategoryName}
                 placeholder="Title e.g. Basic"
                 className="flex-[8] placeholder:text-xs"
                 onChange={(e) => handleInputChange("title", e.target.value)}

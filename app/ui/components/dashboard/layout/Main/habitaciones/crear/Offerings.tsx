@@ -11,6 +11,7 @@ export default function Offerings({
   roomAmenities,
   handleIncreaseStep,
   handleDecreaseStep,
+  handleCreateNewRoom,
 }: {
   renderFeaturesAndAmenities: (
     items: typeof roomFeatures | typeof roomAmenities,
@@ -21,6 +22,9 @@ export default function Offerings({
   roomAmenities: { iconName: string; defaultName: IconType; value: boolean }[];
   handleIncreaseStep: () => void;
   handleDecreaseStep: () => void;
+  handleCreateNewRoom: (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+  ) => Promise<void>;
 }) {
   const inputRef = useRef<InputRef>(null);
   return (

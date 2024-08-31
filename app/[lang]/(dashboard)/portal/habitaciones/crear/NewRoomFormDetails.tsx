@@ -1,5 +1,6 @@
 "use client";
 
+import { Media } from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/Media";
 import Offerings from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/Offerings";
 import RoomDescriptionForm from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/RoomDescription";
 import { useRoomStore } from "@/store/rooms";
@@ -14,10 +15,8 @@ import { createClient } from "@/utils/supabase/client";
 import type { GetProp, UploadProps } from "antd";
 import { InputRef, message, Switch } from "antd";
 import { useRef, useState } from "react";
-import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
 import { twMerge } from "tailwind-merge";
-import classNames from "classnames";
-import { Media } from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/Media";
+import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
 
 interface FileListProps {
   featuredImageCard: string;
@@ -34,33 +33,11 @@ export default function NewRoomFormDetails({
   const inputRef = useRef<InputRef>(null);
   const [messageApi, contextHolder] = message.useMessage();
   const [roomDetails, setRoomDetails] = useState<RoomDetails | {}>({});
-  const [currentStep, setCurrentStep] = useState<number>(3);
+  const [currentStep, setCurrentStep] = useState<number>(1);
   const [fileList, setFileList] = useState<FileListProps>();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
-
   const cardImageRef = useRef<HTMLDivElement>(null);
-  type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
-
-  const steps = [1, 2, 3];
-
-  const getBase64 = (img: FileType, callback: (url: string) => void) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result as string));
-    reader.readAsDataURL(img);
-  };
-
-  const beforeUpload = (file: FileType) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-    }
-    return isJpgOrPng && isLt2M;
-  };
 
   const [selectedFeatures, setSelectedFeatures] = useState<
     { iconName: string; value: boolean }[]
@@ -80,10 +57,9 @@ export default function NewRoomFormDetails({
     })),
   );
 
-  const supabase = createClient();
-  // type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
-
+  // Zustand store
   const { setCreatedRoom, newRoom } = useRoomStore((state) => state);
+
   const handleNewCategory = async (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   ) => {
@@ -208,7 +184,11 @@ export default function NewRoomFormDetails({
 
   const handleIncreaseStep = () => {
     setCurrentStep((prev) => prev + 1);
+    if (currentStep === 2) {
+      console.log(roomDetails);
+    }
   };
+
   const handleDecreaseStep = () => {
     setCurrentStep((prev) => prev - 1);
   };
@@ -294,7 +274,6 @@ export default function NewRoomFormDetails({
           {currentStep === 1 && (
             <RoomDescriptionForm
               handleIncreaseStep={handleIncreaseStep}
-              handleCreateNewRoom={handleCreateNewRoom}
               handlePreview={handlePreview}
               handleInputChange={handleInputChange}
               categories={categories}
@@ -306,6 +285,7 @@ export default function NewRoomFormDetails({
           {currentStep === 2 && (
             <>
               <Offerings
+                handleCreateNewRoom={handleCreateNewRoom}
                 renderFeaturesAndAmenities={renderFeaturesAndAmenities}
                 roomFeatures={roomFeatures}
                 roomAmenities={roomAmenities}

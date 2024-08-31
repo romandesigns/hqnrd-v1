@@ -1,9 +1,18 @@
 "use client";
 import { FaChevronLeft } from "@/app/ui/icons";
+import { useRoomStore } from "@/store/rooms";
+import { createClient } from "@/utils/supabase/client";
 import { Button, Modal } from "antd";
 import Cropper from "cropperjs";
 import "cropperjs/dist/cropper.css"; // Import cropper's CSS
 import { useRef, useState } from "react";
+interface MediaFiles {
+  ogImg: string;
+  cardImg: string;
+  roomLayout: string;
+  roomVideo: string;
+  gallery: string[];
+}
 
 export function Media({
   handleDecreaseStep,
@@ -13,11 +22,23 @@ export function Media({
   handleIncreaseStep: () => void;
 }) {
   // States
-  const [mediaFiles, setMediaFiles] = useState<FileList | null>(null);
+
+  const supabase = createClient();
   const [cropper, setCropper] = useState<Cropper | null>(null);
+  const [isOgImage, setIsOgImage] = useState<Boolean>(false);
   const [cropVisible, setCropVisible] = useState(false);
   const [currentFile, setCurrentFile] = useState<string | null>(null);
   const [aspectRatio, setAspectRatio] = useState<number>(1); // Default aspect ratio
+  const [mediaFiles, setMediaFiles] = useState<MediaFiles>({
+    ogImg: "",
+    cardImg: "",
+    roomLayout: "",
+    roomVideo: "",
+    gallery: [],
+  });
+
+  const { newRoom, setCreatedRoom, clearCreatedRoom, updateRoom } =
+    useRoomStore((state) => state);
 
   // Refs
   const ogImgRef = useRef<HTMLInputElement>(null);
@@ -34,7 +55,6 @@ export function Media({
     e: React.ChangeEvent<HTMLInputElement>,
     aspect: number,
   ) => {
-    console.log(aspect);
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -47,19 +67,49 @@ export function Media({
     }
   };
 
+  const handleRoomUpdate = async () => {
+    // const { data, error } = await supabase
+    //   .from("rooms")
+    //   .update(mediaFiles)
+    //   .eq("id", "someValue")
+    //   .select();
+  };
+
+  const uploadFileToSupabase = async (
+    blob: Blob,
+    filePath: string,
+    ogImg: Boolean = false,
+  ) => {
+    setIsOgImage(ogImg);
+    const { data, error } = await supabase.storage
+      .from("hqnrd-public")
+      .upload(filePath, blob, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+    if (error) {
+      console.error("Error uploading file:", error.message);
+    } else {
+      console.log("File uploaded successfully:", data);
+    }
+  };
+
   const onCrop = () => {
     if (cropper) {
-      const croppedCanvas = cropper.getCroppedCanvas();
+      const croppedCanvas = isOgImage
+        ? cropper.getCroppedCanvas({
+            width: 1200,
+            height: 630,
+          })
+        : cropper.getCroppedCanvas();
       croppedCanvas.toBlob((blob) => {
         if (blob) {
-          // Here, you would upload the blob to Supabase or process it as needed
-          console.log(blob);
-
-          // For now, we can reset the state and close the modal
+          const filePath = `rooms/ab/${new Date().getTime()}.webp`;
+          uploadFileToSupabase(blob, filePath);
           setCropVisible(false);
           setCropper(null);
         }
-      });
+      }, "image/webp");
     }
   };
 
@@ -103,7 +153,7 @@ export function Media({
           {/* Gallery */}
           <div className="grid w-full grid-cols-4 grid-rows-2 gap-2">
             <label
-              className="col-start-1 col-end-3 aspect-og rounded-md border bg-orange-500"
+              className="col-start-1 col-end-3 flex aspect-og items-center justify-center rounded-md border bg-orange-500"
               htmlFor="gallery-one"
             >
               box
@@ -116,7 +166,7 @@ export function Media({
               />
             </label>
             <label
-              className="rounded-md border bg-red-500"
+              className="flex items-center justify-center rounded-md border bg-red-500"
               htmlFor="gallery-two"
             >
               box
@@ -129,7 +179,7 @@ export function Media({
               />
             </label>
             <label
-              className="col-start-4 col-end-5 row-start-1 row-end-3 rounded-md border bg-green-500"
+              className="col-start-4 col-end-5 row-start-1 row-end-3 flex items-center justify-center rounded-md border bg-green-500"
               htmlFor="gallery-three"
             >
               box
@@ -142,7 +192,7 @@ export function Media({
               />
             </label>
             <label
-              className="rounded-md border bg-blue-500"
+              className="flex items-center justify-center rounded-md border bg-blue-500"
               htmlFor="gallery-four"
             >
               box
@@ -155,7 +205,7 @@ export function Media({
               />
             </label>
             <label
-              className="col-start-2 col-end-4 row-start-2 row-end-3 rounded-md border bg-yellow-500"
+              className="col-start-2 col-end-4 row-start-2 row-end-3 flex items-center justify-center rounded-md border bg-yellow-500"
               htmlFor="gallery-five"
             >
               box
@@ -221,7 +271,7 @@ export function Media({
 
       {/* Crop Modal */}
       <Modal
-        visible={cropVisible}
+        open={cropVisible}
         onCancel={() => setCropVisible(false)}
         onOk={onCrop}
         okText="Crop"

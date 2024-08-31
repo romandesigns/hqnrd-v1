@@ -7,6 +7,8 @@ import { devtools, persist } from "zustand/middleware";
 export type RoomState = {
   newRoom: RoomDetailsPayload | {};
   setCreatedRoom: (payload: RoomDetailsPayload) => void;
+  updateRoom: (payload: RoomDetailsPayload) => void;
+  clearCreatedRoom: () => void;
 };
 
 // Store
@@ -15,9 +17,9 @@ export const useRoomStore = create<RoomState>()(
     persist(
       (set) => ({
         newRoom: {},
-
         setCreatedRoom: (payload: RoomDetailsPayload) =>
           set(() => ({ newRoom: payload })),
+        updateRoom: (payload: RoomDetailsPayload) => set(() => ({ newRoom: payload })),
         clearCreatedRoom: () =>
           set(() => ({ newRoom: {} })),
       }),
