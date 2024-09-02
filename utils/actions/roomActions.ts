@@ -52,11 +52,9 @@ export async function newRoomCategoryAction(category_name:string, lang:string) {
     const {id,name,slug} = data[0]
     return {data:[{id,name,slug}]};
   }
-
   // Revalidate path and redirect
   revalidatePath(`/${payload.lang}/portal/habicationes/crear`);
 }
-
 
 export async function newRoomAction(formData:RoomDetailsPayload, lang:string) {
   // Initialize supabase
@@ -73,10 +71,11 @@ export async function newRoomAction(formData:RoomDetailsPayload, lang:string) {
     bed_quantity: formData.bed_quantity,
     square_feet: formData.square_feet,
     features: formData.features,
-    amenities: formData.amenities
+    amenities: formData.amenities,
+    mediaFiles: formData.mediaFiles,
   };
 
-    // Validate incoming payload with zod schema
+  // Validate incoming payload with zod schema
   const validatedData = newRoomSchema.safeParse(payload);
   if (!validatedData.success) {
     const { path, message } = validatedData.error.errors[0];
@@ -90,12 +89,21 @@ const { data, error } = await supabase
   .insert([
     payload,
   ])
-  .select()
+  .select();
 
   if (error) {
     return {error:error.message}
   }
 
-  return {data}
-
+  if(data){
+    // Retrieve category name
+    const {data:categoryData,error:categoryError} = await supabase.from('categories').select().eq('id',data[0].category_id);
+    if(categoryError){
+      return {error:categoryError.message}
+    }
+    if(categoryData){
+      data[0].category_name = categoryData[0].name;
+    }
+    return {data}
+  }
 }

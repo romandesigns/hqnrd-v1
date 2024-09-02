@@ -369,15 +369,9 @@ export type RoomDetails  ={
   amenities: { iconName: string; value: boolean }[];
   [key: string]: any; // Additional dynamic properties
 }
-export type MediaFileTypes = {
-  ogImg: string;
-  cardImg: string;
-  roomLayout: string;
-  roomVideo: string;
-  gallery: string[];
-}
 
-export type RoomDetailsPayload  ={
+
+export type RoomDetailsPayload ={
   category_id: string;
   room_number: number;
   meta_description: string;
@@ -401,8 +395,6 @@ export interface RooomMetaDataProps {
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   ) => Promise<void>;
   handleInputChange: (key: string, value: string | number) => void;
-
-  handlePreview: () => void;
 }
 
 export interface RoomOfferings {
@@ -416,3 +408,60 @@ export interface RoomOfferings {
   setCurrentStep:Dispatch<SetStateAction<number>>;
   steps:number[]
 }
+
+export type FeatureOrAmenity = {
+  iconName: string;
+  value: boolean;
+};
+
+export type MediaFileTypes = {
+  ogImg: string;
+  cardImg: string;
+  roomLayout: string;
+  roomVideo: string;
+  gallery: string[];
+} | undefined;
+
+export type RoomDetailsPayload = {
+  category_id: string;
+  meta_description: string;
+  page_description: string;
+  title: string;
+  price_per_night: number;
+  room_number: number;
+  features: FeatureOrAmenity[];
+  bed_quantity: number;
+  square_feet: number;
+  amenities: FeatureOrAmenity[];
+  mediaFiles: MediaFileTypes;
+};
+
+export type RoomDetailsResponse = {
+  amenities: FeatureOrAmenity[];
+  bed_quantity: number;
+  category_id: string;
+  category_name: string;
+  created_at: string;
+  features: FeatureOrAmenity[];
+  id: string;
+  mediaFiles: MediaFiles;
+  meta_description: string;
+  page_description: string;
+  price_per_night: number;
+  room_number: number;
+  square_feet: number;
+  title: string;
+  updated_at: string;
+};
+
+export type MediaFiles = {
+  og_img: string;
+  featured_card_img: string;
+  room_layout: string;
+  room_video: string;
+  gallery: string[];
+}
+
+ export type RoomMediaFile = {
+    [key: string]: string;
+  };
