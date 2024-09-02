@@ -9,8 +9,12 @@ import {
   NewRoomFormDetailsProps,
   RoomCategory,
   RoomDetails,
+  RoomDetailsPayload,
 } from "@/types/types";
-import { newRoomCategoryAction } from "@/utils/actions/roomActions";
+import {
+  newRoomAction,
+  newRoomCategoryAction,
+} from "@/utils/actions/roomActions";
 import { createClient } from "@/utils/supabase/client";
 import type { GetProp, UploadProps } from "antd";
 import { InputRef, message, Switch } from "antd";
@@ -23,6 +27,26 @@ interface FileListProps {
   ogImage: string;
 }
 
+const roomInitialDetails: RoomDetailsPayload = {
+  category_id: "",
+  room_number: 0,
+  meta_description: "",
+  title: "",
+  price_per_night: 0,
+  page_description: "",
+  bed_quantity: 0,
+  square_feet: 0,
+  features: [],
+  amenities: [],
+  mediaFiles: {
+    ogImg: "",
+    cardImg: "",
+    roomLayout: "",
+    roomVideo: "",
+    gallery: [],
+  },
+};
+
 export default function NewRoomFormDetails({
   params: { lang },
   fetchedCategories,
@@ -32,12 +56,15 @@ export default function NewRoomFormDetails({
   const [newCategoryName, setNewCategoryName] = useState<string>("");
   const inputRef = useRef<InputRef>(null);
   const [messageApi, contextHolder] = message.useMessage();
-  const [roomDetails, setRoomDetails] = useState<RoomDetails | {}>({});
-  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [roomDetails, setRoomDetails] =
+    useState<RoomDetailsPayload>(roomInitialDetails);
+  const [currentStep, setCurrentStep] = useState<number>(3);
   const [fileList, setFileList] = useState<FileListProps>();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
   const cardImageRef = useRef<HTMLDivElement>(null);
+
+  const publicPath = process.env.NEXT_PUBLIC_SUPABASE_URL;
 
   const [selectedFeatures, setSelectedFeatures] = useState<
     { iconName: string; value: boolean }[]
@@ -99,50 +126,25 @@ export default function NewRoomFormDetails({
     );
   }
 
-  const handleCreateNewRoom = async (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-  ) => {
+  const handleCreateNewRoom = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const finalRoomDetails = {
-        ...roomDetails,
-        features: selectedFeatures.map(({ iconName, value }) => ({
-          iconName,
-          value,
-        })),
-        amenities: selectedAmenities.map(({ iconName, value }) => ({
-          iconName,
-          value,
-        })),
-      };
-
-      console.log("Final room details:", finalRoomDetails);
-      // const response = await newRoomAction(finalRoomDetails, lang);
-
-      // if (isNewRoomActionResponse(response)) {
-      //   if (response.error) {
-      //     messageApi.error(response.error);
-      //   } else if (response.data) {
-      //     setCreatedRoom(response.data[0]);
-      //     messageApi.success("Room created successfully!");
-      //     setRoomDetails({});
-      //     setSelectedFeatures(
-      //       roomFeatures.map((feature) => ({
-      //         iconName: feature.iconName,
-      //         value: false,
-      //       })),
-      //     );
-      //     setSelectedAmenities(
-      //       roomAmenities.map((amenity) => ({
-      //         iconName: amenity.iconName,
-      //         value: false,
-      //       })),
-      //     );
-      //   }
-      // } else {
-      //   messageApi.error("Unexpected response format. Please try again.");
-      // }
+      const response = await newRoomAction(roomDetails, lang);
+      if (isNewRoomActionResponse(response)) {
+        if (response.error) {
+          messageApi.error(response.error);
+        } else if (response.data) {
+          messageApi.success("Room created successfully!");
+          if (response.data[0].id) {
+            setCreatedRoom(response.data[0]);
+            console.log(response.data[0]);
+            setCurrentStep(3);
+          }
+        }
+      } else {
+        messageApi.error("Unexpected response format. Please try again.");
+      }
     } catch (error) {
       console.error("Error creating room:", error);
       messageApi.error("Failed to create the room. Please try again.");
@@ -173,12 +175,26 @@ export default function NewRoomFormDetails({
           item.iconName === iconName ? { ...item, value: checked } : item,
         ),
       );
+      setRoomDetails({
+        ...roomDetails,
+        features: selectedFeatures.map((feature) => ({
+          iconName: feature.iconName,
+          value: feature.value,
+        })),
+      });
     } else {
       setSelectedAmenities((prev) =>
         prev.map((item) =>
           item.iconName === iconName ? { ...item, value: checked } : item,
         ),
       );
+      setRoomDetails({
+        ...roomDetails,
+        amenities: selectedAmenities.map((amenity) => ({
+          iconName: amenity.iconName,
+          value: amenity.value,
+        })),
+      });
     }
   };
 
@@ -196,8 +212,8 @@ export default function NewRoomFormDetails({
   const renderFeaturesAndAmenities = (
     items: typeof roomFeatures | typeof roomAmenities,
     type: "feature" | "amenity",
-  ) =>
-    items.map((item, index) => (
+  ) => {
+    return items.map((item, index) => (
       <div className="my-[0.1rem] flex items-start justify-between" key={index}>
         <div className="flex items-center justify-start gap-2">
           <item.defaultName />
@@ -218,6 +234,7 @@ export default function NewRoomFormDetails({
         />
       </div>
     ));
+  };
 
   return (
     <>
@@ -266,15 +283,15 @@ export default function NewRoomFormDetails({
       </div>
       <section className="mx-auto mt-2 flex h-full w-full flex-col items-center justify-center gap-4 p-2">
         <form
+          onSubmit={handleCreateNewRoom}
           className={twMerge(
-            `relative grid w-full max-w-2xl grid-cols-1 grid-rows-[auto_auto] gap-4 rounded-md`,
+            `relative grid w-full max-w-3xl grid-cols-1 grid-rows-[auto_auto] gap-4 rounded-md`,
             currentStep === 3 && "",
           )}
         >
           {currentStep === 1 && (
             <RoomDescriptionForm
               handleIncreaseStep={handleIncreaseStep}
-              handlePreview={handlePreview}
               handleInputChange={handleInputChange}
               categories={categories}
               newCategoryName={newCategoryName}
@@ -285,13 +302,9 @@ export default function NewRoomFormDetails({
           {currentStep === 2 && (
             <>
               <Offerings
-                handleCreateNewRoom={handleCreateNewRoom}
                 renderFeaturesAndAmenities={renderFeaturesAndAmenities}
-                roomFeatures={roomFeatures}
-                roomAmenities={roomAmenities}
                 handleInputChange={handleInputChange}
                 handleDecreaseStep={handleDecreaseStep}
-                handleIncreaseStep={handleIncreaseStep}
               />
             </>
           )}

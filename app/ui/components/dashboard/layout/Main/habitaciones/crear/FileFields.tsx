@@ -28,7 +28,7 @@ export function FileFields({
             className="flex items-center justify-center rounded-md bg-pink-500"
             htmlFor="og-img"
           >
-            {loading ? "Loading..." : "OG IMAGE"}
+            {loading ? "Loading..." : "OG Image"}
             <input
               type="file"
               name="og_img"
@@ -42,7 +42,7 @@ export function FileFields({
             className="flex items-center justify-center rounded-md bg-pink-500"
             htmlFor="card-img"
           >
-            {loading ? "Loading..." : "Card Image"}
+            {loading ? "Loading..." : "Card Image 4x3"}
             <input
               type="file"
               name="featured_card_img"
@@ -58,7 +58,7 @@ export function FileFields({
             className="col-start-1 col-end-3 flex aspect-og items-center justify-center rounded-md border bg-orange-500"
             htmlFor="gallery-one"
           >
-            {loading ? "Loading..." : "Image 16:9"}
+            {loading ? "Loading..." : "Gallery 16:9"}
             <input
               type="file"
               name="img_gallery_16x9"
@@ -70,7 +70,7 @@ export function FileFields({
             className="flex items-center justify-center rounded-md border bg-red-500"
             htmlFor="gallery-two"
           >
-            {loading ? "Loading..." : "Image 1:1"}
+            {loading ? "Loading..." : "Gallery 1:1"}
             <input
               type="file"
               name="img_gallery_1x1"
@@ -82,7 +82,7 @@ export function FileFields({
             className="col-start-4 col-end-5 row-start-1 row-end-3 flex items-center justify-center rounded-md border bg-green-500"
             htmlFor="gallery-three"
           >
-            {loading ? "Loading..." : "Image 9:16"}
+            {loading ? "Loading..." : "Gallery 9:16"}
             <input
               type="file"
               name="img_gallery_9x16"
@@ -94,7 +94,7 @@ export function FileFields({
             className="flex items-center justify-center rounded-md border bg-blue-500"
             htmlFor="gallery-four"
           >
-            {loading ? "Loading..." : "Image 1:1"}
+            {loading ? "Loading..." : "Gallery 1:1"}
             <input
               type="file"
               name="img_gallery_1x1"
@@ -106,7 +106,7 @@ export function FileFields({
             className="col-start-2 col-end-4 row-start-2 row-end-3 flex items-center justify-center rounded-md border bg-yellow-500"
             htmlFor="gallery-five"
           >
-            {loading ? "Loading..." : "Image 16:9"}
+            {loading ? "Loading..." : "Gallery 16:9"}
             <input
               type="file"
               name="img_gallery_16x9"
@@ -165,3 +165,20 @@ export function FileFields({
     </article>
   );
 }
+
+// <ImgCrop rotate aspect={16 / 9}>
+//   <Upload
+//     name="gallery-img-one"
+//     listType="picture-card"
+//     showUploadList={false}
+//     onChange={handleFileChange}
+//     beforeUpload={(file) => {
+//       setDirname("gallery-img-one");
+//       return true;
+//     }}
+//   >
+//     <div className="upload-box" style={{ backgroundColor: "#FFA500" }}>
+//       Gallery 16:9
+//     </div>
+//   </Upload>
+// </ImgCrop>;

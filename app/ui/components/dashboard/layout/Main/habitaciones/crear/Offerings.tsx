@@ -1,32 +1,33 @@
+import {
+  roomFeatures,
+  roomAmenities,
+} from "@/app/[lang]/(dashboard)/portal/habitaciones/crear/NewRoomFormIcons";
 import { FaChevronLeft } from "@/app/ui/icons";
 import { Button, Divider, Input, InputRef } from "antd";
 import { useRef } from "react";
 
 import { IconType } from "react-icons";
 
-export default function Offerings({
-  renderFeaturesAndAmenities,
-  handleInputChange,
-  roomFeatures,
-  roomAmenities,
-  handleIncreaseStep,
-  handleDecreaseStep,
-  handleCreateNewRoom,
-}: {
+type iconTypes = {
+  iconName: string;
+  defaultName: IconType;
+  description: string;
+}[];
+
+type OfferingsPropTypes = {
   renderFeaturesAndAmenities: (
-    items: typeof roomFeatures | typeof roomAmenities,
+    items: iconTypes,
     type: "feature" | "amenity",
   ) => JSX.Element[];
   handleInputChange: (key: string, value: string | number) => void;
-  roomFeatures: { iconName: string; defaultName: IconType; value: boolean }[];
-  roomAmenities: { iconName: string; defaultName: IconType; value: boolean }[];
-  handleIncreaseStep: () => void;
   handleDecreaseStep: () => void;
-  handleCreateNewRoom: (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-  ) => Promise<void>;
-}) {
-  const inputRef = useRef<InputRef>(null);
+};
+
+export default function Offerings({
+  renderFeaturesAndAmenities,
+  handleInputChange,
+  handleDecreaseStep,
+}: OfferingsPropTypes) {
   return (
     <>
       <div className="space-y-4 rounded-md bg-primary-100/10 p-3">
@@ -85,7 +86,7 @@ export default function Offerings({
           className="!h-auto w-full !bg-neutral-800 !py-2 !text-white"
         />
         <Button
-          onClick={() => handleIncreaseStep()}
+          htmlType="submit"
           size="large"
           className="!h-auto flex-1 !bg-neutral-800 !py-2 !text-white"
         >

@@ -1,8 +1,7 @@
-import { Button, Divider, Input, Select, Space, InputRef } from "antd";
 import { MdAdd } from "@/app/ui/icons";
-import { useRef } from "react";
 import { RooomMetaDataProps } from "@/types/types";
-import { steps } from "framer-motion";
+import { Button, Divider, Input, InputRef, Select, Space } from "antd";
+import { useRef } from "react";
 
 export default function RoomDescriptionForm({
   categories,
@@ -10,7 +9,6 @@ export default function RoomDescriptionForm({
   setNewCategoryName,
   handleNewCategory,
   handleInputChange,
-  handlePreview,
   handleIncreaseStep,
 }: RooomMetaDataProps) {
   const inputRef = useRef<InputRef>(null);
@@ -20,14 +18,6 @@ export default function RoomDescriptionForm({
         <fieldset>
           <div className="mb-4 flex items-center justify-between">
             <legend className="text-xs font-bold uppercase">Metadata</legend>
-            {/* <div className="flex items-center gap-2">
-              <Button type="primary" onClick={handleCreateNewRoom}>
-                Save Room Description
-              </Button>
-              <Button className="md:!hidden" onClick={handlePreview}>
-                Preview
-              </Button>
-            </div> */}
           </div>
           <div className="grid gap-2 rounded-md bg-primary-600/5 p-2">
             <Select
