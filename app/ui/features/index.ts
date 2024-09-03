@@ -1,3 +1,4 @@
+import { FileUploadModal } from './FileUploadModal/index';
 export { Backdrop } from "./Backdrop";
 export { BackgroundEffect } from "./BgEffect";
 export { Blurdrop } from "./Blurdrop";
@@ -28,3 +29,5 @@ export { WeatherWidget } from "./WeatherWidget";
 export { FloatingBtn } from "./FloatingBtn";
 export { TableTag } from "./Table/Tag";
 export { SignOutBtn } from "./SignOutBtn";
+export { FileInput } from "./FileInput";
+export { FileUploadModal } from "./FileUploadModal";

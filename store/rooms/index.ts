@@ -15,10 +15,10 @@ const roomInitialDetails: RoomDetailsPayload = {
   features: [],
   amenities: [],
   mediaFiles: {
-    ogImg: "",
-    cardImg: "",
-    roomLayout: "",
-    roomVideo: "",
+    og_img: "",
+    card_img: "",
+    room_layout: "",
+    room_video: "",
     gallery: [],
   },
 };

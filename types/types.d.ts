@@ -382,7 +382,7 @@ export type RoomDetailsPayload ={
   square_feet: number;
   features: { iconName: string; value: boolean }[];
   amenities: { iconName: string; value: boolean }[];
-  mediaFiles: MediaFileTypes;
+  mediaFiles: MediaFiles;
   [key: string]: any; // Additional dynamic properties
 }
 
@@ -422,6 +422,14 @@ export type MediaFileTypes = {
   gallery: string[];
 } | undefined;
 
+export type MediaFiles = {
+  og_img: string;
+  card_img: string;
+  room_layout: string;
+  room_video: string;
+  gallery: string[];
+}
+
 export type RoomDetailsPayload = {
   category_id: string;
   meta_description: string;
@@ -433,7 +441,7 @@ export type RoomDetailsPayload = {
   bed_quantity: number;
   square_feet: number;
   amenities: FeatureOrAmenity[];
-  mediaFiles: MediaFileTypes;
+  mediaFiles: MediaFiles;
 };
 
 export type RoomDetailsResponse = {
@@ -454,13 +462,6 @@ export type RoomDetailsResponse = {
   updated_at: string;
 };
 
-export type MediaFiles = {
-  og_img: string;
-  featured_card_img: string;
-  room_layout: string;
-  room_video: string;
-  gallery: string[];
-}
 
  export type RoomMediaFile = {
     [key: string]: string;

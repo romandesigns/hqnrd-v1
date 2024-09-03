@@ -45,7 +45,7 @@ export function FileFields({
             {loading ? "Loading..." : "Card Image 4x3"}
             <input
               type="file"
-              name="featured_card_img"
+              name="card_img"
               id="card-img"
               onChange={(e) => handleFileChange(e, 16 / 9)}
             />

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./variables.css";
 @import "cropperjs/dist/cropper.css";
 @import "swiper/css";
 @import "swiper/css/autoplay";
@@ -9,8 +10,8 @@
 @import "swiper/css/pagination";
 @import "./ant-ui-elements.css";
 @import "./swiper.css";
-@import "./variables.css";
 @import "react-phone-number-input/style.css";
+@import "cropperjs/dist/cropper.css";
 
 @layer base {
   /* width */
