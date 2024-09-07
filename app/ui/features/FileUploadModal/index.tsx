@@ -36,7 +36,7 @@ export const FileUploadModal: React.FC<{
         key={aspectRatio}
         ref={cropperRef}
         style={{ height: 400, width: "100%" }}
-        zoomTo={1}
+        zoomTo={0.5}
         aspectRatio={aspectRatio}
         src={image}
         viewMode={1}
@@ -47,6 +47,7 @@ export const FileUploadModal: React.FC<{
         autoCropArea={1}
         checkOrientation={false}
         guides={true}
+        className="overflow-hidden"
       />
     </Modal>
   );

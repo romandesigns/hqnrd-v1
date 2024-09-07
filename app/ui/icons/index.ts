@@ -114,7 +114,8 @@ export {
   MdAssignment,
   MdFamilyRestroom,
   MdOutlineDinnerDining,
-  MdAdd
+  MdAdd,
+  MdOutlineCloudUpload
 } from "react-icons/md";
 export {
   PiCoatHangerBold,

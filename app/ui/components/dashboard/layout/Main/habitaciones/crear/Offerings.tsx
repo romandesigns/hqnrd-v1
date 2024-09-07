@@ -83,7 +83,7 @@ export default function Offerings({
           icon={<FaChevronLeft />}
           onClick={() => handleDecreaseStep()}
           size="large"
-          className="!h-auto w-full !bg-neutral-800 !py-2 !text-white"
+          className="!flex !h-auto w-full items-center justify-center !bg-neutral-800 !py-2 !text-white"
         />
         <Button
           htmlType="submit"

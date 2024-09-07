@@ -1,20 +1,45 @@
 "use client";
 
+import cn from "classnames";
+import Image from "next/image";
+import { twMerge } from "tailwind-merge";
+import { MdOutlineCloudUpload } from "../../icons";
+
+const getImageCategory = (imgUrl: string | undefined) => {
+  if (!imgUrl) return;
+  const segments = imgUrl.split("/");
+  const imageSegment = segments.filter((segment) => segment.includes("img"));
+  const category = imageSegment.join("/");
+  return category;
+};
+
 export function FileInput({
-  image,
+  imgUrl,
   imgDir,
+  placeholder = "Image Upload",
   onChange,
+  inputRef,
   name,
+  classNames = "",
 }: {
-  image: string;
+  classNames?: string;
+  imgUrl: string;
   imgDir: string;
+  inputRef: React.RefObject<HTMLInputElement>;
+  placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name: string;
 }) {
+  const imgCategory = getImageCategory(imgUrl);
   return (
     <label
       htmlFor={name}
-      className="relative inline-block h-64 cursor-pointer overflow-hidden rounded-md border border-red-500/50 bg-red-500/10 hover:bg-red-500/20"
+      className={twMerge(
+        `relative flex h-full w-full cursor-pointer items-center justify-center overflow-hidden rounded-md border border-primary-500/50 bg-primary-500/10 hover:bg-primary-500/20 ${classNames}`,
+        cn({
+          "border-none": imgUrl && imgCategory && name.includes(imgCategory),
+        }),
+      )}
     >
       <input
         type="file"
@@ -22,14 +47,16 @@ export function FileInput({
         id={name}
         className="hidden"
         onChange={onChange}
+        ref={inputRef}
       />
-      {image && imgDir.includes(name) ? (
-        <img
-          src={image}
-          alt="og-img"
-          className="absolute bottom-0 left-0 right-0 top-0 h-full w-full object-cover"
-        />
-      ) : null}
+      {imgUrl && imgCategory && name.includes(imgCategory) ? (
+        <Image src={imgUrl} alt={name} fill objectFit="cover" sizes="true" />
+      ) : (
+        <p className="flex flex-col items-center justify-center gap-2 text-xs font-medium">
+          <MdOutlineCloudUpload size={25} />
+          {placeholder}
+        </p>
+      )}
     </label>
   );
 }
