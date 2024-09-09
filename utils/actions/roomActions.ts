@@ -5,8 +5,6 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { format } from "../formatter/format";
 import { newRoomCategorySchema, newRoomSchema } from "../schemas";
-import image from "next/image";
-import sharp from "sharp";
 
 
 export async function newRoomCategoryAction(category_name:string, lang:string) {

@@ -93,8 +93,11 @@ export const RoomCard = ({
           <div className="my-1 flex items-center justify-start">
             <p className="pr-[.535rem] text-[0.7rem] font-semibold">Features</p>
             <ul className="ml-2 flex gap-1 border-l-2 pl-2">
-              {features.map((feature) => (
-                <li className="rounded-md bg-neutral-200 px-2 text-[0.7rem]">
+              {features.map((feature, index) => (
+                <li
+                  className="rounded-md bg-neutral-200 px-2 text-[0.7rem]"
+                  key={index}
+                >
                   {feature}
                 </li>
               ))}

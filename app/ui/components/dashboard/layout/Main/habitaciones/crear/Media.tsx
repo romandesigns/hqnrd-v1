@@ -1,13 +1,13 @@
 "use client";
-import React, { useState, createRef, useEffect, useRef } from "react";
-import { Button, message } from "antd";
-import { createClient } from "@/utils/supabase/client"; // Import Supabase client
-import { ReactCropperElement } from "react-cropper";
-import { useRoomStore } from "@/store/rooms";
 import { FileInput, FileUploadModal } from "@/app/ui/features";
-import { twMerge } from "tailwind-merge";
 import { FaChevronLeft } from "@/app/ui/icons";
+import { useRoomStore } from "@/store/rooms";
+import { createClient } from "@/utils/supabase/client"; // Import Supabase client
+import { Button, message } from "antd";
 import classNames from "classnames";
+import React, { createRef, useRef, useState } from "react";
+import { ReactCropperElement } from "react-cropper";
+import { twMerge } from "tailwind-merge";
 
 type UploadResponseTypes = {
   fullPath: string;
@@ -28,17 +28,20 @@ export function Media({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imgDir, setImgDir] = useState("");
-  const [imgAspectRatio, setImgAspectRatio] = useState("1.91:1"); // Default to 1:1
-  const [aspectRatio, setAspectRatio] = useState(1); // Default to 1:1
+  const [imgAspectRatio, setImgAspectRatio] = useState("1.91:1");
+  const [aspectRatio, setAspectRatio] = useState(1);
+  const [aspectRatioUrlSegment, setAspectRatioUrlSegment] = useState("1.91-1");
 
   const supabase = createClient();
 
+  // Base URL for public bucket
   const publicBucketUrl =
     "https://cknwdpehwpqvbkikbtqr.supabase.co/storage/v1/object/public";
 
   // Zustand store
   const { newRoom: room, updateRoom } = useRoomStore((state) => state);
 
+  // Aspect Ratios
   const aspectRatios = [
     { title: "OG Image", ar: "1.91:1" },
     { title: "Room Layout", ar: "1:1" },
@@ -47,28 +50,25 @@ export function Media({
     { title: "Room Video", ar: "16:9" },
   ];
 
+  // Get input ref
   const inputRef = useRef<HTMLInputElement>(null);
-  const galleryContainerRef = useRef<HTMLDivElement>(null);
 
+  // Handle image upload onChange
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (inputRef.current) {
-      console.log(inputRef.current);
-    }
     e.preventDefault();
+
     const inputName = e.target.name;
-    const [category, ar] = inputName.split("-ar-");
-    setImgAspectRatio(ar);
-
-    // Extract aspect ratio from name value
-    if (ar && ar.includes(":")) {
-      const [width, height] = ar.split(":").map(Number);
-      const numericAspectRatio = width / height;
-      setAspectRatio(numericAspectRatio);
+    const [category, ratio] = inputName.split("-ar-");
+    console.log(category);
+    if (ratio && ratio.includes(":")) {
+      const urlSegment = `ar-${ratio.replace(/[.:]/g, "-")}`;
+      const [width, height] = ratio.split(":").map(Number);
+      setAspectRatio(width / height);
+      setImgDir(category);
+      setAspectRatioUrlSegment(urlSegment);
     } else {
-      setAspectRatio(1); // Default to 1:1 if not specified
+      setAspectRatio(1);
     }
-
-    setImgDir(category);
 
     let files = e.target.files;
     if (!files || files.length === 0) return;
@@ -76,7 +76,7 @@ export function Media({
     const reader = new FileReader();
     reader.onload = () => {
       setImage(reader.result as string);
-      setIsModalOpen(true); // Open the modal after setting the image
+      setIsModalOpen(true);
     };
     reader.readAsDataURL(files[0]);
   };
@@ -92,7 +92,7 @@ export function Media({
             ? { width: 1200, height: 627 }
             : { width: 800, height: 600 },
         )
-        .toDataURL("image/webp", 1);
+        .toDataURL("image/webp", 0.9);
       return croppedDataUrl;
     }
   };
@@ -107,14 +107,14 @@ export function Media({
       const blob = await response.blob();
       const file = new File(
         [blob],
-        `${room.room_number}-${new Date().getTime()}.webp`,
+        `unit-${room.room_number}-${new Date().getTime()}.webp`,
         {
           type: "image/webp",
         },
       );
 
       // Upload to Supabase
-      const filePath = `rooms/${room.category_name}/${room.room_number}/${imgDir}/${room.room_number}-${new Date().getTime()}.webp`;
+      const filePath = `rooms/${room.category_name}/${room.room_number}/${imgDir.includes("gallery") ? "gallery" : imgDir}/${imgDir + "-" + aspectRatioUrlSegment}-unit-${room.room_number}.webp`;
       const { data, error } = await supabase.storage
         .from("hqnrd-public")
         .upload(filePath, file, {
@@ -143,12 +143,27 @@ export function Media({
   const updateLocalRoomMedia = (data: UploadResponseTypes) => {
     const { fullPath } = data;
     const path = `${publicBucketUrl}/${fullPath}`;
+
+    const updatedMediaFiles = imgDir.includes("gallery")
+      ? {
+          ...room.mediaFiles,
+          gallery: [
+            ...room.mediaFiles.gallery,
+            {
+              [imgDir
+                .concat(`-${aspectRatioUrlSegment}`)
+                .replace(/[-.]/g, "_")]: path,
+            },
+          ],
+        }
+      : {
+          ...room.mediaFiles,
+          [imgDir.replace("-", "_")]: path,
+        };
+
     updateRoom({
       ...room,
-      mediaFiles: {
-        ...room.mediaFiles,
-        [imgDir.replace("-", "_")]: path,
-      },
+      mediaFiles: updatedMediaFiles,
       og_img: undefined,
       featured_card_img: undefined,
       room_layout: undefined,
@@ -160,22 +175,47 @@ export function Media({
     setIsModalOpen(false);
   };
 
-  const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleVideoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const inputName = e.target.name;
-    const videoFile = e.target.files;
-    const [category, ar] = inputName.split("-ar-");
-    setImgAspectRatio(ar);
-    console.log(videoFile);
+    if (!e.target.files) return;
+    setLoading(true);
+    const file = e.target.files[0];
+    const filePath = `rooms/${room.category_name}/${room.room_number}/${inputName}/${inputName}-unit-${room.room_number}.mp4`;
+
+    try {
+      const { data, error } = await supabase.storage
+        .from("hqnrd-public")
+        .upload(filePath, file, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (error) {
+        message.error("Upload failed.");
+        console.error("Upload error:", error);
+      } else {
+        message.success("Video uploaded successfully!");
+        console.log("Upload success:", data);
+        if (data.id) {
+          updateLocalRoomMedia(data as UploadResponseTypes);
+        }
+      }
+    } catch (err) {
+      console.error("Error uploading image:", err);
+    } finally {
+      setLoading(false);
+      setIsModalOpen(false);
+    }
   };
 
-  useEffect(() => {
-    if (mediaFilesCount === 3) {
-      if (galleryContainerRef.current) {
-        console.log(galleryContainerRef.current);
-      }
-    }
-  }, [mediaFilesCount]);
+  const getGalleryImage = (galleryItemKey: string) => {
+    const transformedKeyGalleryKey = galleryItemKey.replace(/[-:]/g, "_");
+    const galleryItem = room.mediaFiles.gallery.find(
+      (item) => item[transformedKeyGalleryKey],
+    );
+    return galleryItem ? galleryItem[transformedKeyGalleryKey] : "";
+  };
 
   return (
     <>
@@ -219,14 +259,14 @@ export function Media({
               imgUrl={room.mediaFiles.room_layout}
               imgDir={imgDir}
               onChange={onChange}
-              name="room-layout-img-ar-1:1"
+              name="room-layout-ar-1:1"
               placeholder="Room Layout 1:1"
             />
           )}
           {mediaFilesCount == 2 && (
             <FileInput
               inputRef={inputRef}
-              imgUrl={room.mediaFiles.room_layout}
+              imgUrl={room.mediaFiles.card_img}
               imgDir={imgDir}
               onChange={onChange}
               name="card-img-ar-4:3"
@@ -234,50 +274,47 @@ export function Media({
             />
           )}
           {mediaFilesCount == 3 && (
-            <div
-              className="grid grid-cols-4 grid-rows-2 gap-2"
-              ref={galleryContainerRef}
-            >
+            <div className="grid grid-cols-4 grid-rows-2 gap-2">
               <FileInput
                 inputRef={inputRef}
-                imgUrl={room.mediaFiles.room_layout}
+                imgUrl={getGalleryImage("img-gallery-t-ar-16:9")}
                 imgDir={imgDir}
                 onChange={onChange}
-                name="img-gallery-ar-16:9"
+                name="img-gallery-t-ar-16:9"
                 classNames="col-span-2"
                 placeholder="16:9"
               />
               <FileInput
                 inputRef={inputRef}
-                imgUrl={room.mediaFiles.room_layout}
                 imgDir={imgDir}
                 onChange={onChange}
-                name="img-gallery-ar-1:1"
+                name="img-gallery-t-ar-1:1"
                 placeholder="1:1"
+                imgUrl={getGalleryImage("img-gallery-t-ar-1:1")}
               />
               <FileInput
                 inputRef={inputRef}
-                imgUrl={room.mediaFiles.room_layout}
+                imgUrl={getGalleryImage("img-gallery-r-ar-9:16")}
                 imgDir={imgDir}
                 onChange={onChange}
-                name="img-gallery-ar-9:16"
+                name="img-gallery-r-ar-9:16"
                 classNames="row-span-2"
                 placeholder="9:16"
               />
               <FileInput
                 inputRef={inputRef}
-                imgUrl={room.mediaFiles.room_layout}
+                imgUrl={getGalleryImage("img-gallery-b-ar-1:1")}
                 imgDir={imgDir}
                 onChange={onChange}
-                name="img-gallery-ar-1:1"
+                name="img-gallery-b-ar-1:1"
                 placeholder="1:1"
               />
               <FileInput
                 inputRef={inputRef}
-                imgUrl={room.mediaFiles.room_layout}
+                imgUrl={getGalleryImage("img-gallery-b-ar-16:9")}
                 imgDir={imgDir}
                 onChange={onChange}
-                name="img-gallery-ar-16:9"
+                name="img-gallery-b-ar-16:9"
                 classNames="col-span-2"
                 placeholder="16:9"
               />
@@ -285,11 +322,12 @@ export function Media({
           )}
           {mediaFilesCount == 4 && (
             <FileInput
+              isVideo
               inputRef={inputRef}
               imgUrl={room.mediaFiles.room_layout}
               imgDir={imgDir}
               onChange={handleVideoChange}
-              name="room-video-ar-16:9"
+              name="room-video"
               placeholder="Room Video 16:9"
             />
           )}

@@ -422,12 +422,17 @@ export type MediaFileTypes = {
   gallery: string[];
 } | undefined;
 
+export type GalleryItem = {
+  [key]: string;
+  src: string;
+};
+
 export type MediaFiles = {
   og_img: string;
   card_img: string;
   room_layout: string;
   room_video: string;
-  gallery: string[];
+  gallery: [{[key: string]: string}];
 }
 
 export type RoomDetailsPayload = {

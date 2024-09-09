@@ -33,6 +33,7 @@ export function Brand({
           src="/assets/images/brand/logo-original.svg"
           width={logoSize}
           height={logoSize}
+          className="h-auto"
           alt="Company logo -  Hotel Quinto Nivel RD"
         />
         <figcaption className={figClassName}>

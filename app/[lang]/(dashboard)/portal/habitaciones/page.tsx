@@ -21,7 +21,7 @@ export default async function Page({
       <section className="grid grid-cols-1 grid-rows-[auto_1fr] rounded-md bg-white lg:p-2">
         <nav className="sticky -top-8 z-[4] col-span-full flex justify-between border-b p-4">
           <TopMenuContent lang={lang} menuLinks={roomsNavContent} />
-          <Button type="primary" size="large">
+          <Button type="primary" size="middle">
             <Link href={`/${lang}/portal/habitaciones/crear`}>
               Crear Habitacion
             </Link>
