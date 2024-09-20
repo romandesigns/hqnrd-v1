@@ -12,6 +12,10 @@
 @import "./swiper.css";
 @import "react-phone-number-input/style.css";
 @import "cropperjs/dist/cropper.css";
+@import url("https://unpkg.com/video.js@7/dist/video-js.min.css");
+@import "video.js/dist/video-js.css";
+@import url("https://vjs.zencdn.net/8.16.1/video-js.css");
+@import url("https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css");
 
 @layer base {
   /* width */

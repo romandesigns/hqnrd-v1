@@ -70,7 +70,7 @@ export async function newRoomAction(formData:RoomDetailsPayload, lang:string) {
     square_feet: formData.square_feet,
     features: formData.features,
     amenities: formData.amenities,
-    mediaFiles: formData.mediaFiles,
+    media_files: formData.media_files,
   };
 
   // Validate incoming payload with zod schema
@@ -78,8 +78,7 @@ export async function newRoomAction(formData:RoomDetailsPayload, lang:string) {
   if (!validatedData.success) {
     const { path, message } = validatedData.error.errors[0];
     const errorMessage = `Error: ${path[0]} ${message}`;
-    console.log("Error happened");
-    redirect(`/${payload.lang}/portal/habicationes/crear?error=${errorMessage}`);
+    return {error:errorMessage}
   }
 
 const { data, error } = await supabase

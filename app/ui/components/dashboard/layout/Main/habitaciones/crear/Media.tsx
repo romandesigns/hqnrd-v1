@@ -2,45 +2,48 @@
 import { FileInput, FileUploadModal } from "@/app/ui/features";
 import { FaChevronLeft } from "@/app/ui/icons";
 import { useRoomStore } from "@/store/rooms";
+import { FileUploadResponseTypes } from "@/types/types";
+import { CONSTANTS } from "@/utils/constants";
 import { createClient } from "@/utils/supabase/client"; // Import Supabase client
 import { Button, message } from "antd";
 import classNames from "classnames";
 import React, { createRef, useRef, useState } from "react";
 import { ReactCropperElement } from "react-cropper";
 import { twMerge } from "tailwind-merge";
-
-type UploadResponseTypes = {
-  fullPath: string;
-  id: string;
-  path: string;
-};
+import { MediaFileInputs } from "./MediaFileInputs";
 
 export function Media({
   handleDecreaseStep,
   handleIncreaseStep,
+  setMediaFilesCount,
+  mediaFilesCount,
 }: {
   handleDecreaseStep: () => void;
   handleIncreaseStep: () => void;
+  setMediaFilesCount: React.Dispatch<React.SetStateAction<number>>;
+  mediaFilesCount: number;
 }) {
-  const [mediaFilesCount, setMediaFilesCount] = useState(0);
   const [image, setImage] = useState("");
   const cropperRef = createRef<ReactCropperElement>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [imgDir, setImgDir] = useState("");
+
+  const [dir, setDir] = useState("");
   const [imgAspectRatio, setImgAspectRatio] = useState("1.91:1");
-  const [aspectRatio, setAspectRatio] = useState(1);
-  const [aspectRatioUrlSegment, setAspectRatioUrlSegment] = useState("1.91-1");
+  const [ar, setAr] = useState(1);
+  const [arUrlSegment, setArUrlSegment] = useState("1.91-1");
 
   const supabase = createClient();
 
-  // Base URL for public bucket
-  const publicBucketUrl =
-    "https://cknwdpehwpqvbkikbtqr.supabase.co/storage/v1/object/public";
-
   // Zustand store
-  const { newRoom: room, updateRoom } = useRoomStore((state) => state);
+  const {
+    newRoom: room,
+    updateRoom,
+    mediaFiles,
+    addMediaFile,
+  } = useRoomStore((state) => state);
 
+  console.log(mediaFiles);
   // Aspect Ratios
   const aspectRatios = [
     { title: "OG Image", ar: "1.91:1" },
@@ -52,22 +55,19 @@ export function Media({
 
   // Get input ref
   const inputRef = useRef<HTMLInputElement>(null);
-
   // Handle image upload onChange
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
     const inputName = e.target.name;
     const [category, ratio] = inputName.split("-ar-");
-    console.log(category);
+
     if (ratio && ratio.includes(":")) {
-      const urlSegment = `ar-${ratio.replace(/[.:]/g, "-")}`;
       const [width, height] = ratio.split(":").map(Number);
-      setAspectRatio(width / height);
-      setImgDir(category);
-      setAspectRatioUrlSegment(urlSegment);
+      setArUrlSegment(`ar-${ratio.replace(/[.:]/g, "-")}`);
+      setAr(width / height);
+      setDir(category);
     } else {
-      setAspectRatio(1);
+      setAr(1);
     }
 
     let files = e.target.files;
@@ -83,12 +83,12 @@ export function Media({
 
   const getCropData = (
     cropperRef: React.RefObject<ReactCropperElement>,
-    aspectRatio: number,
+    ar: number,
   ) => {
     if (typeof cropperRef.current?.cropper !== "undefined") {
       const croppedDataUrl = cropperRef.current?.cropper
         .getCroppedCanvas(
-          aspectRatio === 1.91
+          ar === 1.91
             ? { width: 1200, height: 627 }
             : { width: 800, height: 600 },
         )
@@ -98,7 +98,7 @@ export function Media({
   };
 
   const handleOk = async () => {
-    const croppedDataUrl = getCropData(cropperRef, aspectRatio);
+    const croppedDataUrl = getCropData(cropperRef, ar);
     if (!croppedDataUrl) return;
 
     try {
@@ -114,7 +114,7 @@ export function Media({
       );
 
       // Upload to Supabase
-      const filePath = `rooms/${room.category_name}/${room.room_number}/${imgDir.includes("gallery") ? "gallery" : imgDir}/${imgDir + "-" + aspectRatioUrlSegment}-unit-${room.room_number}.webp`;
+      const filePath = `rooms/${room.category_name}/${room.room_number}/${dir.includes("gallery") ? "gallery" : dir}/${dir + "-" + arUrlSegment}-unit-${room.room_number}-${Date.now()}.webp`;
       const { data, error } = await supabase.storage
         .from("hqnrd-public")
         .upload(filePath, file, {
@@ -129,7 +129,7 @@ export function Media({
         message.success("Image uploaded successfully!");
         console.log("Upload success:", data);
         if (data.id) {
-          updateLocalRoomMedia(data as UploadResponseTypes);
+          updateLocalRoomMedia(data as FileUploadResponseTypes);
         }
       }
     } catch (err) {
@@ -140,35 +140,47 @@ export function Media({
     }
   };
 
-  const updateLocalRoomMedia = (data: UploadResponseTypes) => {
+  const updateLocalRoomMedia = (data: FileUploadResponseTypes) => {
     const { fullPath } = data;
-    const path = `${publicBucketUrl}/${fullPath}`;
+    const path = `${CONSTANTS.Services.PUBLIC_SUPABASE_URL}/${fullPath}`;
 
-    const updatedMediaFiles = imgDir.includes("gallery")
-      ? {
-          ...room.mediaFiles,
-          gallery: [
-            ...room.mediaFiles.gallery,
-            {
-              [imgDir
-                .concat(`-${aspectRatioUrlSegment}`)
-                .replace(/[-.]/g, "_")]: path,
-            },
-          ],
-        }
-      : {
-          ...room.mediaFiles,
-          [imgDir.replace("-", "_")]: path,
-        };
+    // Determine if the file is a gallery image or another media type
+    const mediaFileKey = dir.includes("gallery")
+      ? "gallery"
+      : dir.replace("-", "_");
 
-    updateRoom({
-      ...room,
-      mediaFiles: updatedMediaFiles,
-      og_img: undefined,
-      featured_card_img: undefined,
-      room_layout: undefined,
-      room_video: undefined,
-    });
+    if (mediaFileKey === "gallery") {
+      // Handle gallery image updates
+      const [segmentDirection, segmentAr] =
+        fullPath.split("/").pop()?.split("-ar-") || [];
+      const direction = segmentDirection.split("-").pop();
+      const ratio = segmentAr.split("-").join("_");
+      const galleryImageKey = `${direction}_${ratio}`.split("_unit_")[0];
+
+      addMediaFile({
+        ...mediaFiles,
+        gallery: {
+          ...mediaFiles.gallery,
+          [galleryImageKey]: path,
+        },
+      });
+    } else if (mediaFileKey.includes("video")) {
+      // Handle video files: differentiate between video and poster
+      const isPoster = path.includes(".webp");
+      addMediaFile({
+        ...mediaFiles,
+        room_video: {
+          ...mediaFiles.room_video,
+          [isPoster ? "poster" : "src"]: path,
+        },
+      });
+    } else {
+      // Handle non-gallery and non-video media (e.g., card_img, og_img, etc.)
+      addMediaFile({
+        ...mediaFiles,
+        [mediaFileKey]: path,
+      });
+    }
   };
 
   const handleCancel = () => {
@@ -178,6 +190,7 @@ export function Media({
   const handleVideoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const inputName = e.target.name;
+    setDir(inputName);
     if (!e.target.files) return;
     setLoading(true);
     const file = e.target.files[0];
@@ -194,11 +207,11 @@ export function Media({
       if (error) {
         message.error("Upload failed.");
         console.error("Upload error:", error);
+        message.error("Error: " + error.message);
       } else {
         message.success("Video uploaded successfully!");
-        console.log("Upload success:", data);
         if (data.id) {
-          updateLocalRoomMedia(data as UploadResponseTypes);
+          updateLocalRoomMedia(data as FileUploadResponseTypes);
         }
       }
     } catch (err) {
@@ -217,6 +230,18 @@ export function Media({
     return galleryItem ? galleryItem[transformedKeyGalleryKey] : "";
   };
 
+  const handleNextBtnClick = () => {
+    setMediaFilesCount(
+      mediaFilesCount !== aspectRatios.length
+        ? mediaFilesCount + 1
+        : mediaFilesCount,
+    );
+
+    if (mediaFilesCount === 4) {
+      console.log(room);
+    }
+  };
+
   return (
     <>
       <FileUploadModal
@@ -226,7 +251,7 @@ export function Media({
         loading={loading}
         cropperRef={cropperRef}
         image={image}
-        aspectRatio={aspectRatio}
+        ar={ar}
       />
       <div className="flex h-full w-full flex-col items-center justify-center gap-8">
         <h3 className="text-xl font-bold leading-4">
@@ -234,7 +259,7 @@ export function Media({
         </h3>
         <div
           className={twMerge(
-            `grid w-full max-w-2xl grid-cols-1 grid-rows-1 gap-4 border`,
+            `grid w-full grid-cols-1 grid-rows-1 gap-4`,
             classNames({
               "aspect-[1.91/1]": mediaFilesCount == 0,
               "aspect-[1/1]": mediaFilesCount == 1,
@@ -243,94 +268,14 @@ export function Media({
             }),
           )}
         >
-          {mediaFilesCount == 0 && (
-            <FileInput
-              inputRef={inputRef}
-              imgUrl={room.mediaFiles.og_img}
-              imgDir={imgDir}
-              onChange={onChange}
-              name="og-img-ar-1.91:1"
-              placeholder="OG Image 1.91:1"
-            />
-          )}
-          {mediaFilesCount == 1 && (
-            <FileInput
-              inputRef={inputRef}
-              imgUrl={room.mediaFiles.room_layout}
-              imgDir={imgDir}
-              onChange={onChange}
-              name="room-layout-ar-1:1"
-              placeholder="Room Layout 1:1"
-            />
-          )}
-          {mediaFilesCount == 2 && (
-            <FileInput
-              inputRef={inputRef}
-              imgUrl={room.mediaFiles.card_img}
-              imgDir={imgDir}
-              onChange={onChange}
-              name="card-img-ar-4:3"
-              placeholder="Card Image 4:3"
-            />
-          )}
-          {mediaFilesCount == 3 && (
-            <div className="grid grid-cols-4 grid-rows-2 gap-2">
-              <FileInput
-                inputRef={inputRef}
-                imgUrl={getGalleryImage("img-gallery-t-ar-16:9")}
-                imgDir={imgDir}
-                onChange={onChange}
-                name="img-gallery-t-ar-16:9"
-                classNames="col-span-2"
-                placeholder="16:9"
-              />
-              <FileInput
-                inputRef={inputRef}
-                imgDir={imgDir}
-                onChange={onChange}
-                name="img-gallery-t-ar-1:1"
-                placeholder="1:1"
-                imgUrl={getGalleryImage("img-gallery-t-ar-1:1")}
-              />
-              <FileInput
-                inputRef={inputRef}
-                imgUrl={getGalleryImage("img-gallery-r-ar-9:16")}
-                imgDir={imgDir}
-                onChange={onChange}
-                name="img-gallery-r-ar-9:16"
-                classNames="row-span-2"
-                placeholder="9:16"
-              />
-              <FileInput
-                inputRef={inputRef}
-                imgUrl={getGalleryImage("img-gallery-b-ar-1:1")}
-                imgDir={imgDir}
-                onChange={onChange}
-                name="img-gallery-b-ar-1:1"
-                placeholder="1:1"
-              />
-              <FileInput
-                inputRef={inputRef}
-                imgUrl={getGalleryImage("img-gallery-b-ar-16:9")}
-                imgDir={imgDir}
-                onChange={onChange}
-                name="img-gallery-b-ar-16:9"
-                classNames="col-span-2"
-                placeholder="16:9"
-              />
-            </div>
-          )}
-          {mediaFilesCount == 4 && (
-            <FileInput
-              isVideo
-              inputRef={inputRef}
-              imgUrl={room.mediaFiles.room_layout}
-              imgDir={imgDir}
-              onChange={handleVideoChange}
-              name="room-video"
-              placeholder="Room Video 16:9"
-            />
-          )}
+          <MediaFileInputs
+            onChange={onChange}
+            mediaFiles={mediaFiles}
+            mediaFilesCount={mediaFilesCount}
+            handleVideoChange={handleVideoChange}
+            inputRef={inputRef}
+            getGalleryImage={getGalleryImage}
+          />
         </div>
 
         <div className="itesm-center flex justify-center gap-2">
@@ -358,13 +303,7 @@ export function Media({
             </Button>
           ) : (
             <Button
-              onClick={() =>
-                setMediaFilesCount(
-                  mediaFilesCount !== aspectRatios.length
-                    ? mediaFilesCount + 1
-                    : mediaFilesCount,
-                )
-              }
+              onClick={() => handleNextBtnClick()}
               size="large"
               className="!h-auto flex-1 !bg-neutral-800 !py-2 !text-white"
             >

@@ -10,7 +10,7 @@ export const FileUploadModal: React.FC<{
   loading: boolean;
   cropperRef: React.RefObject<ReactCropperElement>;
   image: string;
-  aspectRatio: number;
+  ar: number;
 }> = ({
   isModalOpen,
   handleOk,
@@ -18,7 +18,7 @@ export const FileUploadModal: React.FC<{
   loading,
   cropperRef,
   image,
-  aspectRatio,
+  ar,
 }) => {
   return (
     <Modal
@@ -33,11 +33,11 @@ export const FileUploadModal: React.FC<{
       centered
     >
       <Cropper
-        key={aspectRatio}
+        key={ar}
         ref={cropperRef}
         style={{ height: 400, width: "100%" }}
         zoomTo={0.5}
-        aspectRatio={aspectRatio}
+        aspectRatio={ar}
         src={image}
         viewMode={1}
         minCropBoxHeight={10}

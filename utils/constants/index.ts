@@ -10,4 +10,7 @@ export const CONSTANTS = {
     PHONE_CTA: "Para preguntas porfavor llamarnos al number",
     PHONE_NUMBER: "+1 (809) 753-7500",
   },
+  Services:{
+    PUBLIC_SUPABASE_URL: "https://cknwdpehwpqvbkikbtqr.supabase.co/storage/v1/object/public",
+  }
 };

@@ -21,6 +21,7 @@ import { InputRef, message, Switch } from "antd";
 import { useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
+import cn from "classnames";
 
 interface FileListProps {
   featuredImageCard: string;
@@ -43,7 +44,13 @@ const roomInitialDetails: RoomDetailsPayload = {
     card_img: "",
     room_layout: "",
     room_video: "",
-    gallery: [],
+    gallery: {
+      t_16_9: "",
+      t_1_1: "",
+      r_9_16: "",
+      b_1_1: "",
+      b_16_9: "",
+    },
   },
 };
 
@@ -59,12 +66,7 @@ export default function NewRoomFormDetails({
   const [roomDetails, setRoomDetails] =
     useState<RoomDetailsPayload>(roomInitialDetails);
   const [currentStep, setCurrentStep] = useState<number>(3);
-  const [fileList, setFileList] = useState<FileListProps>();
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
-  const cardImageRef = useRef<HTMLDivElement>(null);
-
-  const publicPath = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const [mediaFilesCount, setMediaFilesCount] = useState(0);
 
   const [selectedFeatures, setSelectedFeatures] = useState<
     { iconName: string; value: boolean }[]
@@ -128,7 +130,6 @@ export default function NewRoomFormDetails({
 
   const handleCreateNewRoom = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       const response = await newRoomAction(roomDetails, lang);
       if (isNewRoomActionResponse(response)) {
@@ -138,7 +139,6 @@ export default function NewRoomFormDetails({
           messageApi.success("Room created successfully!");
           if (response.data[0].id) {
             setCreatedRoom(response.data[0]);
-            console.log(response.data[0]);
             setCurrentStep(3);
           }
         }
@@ -200,9 +200,6 @@ export default function NewRoomFormDetails({
 
   const handleIncreaseStep = () => {
     setCurrentStep((prev) => prev + 1);
-    if (currentStep === 2) {
-      console.log(roomDetails);
-    }
   };
 
   const handleDecreaseStep = () => {
@@ -285,8 +282,14 @@ export default function NewRoomFormDetails({
         <form
           onSubmit={handleCreateNewRoom}
           className={twMerge(
-            `relative grid w-full max-w-3xl grid-cols-1 grid-rows-[auto_auto] gap-4 rounded-md`,
-            currentStep === 3 && "",
+            `relative grid w-full max-w-xl grid-cols-1 grid-rows-[auto_auto] gap-4 rounded-md`,
+            cn({
+              "!max-w-xl": currentStep === 1,
+              "!max-w-3xl": currentStep === 2,
+              "max-w-6xl": mediaFilesCount === 0,
+              "max-w-lg": mediaFilesCount === 1,
+              "max-w-5xl": mediaFilesCount === 3 || mediaFilesCount === 4,
+            }),
           )}
         >
           {currentStep === 1 && (
@@ -311,6 +314,8 @@ export default function NewRoomFormDetails({
           {currentStep === 3 && (
             <>
               <Media
+                setMediaFilesCount={setMediaFilesCount}
+                mediaFilesCount={mediaFilesCount}
                 handleDecreaseStep={handleDecreaseStep}
                 handleIncreaseStep={handleIncreaseStep}
               />

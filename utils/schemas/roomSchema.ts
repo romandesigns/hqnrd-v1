@@ -5,13 +5,24 @@ const featureOrAmenitySchema = z.object({
   value: z.boolean(),
 });
 
+const videoSource = z.object({
+  src: z.string().optional(),
+  poster: z.string().optional(),
+});
+
 // Schema for media files
 const mediaFilesSchema = z.object({
-  ogImg: z.string().optional(),
-  cardImg: z.string().optional(),
-  roomLayout: z.string().optional(),
-  roomVideo: z.string().optional(),
-  gallery: z.array(z.string()).optional(),
+  og_img: z.string().optional(),
+  card_img: z.string().optional(),
+  room_layout: z.string().optional(),
+  room_video: videoSource,
+  gallery: z.object({
+    t_16_9: z.string(),
+    t_1_1: z.string(),
+    r_9_16: z.string(),
+    b_1_1: z.string(),
+    b_16_9: z.string(),
+  }).optional(),
 });
 
 // Updated schema for a new room
@@ -26,5 +37,5 @@ export const newRoomSchema = z.object({
   square_feet: z.number().int().positive(),
   features: z.array(featureOrAmenitySchema),
   amenities: z.array(featureOrAmenitySchema),
-  mediaFiles: mediaFilesSchema,
+  media_files: mediaFilesSchema,
 });
