@@ -78,6 +78,7 @@ export function FileInput({
               </label>
             ) : (
               <Image
+                unoptimized
                 src={poster}
                 alt={name}
                 fill
@@ -87,13 +88,15 @@ export function FileInput({
               />
             )}
           </div>
-
           <video
-            src={mediaUrl}
-            controls
             muted
             controlsList="nodownload noremoteplayback novolume"
-          />
+            controls
+            poster={poster}
+          >
+            <source src={mediaUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </>
       )}
 

@@ -17,7 +17,7 @@ import {
 } from "@/utils/actions/roomActions";
 import { InputRef, message, Switch } from "antd";
 import cn from "classnames";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
 
@@ -66,8 +66,14 @@ export default function NewRoomFormDetails({
   const [messageApi, contextHolder] = message.useMessage();
   const [roomDetails, setRoomDetails] =
     useState<RoomDetailsPayload>(roomInitialDetails);
-  const [currentStep, setCurrentStep] = useState<number>(3);
+  const [currentStep, setCurrentStep] = useState<number>(1);
   const [mediaFilesCount, setMediaFilesCount] = useState(0);
+
+  const {
+    newRoom: room,
+    updateRoom,
+    addMediaFile,
+  } = useRoomStore((state) => state);
 
   const [selectedFeatures, setSelectedFeatures] = useState<
     { iconName: string; value: boolean }[]
@@ -128,9 +134,9 @@ export default function NewRoomFormDetails({
       ("error" in response || "data" in response)
     );
   }
-  console.log(roomDetails);
   const handleCreateNewRoom = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     try {
       const response = await newRoomAction(roomDetails, lang);
       if (isNewRoomActionResponse(response)) {
@@ -197,6 +203,13 @@ export default function NewRoomFormDetails({
   const handleDecreaseStep = () => {
     setCurrentStep((prev) => prev - 1);
   };
+
+  useEffect(() => {
+    if (room.id) {
+      setCurrentStep(3);
+      return;
+    }
+  }, [roomDetails]);
 
   const renderFeaturesAndAmenities = (
     items: typeof roomFeatures | typeof roomAmenities,

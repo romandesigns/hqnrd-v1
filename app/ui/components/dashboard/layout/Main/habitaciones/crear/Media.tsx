@@ -95,7 +95,6 @@ export function Media({
     }
   };
 
-  console.log(room);
   const handleOk = async () => {
     const croppedDataUrl = getCropData(cropperRef, ar);
     if (!croppedDataUrl) return;
@@ -150,7 +149,7 @@ export function Media({
     if (!e.target.files) return;
     setLoading(true);
     const file = e.target.files[0];
-    const filePath = `rooms/${room.category_name}/${room.room_number}/${inputName}/${inputName}-unit-${room.room_number}.mp4`;
+    const filePath = `rooms/${room.category_name}/${room.room_number}/room-video/${inputName}-unit-${room.room_number}.${inputName === "room-video" ? "mp4" : "gif"}`;
 
     try {
       const { data, error } = await supabase.storage
@@ -186,10 +185,6 @@ export function Media({
     // Determine if the file is a gallery image or another media type
     const mediaFileKey = path.includes("gallery") ? "gallery" : fileKey;
 
-    console.log("Full Path:", path);
-    console.log("Media File Key:", mediaFileKey);
-    console.log("Upload Data:", data);
-
     if (mediaFileKey === "gallery") {
       // Handle gallery image updates
       const [segmentDirection, segmentAr] =
@@ -207,7 +202,7 @@ export function Media({
       });
     } else if (mediaFileKey.includes("video")) {
       // Handle video files: differentiate between video and poster
-      const isPoster = path.includes(".webp");
+      const isPoster = path.includes(".gif");
       addMediaFile({
         ...room.media_files,
         room_video: {
