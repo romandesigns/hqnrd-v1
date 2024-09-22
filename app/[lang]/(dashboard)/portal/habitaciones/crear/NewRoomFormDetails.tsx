@@ -15,13 +15,11 @@ import {
   newRoomAction,
   newRoomCategoryAction,
 } from "@/utils/actions/roomActions";
-import { createClient } from "@/utils/supabase/client";
-import type { GetProp, UploadProps } from "antd";
 import { InputRef, message, Switch } from "antd";
+import cn from "classnames";
 import { useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
-import cn from "classnames";
 
 interface FileListProps {
   featuredImageCard: string;
@@ -39,11 +37,14 @@ const roomInitialDetails: RoomDetailsPayload = {
   square_feet: 0,
   features: [],
   amenities: [],
-  mediaFiles: {
+  media_files: {
     og_img: "",
     card_img: "",
     room_layout: "",
-    room_video: "",
+    room_video: {
+      src: "",
+      poster: "",
+    },
     gallery: {
       t_16_9: "",
       t_1_1: "",
@@ -127,7 +128,7 @@ export default function NewRoomFormDetails({
       ("error" in response || "data" in response)
     );
   }
-
+  console.log(roomDetails);
   const handleCreateNewRoom = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -149,15 +150,6 @@ export default function NewRoomFormDetails({
       console.error("Error creating room:", error);
       messageApi.error("Failed to create the room. Please try again.");
     }
-  };
-
-  const handlePreview = () => {
-    const finalRoomDetails = {
-      ...roomDetails,
-      features: selectedFeatures,
-      amenities: selectedAmenities,
-    };
-    console.log("Preview room:", finalRoomDetails);
   };
 
   const handleInputChange = (key: keyof RoomDetails, value: any) => {

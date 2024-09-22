@@ -30,7 +30,7 @@ export function FileInput({
   return (
     <div
       className={twMerge(
-        `relative flex flex-col items-center justify-center`,
+        `relative flex flex-col items-center justify-center border-4`,
         classNames,
       )}
     >
@@ -58,7 +58,44 @@ export function FileInput({
       )}
 
       {/* Media Display */}
-      {isValidVideoUrl && <video src={mediaUrl} />}
+      {isValidVideoUrl && (
+        <>
+          <div className="border-black-800 absolute right-4 top-4 z-[4] flex aspect-[16/9] w-1/4 items-center justify-center rounded-md bg-black/50">
+            {!poster ? (
+              <label
+                htmlFor="room-video-poster"
+                className="flex h-full w-full items-center justify-center"
+              >
+                <input
+                  type="file"
+                  name="room-video-poster"
+                  id="room-video-poster"
+                  className="hidden"
+                  onChange={onChange}
+                  ref={inputRef}
+                />
+                <p className="text-sm text-neutral-400">Add Poster</p>
+              </label>
+            ) : (
+              <Image
+                src={poster}
+                alt={name}
+                fill
+                priority
+                className="h-auto rounded-md object-cover"
+                sizes="true"
+              />
+            )}
+          </div>
+
+          <video
+            src={mediaUrl}
+            controls
+            muted
+            controlsList="nodownload noremoteplayback novolume"
+          />
+        </>
+      )}
 
       {isValidImageUrl && (
         <Image

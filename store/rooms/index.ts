@@ -3,20 +3,8 @@ import { MediaFiles, RoomDetailsPayload } from "@/types/types";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-const roomInitialDetails: RoomDetailsPayload = {
-  category_id: "",
-  room_number: 0,
-  meta_description: "",
-  title: "",
-  price_per_night: 0,
-  page_description: "",
-  bed_quantity: 0,
-  square_feet: 0,
-  features: [],
-  amenities: []
-};
-
-const mediaFilesInitial:MediaFiles = {
+// Initial media files state
+const mediaFilesInitial: MediaFiles = {
   og_img: "",
   card_img: "",
   room_layout: "",
@@ -33,14 +21,28 @@ const mediaFilesInitial:MediaFiles = {
   },
 };
 
+// Initial room details state
+const roomInitialDetails: RoomDetailsPayload = {
+  category_id: "",
+  room_number: 0,
+  meta_description: "",
+  title: "",
+  price_per_night: 0,
+  page_description: "",
+  bed_quantity: 0,
+  square_feet: 0,
+  features: [],
+  amenities: [],
+  media_files: mediaFilesInitial,
+};
+
 // Types
 export type RoomState = {
   newRoom: RoomDetailsPayload;
-  mediaFiles: MediaFiles;
-  addMediaFile: (payload: MediaFiles) => void;
   setCreatedRoom: (payload: RoomDetailsPayload) => void;
-  updateRoom: (payload: RoomDetailsPayload) => void;
+  updateRoom: (payload: Partial<RoomDetailsPayload>) => void;
   clearCreatedRoom: () => void;
+  addMediaFile: (payload: Partial<MediaFiles>) => void; // Media files as part of room update
 };
 
 // Store
@@ -49,19 +51,32 @@ export const useRoomStore = create<RoomState>()(
     persist(
       (set) => ({
         newRoom: roomInitialDetails,
+
+        // Set room details initially
         setCreatedRoom: (payload: RoomDetailsPayload) =>
           set(() => ({ newRoom: payload })),
+
+        // Update newRoom partially
         updateRoom: (payload: Partial<RoomDetailsPayload>) =>
           set((state) => ({
             newRoom: { ...state.newRoom, ...payload },
           })),
+
+        // Clear room details
         clearCreatedRoom: () =>
           set(() => ({ newRoom: roomInitialDetails })),
-        mediaFiles: mediaFilesInitial,
-        addMediaFile: (payload: MediaFiles) => set((state) => ({ mediaFiles: {
-          ...state.mediaFiles,
-          ...payload,
-        } })),
+
+        // Add or update media files as part of the room
+        addMediaFile: (payload: Partial<MediaFiles>) =>
+          set((state) => ({
+            newRoom: {
+              ...state.newRoom,
+              media_files: {
+                ...state.newRoom.media_files,
+                ...payload,
+              },
+            },
+          })),
       }),
       {
         name: "room-store",

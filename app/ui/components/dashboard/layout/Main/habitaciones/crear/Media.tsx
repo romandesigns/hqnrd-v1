@@ -39,11 +39,9 @@ export function Media({
   const {
     newRoom: room,
     updateRoom,
-    mediaFiles,
     addMediaFile,
   } = useRoomStore((state) => state);
 
-  console.log(mediaFiles);
   // Aspect Ratios
   const aspectRatios = [
     { title: "OG Image", ar: "1.91:1" },
@@ -97,6 +95,7 @@ export function Media({
     }
   };
 
+  console.log(room);
   const handleOk = async () => {
     const croppedDataUrl = getCropData(cropperRef, ar);
     if (!croppedDataUrl) return;
@@ -140,49 +139,6 @@ export function Media({
     }
   };
 
-  const updateLocalRoomMedia = (data: FileUploadResponseTypes) => {
-    const { fullPath } = data;
-    const path = `${CONSTANTS.Services.PUBLIC_SUPABASE_URL}/${fullPath}`;
-
-    // Determine if the file is a gallery image or another media type
-    const mediaFileKey = dir.includes("gallery")
-      ? "gallery"
-      : dir.replace("-", "_");
-
-    if (mediaFileKey === "gallery") {
-      // Handle gallery image updates
-      const [segmentDirection, segmentAr] =
-        fullPath.split("/").pop()?.split("-ar-") || [];
-      const direction = segmentDirection.split("-").pop();
-      const ratio = segmentAr.split("-").join("_");
-      const galleryImageKey = `${direction}_${ratio}`.split("_unit_")[0];
-
-      addMediaFile({
-        ...mediaFiles,
-        gallery: {
-          ...mediaFiles.gallery,
-          [galleryImageKey]: path,
-        },
-      });
-    } else if (mediaFileKey.includes("video")) {
-      // Handle video files: differentiate between video and poster
-      const isPoster = path.includes(".webp");
-      addMediaFile({
-        ...mediaFiles,
-        room_video: {
-          ...mediaFiles.room_video,
-          [isPoster ? "poster" : "src"]: path,
-        },
-      });
-    } else {
-      // Handle non-gallery and non-video media (e.g., card_img, og_img, etc.)
-      addMediaFile({
-        ...mediaFiles,
-        [mediaFileKey]: path,
-      });
-    }
-  };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -222,12 +178,50 @@ export function Media({
     }
   };
 
-  const getGalleryImage = (galleryItemKey: string) => {
-    const transformedKeyGalleryKey = galleryItemKey.replace(/[-:]/g, "_");
-    const galleryItem = room.mediaFiles.gallery.find(
-      (item) => item[transformedKeyGalleryKey],
-    );
-    return galleryItem ? galleryItem[transformedKeyGalleryKey] : "";
+  const updateLocalRoomMedia = (data: FileUploadResponseTypes) => {
+    const { fullPath } = data;
+    const path = `${CONSTANTS.Services.PUBLIC_SUPABASE_URL}/${fullPath}`;
+
+    const fileKey = path.split("/").slice(-2)[0].replace("-", "_");
+    // Determine if the file is a gallery image or another media type
+    const mediaFileKey = path.includes("gallery") ? "gallery" : fileKey;
+
+    console.log("Full Path:", path);
+    console.log("Media File Key:", mediaFileKey);
+    console.log("Upload Data:", data);
+
+    if (mediaFileKey === "gallery") {
+      // Handle gallery image updates
+      const [segmentDirection, segmentAr] =
+        fullPath.split("/").pop()?.split("-ar-") || [];
+      const direction = segmentDirection?.split("-").pop();
+      const ratio = segmentAr?.split("-").join("_");
+      const galleryImageKey = `${direction}_${ratio}`.split("_unit_")[0];
+
+      addMediaFile({
+        ...room.media_files,
+        gallery: {
+          ...room.media_files.gallery,
+          [galleryImageKey]: path,
+        },
+      });
+    } else if (mediaFileKey.includes("video")) {
+      // Handle video files: differentiate between video and poster
+      const isPoster = path.includes(".webp");
+      addMediaFile({
+        ...room.media_files,
+        room_video: {
+          ...room.media_files.room_video,
+          ...(isPoster ? { poster: path } : { src: path }),
+        },
+      });
+    } else {
+      // Handle non-gallery and non-video media (e.g., card_img, og_img, etc.)
+      addMediaFile({
+        ...room.media_files,
+        [mediaFileKey]: path,
+      });
+    }
   };
 
   const handleNextBtnClick = () => {
@@ -270,11 +264,10 @@ export function Media({
         >
           <MediaFileInputs
             onChange={onChange}
-            mediaFiles={mediaFiles}
+            mediaFiles={room.media_files}
             mediaFilesCount={mediaFilesCount}
             handleVideoChange={handleVideoChange}
             inputRef={inputRef}
-            getGalleryImage={getGalleryImage}
           />
         </div>
 

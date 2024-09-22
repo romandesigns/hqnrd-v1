@@ -8,17 +8,14 @@ export const MediaFileInputs = ({
   inputRef,
   onChange,
   mediaFiles,
-  getGalleryImage,
   handleVideoChange,
 }: {
   mediaFilesCount: number;
   inputRef: React.RefObject<HTMLInputElement>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   mediaFiles: MediaFiles;
-  getGalleryImage?: (key: string) => string;
   handleVideoChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
-  console.log(mediaFiles);
   return (
     <>
       {mediaFilesCount == 0 && (

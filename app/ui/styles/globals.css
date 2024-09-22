@@ -70,4 +70,20 @@
   .ant-upload-select {
     @apply !h-full !w-full;
   }
+  video::-webkit-media-controls-volume-slider {
+    display: none;
+  }
+  video::-webkit-media-controls-mute-button {
+    display: none;
+  }
+  video {
+    /* Prevent the video controls from fading */
+    outline: none;
+  }
+
+  /* Keep the controls visible */
+  video::-webkit-media-controls-panel {
+    opacity: 1 !important;
+    transition: opacity 0s !important;
+  }
 }

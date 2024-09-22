@@ -382,6 +382,22 @@ export type RoomDetailsPayload ={
   square_feet: number;
   features: { iconName: string; value: boolean }[];
   amenities: { iconName: string; value: boolean }[];
+  media_files:  {
+    og_img: string;
+    card_img: string;
+    room_layout: string;
+    room_video: {
+      src: string;
+      poster: string;
+    };
+    gallery: {
+      t_16_9: string;
+      t_1_1: string;
+      r_9_16: string;
+      b_1_1: string;
+      b_16_9: string;
+    };
+  }
   [key: string]: any; // Additional dynamic properties
 }
 
