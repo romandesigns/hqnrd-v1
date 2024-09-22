@@ -1,32 +1,16 @@
 import {
-  roomFeatures,
   roomAmenities,
+  roomFeatures,
 } from "@/app/[lang]/(dashboard)/portal/habitaciones/crear/NewRoomFormIcons";
 import { FaChevronLeft } from "@/app/ui/icons";
-import { Button, Divider, Input, InputRef } from "antd";
-import { useRef } from "react";
+import { OfferingsPropTypes } from "@/types/types";
+import { Button, Divider, Input } from "antd";
 
-import { IconType } from "react-icons";
-
-type iconTypes = {
-  iconName: string;
-  defaultName: IconType;
-  description: string;
-}[];
-
-type OfferingsPropTypes = {
-  renderFeaturesAndAmenities: (
-    items: iconTypes,
-    type: "feature" | "amenity",
-  ) => JSX.Element[];
-  handleInputChange: (key: string, value: string | number) => void;
-  handleDecreaseStep: () => void;
-};
-
-export default function Offerings({
+export function Offerings({
   renderFeaturesAndAmenities,
   handleInputChange,
   handleDecreaseStep,
+  room,
 }: OfferingsPropTypes) {
   return (
     <>

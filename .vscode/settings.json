@@ -1,11 +1,9 @@
 {
-  "deno.enablePaths": [
-    "supabase/functions"
-  ],
+  "deno.enablePaths": ["supabase/functions"],
   "deno.lint": true,
   "deno.unstable": true,
   "[typescript]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
   "a-file-icon-vscode.folderTheme": "specific"
 }

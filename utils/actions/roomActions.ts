@@ -104,3 +104,67 @@ const { data, error } = await supabase
     return {data}
   }
 }
+
+export async function updateRoomAction(formData: RoomDetailsPayload, lang: string) {
+  // Initialize supabase
+  const supabase = createClient();
+
+  // Retrieve the current room data from the database
+  const { data: currentRoomData, error: fetchError } = await supabase
+    .from('rooms')
+    .select('*')
+    .eq('id', formData.id)
+    .single();
+
+  if (fetchError) {
+    return { error: `Room not found: ${fetchError.message}` };
+  }
+
+  // Dynamically build the payload from formData by comparing with the current data
+  const payload = {};
+  Object.keys(formData).forEach((key) => {
+    if (JSON.stringify(formData[key]) !== JSON.stringify(currentRoomData[key])) {
+      // Only include fields that have been updated
+      payload[key] = formData[key];
+    }
+  });
+
+  // Validate the dynamic payload with zod schema
+  const validatedData = newRoomSchema.safeParse(payload);
+  if (!validatedData.success) {
+    const { path, message } = validatedData.error.errors[0];
+    const errorMessage = `Error: ${path[0]} ${message}`;
+    return { error: errorMessage };
+  }
+
+  // Perform the update with the dynamically built payload
+  const { data, error: updateError } = await supabase
+    .from('rooms')
+    .update(payload)
+    .eq('id', formData.id)
+    .select();
+
+  if (updateError) {
+    return { error: updateError.message };
+  }
+
+  if (data) {
+    // Retrieve the updated category name if category_id was updated
+    if (payload.category_id) {
+      const { data: categoryData, error: categoryError } = await supabase
+        .from('categories')
+        .select()
+        .eq('id', data[0].category_id);
+
+      if (categoryError) {
+        return { error: categoryError.message };
+      }
+
+      if (categoryData) {
+        data[0].category_name = categoryData[0].name;
+      }
+    }
+
+    return { data };
+  }
+}

@@ -3,13 +3,14 @@ import { RooomMetaDataProps } from "@/types/types";
 import { Button, Divider, Input, InputRef, Select, Space } from "antd";
 import { useRef } from "react";
 
-export default function RoomDescriptionForm({
+export function Description({
   categories,
   newCategoryName,
   setNewCategoryName,
   handleNewCategory,
   handleInputChange,
   handleIncreaseStep,
+  room,
 }: RooomMetaDataProps) {
   const inputRef = useRef<InputRef>(null);
   return (
@@ -23,7 +24,7 @@ export default function RoomDescriptionForm({
             <Select
               size="large"
               className="w-full placeholder:text-xs"
-              placeholder="Select category"
+              placeholder={room.category_name || "Select category"}
               onChange={(value) => handleInputChange("category_id", value)}
               dropdownRender={(menu) => (
                 <>
@@ -54,6 +55,7 @@ export default function RoomDescriptionForm({
               }))}
             />
             <Input
+              value={room.room_number || ""}
               size="large"
               type="number"
               min={0}
@@ -67,6 +69,7 @@ export default function RoomDescriptionForm({
               }
             />
             <Input.TextArea
+              value={room.meta_description || ""}
               size="large"
               placeholder="Meta Description"
               maxLength={160}
@@ -90,12 +93,13 @@ export default function RoomDescriptionForm({
             <div className="flex gap-2">
               <Input
                 size="large"
-                // value={newCategoryName}
+                value={room.title || ""}
                 placeholder="Title e.g. Basic"
                 className="flex-[8] placeholder:text-xs"
                 onChange={(e) => handleInputChange("title", e.target.value)}
               />
               <Input
+                value={room.price_per_night || ""}
                 size="large"
                 type="number"
                 step={150}
@@ -108,6 +112,7 @@ export default function RoomDescriptionForm({
               />
             </div>
             <Input.TextArea
+              value={room.page_description || ""}
               size="large"
               placeholder="Page Description"
               maxLength={304}

@@ -11,17 +11,21 @@ import React, { createRef, useRef, useState } from "react";
 import { ReactCropperElement } from "react-cropper";
 import { twMerge } from "tailwind-merge";
 import { MediaFileInputs } from "./MediaFileInputs";
+import { findEmptyFields } from "@/utils/findEmptyFields";
+import { updateRoomAction } from "@/utils/actions";
 
 export function Media({
   handleDecreaseStep,
   handleIncreaseStep,
   setMediaFilesCount,
   mediaFilesCount,
+  lang,
 }: {
   handleDecreaseStep: () => void;
   handleIncreaseStep: () => void;
   setMediaFilesCount: React.Dispatch<React.SetStateAction<number>>;
   mediaFilesCount: number;
+  lang: string;
 }) {
   const [image, setImage] = useState("");
   const cropperRef = createRef<ReactCropperElement>();
@@ -219,16 +223,27 @@ export function Media({
     }
   };
 
-  const handleNextBtnClick = () => {
+  const handleNextBtnClick = async () => {
     setMediaFilesCount(
       mediaFilesCount !== aspectRatios.length
         ? mediaFilesCount + 1
         : mediaFilesCount,
     );
+    console.log(mediaFilesCount);
 
-    if (mediaFilesCount === 4) {
-      console.log(room);
-    }
+    // if (mediaFilesCount === ) {
+    // const output = findEmptyFields(room);
+    // If return null then update room with media fields
+    // if (output === null) {
+    //   console.log("test");
+    //   const response = await updateRoomAction(room, lang);
+    //   console.log(response);
+    // }
+    // If update is sucewssful then clear the room state
+    // If update fails then show error message
+    // Redirect to rooms home page
+    // console.log(output);
+    // }
   };
 
   return (

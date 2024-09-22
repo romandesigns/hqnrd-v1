@@ -1,8 +1,11 @@
 "use client";
 
-import { Media } from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/Media";
-import Offerings from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/Offerings";
-import RoomDescriptionForm from "@/app/ui/components/dashboard/layout/Main/habitaciones/crear/RoomDescription";
+import {
+  Description,
+  Media,
+  Offerings,
+} from "@/app/ui/components/dashboard/layout/Main/rooms/new";
+import { roomInitialDetails } from "@/store/InitialStates";
 import { useRoomStore } from "@/store/rooms";
 import {
   NewRoomActionResponse,
@@ -17,43 +20,9 @@ import {
 } from "@/utils/actions/roomActions";
 import { InputRef, message, Switch } from "antd";
 import cn from "classnames";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { roomAmenities, roomFeatures } from "./NewRoomFormIcons";
-
-interface FileListProps {
-  featuredImageCard: string;
-  ogImage: string;
-}
-
-const roomInitialDetails: RoomDetailsPayload = {
-  category_id: "",
-  room_number: 0,
-  meta_description: "",
-  title: "",
-  price_per_night: 0,
-  page_description: "",
-  bed_quantity: 0,
-  square_feet: 0,
-  features: [],
-  amenities: [],
-  media_files: {
-    og_img: "",
-    card_img: "",
-    room_layout: "",
-    room_video: {
-      src: "",
-      poster: "",
-    },
-    gallery: {
-      t_16_9: "",
-      t_1_1: "",
-      r_9_16: "",
-      b_1_1: "",
-      b_16_9: "",
-    },
-  },
-};
 
 export default function NewRoomFormDetails({
   params: { lang },
@@ -66,14 +35,11 @@ export default function NewRoomFormDetails({
   const [messageApi, contextHolder] = message.useMessage();
   const [roomDetails, setRoomDetails] =
     useState<RoomDetailsPayload>(roomInitialDetails);
-  const [currentStep, setCurrentStep] = useState<number>(1);
-  const [mediaFilesCount, setMediaFilesCount] = useState(0);
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [mediaFilesCount, setMediaFilesCount] = useState<number>(0);
 
-  const {
-    newRoom: room,
-    updateRoom,
-    addMediaFile,
-  } = useRoomStore((state) => state);
+  // Zustand store
+  const { newRoom: room, setCreatedRoom } = useRoomStore((state) => state);
 
   const [selectedFeatures, setSelectedFeatures] = useState<
     { iconName: string; value: boolean }[]
@@ -92,9 +58,6 @@ export default function NewRoomFormDetails({
       value: false,
     })),
   );
-
-  // Zustand store
-  const { setCreatedRoom, newRoom } = useRoomStore((state) => state);
 
   const handleNewCategory = async (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
@@ -134,27 +97,31 @@ export default function NewRoomFormDetails({
       ("error" in response || "data" in response)
     );
   }
+
   const handleCreateNewRoom = async (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    try {
-      const response = await newRoomAction(roomDetails, lang);
-      if (isNewRoomActionResponse(response)) {
-        if (response.error) {
-          messageApi.error(response.error);
-        } else if (response.data) {
-          messageApi.success("Room created successfully!");
-          if (response.data[0].id) {
-            setCreatedRoom(response.data[0]);
-            setCurrentStep(3);
+    if (room.id) {
+      setCurrentStep(2);
+    } else {
+      try {
+        const response = await newRoomAction(roomDetails, lang);
+        if (isNewRoomActionResponse(response)) {
+          if (response.error) {
+            messageApi.error(response.error);
+          } else if (response.data) {
+            messageApi.success("Room created successfully!");
+            if (response.data[0].id) {
+              setCreatedRoom(response.data[0]);
+              setCurrentStep(3);
+            }
           }
+        } else {
+          messageApi.error("Unexpected response format. Please try again.");
         }
-      } else {
-        messageApi.error("Unexpected response format. Please try again.");
+      } catch (error) {
+        console.error("Error creating room:", error);
+        messageApi.error("Failed to create the room. Please try again.");
       }
-    } catch (error) {
-      console.error("Error creating room:", error);
-      messageApi.error("Failed to create the room. Please try again.");
     }
   };
 
@@ -168,48 +135,37 @@ export default function NewRoomFormDetails({
     checked: boolean,
   ) => {
     if (type === "feature") {
-      setSelectedFeatures((prev) =>
-        prev.map((item) =>
-          item.iconName === iconName ? { ...item, value: checked } : item,
-        ),
+      // Update selected features with the new checked state
+      const updatedFeatures = selectedFeatures.map((item) =>
+        item.iconName === iconName ? { ...item, value: checked } : item,
       );
-      setRoomDetails({
-        ...roomDetails,
-        features: selectedFeatures.map((feature) => ({
+      setSelectedFeatures(updatedFeatures); // Update the state for selected features
+
+      // Update roomDetails with the latest features
+      setRoomDetails((prevRoomDetails) => ({
+        ...prevRoomDetails,
+        features: updatedFeatures.map((feature) => ({
           iconName: feature.iconName,
           value: feature.value,
         })),
-      });
+      }));
     } else {
-      setSelectedAmenities((prev) =>
-        prev.map((item) =>
-          item.iconName === iconName ? { ...item, value: checked } : item,
-        ),
+      // Update selected amenities with the new checked state
+      const updatedAmenities = selectedAmenities.map((item) =>
+        item.iconName === iconName ? { ...item, value: checked } : item,
       );
-      setRoomDetails({
-        ...roomDetails,
-        amenities: selectedAmenities.map((amenity) => ({
+      setSelectedAmenities(updatedAmenities); // Update the state for selected amenities
+
+      // Update roomDetails with the latest amenities
+      setRoomDetails((prevRoomDetails) => ({
+        ...prevRoomDetails,
+        amenities: updatedAmenities.map((amenity) => ({
           iconName: amenity.iconName,
           value: amenity.value,
         })),
-      });
+      }));
     }
   };
-
-  const handleIncreaseStep = () => {
-    setCurrentStep((prev) => prev + 1);
-  };
-
-  const handleDecreaseStep = () => {
-    setCurrentStep((prev) => prev - 1);
-  };
-
-  useEffect(() => {
-    if (room.id) {
-      setCurrentStep(3);
-      return;
-    }
-  }, [roomDetails]);
 
   const renderFeaturesAndAmenities = (
     items: typeof roomFeatures | typeof roomAmenities,
@@ -225,10 +181,8 @@ export default function NewRoomFormDetails({
           size="small"
           checked={
             type === "feature"
-              ? selectedFeatures.find((f) => f.iconName === item.iconName)
-                  ?.value
-              : selectedAmenities.find((a) => a.iconName === item.iconName)
-                  ?.value
+              ? room.features.find((f) => f.iconName === item.iconName)?.value
+              : room.amenities.find((a) => a.iconName === item.iconName)?.value
           }
           onChange={(checked) =>
             handleSwitchChange(type, item.iconName, checked)
@@ -238,67 +192,76 @@ export default function NewRoomFormDetails({
     ));
   };
 
+  const handleIncreaseStep = () => {
+    setCurrentStep((prev) => prev + 1);
+  };
+
+  const handleDecreaseStep = () => {
+    setCurrentStep((prev) => prev - 1);
+  };
+
   return (
     <>
       {contextHolder}
-      <div>
-        <ul className="relative mx-auto grid grid-cols-[auto_auto_auto_auto_auto] items-center justify-center gap-3 py-8 pt-10">
-          <li
-            className={twMerge(
-              `relative flex h-2 w-2 items-center justify-center rounded-full bg-primary-100/30 p-3 text-xs text-white`,
-              currentStep >= 1 &&
-                "bg-primary-500/80 [&>span+span]:text-primary-500/80 [&>span]:text-white",
-            )}
-          >
-            <span className="text-primary-500/80">1</span>
-            <span className="absolute top-10 text-xs text-primary-500/30">
-              Description
-            </span>
-          </li>
-          <li className="h-1 w-20 bg-primary-100/30" />
-          <li
-            className={twMerge(
-              `relative flex h-2 w-2 items-center justify-center rounded-full bg-primary-100/30 p-3 text-xs text-white`,
-              currentStep >= 2 &&
-                "bg-primary-500/80 [&>span+span]:text-primary-500/80 [&>span]:text-white",
-            )}
-          >
-            <span className="text-primary-500/80">2</span>
-            <span className="absolute top-10 text-xs text-primary-500/30">
-              Offerings
-            </span>
-          </li>
-          <li className="h-1 w-20 bg-primary-100/30" />
-          <li
-            className={twMerge(
-              `relative flex h-2 w-2 items-center justify-center rounded-full bg-primary-100/30 p-3 text-xs text-white`,
-              currentStep === 3 &&
-                "bg-primary-500/80 [&>span+span]:text-primary-500/80 [&>span]:text-white",
-            )}
-          >
-            <span className="text-primary-500/80">3</span>
-            <span className="absolute top-10 text-xs text-primary-500/30">
-              Media
-            </span>
-          </li>
-        </ul>
-      </div>
+      {/* STEPS */}
+      <ul className="relative mx-auto grid grid-cols-[auto_auto_auto_auto_auto] items-center justify-center gap-3 py-8 pt-10">
+        <li
+          className={twMerge(
+            `relative flex h-2 w-2 items-center justify-center rounded-full bg-primary-100/30 p-3 text-xs text-white`,
+            currentStep >= 0 &&
+              "bg-primary-500/80 [&>span+span]:text-primary-500/80 [&>span]:text-white",
+          )}
+        >
+          <span className="text-primary-500/80">1</span>
+          <span className="absolute top-10 text-xs text-primary-500/30">
+            Description
+          </span>
+        </li>
+        <li className="h-1 w-20 bg-primary-100/30" />
+        <li
+          className={twMerge(
+            `relative flex h-2 w-2 items-center justify-center rounded-full bg-primary-100/30 p-3 text-xs text-white`,
+            currentStep >= 1 &&
+              "bg-primary-500/80 [&>span+span]:text-primary-500/80 [&>span]:text-white",
+          )}
+        >
+          <span className="text-primary-500/80">2</span>
+          <span className="absolute top-10 text-xs text-primary-500/30">
+            Offerings
+          </span>
+        </li>
+        <li className="h-1 w-20 bg-primary-100/30" />
+        <li
+          className={twMerge(
+            `relative flex h-2 w-2 items-center justify-center rounded-full bg-primary-100/30 p-3 text-xs text-white`,
+            currentStep === 2 &&
+              "bg-primary-500/80 [&>span+span]:text-primary-500/80 [&>span]:text-white",
+          )}
+        >
+          <span className="text-primary-500/80">3</span>
+          <span className="absolute top-10 text-xs text-primary-500/30">
+            Media
+          </span>
+        </li>
+      </ul>
+
       <section className="mx-auto mt-2 flex h-full w-full flex-col items-center justify-center gap-4 p-2">
         <form
           onSubmit={handleCreateNewRoom}
           className={twMerge(
             `relative grid w-full max-w-xl grid-cols-1 grid-rows-[auto_auto] gap-4 rounded-md`,
             cn({
-              "!max-w-xl": currentStep === 1,
-              "!max-w-3xl": currentStep === 2,
+              "!max-w-xl": currentStep === 0,
+              "!max-w-3xl": currentStep === 1,
               "max-w-6xl": mediaFilesCount === 0,
               "max-w-lg": mediaFilesCount === 1,
               "max-w-5xl": mediaFilesCount === 3 || mediaFilesCount === 4,
             }),
           )}
         >
-          {currentStep === 1 && (
-            <RoomDescriptionForm
+          {currentStep === 0 && (
+            <Description
+              room={room}
               handleIncreaseStep={handleIncreaseStep}
               handleInputChange={handleInputChange}
               categories={categories}
@@ -307,18 +270,20 @@ export default function NewRoomFormDetails({
               handleNewCategory={handleNewCategory}
             />
           )}
-          {currentStep === 2 && (
+          {currentStep === 1 && (
             <>
               <Offerings
+                room={room}
                 renderFeaturesAndAmenities={renderFeaturesAndAmenities}
                 handleInputChange={handleInputChange}
                 handleDecreaseStep={handleDecreaseStep}
               />
             </>
           )}
-          {currentStep === 3 && (
+          {currentStep === 2 && (
             <>
               <Media
+                lang={lang}
                 setMediaFilesCount={setMediaFilesCount}
                 mediaFilesCount={mediaFilesCount}
                 handleDecreaseStep={handleDecreaseStep}

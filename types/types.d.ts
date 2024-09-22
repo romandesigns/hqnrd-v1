@@ -410,6 +410,7 @@ export interface RooomMetaDataProps {
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
   ) => Promise<void>;
   handleInputChange: (key: string, value: string | number) => void;
+  room: RoomDetailsPayload;
 }
 
 export interface RoomOfferings {
@@ -502,3 +503,19 @@ export type RoomDetailsResponse = {
       b_16_9: string;
     };
   }
+
+  export type OfferingsPropTypes = {
+    renderFeaturesAndAmenities: (
+      items: iconTypes,
+      type: "feature" | "amenity",
+    ) => JSX.Element[];
+    handleInputChange: (key: string, value: string | number) => void;
+    handleDecreaseStep: () => void;
+    room: RoomDetailsPayload;
+  };
+
+  export type IconTypes = {
+    iconName: string;
+    defaultName: IconType;
+    description: string;
+  }[];
