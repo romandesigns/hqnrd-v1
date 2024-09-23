@@ -109,25 +109,20 @@ export async function updateRoomAction(formData: RoomDetailsPayload, lang: strin
   // Initialize supabase
   const supabase = createClient();
 
-  // Retrieve the current room data from the database
-  const { data: currentRoomData, error: fetchError } = await supabase
-    .from('rooms')
-    .select('*')
-    .eq('id', formData.id)
-    .single();
-
-  if (fetchError) {
-    return { error: `Room not found: ${fetchError.message}` };
-  }
-
-  // Dynamically build the payload from formData by comparing with the current data
-  const payload = {};
-  Object.keys(formData).forEach((key) => {
-    if (JSON.stringify(formData[key]) !== JSON.stringify(currentRoomData[key])) {
-      // Only include fields that have been updated
-      payload[key] = formData[key];
-    }
-  });
+  // Ensure no required fields are undefined before validation
+  const payload: RoomDetailsPayload = {
+    title: formData.title ?? "", // Add default fallback if field is missing
+    page_description: formData.page_description ?? "",
+    category_id: formData.category_id ?? "",
+    price_per_night: formData.price_per_night ?? 0,
+    room_number: formData.room_number ?? 0,
+    meta_description: formData.meta_description ?? "",
+    bed_quantity: formData.bed_quantity ?? 0,
+    square_feet: formData.square_feet ?? 0,
+    features: formData.features ?? [], // Ensure this is an array
+    amenities: formData.amenities ?? [], // Ensure this is an array
+    media_files: formData.media_files ?? {}, // Handle media files carefully
+  };
 
   // Validate the dynamic payload with zod schema
   const validatedData = newRoomSchema.safeParse(payload);
@@ -137,7 +132,7 @@ export async function updateRoomAction(formData: RoomDetailsPayload, lang: strin
     return { error: errorMessage };
   }
 
-  // Perform the update with the dynamically built payload
+  // Perform the update in Supabase
   const { data, error: updateError } = await supabase
     .from('rooms')
     .update(payload)
@@ -149,7 +144,7 @@ export async function updateRoomAction(formData: RoomDetailsPayload, lang: strin
   }
 
   if (data) {
-    // Retrieve the updated category name if category_id was updated
+    // Retrieve updated category name if needed
     if (payload.category_id) {
       const { data: categoryData, error: categoryError } = await supabase
         .from('categories')

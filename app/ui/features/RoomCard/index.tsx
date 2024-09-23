@@ -1,5 +1,5 @@
 import { Locale } from "@/i18n-config";
-import { RoomTypes } from "@/types/types";
+import { RoomDetailsPayload, RoomTypes } from "@/types/types";
 import { Button } from "antd";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +14,17 @@ export const shareData = {
   url: "https://developer.mozilla.org",
 };
 
+const transformTitle = (title: string) => {
+  const [category, characteristic] = title.split("-");
+  const [adjective, businessName] = characteristic.split("at");
+  return (
+    <h3 className="mr-4 text-sm font-bold text-neutral-700">
+      <span>{category}</span>
+      <span>{adjective}</span>
+    </h3>
+  );
+};
+
 export const RoomCard = ({
   className,
   lang,
@@ -24,7 +35,7 @@ export const RoomCard = ({
 }: {
   className?: string;
   lang?: Locale;
-  room?: RoomTypes;
+  room?: RoomDetailsPayload;
   portal?: boolean;
   roomEditPath?: string;
   roomDeletePath?: string;
@@ -67,9 +78,7 @@ export const RoomCard = ({
         <figure className="relative h-full w-full overflow-hidden rounded-md shadow-[0_0.7rem_0.6rem_-0.5rem_rgba(0,0,0,0.4)] transition-[transform_shadow] delay-75 group-hover:scale-[1.04] group-hover:shadow-[0_0.7rem_0.8rem_-0.6rem_rgba(0,0,0,0.5)]">
           <Image
             className="absolute h-full w-full object-cover transition-transform duration-300 lg:group-hover:scale-[1.05]"
-            src={
-              "/assets/home/trending/phtograph-behind-plant-on-the-table-during-sunset-at-the-hotel-quinto-nivel-rd.webp"
-            }
+            src={room.media_files.card_img}
             alt="hero image"
             width={1920}
             height={1080}
@@ -80,7 +89,7 @@ export const RoomCard = ({
         <div className="flex items-center justify-between">
           <span className="flex items-center justify-start">
             <h3 className="mr-4 text-sm font-bold text-neutral-700">
-              {room?.category.replace("Room", "")} #{room?.roomNumber}
+              {transformTitle(room?.title as string)} #{room?.unite_number}
             </h3>
             <ShareBtn data={shareData} className="rounded-md border" />
           </span>

@@ -7,12 +7,13 @@ import { CONSTANTS } from "@/utils/constants";
 import { createClient } from "@/utils/supabase/client"; // Import Supabase client
 import { Button, message } from "antd";
 import classNames from "classnames";
-import React, { createRef, useRef, useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import { ReactCropperElement } from "react-cropper";
 import { twMerge } from "tailwind-merge";
 import { MediaFileInputs } from "./MediaFileInputs";
 import { findEmptyFields } from "@/utils/findEmptyFields";
 import { updateRoomAction } from "@/utils/actions";
+import { useRouter } from "next/router";
 
 export function Media({
   handleDecreaseStep,
@@ -31,19 +32,20 @@ export function Media({
   const cropperRef = createRef<ReactCropperElement>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const [dir, setDir] = useState("");
   const [imgAspectRatio, setImgAspectRatio] = useState("1.91:1");
   const [ar, setAr] = useState(1);
   const [arUrlSegment, setArUrlSegment] = useState("1.91-1");
+  const [roomCreationIsComplete, setRoomCreationIsComplete] = useState(false);
 
   const supabase = createClient();
-
+  const router = useRouter();
   // Zustand store
   const {
     newRoom: room,
     updateRoom,
     addMediaFile,
+    clearCreatedRoom,
   } = useRoomStore((state) => state);
 
   // Aspect Ratios
@@ -229,22 +231,28 @@ export function Media({
         ? mediaFilesCount + 1
         : mediaFilesCount,
     );
-    console.log(mediaFilesCount);
-
-    // if (mediaFilesCount === ) {
-    // const output = findEmptyFields(room);
-    // If return null then update room with media fields
-    // if (output === null) {
-    //   console.log("test");
-    //   const response = await updateRoomAction(room, lang);
-    //   console.log(response);
-    // }
-    // If update is sucewssful then clear the room state
-    // If update fails then show error message
-    // Redirect to rooms home page
-    // console.log(output);
-    // }
   };
+
+  async function handleNewRoomCompletion() {
+    const { data } = await updateRoomAction(room, lang);
+    if (data[0].id) {
+      clearCreatedRoom();
+      router.push(`/${lang}/portal/habitaciones/ver-todas`);
+    }
+  }
+
+  useEffect(() => {
+    const updateRoomMedia = async () => {
+      if (findEmptyFields(room)) {
+        setRoomCreationIsComplete(false);
+        return;
+      }
+      if (!findEmptyFields(room)) {
+        setRoomCreationIsComplete(true);
+      }
+    };
+    updateRoomMedia();
+  }, [mediaFilesCount]);
 
   return (
     <>
@@ -290,21 +298,16 @@ export function Media({
             size="large"
             className="!flex !h-auto w-full items-center justify-center !bg-neutral-800 !py-2 !text-white"
           />
-          {mediaFilesCount === 4 ? (
+          {mediaFilesCount === 4 && (
             <Button
-              onClick={() =>
-                setMediaFilesCount(
-                  mediaFilesCount === aspectRatios.length
-                    ? mediaFilesCount + 1
-                    : mediaFilesCount,
-                )
-              }
+              onClick={() => handleNewRoomCompletion()}
               size="large"
               className="!h-auto flex-1 !bg-neutral-800 !py-2 !text-white"
             >
               Finish
             </Button>
-          ) : (
+          )}
+          {mediaFilesCount < 4 && (
             <Button
               onClick={() => handleNextBtnClick()}
               size="large"

@@ -6,13 +6,16 @@ import { Button, Empty } from "antd";
 import cn from "classnames";
 import Link from "next/link";
 import { roomsNavContent } from "../navbarContent";
+import { getAllRooms } from "@/utils/supabase/queries";
 
 export default async function Page({
   params: { lang },
 }: Readonly<{
   params: { lang: Locale };
 }>) {
-  let rooms = [1, 2, 3, 4, 5];
+  const rooms = await getAllRooms();
+  console.log(rooms);
+  // let rooms = [1, 2, 3, 4, 5];
   return (
     <>
       <Navigation lang={lang}>
@@ -38,6 +41,7 @@ export default async function Page({
           {rooms.length > 0 && rooms ? (
             rooms.map((room, index) => (
               <RoomCard
+                room={room}
                 key={index}
                 roomEditPath={`/${lang}/portal/habitaciones/edit/${index}`}
                 roomDeletePath={`/${lang}/portal/habitaciones?remove-unit=${index}`}
