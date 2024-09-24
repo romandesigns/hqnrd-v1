@@ -16,13 +16,8 @@ export const shareData = {
 
 const transformTitle = (title: string) => {
   const [category, characteristic] = title.split("-");
-  const [adjective, businessName] = characteristic.split("at");
-  return (
-    <h3 className="mr-4 text-sm font-bold text-neutral-700">
-      <span>{category}</span>
-      <span>{adjective}</span>
-    </h3>
-  );
+  // const [adjective, businessName] = characteristic.split("at");
+  return <h3 className="mr-4 text-sm text-neutral-700"></h3>;
 };
 
 export const RoomCard = ({
@@ -40,6 +35,7 @@ export const RoomCard = ({
   roomEditPath?: string;
   roomDeletePath?: string;
 }) => {
+  console.log(room);
   return (
     <div
       className={twMerge(
@@ -78,7 +74,9 @@ export const RoomCard = ({
         <figure className="relative h-full w-full overflow-hidden rounded-md shadow-[0_0.7rem_0.6rem_-0.5rem_rgba(0,0,0,0.4)] transition-[transform_shadow] delay-75 group-hover:scale-[1.04] group-hover:shadow-[0_0.7rem_0.8rem_-0.6rem_rgba(0,0,0,0.5)]">
           <Image
             className="absolute h-full w-full object-cover transition-transform duration-300 lg:group-hover:scale-[1.05]"
-            src={room.media_files.card_img}
+            src={
+              "https://cknwdpehwpqvbkikbtqr.supabase.co/storage/v1/object/public/hqnrd-public/rooms/basicas/205/card-img/card-img-ar-4-3-unit-205-1726988783343.webp"
+            }
             alt="hero image"
             width={1920}
             height={1080}
@@ -87,13 +85,14 @@ export const RoomCard = ({
       </div>
       <div className="grid grid-cols-1 grid-rows-[auto,auto,auto,auto] px-2 pb-4">
         <div className="flex items-center justify-between">
-          <span className="flex items-center justify-start">
-            <h3 className="mr-4 text-sm font-bold text-neutral-700">
-              {transformTitle(room?.title as string)} #{room?.unite_number}
+          <span className="flex items-center justify-center">
+            <h3 className="mr-4 py-2 text-xs text-neutral-700">
+              <span className="block text-left">Basic Room</span>
+              <span className="block font-bold">Comfort and Affordability</span>
             </h3>
             <ShareBtn data={shareData} className="rounded-md border" />
           </span>
-          <span className="rounded-md bg-neutral-500/50 px-4 py-1 text-xs font-bold text-neutral-800">
+          <span className="rounded-md border border-neutral-500/50 px-4 py-1 text-xs font-bold text-neutral-800">
             2,350 / Night
           </span>
         </div>

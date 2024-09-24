@@ -10,12 +10,13 @@ import {
 import { HeaderContent } from "@/app/ui/components/site/Home/Header/HeaderContent";
 import { Locale } from "@/i18n-config";
 import { UserProfileTypes } from "@/types/types";
-import { getUser } from "@/utils/supabase/queries";
+import { getAllRooms, getUser } from "@/utils/supabase/queries";
 import { User } from "@supabase/supabase-js";
 import { Header, PublicLayout, Wrapper } from "../../ui/layout";
 
 const getUserData = async () => {
   const userData: User | null = await getUser();
+
   return {
     authenticated: userData?.role,
     id: userData?.user_metadata.sub,
@@ -30,7 +31,7 @@ export default async function Home({
 }) {
   //@ts-ignore
   const user: UserProfileTypes = await getUserData();
-
+  const rooms = await getAllRooms();
   return (
     <PublicLayout lang={lang} user={user}>
       <Wrapper className="p-0 pt-[57px] md:pt-[0]">
@@ -44,7 +45,7 @@ export default async function Home({
         <Amenities />
         <Categories lang={lang} />
         <CommonAreaAndEntertainment />
-        <Trending />
+        <Trending trendingList={rooms} />
         <FrequentlyAskedQuestions />
       </main>
     </PublicLayout>

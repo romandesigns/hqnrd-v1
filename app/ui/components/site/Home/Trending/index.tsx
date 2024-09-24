@@ -9,14 +9,7 @@ import { BsStars } from "react-icons/bs";
 type TrendingListType = Array<
   { a: number } | { b: number } | { c: number } | { d: number } | { e: number }
 >;
-export function Trending() {
-  const trendingList: TrendingListType = [
-    { a: 1 },
-    { b: 1 },
-    { c: 1 },
-    { d: 1 },
-    { e: 1 },
-  ];
+export function Trending({ trendingList }) {
   return (
     <Section className="my-2">
       <div className="bg-trasparent absolute top-0 -z-10 h-full w-full">
